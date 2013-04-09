@@ -7,6 +7,10 @@ gem 'rails', '3.2.13'
 
 gem 'mysql2'
 
+group :development do
+  gem 'better_errors'
+  gem 'bullet'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -15,12 +19,24 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+  gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem "less-rails"
 end
 
+gem "twitter-bootstrap-rails"
 gem 'jquery-rails'
+gem 'devise'
+gem 'show_for'
+gem 'cancan'
+gem 'simple_form'
+gem 'kaminari'
+gem 'nested_form'
+gem 'puma'
+gem 'responders'
+gem 'rack-mini-profiler'
+gem 'activable'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

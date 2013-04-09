@@ -1,5 +1,5 @@
 # MySQL.  Versions 4.1 and 5.0 are recommended.
-# 
+#
 # Install the MYSQL driver
 #   gem install mysql2
 #
@@ -12,10 +12,10 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: inscreva_development
+  database: inscreva_dev
   pool: 5
-  username: root
-  password:
+  username: <%= ENV['INSCREVA_DB_USER'] %>
+  password: <%= ENV['INSCREVA_DB_PASS'] %>
   socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -27,16 +27,16 @@ test:
   reconnect: false
   database: inscreva_test
   pool: 5
-  username: root
-  password:
+  username: <%= ENV['INSCREVA_DB_USER'] %>
+  password: <%= ENV['INSCREVA_DB_PASS'] %>
   socket: /var/run/mysqld/mysqld.sock
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: inscreva_production
+  database: inscreva
   pool: 5
-  username: root
-  password:
+  username: <%= ENV['INSCREVA_DB_USER'] %>
+  password: <%= ENV['INSCREVA_DB_PASS'] %>
   socket: /var/run/mysqld/mysqld.sock

@@ -1,0 +1,70 @@
+# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+
+pt-BR:
+  errors:
+    messages:
+      expired: expirou, solicite novamente
+      not_found: não encontrado
+      already_confirmed: já foi confirmado, experimente acessar!
+      not_locked: não estava bloqueado
+      not_saved:
+        one: 1 erro impediu salvar %{resource}
+        other: "%{count} erros o impediram de salvar %{resource}"
+  devise:
+    buttons:
+      sign_in: Acessar o sistema
+      sign_up: Confirmar cadastro
+      forgot: Enviar instruções de alteração de senha
+      confirmation: Enviar instruções de confirmação
+      change: Alterar minha senha
+    links:
+      sign_in: Acessar
+      sign_up: Quero me cadastrar
+      sign_out: Sair
+      forgot: Esqueci minha senha
+      confirmation: Quero receber novamente as instruções de confirmação
+    failure:
+      already_authenticated: Você já está autenticado.
+      unauthenticated: ''
+      unconfirmed: Você precisa confirmar sua conta antes de continuar.
+      locked: Sua conta está bloqueada.
+      invalid: Usuário ou senha inválidos.
+      invalid_token: Token de autenticação inválido.
+      timeout: Sua sessão expirou. Por favor, acesse o sistema novamente.
+      inactive: Sua conta ainda não está ativada.
+      user:
+        not_found_in_database: Usuário ou senha inválidos.
+    sessions:
+      signed_in: Você acessou o sistema com sucesso.
+      signed_out: Você saiu do sistema com sucesso. Volte sempre!
+    passwords:
+      send_instructions: Você receberá um e-mail com instruções de alteração de senha em alguns minutos.
+      updated: Sua senha foi alterada com sucesso.
+      updated_not_active: Sua senha foi alterada com sucesso.
+      send_paranoid_instructions: Se seu e-mail for encontrado em nossa base, você receberá um link de recuperação de senha em alguns minutos.
+    confirmations:
+      send_instructions: Você receberá um e-mail com instruções para confirmação de sua conta em alguns minutos.
+      send_paranoid_instructions: Se o seu endereço de e-mail estiver cadastrado, você receberá uma mensagem com instruções para confirmação da sua conta.
+      confirmed: Sua conta foi confirmada com sucesso.
+    registrations:
+      signed_up: Login efetuado com sucesso. Se não foi autorizado, a confirmação será enviada por e-mail.
+      signed_up_but_unconfirmed: Uma mensagem com um link de confirmação foi enviada ao seu e-mail. Por favor, abra o link para ativar sua conta.
+      signed_up_but_inactive: Você foi cadastrado com sucesso. No entanto, não foi possível efetuar login, pois sua conta não foi ativada.
+      signed_up_but_locked: Você foi cadastrado com sucesso. No entanto, não foi possível efetuar login, pois sua conta está bloqueada.
+      updated: Sua conta foi atualizada com sucesso.
+      update_needs_confirmation: You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address.
+      destroyed: Tchau! Sua conta foi cancelada com sucesso. Esperamos vê-lo novamente em breve.
+    unlocks:
+      send_instructions: Dentro de minutos, você receberá um email com instruções para o desbloqueio da sua conta.
+      unlocked: Sua conta foi desbloqueada com sucesso. Efetue login para continuar.
+      send_paranoid_instructions: Se sua conta existir, você receberá um e-mail com instruções para desbloqueá-la em alguns minutos.
+    omniauth_callbacks:
+      success: Autenticado com sucesso com uma conta de %{kind}.
+      failure: Não foi possível autenticá-lo como %{kind} porque "%{reason}".
+    mailer:
+      confirmation_instructions:
+        subject: Instruções de confirmação
+      reset_password_instructions:
+        subject: Instruções de troca de senha
+      unlock_instructions:
+        subject: Instruções de desbloqueio

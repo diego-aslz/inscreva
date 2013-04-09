@@ -1,0 +1,20 @@
+<%= simple_nested_form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :domain_id, collection: Domain.all, input_html: { autofocus: true} %>
+  <%= f.input :person_id do %>
+    <%= f.input_field :person_id, collection: Person.without_user,
+      selected: @person_id || -1 %>
+    <a href="<%= new_person_path %>?src=user" class="btn" title="Novo">
+      <i class="icon-file"></i>
+    </a>
+  <% end %>
+  <%= f.input :login %>
+  <%= f.input :email %>
+  <%= f.association :roles, as: :check_boxes %>
+  <%= f.input :password, :placeholder => "deixe em branco para não alterar" %>
+  <%= f.input :password_confirmation %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+      users_path, :class => 'btn' %>
+  </div>
+<% end %>
