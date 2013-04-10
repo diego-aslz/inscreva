@@ -8,10 +8,6 @@
   <dd><%= @user.email %></dd>
   <dt><strong><%= t('simple_form.labels.defaults.name') %>:</strong></dt>
   <dd><%= @user.name %></dd>
-  <dt><strong><%= t('simple_form.labels.defaults.domain_id') %>:</strong></dt>
-  <dd><%= @user.domain.name %></dd>
-  <dt><strong><%= t('simple_form.labels.defaults.person_id') %>:</strong></dt>
-  <dd><%= @user.person ? @user.person.name : '-' %></dd>
 </dl>
 <br/>
 <h3>Monitoria</h3>
@@ -29,8 +25,8 @@
   <dt><strong><%= t('simple_form.labels.defaults.last_sign_in_ip') %>:</strong></dt>
   <dd><%= @user.last_sign_in_ip || '-' %></dd>
   <dt><strong><%= t('simple_form.labels.defaults.active') %>:</strong></dt>
-  <dd><%= @user.active ? "Sim" : "Não" %></dd>
-  <% if @user.active %>
+  <dd><%= @user.active? ? "Sim" : "Não" %></dd>
+  <% if @user.active? %>
     <dt><strong><%= t('simple_form.labels.defaults.activated_by') %>:</strong></dt>
     <dd><%= @user.activated_by ? @user.activated_by.name : '-' %></dd>
     <dt><strong><%= t('simple_form.labels.defaults.activated_at') %>:</strong></dt>

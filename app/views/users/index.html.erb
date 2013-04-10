@@ -37,7 +37,7 @@
         <%= user.current_sign_in_ip %>
       </td>
       <td>
-        <% if user.active %>
+        <% if user.active? %>
           <i class="icon-thumbs-up alert-success"></i>
         <% else %>
           <i class="icon-thumbs-down alert-error"></i>
@@ -53,7 +53,7 @@
           activate_user_path(user),
           :method => :put,
           :data => { :confirm => "Tem certeza de que deseja ativar usuário #{user.name || ''}?" },
-          :class => 'btn btn-mini btn-success' unless user.active %>
+          :class => 'btn btn-mini btn-success' unless user.active? %>
         <%= link_to "<i class=\"icon-pencil\"></i>".html_safe,
           edit_user_path(user),
           :class => 'btn btn-mini btn-warning' if user != current_user %>

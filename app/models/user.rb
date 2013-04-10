@@ -13,6 +13,12 @@ class User < ActiveRecord::Base
   has_many :permissions
   has_many :roles, through: :permissions
 
+  scope :search, ->(s) {
+    where(%(
+      lower(email) like lower(?)
+    ), "%#{s}%")
+  }
+
   def has_role?(role_name)
     roles.each { |r| return true if r.name == role_name.to_s }
     false
