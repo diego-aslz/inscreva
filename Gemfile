@@ -7,6 +7,13 @@ gem 'rails', '3.2.13'
 
 gem 'mysql2'
 
+group :test, :development do
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'factory_girl'
+end
+
 group :development do
   gem 'better_errors'
   gem 'bullet'
