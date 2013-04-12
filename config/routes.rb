@@ -1,4 +1,7 @@
 Inscreva::Application.routes.draw do
+  resources :contests
+
+
   devise_for :users
 
   resources :users

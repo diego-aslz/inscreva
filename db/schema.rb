@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130404180749) do
+ActiveRecord::Schema.define(:version => 20130411203707) do
+
+  create_table "contests", :force => true do |t|
+    t.string   "name"
+    t.datetime "begin_at"
+    t.datetime "end_at"
+    t.boolean  "allow_edit"
+    t.string   "rules_url"
+    t.string   "technical_email"
+    t.string   "email"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "permissions", :force => true do |t|
     t.integer  "user_id"
