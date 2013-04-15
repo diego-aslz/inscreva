@@ -1,40 +1,33 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Contest -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <b>Name:</b>
-  <%= @contest.name %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @contest.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:begin_at) %>:</strong></dt>
+  <dd><%= @contest.begin_at %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:end_at) %>:</strong></dt>
+  <dd><%= @contest.end_at %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:allow_edit) %>:</strong></dt>
+  <dd><%= @contest.allow_edit %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:rules_url) %>:</strong></dt>
+  <dd><%= @contest.rules_url %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:technical_email) %>:</strong></dt>
+  <dd><%= @contest.technical_email %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%= @contest.email %></dd>
+</dl>
 
-<p>
-  <b>Begin at:</b>
-  <%= @contest.begin_at %>
-</p>
-
-<p>
-  <b>End at:</b>
-  <%= @contest.end_at %>
-</p>
-
-<p>
-  <b>Allow edit:</b>
-  <%= @contest.allow_edit %>
-</p>
-
-<p>
-  <b>Rules url:</b>
-  <%= @contest.rules_url %>
-</p>
-
-<p>
-  <b>Technical email:</b>
-  <%= @contest.technical_email %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @contest.email %>
-</p>
-
-
-<%= link_to 'Edit', edit_contest_path(@contest) %> |
-<%= link_to 'Back', contests_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              contests_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_contest_path(@contest), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              contest_path(@contest),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

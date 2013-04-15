@@ -12,7 +12,7 @@ describe "contests/index" do
       ),
       stub_model(Contest,
         :name => "Name",
-        :allow_edit => false,
+        :allow_edit => true,
         :rules_url => "Rules Url",
         :technical_email => "Technical Email",
         :email => "Email"
@@ -22,11 +22,10 @@ describe "contests/index" do
 
   it "renders a list of contests" do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "tr>td", :text => "Name".to_s, :count => 2
-    assert_select "tr>td", :text => false.to_s, :count => 2
-    assert_select "tr>td", :text => "Rules Url".to_s, :count => 2
-    assert_select "tr>td", :text => "Technical Email".to_s, :count => 2
+    assert_select "tr>td", :text => "Email".to_s, :count => 2
+    assert_select "tr>td", :text => t('no'), :count => 1
+    assert_select "tr>td", :text => t('yes'), :count => 1
     assert_select "tr>td", :text => "Email".to_s, :count => 2
   end
 end

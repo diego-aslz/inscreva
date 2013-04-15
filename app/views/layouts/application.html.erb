@@ -32,7 +32,7 @@
 
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
-    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+    <%#= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
   </head>
   <body>
 
@@ -48,6 +48,7 @@
           <div class="container nav-collapse">
             <ul class="nav">
               <li><%= link_to "Users", users_path if can? :index, User %></li>
+              <li><%= link_to "Contests", contests_path if can? :index, Contest %></li>
             </ul>
             <% if user_signed_in? %>
               <div class="btn-group pull-right">

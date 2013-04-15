@@ -2,12 +2,15 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 pt-BR:
+  'no': Não
+  'yes': Sim
   unauthorized:
     manage:
       all: 'Permissão negada'
   activerecord:
     models:
       user: Usuário
+      contest: Concurso
   views:
     pagination:
       first: Início

@@ -1,17 +1,14 @@
-<%= simple_form_for(@contest) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :begin_at %>
-    <%= f.input :end_at %>
-    <%= f.input :allow_edit %>
-    <%= f.input :rules_url %>
-    <%= f.input :technical_email %>
-    <%= f.input :email %>
-  </div>
-
+<%= simple_form_for @contest, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name %>
+  <%= f.input :begin_at %>
+  <%= f.input :end_at %>
+  <%= f.input :allow_edit %>
+  <%= f.input :rules_url %>
+  <%= f.input :technical_email %>
+  <%= f.input :email %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                contests_path, :class => 'btn' %>
   </div>
 <% end %>
