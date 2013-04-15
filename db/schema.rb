@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411203707) do
+ActiveRecord::Schema.define(:version => 20130415132836) do
 
-  create_table "contests", :force => true do |t|
+  create_table "events", :force => true do |t|
     t.string   "name"
-    t.datetime "begin_at"
-    t.datetime "end_at"
+    t.datetime "opens_at"
+    t.datetime "closes_at"
     t.boolean  "allow_edit"
     t.string   "rules_url"
     t.string   "technical_email"

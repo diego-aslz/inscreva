@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "Contests" do
+feature "Events" do
   fixtures :all
 
   background do
@@ -12,11 +12,11 @@ feature "Contests" do
   end
 
   scenario "creating a new one" do
-    # visit contests_path
-    click_link 'Contests'
+    # visit events_path
+    click_link 'Events'
     click_link I18n.t 'helpers.links.new'
-    fill_in 'contest_name', with: 'Example'
+    fill_in 'event_name', with: 'Example'
     click_button I18n.t('helpers.titles.new', model: I18n.t(
-        'activerecord.models.contest'))
+        'activerecord.models.event'))
   end
 end

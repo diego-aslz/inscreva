@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe "contests/show" do
+describe "events/show" do
   before(:each) do
-    @contest = assign(:contest, stub_model(Contest,
+    @event = assign(:event, stub_model(Event,
       :name => "Name",
       :allow_edit => false,
       :rules_url => "Rules Url",

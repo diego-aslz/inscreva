@@ -48,7 +48,7 @@
           <div class="container nav-collapse">
             <ul class="nav">
               <li><%= link_to "Users", users_path if can? :index, User %></li>
-              <li><%= link_to "Contests", contests_path if can? :index, Contest %></li>
+              <li><%= link_to "Events", events_path if can? :index, Event %></li>
             </ul>
             <% if user_signed_in? %>
               <div class="btn-group pull-right">

@@ -10,7 +10,7 @@ pt-BR:
   activerecord:
     models:
       user: Usuário
-      contest: Concurso
+      event: Evento
   views:
     pagination:
       first: Início

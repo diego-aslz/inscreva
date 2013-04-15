@@ -1,4 +1,4 @@
-<%- model_class = Contest -%>
+<%- model_class = Event -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
@@ -6,26 +6,26 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:begin_at) %></th>
-      <th><%= model_class.human_attribute_name(:end_at) %></th>
+      <th><%= model_class.human_attribute_name(:opens_at) %></th>
+      <th><%= model_class.human_attribute_name(:closes_at) %></th>
       <th><%= model_class.human_attribute_name(:allow_edit) %></th>
       <th><%= model_class.human_attribute_name(:email) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
-    <% @contests.each do |contest| %>
+    <% @events.each do |event| %>
       <tr>
-        <td><%= link_to contest.name, contest_path(contest) %></td>
-        <td><%=l contest.begin_at if contest.begin_at %></td>
-        <td><%=l contest.end_at if contest.end_at %></td>
-        <td><%= contest.allow_edit ? t(:yes) : t(:no) %></td>
-        <td><%= contest.email %></td>
+        <td><%= link_to event.name, event_path(event) %></td>
+        <td><%=l event.opens_at if event.opens_at %></td>
+        <td><%=l event.closes_at if event.closes_at %></td>
+        <td><%= event.allow_edit ? t(:yes) : t(:no) %></td>
+        <td><%= event.email %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_contest_path(contest), :class => 'btn btn-mini' %>
+                      edit_event_path(event), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      contest_path(contest),
+                      event_path(event),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' %>
@@ -36,5 +36,5 @@
 </table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_contest_path,
+            new_event_path,
             :class => 'btn btn-primary' %>

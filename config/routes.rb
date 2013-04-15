@@ -1,5 +1,5 @@
 Inscreva::Application.routes.draw do
-  resources :contests
+  resources :events
 
 
   devise_for :users

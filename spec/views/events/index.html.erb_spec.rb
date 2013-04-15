@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-describe "contests/index" do
+describe "events/index" do
   before(:each) do
-    assign(:contests, [
-      stub_model(Contest,
+    assign(:events, [
+      stub_model(Event,
         :name => "Name",
         :allow_edit => false,
         :rules_url => "Rules Url",
         :technical_email => "Technical Email",
         :email => "Email"
       ),
-      stub_model(Contest,
+      stub_model(Event,
         :name => "Name",
         :allow_edit => true,
         :rules_url => "Rules Url",
@@ -20,7 +20,7 @@ describe "contests/index" do
     ])
   end
 
-  it "renders a list of contests" do
+  it "renders a list of events" do
     render
     assert_select "tr>td", :text => "Name".to_s, :count => 2
     assert_select "tr>td", :text => "Email".to_s, :count => 2
