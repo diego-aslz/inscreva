@@ -48,7 +48,7 @@
           user_path(user),
           :method => :delete,
           :data => { :confirm => "Tem certeza de que deseja desativar usuário #{user.name || ''}?" },
-          :class => 'btn btn-mini btn-danger' if user != current_user && user.active %>
+          :class => 'btn btn-mini btn-danger' if user != current_user && user.active? %>
         <%= link_to "<i class=\"icon-ok\"></i>".html_safe,
           activate_user_path(user),
           :method => :put,

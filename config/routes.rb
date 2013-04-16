@@ -1,12 +1,14 @@
 Inscreva::Application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   resources :events
 
-
   devise_for :users
-
   resources :users
 
   root to: "home#index"
+
+  ActiveAdmin.routes(self)
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
