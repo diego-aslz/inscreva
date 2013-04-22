@@ -4,6 +4,8 @@
 pt-BR:
   'no': Não
   'yes': Sim
+  details: Detalhes
+  event_fields: Campos Extras para Formulário de Inscrição
   unauthorized:
     manage:
       all: 'Permissão negada'
@@ -11,6 +13,7 @@ pt-BR:
     models:
       user: Usuário
       event: Evento
+      event_field: Campo Extra
   views:
     pagination:
       first: Início

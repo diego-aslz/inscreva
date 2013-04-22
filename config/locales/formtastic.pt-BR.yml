@@ -1,0 +1,33 @@
+# -*- encoding : utf-8 -*-
+
+pt-BR:
+  formtastic:
+    # titles:
+    #   post_details: "Post details"
+    labels:
+      event:
+        name: "Nome"
+        opens_at: "Abertura das Inscrições"
+        closes_at: "Fechamento das Inscrições"
+        allow_edit: "Permite ao candidato alterar inscrição"
+        rules_url: "Endereço do Edital"
+        technical_email: "E-mail do suporte técnico"
+        email: "E-mail oficial"
+    # hints:
+    #   event:
+    #     allow_edit: "Marque para que o candidato possa alterar seus dados até o fechamento das inscrições."
+    #   post:
+    #     title: "Choose a good title for your post."
+    #     body: "Write something inspiring here."
+    # placeholders:
+    #   post:
+    #     title: "Title your post"
+    #     slug: "Leave blank for an automatically generated slug"
+    #   user:
+    #     email: "you@yours.com"
+    # actions:
+    #   create: "Criar %{model}"
+    #   update: "Save changes"
+    #   reset: "Reset form"
+    #   cancel: "Cancel and go back"
+    #   dummie: "Launch!"

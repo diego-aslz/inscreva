@@ -1,7 +1,28 @@
+# -*- encoding : utf-8 -*-
 ActiveAdmin.register Event do
   filter :name
   filter :opens_at
   filter :closes_at
+
+  form do |f|
+    f.inputs t(:details) do
+      f.input :name
+      f.input :opens_at
+      f.input :closes_at
+      f.input :allow_edit
+      f.input :rules_url
+      f.input :technical_email
+      f.input :email
+    end
+    f.inputs t(:event_fields) do
+      f.has_many :fields do |ff|
+        ff.input :name
+        ff.input :field_type, as: :select, collection: %w[Texto Lógico]
+        ff.input :required
+      end
+    end
+    f.actions
+end
 
   index do
     column :name
