@@ -5,8 +5,14 @@ pt-BR:
     # titles:
     #   post_details: "Post details"
     labels:
-      event:
+      default:
         name: "Nome"
+      area:
+        event: Evento
+        requirement: Requisito Mínimo
+        vacation: Vagas
+        special_vacation: Vagas PNE
+      event:
         opens_at: "Abertura das Inscrições"
         closes_at: "Fechamento das Inscrições"
         allow_edit: "Permite ao candidato alterar inscrição"
