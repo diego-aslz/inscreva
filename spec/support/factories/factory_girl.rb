@@ -43,4 +43,12 @@ FactoryGirl.define do
       closes_at { Time.zone.now + 1.hour }
     end
   end
+
+  factory :subscription do
+    association :event, factory: :ongoing_event
+    # user
+    # email { user.email }
+    email "candidate@example.com"
+    id_card '1234567890'
+  end
 end

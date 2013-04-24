@@ -5,7 +5,7 @@ pt-BR:
   'no': Não
   'yes': Sim
   details: Detalhes
-  event_fields: Campos Extras para Formulário de Inscrição
+  event_fields: Campos para Formulário de Inscrição
   home_title: Eventos em andamento
   active_admin:
     access_denied:
@@ -17,7 +17,7 @@ pt-BR:
     models:
       user: Usuário
       event: Evento
-      event_field: Campo Extra
+      event_field: Campo
   views:
     pagination:
       first: Início

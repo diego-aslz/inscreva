@@ -11,7 +11,9 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'guard-rspec'
 end
 
 group :development do
@@ -45,6 +47,7 @@ gem 'responders'
 gem 'rack-mini-profiler'
 gem 'activable'
 gem 'activeadmin'
+gem 'has_scope'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   has_many :permissions, as: :user
   has_many :roles, through: :permissions
+  has_many :subscriptions
 
   def has_role?(role)
     roles.each { |r| return true if r.name == role.name.to_s }

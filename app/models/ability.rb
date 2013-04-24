@@ -7,9 +7,10 @@ class Ability
       can :read, ActiveAdmin::Page, :name => "Dashboard"
     elsif user.is_a? AdminUser
       can :manage, :all
-    else
-      # can [:new, :create], Subscription
+    elsif user.subscriptions.any?
+      can [:edit, :update], Subscription, user_id: user.id
     end
+    can [:new, :create], Subscription
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
