@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130422194816) do
+ActiveRecord::Schema.define(:version => 20130424113113) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -82,14 +82,15 @@ ActiveRecord::Schema.define(:version => 20130422194816) do
   end
 
   create_table "permissions", :force => true do |t|
-    t.integer  "user_id"
     t.integer  "role_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+    t.string   "user_type"
   end
 
   add_index "permissions", ["role_id"], :name => "index_permissions_on_role_id"
-  add_index "permissions", ["user_id"], :name => "index_permissions_on_user_id"
+  add_index "permissions", ["user_id", "user_type"], :name => "index_permissions_on_user_id_and_user_type"
 
   create_table "roles", :force => true do |t|
     t.string   "name"

@@ -6,6 +6,9 @@ pt-BR:
   'yes': Sim
   details: Detalhes
   event_fields: Campos Extras para Formulário de Inscrição
+  active_admin:
+    access_denied:
+      message: 'Permissão negada'
   unauthorized:
     manage:
       all: 'Permissão negada'

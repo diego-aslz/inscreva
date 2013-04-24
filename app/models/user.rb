@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
-  has_many :permissions
+  has_many :permissions, as: :user
   has_many :roles, through: :permissions
 
   scope :search, ->(s) {
@@ -19,8 +19,8 @@ class User < ActiveRecord::Base
     ), "%#{s}%")
   }
 
-  def has_role?(role_name)
-    roles.each { |r| return true if r.name == role_name.to_s }
+  def has_role?(role)
+    roles.each { |r| return true if r.name == role.name.to_s }
     false
   end
 end

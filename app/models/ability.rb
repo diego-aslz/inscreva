@@ -2,9 +2,13 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||=User.new
-    if user.has_role?(:admin)
+    user ||= User.new
+    if user.has_role? Role.new(name: 'superadmin')
+      can :read, ActiveAdmin::Page, :name => "Dashboard"
+    elsif user.is_a? AdminUser
       can :manage, :all
+    else
+      # can [:new, :create], Subscription
     end
     # Define abilities for the passed in user here. For example:
     #
