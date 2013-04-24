@@ -45,7 +45,7 @@ gem 'nested_form'
 gem 'puma'
 gem 'responders'
 gem 'rack-mini-profiler'
-gem 'activable'
+# gem 'activable'
 gem 'activeadmin'
 gem 'has_scope'
 

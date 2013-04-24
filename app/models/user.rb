@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  is_activable
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable

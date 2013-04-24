@@ -46,9 +46,8 @@ FactoryGirl.define do
 
   factory :subscription do
     association :event, factory: :ongoing_event
-    # user
-    # email { user.email }
-    email "candidate@example.com"
+    user
+    email { user.email }
     id_card '1234567890'
   end
 end

@@ -21,11 +21,12 @@ describe SubscriptionsController do
   describe "GET edit" do
     it "doesn\'t edit when the event doesn\'t allow it" do
       ev = create(:ongoing_event) do |e|
-        e.allow_edit = true
+        e.allow_edit = false
       end
       sub = create(:subscription) do |s|
         s.event = ev
       end
+      sign_in sub.user
       get :edit, id: sub.id
       response.should redirect_to(root_path)
     end
@@ -35,6 +36,7 @@ describe SubscriptionsController do
       sub = create(:subscription) do |s|
         s.event = ev
       end
+      sign_in sub.user
       get :edit, id: sub.id
       response.should redirect_to(root_path)
     end
