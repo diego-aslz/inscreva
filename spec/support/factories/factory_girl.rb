@@ -1,21 +1,46 @@
 FactoryGirl.define do
+  factory :admin_user do
+    sequence(:email) { |n| "admin#{n}@example.com" }
+    password 'password'
+    password_confirmation 'password'
+  end
+
   factory :user do
-    email 'admin@example.com'
-    password 'test1234'
-    password_confirmation 'test1234'
+    sequence(:email) { |n| "candidate#{n}@example.com" }
+    password 'password'
+    password_confirmation 'password'
   end
 
   factory :role do
-    name 'admin'
+    name 'superadmin'
+
+    factory :candidate_role do
+      name 'candidate'
+    end
   end
 
-  factory :contest do
-    allow_edit true
-    begin_at Time.zone.now - 1.week
-    email 'contest@nomail.com'
-    end_at Time.zone.now + 1.week
+  factory :event do
     name 'Contest sample'
-    rules_url ''
+    email 'contest@nomail.com'
     technical_email 'systems@nomail.com'
+    allow_edit true
+    opens_at { Time.zone.now }
+    closes_at { Time.zone.now + 1.day }
+    rules_url ''
+
+    factory :ongoing_event do
+      opens_at { Time.zone.now - 1.week }
+      closes_at { Time.zone.now + 1.week }
+    end
+
+    factory :past_event do
+      opens_at { Time.zone.now - 2.week }
+      closes_at { Time.zone.now - 1.week }
+    end
+
+    factory :future_event do
+      opens_at { Time.zone.now + 1.week }
+      closes_at { Time.zone.now + 2.week }
+    end
   end
 end

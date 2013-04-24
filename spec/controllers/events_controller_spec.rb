@@ -18,12 +18,13 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
+=begin
 describe EventsController do
   fixtures :all
 
   before(:each) do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
-    sign_in users(:admin)
+    @request.env["devise.mapping"] = Devise.mappings[:admin_user]
+    sign_in users(:admin_user)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -165,3 +166,4 @@ describe EventsController do
   end
 
 end
+=end
