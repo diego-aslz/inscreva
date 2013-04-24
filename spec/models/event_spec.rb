@@ -25,4 +25,14 @@ end
     event.valid?.should be_false
     event.errors[:closes_at].should_not be_nil
   end
+
+  it "scopes ongoing events" do
+    curr = create(:ongoing_event)
+    past = create(:past_event)
+    future = create(:future_event)
+    events = Event.ongoing
+    events.include?(curr).should be_true
+    events.include?(past).should be_false
+    events.include?(future).should be_false
+  end
 end

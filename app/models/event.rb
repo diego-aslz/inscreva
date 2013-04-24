@@ -10,13 +10,14 @@ class Event < ActiveRecord::Base
       lambda { |f| f[:name].blank? }
 
   validate :valid_period?
+  scope :ongoing, -> { where('? between opens_at and closes_at', Time.zone.now) }
 
   def ongoing?
     opens_at && closes_at && Time.zone.now.between?(opens_at, closes_at)
   end
 
   def valid_period?
-    errors[:closes_at] = "Wrong" unless (closes_at.nil? || opens_at.nil? ||
-        closes_at > opens_at)
+    errors[:closes_at] = I18n.t('helpers.errors.event.closes_at.too_soon') unless (
+        closes_at.nil? || opens_at.nil? || closes_at > opens_at)
   end
 end

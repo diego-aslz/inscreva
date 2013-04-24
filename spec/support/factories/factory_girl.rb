@@ -29,18 +29,18 @@ FactoryGirl.define do
     rules_url ''
 
     factory :ongoing_event do
-      opens_at { Time.zone.now - 1.week }
-      closes_at { Time.zone.now + 1.week }
+      opens_at { Time.zone.now - 30.minutes }
+      closes_at { Time.zone.now + 30.minutes }
     end
 
     factory :past_event do
-      opens_at { Time.zone.now - 2.week }
-      closes_at { Time.zone.now - 1.week }
+      opens_at { Time.zone.now - 1.hour }
+      closes_at { Time.zone.now - 30.minutes }
     end
 
     factory :future_event do
-      opens_at { Time.zone.now + 1.week }
-      closes_at { Time.zone.now + 2.week }
+      opens_at { Time.zone.now + 30.minutes }
+      closes_at { Time.zone.now + 1.hour }
     end
   end
 end

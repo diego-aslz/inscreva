@@ -6,6 +6,7 @@ pt-BR:
   'yes': Sim
   details: Detalhes
   event_fields: Campos Extras para Formulário de Inscrição
+  home_title: Eventos em andamento
   active_admin:
     access_denied:
       message: 'Permissão negada'
@@ -46,6 +47,9 @@ pt-BR:
       update: Atualizar %{model}
     errors:
       duplicity: você já possui %{model} com tal %{attr}
+      event:
+        closes_at:
+          too_soon: deve ser posterior à abertura
   date:
     min_day_names:
     - Do
