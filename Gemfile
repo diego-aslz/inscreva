@@ -19,6 +19,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'bullet'
+  gem 'rack-mini-profiler'
 end
 
 # Gems used only for assets and not required
@@ -44,7 +45,6 @@ gem 'kaminari'
 gem 'nested_form'
 gem 'puma'
 gem 'responders'
-gem 'rack-mini-profiler'
 # gem 'activable'
 gem 'activeadmin'
 gem 'has_scope'
