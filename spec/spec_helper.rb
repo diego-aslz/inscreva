@@ -44,4 +44,5 @@ RSpec.configure do |config|
 
   config.before(:each) { GC.disable }
   config.after(:each) { GC.enable }
+  I18n.locale = 'pt-BR'
 end

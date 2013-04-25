@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
 
   validate :valid_period?
   scope :ongoing, -> { where('? between opens_at and closes_at', Time.zone.now) }
+  scope :future, -> { where('? < opens_at and closes_at', Time.zone.now) }
 
   def ongoing?
     opens_at && closes_at && Time.zone.now.between?(opens_at, closes_at)
