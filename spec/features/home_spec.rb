@@ -11,6 +11,7 @@ feature "Visiting Home" do
   scenario "viewing future events" do
     event = create(:future_event)
     visit root_path
+    page.should have_content I18n.t :future_events
     page.should have_content event.name
     page.should_not have_content I18n.t :subscribe
   end
