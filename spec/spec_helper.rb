@@ -41,4 +41,7 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include FactoryGirl::Syntax::Methods
+
+  config.before(:each) { GC.disable }
+  config.after(:each) { GC.enable }
 end

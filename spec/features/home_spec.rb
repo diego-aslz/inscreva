@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 feature "Visiting Home" do
-  background do
-  end
-
   scenario "viewing ongoing events" do
     event = create(:ongoing_event)
     visit root_path

@@ -9,9 +9,13 @@ gem 'mysql2'
 
 group :test, :development do
   gem 'rspec-rails'
+end
+
+group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'factory_girl_rails'
+  gem 'zeus'
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'guard-rspec'
 end
