@@ -92,6 +92,8 @@ GEM
     formatador (0.2.4)
     formtastic (2.2.1)
       actionpack (>= 3.0)
+    formtastic-bootstrap (2.1.1)
+      formtastic (~> 2.2)
     guard (1.8.0)
       formatador (>= 0.2.4)
       listen (>= 1.0.0)
@@ -217,9 +219,6 @@ GEM
     show_for (0.2.5)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    simple_form (2.1.0)
-      actionpack (~> 3.0)
-      activemodel (~> 3.0)
     slop (3.4.4)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -263,6 +262,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
   factory_girl_rails
+  formtastic-bootstrap
   guard-rspec
   has_scope
   jquery-rails
@@ -278,7 +278,6 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 3.2.3)
   show_for
-  simple_form
   therubyracer
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)

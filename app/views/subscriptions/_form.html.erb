@@ -1,12 +1,11 @@
-<%= simple_form_for @subscription, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :id_card %>
-  <%= f.input :email %>
-  <%= f.input :event_id %>
-  <%= f.input :details %>
-  <%= f.input :user_id %>
-  <div class="form-actions">
-    <%= f.button :submit, :class => 'btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                subscriptions_path, :class => 'btn' %>
-  </div>
+<%= semantic_form_for @subscription, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.semantic_errors %>
+  <%= f.inputs do %>
+    <%= f.input :id_card %>
+    <%= f.input :email %>
+    <%= f.input :event_id %>
+  <% end %>
+  <%= f.actions do %>
+    <%= f.action :submit %>
+  <% end %>
 <% end %>
