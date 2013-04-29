@@ -1,6 +1,7 @@
 class SubscriptionsController < InheritedResources::Base
   actions :all, except: [ :index, :destroy ]
   load_and_authorize_resource
+  respond_to :js, :only => :check
 
   def new
     unless params[:event_id] && Event.find(params[:event_id]).ongoing?
@@ -34,6 +35,15 @@ class SubscriptionsController < InheritedResources::Base
       update!
     else
       redirect_to root_url
+    end
+  end
+
+  def check
+    id_card = params[:id_card]
+    if id_card && Subscription.exists?(id_card: id_card)
+      render json: 1
+    else
+      render json: 0
     end
   end
 end

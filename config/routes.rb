@@ -1,6 +1,6 @@
 Inscreva::Application.routes.draw do
+  get 'subscriptions/check', as: :check_id
   resources :subscriptions
-
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 

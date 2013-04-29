@@ -10,7 +10,7 @@ class Ability
     elsif user.subscriptions.any?
       can [:edit, :update], Subscription, user_id: user.id
     end
-    can [:new, :create], Subscription
+    can [:new, :create, :check], Subscription
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

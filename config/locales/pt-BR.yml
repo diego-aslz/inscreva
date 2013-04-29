@@ -9,6 +9,8 @@ pt-BR:
   home_title: Eventos em andamento
   future_events: Próximos eventos
   subscribe: Inscrever-se
+  continue: Continuar
+
   active_admin:
     access_denied:
       message: 'Permissão negada'

@@ -12,6 +12,7 @@ pt-BR:
         requirement: Requisito Mínimo
         vacation: Vagas
         special_vacation: Vagas PNE
+        subscription: Inscrição
       event:
         opens_at: "Abertura das Inscrições"
         closes_at: "Fechamento das Inscrições"
@@ -19,18 +20,23 @@ pt-BR:
         rules_url: "Endereço do Edital"
         technical_email: "E-mail do suporte técnico"
         email: "E-mail oficial"
+      subscription:
+        id_card: Identidade
+        email: "E-mail"
     # hints:
     #   event:
     #     allow_edit: "Marque para que o candidato possa alterar seus dados até o fechamento das inscrições."
     #   post:
     #     title: "Choose a good title for your post."
     #     body: "Write something inspiring here."
-    # placeholders:
-    #   post:
-    #     title: "Title your post"
-    #     slug: "Leave blank for an automatically generated slug"
-    #   user:
-    #     email: "you@yours.com"
+    placeholders:
+      user:
+        edit:
+          current_password: para confirmar se é você mesmo
+          email: um e-mail válido
+    error_notification:
+      default_message: 'Há erros nos dados.'
+    required: 'obrigatório'
     # actions:
     #   create: "Criar %{model}"
     #   update: "Save changes"
