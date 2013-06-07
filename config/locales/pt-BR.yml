@@ -55,6 +55,8 @@ pt-BR:
         closes_at:
           too_soon: deve ser posterior à abertura
       subscription:
+        email:
+          differs_from_confirmation: Não confere com a confirmação de e-mail.
         event_id:
           not_ongoing: Inscrições ainda não abertas ou já encerradas.
   date:
