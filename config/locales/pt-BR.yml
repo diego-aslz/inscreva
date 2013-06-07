@@ -54,6 +54,9 @@ pt-BR:
       event:
         closes_at:
           too_soon: deve ser posterior à abertura
+      subscription:
+        event_id:
+          not_ongoing: Inscrições ainda não abertas ou já encerradas.
   date:
     min_day_names:
     - Do

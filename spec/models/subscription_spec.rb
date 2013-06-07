@@ -13,6 +13,11 @@ describe Subscription do
     build(:subscription, event_id: "").should have(1).errors_on(:event_id)
   end
 
+  it "validates event is ongoing" do
+    build(:subscription, event_id: create(:past_event).id).should have(1).
+        errors_on(:event_id)
+  end
+
   it "validates email" do
     build(:subscription, email: "anything").should have(1).errors_on(:email)
     build(:subscription, email: "valid_mail@example.com second_mail@example.com").
