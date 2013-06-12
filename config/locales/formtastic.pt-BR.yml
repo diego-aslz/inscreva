@@ -21,8 +21,13 @@ pt-BR:
         technical_email: "E-mail do suporte técnico"
         email: "E-mail oficial"
       subscription:
+        event: Evento
         id_card: Identidade
         email: "E-mail"
+        name: Nome
+        email_confirmation: Redigite seu e-mail
+        password: Senha
+        password_confirmation: Redigite sua senha
     # hints:
     #   event:
     #     allow_edit: "Marque para que o candidato possa alterar seus dados até o fechamento das inscrições."

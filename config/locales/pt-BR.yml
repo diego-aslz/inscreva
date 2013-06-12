@@ -43,6 +43,7 @@ pt-BR:
       cancel: Cancelar
       back: Voltar
       confirm: Tem certeza que deseja apagar %{model} "%{value}"?
+      password_link: clique aqui para recuperar sua senha
     select:
       prompt: Por favor selecione
     submit:
@@ -55,10 +56,13 @@ pt-BR:
         closes_at:
           too_soon: deve ser posterior à abertura
       subscription:
+        invalid_user: "Seu e-mail já está registrado em nosso sistema.<br /> Por favor, utilize a mesma senha utilizada em sua última inscrição. <strong>Caso não a recorde</strong>, %{password_link}."
         email:
           differs_from_confirmation: Não confere com a confirmação de e-mail.
         event_id:
           not_ongoing: Inscrições ainda não abertas ou já encerradas.
+        password:
+          invalid: Deve conferir com a mesma utilizada em inscrições anteriores
   date:
     min_day_names:
     - Do

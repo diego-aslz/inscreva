@@ -1,17 +1,18 @@
-<%= semantic_form_for @subscription, :html => { :class => 'form-horizontal' } do |f| %>
+<%= semantic_form_for @application, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.semantic_errors %>
+
   <%= f.inputs do %>
     <%= f.input :event_id, as: :hidden %>
-    <%= content_tag :div, id: 'id_card_field' do %>
-      <%= f.input :id_card, append: link_to_check_id_card.html_safe %>
-    <% end %>
-
-    <%= content_tag :div, id: 'subscription_fields' do %>
-      <%= f.input :id_card, input_html: { readonly: :readonly, id: 'id_card_show' } %>
-      <%= f.input :email %>
-    <% end %>
+    <%= f.input :event_name, as: :xx_large_string, input_html: { readonly: true },
+        required: false %>
+    <%= f.input :name, as: :xx_large_string %>
+    <%= f.input :id_card %>
+    <%= f.input :email, as: :x_large_string %>
+    <%= f.input :email_confirmation, as: :x_large_string %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
   <% end %>
   <%= f.actions do %>
-    <%= f.action :submit %>
+    <%= f.action :submit, label: t(:subscribe), button_html: { class: 'btn btn-primary' } %>
   <% end %>
 <% end %>

@@ -1,14 +1,22 @@
 FactoryGirl.define do
+  sequence(:email) { |n| "email#{n}@example.com" }
+
   factory :admin_user do
-    sequence(:email) { |n| "admin#{n}@example.com" }
+    email
     password 'password'
     password_confirmation 'password'
   end
 
   factory :user do
-    sequence(:email) { |n| "candidate#{n}@example.com" }
+    email
     password 'password'
     password_confirmation 'password'
+
+    factory :candidate_user do
+      after(:create) do |user,evaluator|
+        user.subscriptions << create(:subscription)
+      end
+    end
   end
 
   factory :role do
@@ -21,7 +29,7 @@ FactoryGirl.define do
 
   factory :event do
     name 'Contest sample'
-    email 'contest@nomail.com'
+    email
     technical_email 'systems@nomail.com'
     allow_edit true
     opens_at { Time.zone.now }
@@ -46,8 +54,18 @@ FactoryGirl.define do
 
   factory :subscription do
     association :event, factory: :ongoing_event
-    user
-    email { user.email }
+    email
     id_card '1234567890'
+    name 'Jorge'
+  end
+
+  factory :application_form do
+    association :event, factory: :ongoing_event
+    email
+    email_confirmation { email }
+    id_card '1234567890'
+    name 'Jorge'
+    password 'JorgeJorge'
+    password_confirmation 'JorgeJorge'
   end
 end

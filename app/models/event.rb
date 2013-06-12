@@ -21,4 +21,8 @@ class Event < ActiveRecord::Base
     errors[:closes_at] = I18n.t('helpers.errors.event.closes_at.too_soon') unless (
         closes_at.nil? || opens_at.nil? || closes_at > opens_at)
   end
+
+  def to_s
+    name
+  end
 end
