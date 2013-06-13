@@ -34,6 +34,35 @@ describe 'ApplicationForm' do
       subscription.should have(1).errors_on(:event_id)
     end
 
+    context 'data confirmation' do
+      it "is NOT confirmed if it's not valid yet" do
+        subscription.confirmed = false
+        subscription.name = nil
+        subscription.valid?(:create).should be_false
+        subscription.confirmed?.should be_false
+      end
+
+      it "is confirmed when everything else is valid" do
+        subscription.confirmed = false
+        subscription.valid?(:create).should be_false
+        subscription.confirmed.should be_true
+        subscription.errors.count.should == 1
+        subscription.errors[:base].should_not be_empty
+      end
+
+      it "is valid after confirmed" do
+        subscription.confirmed = 'true'
+        subscription.valid?(:create).should be_true
+      end
+
+      it "falls back to not confirmed if there's something invalid" do
+        subscription.confirmed = 'true'
+        subscription.name = nil
+        subscription.valid?(:create).should be_false
+        subscription.confirmed?.should be_false
+      end
+    end
+
     context 'user creation' do
       it "validates the password when user exists" do
         subscription.email = user.email,

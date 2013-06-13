@@ -67,5 +67,6 @@ FactoryGirl.define do
     name 'Jorge'
     password 'JorgeJorge'
     password_confirmation 'JorgeJorge'
+    confirmed 'true'
   end
 end

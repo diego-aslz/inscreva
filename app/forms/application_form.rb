@@ -3,15 +3,15 @@ class ApplicationForm
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
-  ATTRIBUTES = [:password, :password_confirmation, :email_confirmation]
+  ATTRIBUTES = [:password, :password_confirmation, :email_confirmation, :confirmed]
   attr_accessor *ATTRIBUTES
 
   validate :event_is_ongoing?, if: :event_id
   validate :valid_user?, on: :create
   validates_presence_of :email, :id_card, :event_id, :event, :name
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
-  validates_confirmation_of :email, message: I18n.t('helpers.' +
-      'errors.subscription.email.differs_from_confirmation')
+  validates_confirmation_of :email, message: I18n.t('helpers.errors.' +
+      'subscription.email.differs_from_confirmation')
   validates_confirmation_of :password
   validates_presence_of :password, on: :create
   validates_presence_of :email_confirmation, if: :email
@@ -22,11 +22,18 @@ class ApplicationForm
   delegate :details=, :email=, :id_card=, :event_id=, :event=, :name=, :user_id=,
       :user=, :persisted?, :new_record?, to: :subscription
 
-  def load_from(params)
+  def load_from(params, user = nil)
     if params
       subscription.attributes = params.slice(:details, :email, :id_card,
           :event_id, :name)
       ATTRIBUTES.each { |att| send("#{att}=", params[att]) }
+    end
+    self.confirmed = false if self.confirmed.nil?
+    if user && (last = user.subscriptions.last)
+      self.name = last.name
+      self.id_card = last.id_card
+      self.email = last.email
+      self.email_confirmation = last.email
     end
     self
   end
@@ -53,6 +60,24 @@ class ApplicationForm
     else
       false
     end
+  end
+
+  def confirmed?
+    self.confirmed == 'true'
+  end
+
+  def valid?(context = nil)
+    valid = super(context)
+    unless valid
+      self.confirmed = false
+    else
+      unless confirmed?
+        errors.add :base, I18n.t('helpers.errors.subscription.confirm')
+        self.confirmed = true
+        return false
+      end
+    end
+    valid
   end
 
   private

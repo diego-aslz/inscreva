@@ -11,6 +11,9 @@ pt-BR:
   subscribe: Inscrever-se
   cancel: Cancelar
 
+  subscriptions:
+    new:
+      title: Nova %{model}
   active_admin:
     access_denied:
       message: 'Permissão negada'
@@ -22,6 +25,7 @@ pt-BR:
       user: Usuário
       event: Evento
       event_field: Campo
+      subscription: Inscrição
   views:
     pagination:
       first: Início
@@ -61,6 +65,7 @@ pt-BR:
           not_ongoing: Inscrições ainda não abertas ou já encerradas.
         password:
           invalid: Deve conferir com a mesma utilizada em inscrições anteriores
+        confirm: Confira as informações e envie a inscrição novamente
   date:
     min_day_names:
     - Do

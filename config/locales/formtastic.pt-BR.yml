@@ -7,7 +7,6 @@ pt-BR:
     labels:
       default:
         name: "Nome"
-        email: E-mail
       user:
         email: E-mail
         password: Senha
@@ -28,6 +27,7 @@ pt-BR:
         technical_email: "E-mail do suporte técnico"
         email: "E-mail oficial"
       subscription:
+        email: E-mail
         event: Evento
         id_card: Identidade
         name: Nome

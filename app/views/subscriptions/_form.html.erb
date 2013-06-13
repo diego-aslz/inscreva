@@ -2,6 +2,7 @@
   <%= f.semantic_errors %>
 
   <%= f.inputs do %>
+    <%= f.input :confirmed, as: :hidden %>
     <%= f.input :event_id, as: :hidden %>
     <%= f.input :event_name, as: :xx_large_string, input_html: { readonly: true },
         required: false %>

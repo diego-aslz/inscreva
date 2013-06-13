@@ -2,8 +2,4 @@
 <div class="page-header">
   <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human %></h1>
 </div>
-<%# if @subscription.id_card %>
   <%= render :partial => 'form' %>
-<%# else %>
-  <%#= render :partial => 'id_card' %>
-<%# end %>

@@ -6,8 +6,7 @@ class SubscriptionsController < InheritedResources::Base
     unless params[:event_id] && Event.find(params[:event_id]).ongoing?
       redirect_to root_url
     else
-      @application = ApplicationForm.new.load_from params
-      new!
+      @application = ApplicationForm.new.load_from params, current_user
     end
   end
 
