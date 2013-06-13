@@ -7,13 +7,16 @@ class SubscriptionsController < InheritedResources::Base
       redirect_to root_url
     else
       @application = ApplicationForm.new.load_from params, current_user
+      @application.user = current_user
     end
   end
 
   def create
     @application = ApplicationForm.new.load_from(params[:subscription])
+    @application.user = current_user
     if @application.submit
-      sign_in @application.user
+      sign_in @application.user unless current_user
+      flash[:notice] = t 'helpers.messages.subscription.successfully_created'
       redirect_to @application.subscription
     else
       render :new

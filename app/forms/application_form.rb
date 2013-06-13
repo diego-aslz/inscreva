@@ -13,7 +13,7 @@ class ApplicationForm
   validates_confirmation_of :email, message: I18n.t('helpers.errors.' +
       'subscription.email.differs_from_confirmation')
   validates_confirmation_of :password
-  validates_presence_of :password, on: :create
+  validates_presence_of :password, on: :create, unless: :user
   validates_presence_of :email_confirmation, if: :email
   validates_presence_of :password_confirmation, if: :password
 
@@ -88,7 +88,7 @@ class ApplicationForm
   end
 
   def valid_user?
-    valid = (self.user = User.where(email: email).first).nil? || self.user.
+    valid = self.user || (self.user = User.where(email: email).first).nil? || self.user.
         valid_password?(password)
     unless valid
       helper = Rails.application.routes.url_helpers
@@ -99,6 +99,7 @@ class ApplicationForm
           password_link: base_helper.link_to(I18n.t('helpers.links.password_link'),
               helper.new_user_password_path, target: :_blank)).html_safe
       errors.add :base, msg
+      self.user = nil
     end
   end
 end

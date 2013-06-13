@@ -14,6 +14,8 @@ pt-BR:
   subscriptions:
     new:
       title: Nova %{model}
+    show:
+      title: Comprovante de Inscrição
   active_admin:
     access_denied:
       message: 'Permissão negada'
@@ -52,6 +54,9 @@ pt-BR:
       create: Criar %{model}
       submit: Salvar %{model}
       update: Atualizar %{model}
+    messages:
+      subscription:
+        successfully_created: Inscrição realizada com sucesso
     errors:
       duplicity: você já possui %{model} com tal %{attr}
       event:
