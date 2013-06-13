@@ -37,39 +37,39 @@
     <%#= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
   </head>
   <body>
-
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="<%= root_url %>">Inscreva</a>
-          <div class="container nav-collapse">
-            <ul class="nav">
-              <li><%= link_to "Users", users_path if can? :index, User %></li>
-              <li><%= link_to "Events", events_path if can? :index, Event %></li>
-              <li><%= link_to t('subscriptions.index.title'), subscriptions_path if can? :index, Subscription %></li>
-            </ul>
-            <% if user_signed_in? %>
-              <div class="btn-group pull-right">
-                <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> <%= current_user.email %></a>
-                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="<%=destroy_user_session_url%>" data-method="delete"><i class="icon-ban-circle"></i> Sair</a></li>
-                </ul>
-              </div>
-            <% else %>
-              <div style="float: right;"><%= link_to t('devise.links.sign_in'), new_user_session_url, :class => 'btn btn-primary' %></div>
-            <% end %>
-          </div><!--/.nav-collapse -->
+    <div class="wrapper">
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="<%= root_url %>">Inscreva</a>
+            <div class="container nav-collapse">
+              <ul class="nav">
+                <li><%= link_to "Users", users_path if can? :index, User %></li>
+                <li><%= link_to "Events", events_path if can? :index, Event %></li>
+                <li><%= link_to t('subscriptions.index.title'), subscriptions_path if can? :index, Subscription %></li>
+              </ul>
+              <% if user_signed_in? %>
+                <div class="btn-group pull-right">
+                  <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> <%= current_user.email %></a>
+                  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="<%=destroy_user_session_url%>" data-method="delete"><i class="icon-ban-circle"></i> Sair</a></li>
+                  </ul>
+                </div>
+              <% else %>
+                <div style="float: right;"><%= link_to t('devise.links.sign_in'), new_user_session_url, :class => 'btn btn-primary' %></div>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="container">
+      <div class="container">
         <div class="row">
           <div class="span12">
             <% flash.each do |k,v| %>
@@ -80,22 +80,21 @@
             <% end %>
             <%= yield %>
           </div>
-        </div><!--/row-->
+        </div>
+      </div>
+    </div>
 
-    </div> <!-- /container -->
-
-    <footer class="footer">
+    <div class="footer">
       <div class="container">
-        <p>Inscreva Software</p>
+        <p>Inscreva</p>
         <p>Versão 0.01</p>
         <p>Criado por <a href="http://www.linkedin.com/pub/diego-aguir-selzlein/23/259/40" target="_blank">Diego Aguir Selzlein</a></p>
       </div>
-    </footer>
+    </div>
 
     <!-- Javascripts
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
-
   </body>
 </html>

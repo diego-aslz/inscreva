@@ -11,19 +11,23 @@
  *= require formtastic-bootstrap
  *= require formtastic_ie6
  *= require formtastic_ie7
- *= require subscription
+ *= require bootstrap_and_overrides
  *= require_self
  */
 
-@import "bootstrap";
+html, body, .wrapper { height: 90%; }
+body > .wrapper { height: auto; min-height: 82%; }
+.wrapper { padding-bottom: 6em; }
 
 .footer {
-  margin-top: 30px;
+  clear: both;
+  position: relative;
+  z-index: 10;
+  margin-top: -3em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  height: 6em;
+  background-color: whiteSmoke;
   border-top: 1px solid #E5E5E5;
   text-align: right;
-  background-color: whiteSmoke;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  width: 100%;
-  bottom: 0;
 }
