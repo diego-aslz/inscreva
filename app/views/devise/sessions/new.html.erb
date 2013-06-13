@@ -1,15 +1,14 @@
-<h2>Sign in</h2>
+<h2><%= t 'devise.titles.sign_in' %></h2>
 
-<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
+<%= semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <%= f.inputs do %>
     <%= f.input :email, :required => false, :autofocus => true %>
-    <%= f.input :password, :required => false %>
+    <%= f.input :password, :required => false, hint: false %>
     <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, t('devise.buttons.sign_in') %>
-  </div>
+  <% end %>
+  <%= f.actions do %>
+    <%= f.action :submit, label: t('devise.buttons.sign_in'), button_html: { class: 'btn btn-primary' } %>
+  <% end %>
 <% end %>
 
 <%= render "devise/shared/links" %>

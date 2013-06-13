@@ -7,6 +7,13 @@ pt-BR:
     labels:
       default:
         name: "Nome"
+        email: E-mail
+      user:
+        email: E-mail
+        password: Senha
+        password_confirmation: Redigite sua senha
+        current_password: Senha atual
+        remember_me: Manter usuário conectado neste computador
       area:
         event: Evento
         requirement: Requisito Mínimo
@@ -23,14 +30,13 @@ pt-BR:
       subscription:
         event: Evento
         id_card: Identidade
-        email: "E-mail"
         name: Nome
         email_confirmation: Redigite seu e-mail
         password: Senha
         password_confirmation: Redigite sua senha
-    # hints:
-    #   event:
-    #     allow_edit: "Marque para que o candidato possa alterar seus dados até o fechamento das inscrições."
+    hints:
+      user:
+        password: "Deixe em branco para não alterar"
     #   post:
     #     title: "Choose a good title for your post."
     #     body: "Write something inspiring here."

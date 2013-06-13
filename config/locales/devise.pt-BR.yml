@@ -11,12 +11,17 @@ pt-BR:
         one: 1 erro impediu salvar %{resource}
         other: "%{count} erros o impediram de salvar %{resource}"
   devise:
+    titles:
+      sign_in: Autenticação
+      forgot: Esqueceu sua senha?
+      change: Alterar minha senha
     buttons:
       sign_in: Acessar o sistema
       sign_up: Confirmar cadastro
       forgot: Enviar instruções de alteração de senha
       confirmation: Enviar instruções de confirmação
       change: Alterar minha senha
+      update: Alterar meus dados
     links:
       sign_in: Acessar
       sign_up: Quero me cadastrar

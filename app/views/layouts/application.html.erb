@@ -54,11 +54,9 @@
             </ul>
             <% if user_signed_in? %>
               <div class="btn-group pull-right">
-                <a class="btn btn-primary" href="<%=edit_user_registration_url%>"><i class="icon-user icon-white"></i> <%= current_user.email %></a>
+                <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> <%= current_user.email %></a>
                 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="<%=edit_user_registration_url%>"><i class="icon-pencil"></i> Alterar dados</a></li>
-                  <li class="divider"></li>
                   <li><a href="<%=destroy_user_session_url%>" data-method="delete"><i class="icon-ban-circle"></i> Sair</a></li>
                 </ul>
               </div>

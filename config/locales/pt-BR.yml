@@ -9,7 +9,7 @@ pt-BR:
   home_title: Eventos em andamento
   future_events: Próximos eventos
   subscribe: Inscrever-se
-  continue: Continuar
+  cancel: Cancelar
 
   active_admin:
     access_denied:
@@ -32,8 +32,6 @@ pt-BR:
     titles:
       new: Criar %{model}
       edit: Editar %{model}
-      sign_in: Acesse o sistema!
-      sign_up: Cadastre-se, é rápido!
     actions: Ações
     links:
       edit: Editar
