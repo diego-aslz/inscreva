@@ -28,7 +28,7 @@ pt-BR:
         email: "E-mail oficial"
       subscription:
         email: E-mail
-        event: Evento
+        event_name: Evento
         id_card: Identidade
         name: Nome
         email_confirmation: Redigite seu e-mail

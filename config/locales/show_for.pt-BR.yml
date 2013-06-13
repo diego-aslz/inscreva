@@ -1,0 +1,5 @@
+pt-BR:
+  show_for:
+    blank: "Não especificado"
+    "yes": "Sim"
+    "no": "Não"

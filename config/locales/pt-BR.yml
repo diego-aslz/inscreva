@@ -31,6 +31,11 @@ pt-BR:
       event: Evento
       event_field: Campo
       subscription: Inscrição
+    attributes:
+      subscription:
+        id_card: Identidade
+        email: E-mail
+        event: Evento
   views:
     pagination:
       first: Início

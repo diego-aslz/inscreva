@@ -1,29 +1,16 @@
 <%- model_class = Subscription -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
-</div>
+<%= text_page_header t('.title') %>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:id_card) %>:</strong></dt>
-  <dd><%= @subscription.id_card %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-  <dd><%= @subscription.email %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:event_id) %>:</strong></dt>
-  <dd><%= @subscription.event_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:details) %>:</strong></dt>
-  <dd><%= @subscription.details %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @subscription.user_id %></dd>
-</dl>
+<%= show_for @subscription, class: 'dl-horizontal' do |show| %>
+  <%= show.attribute :id_card %>
+  <%= show.attribute :email %>
+  <%= show.association :event %>
+  <%#= show.attribute :details %>
+<% end %>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               subscriptions_path, :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_subscription_path(@subscription), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              subscription_path(@subscription),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
 </div>
