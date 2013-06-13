@@ -54,12 +54,8 @@
                 <li><%= link_to t('subscriptions.index.title'), subscriptions_path if can? :index, Subscription %></li>
               </ul>
               <% if user_signed_in? %>
-                <div class="btn-group pull-right">
-                  <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> <%= current_user.email %></a>
-                  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="<%=destroy_user_session_url%>" data-method="delete"><i class="icon-ban-circle"></i> Sair</a></li>
-                  </ul>
+                <div class="pull-right">
+                  <%= current_user.email %>, <a href="<%=destroy_user_session_url%>" data-method="delete"> Sair</a>
                 </div>
               <% else %>
                 <div style="float: right;"><%= link_to t('devise.links.sign_in'), new_user_session_url, :class => 'btn btn-primary' %></div>
