@@ -5,34 +5,25 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:id_card) %></th>
-      <th><%= model_class.human_attribute_name(:email) %></th>
-      <th><%= model_class.human_attribute_name(:event_id) %></th>
-      <th><%= model_class.human_attribute_name(:details) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= t(:'formtastic.labels.subscription.id_card') %></th>
+      <th><%= t(:'formtastic.labels.subscription.email') %></th>
+      <th><%= t(:'formtastic.labels.subscription.event') %></th>
+      <th></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @subscriptions.each do |subscription| %>
       <tr>
-        <td><%= link_to subscription.id, subscription_path(subscription) %></td>
-        <td><%= subscription.id_card %></td>
+        <td><%= link_to subscription.id_card, subscription_path(subscription) %></td>
         <td><%= subscription.email %></td>
-        <td><%= subscription.event_id %></td>
-        <td><%= subscription.details %></td>
-        <td><%= subscription.user_id %></td>
-        <td><%=l subscription.created_at %></td>
+        <td><%= subscription.event.name if subscription.event %></td>
+        <td>
+          <%= link_to t(:show_receipt), subscription_path(subscription) %>
+        </td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_subscription_path(subscription), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      subscription_path(subscription),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
+                      edit_subscription_path(subscription), :class => 'btn btn-mini' if can? :edit, subscription %>
         </td>
       </tr>
     <% end %>

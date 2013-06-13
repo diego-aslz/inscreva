@@ -10,12 +10,15 @@ pt-BR:
   future_events: Próximos eventos
   subscribe: Inscrever-se
   cancel: Cancelar
+  show_receipt: Visualizar comprovante
 
   subscriptions:
     new:
       title: Nova %{model}
     show:
       title: Comprovante de Inscrição
+    index:
+      title: Minhas inscrições
   active_admin:
     access_denied:
       message: 'Permissão negada'

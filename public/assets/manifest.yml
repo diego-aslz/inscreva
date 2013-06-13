@@ -45,13 +45,7 @@ active_admin/print.css: active_admin/print.css
 active_admin/print/index.css: active_admin/print.css
 jquery.min.map: jquery.min.map
 jquery/index.min.map: jquery.min.map
-fontawesome-webfont.eot: fontawesome-webfont.eot
-fontawesome-webfont/index.eot: fontawesome-webfont.eot
-fontawesome-webfont.ttf: fontawesome-webfont.ttf
-fontawesome-webfont/index.ttf: fontawesome-webfont.ttf
-fontawesome-webfont.woff: fontawesome-webfont.woff
-fontawesome-webfont/index.woff: fontawesome-webfont.woff
-twitter/bootstrap/glyphicons-halflings-white.png: twitter/bootstrap/glyphicons-halflings-white.png
-twitter/bootstrap/glyphicons-halflings-white/index.png: twitter/bootstrap/glyphicons-halflings-white.png
-twitter/bootstrap/glyphicons-halflings.png: twitter/bootstrap/glyphicons-halflings.png
-twitter/bootstrap/glyphicons-halflings/index.png: twitter/bootstrap/glyphicons-halflings.png
+glyphicons-halflings-white.png: glyphicons-halflings-white.png
+glyphicons-halflings-white/index.png: glyphicons-halflings-white.png
+glyphicons-halflings.png: glyphicons-halflings.png
+glyphicons-halflings/index.png: glyphicons-halflings.png

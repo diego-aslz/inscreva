@@ -8,7 +8,7 @@ class Ability
     elsif user.is_a? AdminUser
       can :manage, :all
     elsif user.subscriptions.any?
-      can [:edit, :update, :show], Subscription, user_id: user.id
+      can [:edit, :update, :show, :index], Subscription, user_id: user.id
     end
     can [:new, :create], Subscription
   end

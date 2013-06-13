@@ -1,5 +1,5 @@
 class SubscriptionsController < InheritedResources::Base
-  actions :all, except: [ :index, :destroy, :create ]
+  actions :all, except: [ :destroy, :create ]
   load_and_authorize_resource except: [:create]
 
   def new
@@ -39,5 +39,9 @@ class SubscriptionsController < InheritedResources::Base
     else
       redirect_to root_url
     end
+  end
+
+  def index
+    @subscriptions = Subscription.accessible_by(current_ability).includes :event
   end
 end

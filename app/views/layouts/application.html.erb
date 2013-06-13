@@ -51,6 +51,7 @@
             <ul class="nav">
               <li><%= link_to "Users", users_path if can? :index, User %></li>
               <li><%= link_to "Events", events_path if can? :index, Event %></li>
+              <li><%= link_to t('subscriptions.index.title'), subscriptions_path if can? :index, Subscription %></li>
             </ul>
             <% if user_signed_in? %>
               <div class="btn-group pull-right">
