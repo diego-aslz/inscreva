@@ -69,4 +69,9 @@ FactoryGirl.define do
     password_confirmation 'JorgeJorge'
     confirmed 'true'
   end
+
+  factory :event_field do
+    sequence(:name) { |n| "field#{n}" }
+    field_type 'boolean'
+  end
 end

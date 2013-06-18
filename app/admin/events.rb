@@ -17,7 +17,7 @@ ActiveAdmin.register Event do
     f.inputs t(:event_fields) do
       f.has_many :fields do |ff|
         ff.input :name
-        ff.input :field_type, as: :select, collection: %w[Texto Lógico]
+        ff.input :field_type, as: :select, collection: %w[string boolean]
         ff.input :required
       end
     end

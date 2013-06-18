@@ -24,18 +24,25 @@ class SubscriptionsController < InheritedResources::Base
   end
 
   def edit
-    @subscription = Subscription.find(params[:id])
-    if @subscription.event.ongoing? && @subscription.event.allow_edit
-      edit!
+    sub = Subscription.find(params[:id])
+    if sub.event.ongoing? && sub.event.allow_edit
+      @application = ApplicationForm.new
+      @application.subscription = sub
     else
       redirect_to root_url
     end
   end
 
   def update
-    @subscription = Subscription.find(params[:id])
-    if @subscription.event.ongoing? && @subscription.event.allow_edit
-      update!
+    @application = ApplicationForm.new
+    sub = Subscription.find(params[:id])
+    @application.subscription = sub
+    if sub.event.ongoing? && sub.event.allow_edit
+      if @application.submit params[:subscription]
+        redirect_to sub
+      else
+        render :edit
+      end
     else
       redirect_to root_url
     end

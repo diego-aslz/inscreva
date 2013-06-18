@@ -43,9 +43,9 @@ active_admin/pages/application.js: active_admin/pages/application.js
 active_admin/pages/application/index.js: active_admin/pages/application.js
 active_admin/print.css: active_admin/print.css
 active_admin/print/index.css: active_admin/print.css
-jquery.min.map: jquery.min.map
-jquery/index.min.map: jquery.min.map
 glyphicons-halflings-white.png: glyphicons-halflings-white.png
 glyphicons-halflings-white/index.png: glyphicons-halflings-white.png
 glyphicons-halflings.png: glyphicons-halflings.png
 glyphicons-halflings/index.png: glyphicons-halflings.png
+jquery.min.map: jquery.min.map
+jquery/index.min.map: jquery.min.map

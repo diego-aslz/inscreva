@@ -8,10 +8,18 @@
         required: false %>
     <%= f.input :name, as: :xx_large_string %>
     <%= f.input :id_card %>
-    <%= f.input :email, as: :x_large_string %>
-    <%= f.input :email_confirmation, as: :x_large_string %>
+    <% if @application.new_record? %>
+      <%= f.input :email, as: :x_large_string %>
+      <%= f.input :email_confirmation, as: :x_large_string %>
+    <% end %>
     <%= f.input :password unless @application.user %>
     <%= f.input :password_confirmation unless @application.user %>
+
+    <%= f.fields_for :details, OpenStruct.new(@application.details) do |builder| %>
+      <% @application.event.fields.each do |field| %>
+        <%= render "subscriptions/fields/#{field.field_type}_field", field: field, f: builder %>
+      <% end %>
+    <% end %>
   <% end %>
   <%= f.actions do %>
     <%= f.action :submit, label: t(:subscribe), button_html: { class: 'btn btn-primary' } %>

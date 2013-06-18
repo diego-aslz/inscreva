@@ -14,11 +14,11 @@ class ApplicationForm
       'subscription.email.differs_from_confirmation')
   validates_confirmation_of :password
   validates_presence_of :password, on: :create, unless: :user
-  validates_presence_of :email_confirmation, if: :email
+  validates_presence_of :email_confirmation, if: :email, on: :create
   validates_presence_of :password_confirmation, if: :password
 
   delegate :details, :email, :id_card, :event_id, :event, :name, :user_id, :user,
-      to: :subscription
+      :id, to: :subscription
   delegate :details=, :email=, :id_card=, :event_id=, :event=, :name=, :user_id=,
       :user=, :persisted?, :new_record?, to: :subscription
 
@@ -50,6 +50,10 @@ class ApplicationForm
     @subscription ||= Subscription.new
   end
 
+  def subscription=(s)
+    @subscription = s
+  end
+
   def submit(params = nil)
     load_from params if params
     if valid? (new_record? ? :create : :update)
@@ -71,7 +75,7 @@ class ApplicationForm
     unless valid
       self.confirmed = false
     else
-      unless confirmed?
+      if !confirmed? && context == :create
         errors.add :base, I18n.t('helpers.errors.subscription.confirm')
         self.confirmed = true
         return false

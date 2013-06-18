@@ -14,7 +14,8 @@ describe 'ApplicationForm' do
     it { should require_presence_of :event_id }
     it { should require_presence_of :password, context: :create, errors: 2 }
     it { should require_presence_of :password_confirmation }
-    it { should require_presence_of :email_confirmation }
+    it { should require_presence_of :email_confirmation, context: :create }
+    it { should_not require_presence_of :email_confirmation, context: :update }
     it { should require_presence_of :email, errors: 3 }
     it { should require_confirmation_of :email, errors: 2 }
     it { should require_confirmation_of :password, errors: 1 }
