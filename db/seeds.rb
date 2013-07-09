@@ -8,6 +8,8 @@
 
 r = Role.find_or_create_by_name('superadmin')
 admin = AdminUser.first
+admin.update_attribute :email, 'admin@inscreva.com'
+admin.update_attributes password: 'admin1234', password_confirmation: 'admin1234'
 admin.roles << r unless admin.has_role? r
 
 =begin
