@@ -34,6 +34,9 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
   gem "bootstrap-sass"
+  gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
+                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+  gem 'maskedinput-rails'
 end
 
 gem 'devise'
