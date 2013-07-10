@@ -76,3 +76,7 @@
 # Formtastic::FormBuilder.perform_browser_validations = true
 
 Formtastic::Helpers::FormHelper.builder = FormtasticBootstrap::FormBuilder
+
+# Priority countries.
+# Default: ["Australia", "Canada", "United Kingdom", "United States"]
+Formtastic::FormBuilder.priority_countries = %w[BRA ARG BOL CHL COL CUB MEX PER PRY URY VEN]

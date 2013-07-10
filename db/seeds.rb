@@ -11,12 +11,3 @@ admin = AdminUser.first
 admin.update_attribute :email, 'admin@inscreva.com'
 admin.update_attributes password: 'admin1234', password_confirmation: 'admin1234'
 admin.roles << r unless admin.has_role? r
-
-=begin
-u = User.find_by_email 'admin@inscreva.com.br'
-unless u
-  u = User.create!(email: 'admin@inscreva.com.br', password: 'admin1234',
-      password_confirmation: 'admin1234', name: 'Admin')
-  u.permissions.create!(role_id: r.id)
-end
-=end
