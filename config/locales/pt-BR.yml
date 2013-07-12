@@ -36,6 +36,9 @@ pt-BR:
         id_card: Identidade
         email: E-mail
         event: Evento
+    errors:
+      messages:
+        record_invalid: Dados incorretos
   views:
     pagination:
       first: Início
