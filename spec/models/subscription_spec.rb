@@ -17,4 +17,19 @@ describe 'Subscription' do
     it { should be_include(f2) }
     it { should_not be_include(f3) }
   end
+
+  it "should generate a subscription number" do
+    sub = build(:subscription)
+    sub.number.should be_nil
+    sub.save
+    sub.number.should_not be_nil
+  end
+
+  it "should not change the number" do
+    sub = create(:subscription)
+    sub.number.should_not be_nil
+    expect {
+      sub.update_attribute :name, sub.name + sub.name
+    }.not_to change(sub, :number)
+  end
 end

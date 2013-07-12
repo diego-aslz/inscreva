@@ -45,7 +45,7 @@ RSpec::Matchers.define :require_valid do |attrib, options = {}|
     model.send(attrib.to_s + '=', options[:invalid])
     model.valid? options[:context]
     @errors = model.errors[attrib].count
-    return false unless @errors == @expected_errors
+    next false unless @errors == @expected_errors
 
     @expected_errors = 0
     model.send(attrib.to_s + '=', options[:valid])
@@ -62,5 +62,31 @@ RSpec::Matchers.define :require_valid do |attrib, options = {}|
 
   description do
     "validates attribute #{attrib} is valid"
+  end
+end
+
+RSpec::Matchers.define :require_uniqueness_of do |attrib, options = {}|
+  match do |model|
+    @expected_errors = (options[:errors] || 1)
+    model.send(attrib.to_s + '=', options[:used_value])
+    model.valid? options[:context]
+    @errors = model.errors[attrib].count
+    next false unless @errors == @expected_errors
+
+    @expected_errors = 0
+    model.send(attrib.to_s + '=', options[:unused_value] || options[:used_value].to_s + '2')
+    model.valid? options[:context]
+    @errors = model.errors[attrib].count
+    @errors == @expected_errors
+  end
+
+  failure_message_for_should do |model|
+    attrib,options = expected
+    message = "expected #{model} to have #{@expected_errors}" +
+        " errors for #{attrib}, but it has #{@errors}."
+  end
+
+  description do
+    "validates uniqueness of #{attrib}"
   end
 end
