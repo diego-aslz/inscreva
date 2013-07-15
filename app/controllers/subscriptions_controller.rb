@@ -3,17 +3,19 @@ class SubscriptionsController < InheritedResources::Base
   load_and_authorize_resource except: [:create]
 
   def new
-    unless params[:event_id] && Event.find(params[:event_id]).ongoing?
+    unless params[:event_id] && (event = Event.find(params[:event_id])).ongoing?
       redirect_to root_url
     else
       @application = ApplicationForm.new.load_from params, current_user
       @application.user = current_user
+      @application.field_fills = event.field_fills
     end
   end
 
   def create
     @application = ApplicationForm.new.load_from(params[:subscription])
     @application.user = current_user
+    @application.generate_number
     if @application.submit
       sign_in @application.user unless current_user
       flash[:notice] = t 'helpers.messages.subscription.successfully_created'
@@ -50,5 +52,9 @@ class SubscriptionsController < InheritedResources::Base
 
   def index
     @subscriptions = Subscription.accessible_by(current_ability).includes :event
+  end
+
+  def show
+    @subscription = Subscription.includes(field_fills: :event_field).find(params[:id])
   end
 end

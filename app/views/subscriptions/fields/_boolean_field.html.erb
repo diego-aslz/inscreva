@@ -1,1 +1,1 @@
-<%= f.input field.id.to_s, label: field.name, as: :radio, required: field.required, collection: { t('yes') => true, t('no') => false} %>
+<%= f.input :value, label: field.name, as: :radio, required: field.required, collection: { t('yes') => true, t('no') => false} %>

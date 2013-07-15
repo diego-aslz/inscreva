@@ -17,15 +17,16 @@ class ApplicationForm
   validates_presence_of :email_confirmation, if: :email, on: :create
   validates_presence_of :password_confirmation, if: :password
 
-  delegate :details, :email, :id_card, :event_id, :event, :name, :user_id, :user,
-      :id, to: :subscription
-  delegate :details=, :email=, :id_card=, :event_id=, :event=, :name=, :user_id=,
-      :user=, :persisted?, :new_record?, to: :subscription
+  delegate :field_fills, :email, :id_card, :event_id, :event, :name, :user_id, :user,
+      :id, :generate_number, to: :subscription
+  delegate :field_fills=, :field_fills_attributes=, :email=, :id_card=, :event_id=,
+      :event=, :name=, :user_id=, :user=, :persisted?, :new_record?, to: :subscription
 
   def load_from(params, user = nil)
+    subscription
     if params
-      subscription.attributes = params.slice(:details, :email, :id_card,
-          :event_id, :name)
+      subscription.attributes = params.slice(:email, :id_card, :event_id, :name,
+          :field_fills_attributes)
       ATTRIBUTES.each { |att| send("#{att}=", params[att]) }
     end
     self.confirmed = false if self.confirmed.nil?

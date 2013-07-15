@@ -1,1 +1,4 @@
-<%= value %>
+<%#= link_to "Download", file_path(field.id, value) %>
+<%#= link_to "Delete", file_path(field.id, value), method: :delete,
+    data: { confirm: t("helpers.links.files.confirm",
+        :value => field.name) } if can?(:edit, @subscription) && !field.required %>

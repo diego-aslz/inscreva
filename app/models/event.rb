@@ -25,4 +25,13 @@ class Event < ActiveRecord::Base
   def to_s
     name
   end
+
+  def field_fills
+    result = []
+    fields.each do |f|
+      result << FieldFill.new
+      result.last.event_field = f
+    end if fields
+    result
+  end
 end

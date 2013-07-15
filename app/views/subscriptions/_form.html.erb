@@ -4,8 +4,7 @@
   <%= f.inputs do %>
     <%= f.input :confirmed, as: :hidden %>
     <%= f.input :event_id, as: :hidden %>
-    <%= f.input :event_name, as: :xx_large_string, input_html: { readonly: true },
-        required: false %>
+    <%= f.input :event_name, as: :xx_large_string, input_html: { readonly: true }, required: false %>
     <%= f.input :name, as: :xx_large_string %>
     <%= f.input :id_card %>
     <% if @application.new_record? %>
@@ -15,10 +14,10 @@
     <%= f.input :password unless @application.user %>
     <%= f.input :password_confirmation unless @application.user %>
 
-    <%= f.fields_for :details, OpenStruct.new(@application.details) do |builder| %>
-      <% @application.event.fields.each do |field| %>
-        <%= render "subscriptions/fields/#{field.field_type}_field", field: field, f: builder %>
-      <% end %>
+    <%= f.semantic_fields_for :field_fills do |ff| %>
+      <%= ff.input :event_field_id, as: :hidden, label: false %>
+      <%= render "subscriptions/fields/#{ff.object.event_field.field_type}_field",
+          fill: ff.object, field: ff.object.event_field, f: ff %>
     <% end %>
   <% end %>
   <%= f.actions do %>

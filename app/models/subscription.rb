@@ -2,34 +2,32 @@ class Subscription < ActiveRecord::Base
   belongs_to :event
   belongs_to :user
 
-  attr_accessible :details, :email, :id_card, :event_id, :name
-  serialize :details, Hash
+  attr_accessible :field_fills_attributes, :email, :id_card, :event_id, :name
+  has_many :field_fills
+  accepts_nested_attributes_for :field_fills
 
+  # before_create :generate_number
   validates_uniqueness_of :number
 
-  before_save :save_files
+  # before_save :save_files
 
   FILE_STORE = '/tmp/files'
 
-  def details_fields
-    EventField.where(id: details.keys)
-  end
-
   private
 
-  def save_files
-    generate_number unless self.number
-    details_fields.each do |f|
-      if f.field_type == "file"
-        upload = details[f.id.to_s]
-        if upload
-          file_name = "subscription_#{number}#{File.extname(upload.original_filename)}"
-          details[f.id.to_s] = file_name
-          save_file_data upload, File.join(FILE_STORE, f.id.to_s), file_name
-        end
-      end
-    end
-  end
+  # def save_files
+  #   generate_number unless self.number
+  #   details_fields.each do |f|
+  #     if f.field_type == "file"
+  #       upload = details[f.id.to_s]
+  #       if upload
+  #         file_name = "#{number}#{File.extname(upload.original_filename)}"
+  #         details[f.id.to_s] = file_name
+  #         save_file_data upload, File.join(FILE_STORE, f.id.to_s), file_name
+  #       end
+  #     end
+  #   end
+  # end
 
   def save_file_data(data, dir, file_name)
     if data

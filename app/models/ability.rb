@@ -9,6 +9,7 @@ class Ability
       can :read, ActiveAdmin::Page, :name => "Dashboard"
     elsif user.subscriptions.any?
       can [:edit, :update, :show, :index], Subscription, user_id: user.id
+      can :show, :file
     end
     can [:new, :create], Subscription
   end

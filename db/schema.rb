@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130711142156) do
+ActiveRecord::Schema.define(:version => 20130715172713) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -81,6 +81,17 @@ ActiveRecord::Schema.define(:version => 20130711142156) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "field_fills", :force => true do |t|
+    t.integer  "event_field_id"
+    t.integer  "subscription_id"
+    t.string   "value"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "field_fills", ["event_field_id"], :name => "index_field_fills_on_event_field_id"
+  add_index "field_fills", ["subscription_id"], :name => "index_field_fills_on_subscription_id"
+
   create_table "permissions", :force => true do |t|
     t.integer  "role_id"
     t.datetime "created_at", :null => false
@@ -102,7 +113,6 @@ ActiveRecord::Schema.define(:version => 20130711142156) do
     t.string   "id_card"
     t.string   "email"
     t.integer  "event_id"
-    t.text     "details"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"

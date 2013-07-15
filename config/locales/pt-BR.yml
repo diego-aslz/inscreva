@@ -36,6 +36,7 @@ pt-BR:
         id_card: Identidade
         email: E-mail
         event: Evento
+        number: Número
     errors:
       messages:
         record_invalid: Dados incorretos
@@ -59,6 +60,8 @@ pt-BR:
       back: Voltar
       confirm: Tem certeza que deseja apagar %{model} "%{value}"?
       password_link: clique aqui para recuperar sua senha
+      files:
+        confirm: "Tem certeza que deseja apagar arquivo \"%{value}\"?"
     select:
       prompt: Por favor selecione
     submit:

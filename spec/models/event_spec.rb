@@ -53,4 +53,12 @@ end
     events.include?(past).should be_false
     events.include?(future).should be_true
   end
+
+  it "creates a list of field_fill" do
+    ev = create(:ongoing_event)
+    ev.field_fills.should be_empty
+    ev.fields << (field = create(:event_field, event_id: ev.id))
+    ev.field_fills.count.should == 1
+    ev.field_fills.first.event_field_id.should == field.id
+  end
 end

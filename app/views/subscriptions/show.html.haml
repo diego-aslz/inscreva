@@ -1,0 +1,17 @@
+- model_class = Subscription
+= page_header t('.title')
+
+= show_for @subscription, class: 'dl-horizontal' do |show|
+  = show.attribute :number
+  = show.attribute :id_card
+  = show.attribute :email
+  = show.association :event
+  - @subscription.field_fills.each do |fill|
+    - field = fill.event_field
+    = show.attribute field.name.to_sym do
+      = render "subscriptions/fields/#{field.field_type}_show",
+          value: fill.value, field: field
+
+= form_actions do
+  = link_to_back path: subscriptions_path
+  = link_to_edit @subscription, edit_subscription_path(@subscription)
