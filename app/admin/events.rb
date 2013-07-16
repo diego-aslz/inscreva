@@ -17,8 +17,9 @@ ActiveAdmin.register Event do
     f.inputs t(:event_fields) do
       f.has_many :fields do |ff|
         ff.input :name
-        ff.input :field_type, as: :select, collection: %w[text boolean country
-            date file], include_blank: false
+        ff.input :field_type, as: :select, collection: { "Texto" => "string",
+            "Texto Multilinha" => "text", "Lógico" => "boolean", "País" => 'country',
+            "Data" => 'date', "Arquivo" => 'file' }, include_blank: false
         ff.input :required
       end
     end
