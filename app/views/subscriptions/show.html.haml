@@ -10,7 +10,7 @@
     - field = fill.event_field
     = show.attribute field.name.to_sym do
       = render "subscriptions/fields/#{field.field_type}_show",
-          value: fill.value, field: field
+          value: fill.value, field: field, fill: fill
 
 = form_actions do
   = link_to_back path: subscriptions_path

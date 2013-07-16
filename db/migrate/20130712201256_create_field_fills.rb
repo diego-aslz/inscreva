@@ -3,7 +3,9 @@ class CreateFieldFills < ActiveRecord::Migration
     create_table :field_fills do |t|
       t.belongs_to :event_field
       t.belongs_to :subscription
+      t.string :type
       t.string :value
+      t.attachment :file
 
       t.timestamps
     end

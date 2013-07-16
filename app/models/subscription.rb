@@ -3,7 +3,7 @@ class Subscription < ActiveRecord::Base
   belongs_to :user
 
   attr_accessible :field_fills_attributes, :email, :id_card, :event_id, :name
-  has_many :field_fills
+  has_many :field_fills #, polymorphic: true
   accepts_nested_attributes_for :field_fills
 
   # before_create :generate_number

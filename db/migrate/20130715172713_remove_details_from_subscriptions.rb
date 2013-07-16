@@ -4,6 +4,6 @@ class RemoveDetailsFromSubscriptions < ActiveRecord::Migration
   end
 
   def down
-    add_column :subscriptions, :details, :string
+    add_column :subscriptions, :details, :text
   end
 end

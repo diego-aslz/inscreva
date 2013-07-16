@@ -34,8 +34,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
   gem "bootstrap-sass"
-  gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
-                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+  gem 'bootstrap-datepicker-rails'
   gem 'maskedinput-rails'
 end
 
@@ -51,6 +50,7 @@ gem 'activeadmin'
 gem 'has_scope'
 gem 'country-select', github: 'nerde/country-select'
 gem "haml-rails"
+gem "paperclip"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
