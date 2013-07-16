@@ -26,7 +26,7 @@ class SubscriptionsController < InheritedResources::Base
   end
 
   def edit
-    sub = Subscription.find(params[:id])
+    sub = Subscription.includes(field_fills: :event_field).find(params[:id])
     if sub.event.ongoing? && sub.event.allow_edit
       @application = ApplicationForm.new
       @application.subscription = sub

@@ -1,2 +1,3 @@
-<%= f.input :file, label: field.name, as: :file,
-    required: field.required if @application.new_record? %>
+<%= f.input :file, label: field.name, as: :file, required: field.required %>
+<%= f.input :file_cache, label: false, as: :hidden %>
+<%= f.input :remove_file, label: "Remove current #{field.name}", as: :boolean if fill.file? && !field.required %>

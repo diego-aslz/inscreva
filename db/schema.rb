@@ -86,12 +86,9 @@ ActiveRecord::Schema.define(:version => 20130715172713) do
     t.integer  "subscription_id"
     t.string   "type"
     t.string   "value"
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.string   "file"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   add_index "field_fills", ["event_field_id"], :name => "index_field_fills_on_event_field_id"

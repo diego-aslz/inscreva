@@ -1,23 +1,12 @@
 Inscreva::Application.routes.draw do
-  # resources :files, only: [:destroy] do
-  #   member do
-  #     get ":file_name", to: 'files#show', as: :file, format: false,
-  #         constraints: { file_name: /[\.A-z0-9]*/ }
-  #   end
-  # end
-  get "files/:id/:file_name", to: 'files#show', as: :file, format: false,
-      constraints: { file_name: /[\.A-z0-9]*/ }
+  get "field_fill/:id/download", to: 'field_fill#download', as: :download_field_fill
 
-
-  get 'subscriptions/check', as: :check_id
   resources :subscriptions
+  resources :events
+  resources :users
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-
-  resources :events
-
   devise_for :users
-  resources :users
 
   root to: "home#index"
 

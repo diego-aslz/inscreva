@@ -5,7 +5,7 @@ class CreateFieldFills < ActiveRecord::Migration
       t.belongs_to :subscription
       t.string :type
       t.string :value
-      t.attachment :file
+      t.string :file
 
       t.timestamps
     end
