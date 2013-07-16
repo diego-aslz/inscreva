@@ -1,7 +1,7 @@
 class Subscription < ActiveRecord::Base
   belongs_to :event
   belongs_to :user
-  has_many :field_fills, dependent: :destroy
+  has_many :field_fills, dependent: :destroy, include: :event_field
 
   validates_uniqueness_of :number
 

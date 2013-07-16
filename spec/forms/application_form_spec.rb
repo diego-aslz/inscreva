@@ -25,15 +25,19 @@ describe 'ApplicationForm' do
     it { should require_valid(:email, errors: 2, valid: subscription.email,
         invalid: "invalid_mail@example.com second_mail@example.com") }
 
-    it "validates event is ongoing" do
+    it "should validate that event is ongoing" do
       subscription.event_id = create(:past_event).id
       subscription.should have(1).errors_on(:event_id)
     end
 
-    it "validates event exists" do
+    it "should validate that event exists" do
       subscription.event_id = -1
       subscription.should have(1).errors_on(:event_id)
     end
+
+    let(:valid_fill) { build :required_field_fill, subscription_id: subscription.id }
+    let(:invalid_fill) { build :required_field_fill, subscription_id: subscription.id, value: nil }
+    it { should require_valid(:field_fills, valid: [valid_fill], invalid: [invalid_fill]) }
 
     context 'data confirmation' do
       it "is NOT confirmed if it's not valid yet" do

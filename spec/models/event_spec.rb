@@ -7,7 +7,7 @@ describe Event do
 
   it "is not ongoing by default" do
     Event.new.ongoing?.should be_false
-end
+  end
 
   it "is not ongoing when closes_at is in the past" do
     build(:past_event).ongoing?.should be_false

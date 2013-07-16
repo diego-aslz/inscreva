@@ -5,6 +5,7 @@
   = show.attribute :number do
     - content_tag :strong, @subscription.number
   = show.attribute :id_card
+  = show.attribute :name
   = show.attribute :email
   = show.association :event
   - @subscription.field_fills.each do |fill|

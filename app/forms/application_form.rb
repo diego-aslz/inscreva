@@ -2,6 +2,7 @@ class ApplicationForm
   extend ActiveModel::Naming
   include ActiveModel::Conversion
   include ActiveModel::Validations
+  include ActiveRecord::Validations
 
   ATTRIBUTES = [:password, :password_confirmation, :email_confirmation, :confirmed]
   attr_accessor *ATTRIBUTES
@@ -16,6 +17,7 @@ class ApplicationForm
   validates_presence_of :password, on: :create, unless: :user
   validates_presence_of :email_confirmation, if: :email, on: :create
   validates_presence_of :password_confirmation, if: :password
+  validates_associated :field_fills
 
   delegate :field_fills, :email, :id_card, :event_id, :event, :name, :user_id, :user,
       :id, :generate_number, to: :subscription
