@@ -6,7 +6,7 @@ class EventField < ActiveRecord::Base
   def select_options
     return nil if extra.blank?
     options = extra.split /\n/
-    options.map { |opt| opt.split('=').reverse }
+    options.map { |opt| opt.strip.split('=').reverse }
   end
 
   def select_value(key)

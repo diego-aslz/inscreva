@@ -10,7 +10,7 @@ describe "EventField" do
   end
 
   describe "select field" do
-    let(:event_field) { build(:select_event_field, extra: "3=A\n1=B\n2=C\n\n") }
+    let(:event_field) { build(:select_event_field, extra: "3=A\r\n1=B\n2=C\n\n") }
 
     it "generates options for select input" do
       event_field.select_options.should == [["A", '3'], ["B", '1'], ["C", '2']]

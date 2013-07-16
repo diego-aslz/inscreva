@@ -19,8 +19,8 @@ ActiveAdmin.register Event do
         ff.input :name
         ff.input :field_type, as: :select, collection: { "Texto" => "string",
             "Texto Multilinha" => "text", "Lógico" => "boolean", "País" => 'country',
-            "Data" => 'date', "Arquivo" => 'file', "Única Escolha" => 'select'
-            }, include_blank: false
+            "Data" => 'date', "Arquivo" => 'file', "Única Escolha" => 'select',
+            "Múltipla Escolha" => 'check_boxes'}, include_blank: false
         ff.input :extra
         ff.input :required
       end

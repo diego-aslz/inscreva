@@ -1,0 +1,4 @@
+- if value.blank?
+  &nbsp;
+- else
+  = fill.value_cb.map { |v| field.select_value(v) }.join ', '
