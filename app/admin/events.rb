@@ -19,7 +19,9 @@ ActiveAdmin.register Event do
         ff.input :name
         ff.input :field_type, as: :select, collection: { "Texto" => "string",
             "Texto Multilinha" => "text", "Lógico" => "boolean", "País" => 'country',
-            "Data" => 'date', "Arquivo" => 'file' }, include_blank: false
+            "Data" => 'date', "Arquivo" => 'file', "Única Escolha" => 'select'
+            }, include_blank: false
+        ff.input :extra
         ff.input :required
       end
     end
@@ -31,7 +33,7 @@ end
     column :opens_at
     column :closes_at
     column :subscriptions do |e|
-      0
+      e.subscriptions.count
     end
     default_actions
   end

@@ -2,7 +2,8 @@
 = page_header t('.title')
 
 = show_for @subscription, class: 'dl-horizontal' do |show|
-  = show.attribute :number
+  = show.attribute :number do
+    - content_tag :strong, @subscription.number
   = show.attribute :id_card
   = show.attribute :email
   = show.association :event

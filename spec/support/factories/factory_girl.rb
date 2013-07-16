@@ -76,6 +76,10 @@ FactoryGirl.define do
     association :event, factory: :ongoing_event
     sequence(:name) { |n| "field#{n}" }
     field_type 'boolean'
+
+    factory :select_event_field do
+      field_type 'select'
+    end
   end
 
   factory :field_fill do

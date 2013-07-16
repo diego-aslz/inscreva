@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
 
   has_many :fields, class_name: "EventField"
+  has_many :subscriptions
   attr_accessible :allow_edit, :closes_at, :email, :name, :opens_at, :rules_url,
       :technical_email, :fields_attributes
 
