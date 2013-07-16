@@ -5,6 +5,12 @@ FactoryGirl.define do
     email
     password 'password'
     password_confirmation 'password'
+
+    factory :superadmin do
+      after(:create) do |user,evaluator|
+        user.roles << create(:role)
+      end
+    end
   end
 
   factory :user do
@@ -21,10 +27,6 @@ FactoryGirl.define do
 
   factory :role do
     name 'superadmin'
-
-    factory :candidate_role do
-      name 'candidate'
-    end
   end
 
   factory :event do
@@ -71,7 +73,14 @@ FactoryGirl.define do
   end
 
   factory :event_field do
+    association :event, factory: :ongoing_event
     sequence(:name) { |n| "field#{n}" }
     field_type 'boolean'
+  end
+
+  factory :field_fill do
+    event_field
+    value true
+    subscription
   end
 end

@@ -1,5 +1,5 @@
 Inscreva::Application.routes.draw do
-  get "field_fill/:id/download", to: 'field_fill#download', as: :download_field_fill
+  get "field_fills/:id/download", to: 'field_fills#download', as: :download_field_fill
 
   resources :subscriptions
   resources :events
