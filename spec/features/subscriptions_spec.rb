@@ -15,4 +15,14 @@ feature "Subscriptions" do
 
     click_button I18n.t(:subscribe)
   end
+
+  scenario "viewing subscription receipt" do
+    af = build(:application_form)
+    af.submit
+    sign_in User.new(email: af.email, password: af.password)
+
+    visit subscription_path(af.subscription)
+    click_link I18n.t(:print_receipt)
+    page.should have_content(af.subscription.name)
+  end
 end

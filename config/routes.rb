@@ -1,7 +1,9 @@
 Inscreva::Application.routes.draw do
   get "field_fills/:id/download", to: 'field_fills#download', as: :download_field_fill
 
-  resources :subscriptions
+  resources :subscriptions do
+    get "receipt", on: :member
+  end
   resources :events
 
   devise_for :admin_users, ActiveAdmin::Devise.config

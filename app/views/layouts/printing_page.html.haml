@@ -1,0 +1,17 @@
+!!!
+%html
+
+  %head
+    %title
+      = content_for?(:title) ? yield(:title) : "Untitled"
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
+    = stylesheet_link_tag :printing_page, media: nil
+    = javascript_include_tag :printing_page
+    = csrf_meta_tag
+    = yield(:head)
+
+  %body
+    .page
+      #container
+        = page_header yield(:title)
+        = yield

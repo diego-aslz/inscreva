@@ -10,15 +10,17 @@ pt-BR:
   future_events: Próximos eventos
   subscribe: Inscrever-se
   cancel: Cancelar
-  show_receipt: Visualizar comprovante
+  print_receipt: Emitir comprovante
 
   subscriptions:
     new:
       title: Nova %{model}
     show:
-      title: Comprovante de Inscrição
+      title: Inscrição
     index:
       title: Minhas inscrições
+    receipt:
+      title: Comprovante de Inscrição
   active_admin:
     access_denied:
       message: 'Permissão negada'
@@ -33,10 +35,13 @@ pt-BR:
       subscription: Inscrição
     attributes:
       subscription:
-        id_card: Identidade
+        created_at: Inscrito
         email: E-mail
         event: Evento
+        id_card: Identidade
+        name: Nome Completo
         number: Número
+        receipt_at: Emissão deste Comprovante
     errors:
       messages:
         record_invalid: Dados incorretos

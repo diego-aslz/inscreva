@@ -10,6 +10,10 @@ class Subscription < ActiveRecord::Base
 
   before_create :generate_number
 
+  def receipt_fills
+    field_fills.joins(:event_field).where('event_fields.show_receipt')
+  end
+
   private
 
   def generate_number

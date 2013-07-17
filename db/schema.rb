@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130716141837) do
+ActiveRecord::Schema.define(:version => 20130717180546) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -63,9 +63,10 @@ ActiveRecord::Schema.define(:version => 20130716141837) do
     t.string   "field_type"
     t.boolean  "required"
     t.integer  "event_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.text     "extra"
+    t.boolean  "show_receipt", :default => false
   end
 
   add_index "event_fields", ["event_id"], :name => "index_event_fields_on_event_id"

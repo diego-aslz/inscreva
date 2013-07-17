@@ -3,7 +3,7 @@ module SessionHelper
     visit new_user_session_path
     fill_in 'E-mail', with: user.email
     fill_in 'Senha', with: user.password
-    click_button 'Acessar'
+    click_button 'Acessar o sistema'
   end
 end
 

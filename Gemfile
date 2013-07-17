@@ -20,7 +20,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'bullet'
-  gem 'rack-mini-profiler'
+  # gem 'rack-mini-profiler'
   gem 'binding_of_caller'
 end
 

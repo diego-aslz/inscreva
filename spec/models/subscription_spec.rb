@@ -17,4 +17,18 @@ describe 'Subscription' do
       }.not_to change(sub, :number)
     end
   end
+
+  describe "receipt_fills" do
+    it "should return fills which field has show_receipt == true" do
+      field = create(:event_field)
+      show_field = create(:event_field, show_receipt: true)
+      fill = create(:field_fill, event_field_id: field.id)
+      show_fill = create(:field_fill, event_field_id: show_field.id, subscription_id:
+          fill.subscription_id)
+
+      subscription = fill.subscription
+      subscription.receipt_fills.include?(fill).should be_false
+      subscription.receipt_fills.include?(show_fill).should be_true
+    end
+  end
 end

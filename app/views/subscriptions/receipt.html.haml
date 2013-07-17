@@ -1,20 +1,19 @@
-- model_class = Subscription
-= page_header t('.title')
+- content_for :title do
+  - t('.title')
 
 = show_for @subscription, class: 'dl-horizontal' do |show|
+  = show.association :event
   = show.attribute :number do
     - content_tag :strong, @subscription.number
+  = show.attribute :created_at do
+    - l @subscription.created_at
+  = show.attribute :receipt_at do
+    - l Time.zone.now
   = show.attribute :id_card
   = show.attribute :name
   = show.attribute :email
-  = show.association :event
-  - @subscription.field_fills.each do |fill|
+  - @subscription.receipt_fills.each do |fill|
     - field = fill.event_field
     = show.attribute field.name.to_sym do
       = render "subscriptions/fields/#{field.field_type}_show",
           value: fill.value, field: field, fill: fill
-
-= form_actions do
-  = link_to_back path: subscriptions_path
-  = link_to_edit @subscription, edit_subscription_path(@subscription)
-  = link_to_receipt(@subscription)

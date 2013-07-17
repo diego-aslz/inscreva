@@ -57,4 +57,9 @@ class SubscriptionsController < InheritedResources::Base
   def show
     @subscription = Subscription.find(params[:id])
   end
+
+  def receipt
+    @subscription = Subscription.find(params[:id])
+    render layout: 'printing_page'
+  end
 end
