@@ -4,13 +4,15 @@
 pt-BR:
   'no': Não
   'yes': Sim
-  details: Detalhes
-  event_fields: Campos para Formulário de Inscrição
-  home_title: Eventos em andamento
-  future_events: Próximos eventos
-  subscribe: Inscrever-se
   cancel: Cancelar
+  details: Detalhes
+  download: Baixar
+  event_fields: Campos para Formulário de Inscrição
+  future_events: Próximos eventos
+  home_title: Eventos em andamento
+  no_file: Nenhum arquivo adicionado
   print_receipt: Emitir comprovante
+  subscribe: Inscrever-se
 
   subscriptions:
     new:
