@@ -23,10 +23,11 @@ ActiveAdmin.register Event do
             "Múltipla Escolha" => 'check_boxes'}, include_blank: false
         ff.input :extra
         ff.input :required
+        ff.input :show_receipt
       end
     end
     f.actions
-end
+  end
 
   index do
     column :name

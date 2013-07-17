@@ -1,6 +1,6 @@
 class EventField < ActiveRecord::Base
   belongs_to :event
-  attr_accessible :field_type, :name, :extra, :required
+  attr_accessible :field_type, :name, :extra, :required, :show_receipt
   validates_presence_of :field_type, :name
   validates_inclusion_of :field_type, in: %w[string text select country check_boxes boolean date file], if: :field_type
 
