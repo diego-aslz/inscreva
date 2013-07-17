@@ -3,7 +3,6 @@ Inscreva::Application.routes.draw do
 
   resources :subscriptions
   resources :events
-  resources :users
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users
