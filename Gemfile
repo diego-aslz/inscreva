@@ -46,7 +46,7 @@ gem 'kaminari'
 gem 'nested_form'
 gem 'puma'
 gem 'responders'
-gem 'activeadmin'
+gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'has_scope'
 gem 'country-select', github: 'nerde/country-select'
 gem "haml-rails"

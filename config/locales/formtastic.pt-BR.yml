@@ -2,8 +2,6 @@
 
 pt-BR:
   formtastic:
-    # titles:
-    #   post_details: "Post details"
     labels:
       default:
         name: "Nome"
@@ -37,14 +35,14 @@ pt-BR:
     hints:
       user:
         password: "Deixe em branco para não alterar"
-    #   post:
-    #     title: "Choose a good title for your post."
-    #     body: "Write something inspiring here."
     placeholders:
       user:
         edit:
           current_password: para confirmar se é você mesmo
           email: um e-mail válido
+      event_field:
+        extra: "Um mapeamento chave=valor por linha. Exemplo: 1=Carro"
+        name: Será apresentado no formulário de inscrição
     error_notification:
       default_message: 'Há erros nos dados.'
     required: 'obrigatório'

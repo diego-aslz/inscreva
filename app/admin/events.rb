@@ -15,13 +15,13 @@ ActiveAdmin.register Event do
       f.input :email
     end
     f.inputs t(:event_fields) do
-      f.has_many :fields do |ff|
+      f.has_many :fields, allow_destroy: true do |ff|
         ff.input :name
-        ff.input :field_type, as: :select, collection: { "Texto" => "string",
-            "Texto Multilinha" => "text", "Lógico" => "boolean", "País" => 'country',
-            "Data" => 'date', "Arquivo" => 'file', "Única Escolha" => 'select',
-            "Múltipla Escolha" => 'check_boxes'}, include_blank: false
-        ff.input :extra
+        ff.input :field_type, as: :select, collection: EventField::VALID_TYPES,
+            include_blank: false, input_html: { class: :field_type,
+                disabled: !ff.object.new_record? }
+        ff.input :extra, wrapper_html: { class: :extra, data: { :'extra-types' =>
+            EventField::TYPES_WITH_EXTRA } }
         ff.input :required
         ff.input :show_receipt
       end
@@ -37,6 +37,31 @@ ActiveAdmin.register Event do
       e.subscriptions.count
     end
     default_actions
+  end
+
+  show do
+    attributes_table do
+      row :name
+      row :opens_at
+      row :closes_at
+      row :allow_edit do
+        event.allow_edit ? t('yes') : t('no')
+      end
+      row :rules_url
+      row :technical_email
+      row :email
+    end
+    panel EventField.model_name.human.pluralize do
+      table_for event.fields, i18n: EventField do
+        column :name
+        column :field_type do |field|
+          EventField::VALID_TYPES.key(field.field_type)
+        end
+        column :show_receipt do |field|
+          field.show_receipt ? t('yes') : t('no')
+        end
+      end
+    end
   end
 
   controller do

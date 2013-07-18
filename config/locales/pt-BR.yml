@@ -44,6 +44,20 @@ pt-BR:
         name: Nome Completo
         number: Número
         receipt_at: Emissão deste Comprovante
+      event:
+        name: Nome
+        opens_at: Início das Inscrições
+        closes_at: Término das Inscrições
+        allow_edit: Permitir aos inscritos alterar suas inscrições antes do fechamento
+        rules_url: Endereço eletrônico para Edital ou similar
+        technical_email: E-mail auxílio técnico
+        email: E-mail oficial de comunicação
+      event_field:
+        name: Descrição
+        required: Obrigatório
+        extra: Configuração
+        field_type: Tipo
+        show_receipt: Exibir no Comprovante
     errors:
       messages:
         record_invalid: Dados incorretos
