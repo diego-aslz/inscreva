@@ -17,8 +17,7 @@
     <%= f.semantic_fields_for :field_fills do |ff| %>
       <%= ff.input :event_field_id, as: :hidden, label: false %>
       <%= ff.input :type, as: :hidden, label: false %>
-      <%= render "subscriptions/fields/#{ff.object.event_field.field_type}_field",
-          fill: ff.object, field: ff.object.event_field, f: ff %>
+      <%= input_fill ff %>
     <% end %>
   <% end %>
   <%= f.actions do %>

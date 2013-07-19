@@ -15,7 +15,7 @@ ActiveAdmin.register Event do
       f.input :email
     end
     f.inputs t(:event_fields) do
-      f.has_many :fields, allow_destroy: true do |ff|
+      f.has_many :fields, allow_destroy: true, heading: false do |ff|
         ff.input :name
         ff.input :field_type, as: :select, collection: EventField::VALID_TYPES,
             include_blank: false, input_html: { class: :field_type,

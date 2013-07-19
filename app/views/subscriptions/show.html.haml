@@ -9,10 +9,8 @@
   = show.attribute :email
   = show.association :event
   - @subscription.field_fills.each do |fill|
-    - field = fill.event_field
-    = show.attribute field.name.to_sym do
-      = render "subscriptions/fields/#{field.field_type}_show",
-          value: fill.value, field: field, fill: fill
+    = show.attribute fill.event_field.name.to_sym do
+      = show_fill fill
 
 = form_actions do
   = link_to_back path: subscriptions_path
