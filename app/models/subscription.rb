@@ -18,7 +18,7 @@ class Subscription < ActiveRecord::Base
 
   def generate_number
     begin
-      self.number = Time.zone.now.strftime("%Y%m%d%H%M%S") + sprintf("%03d", rand(999))
+      self.number = Time.zone.now.strftime("%y%m%d%H%M%S") + sprintf("%03d", rand(999))
     end while Subscription.exists? number: self.number
   end
 end
