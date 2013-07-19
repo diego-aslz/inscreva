@@ -15,7 +15,7 @@
     <%= f.input :password_confirmation unless @application.user %>
 
     <%= f.semantic_fields_for :field_fills do |ff| %>
-      <%= ff.input :event_field_id, as: :hidden, label: false %>
+      <%= ff.input :field_id, as: :hidden, label: false %>
       <%= ff.input :type, as: :hidden, label: false %>
       <%= input_fill ff %>
     <% end %>

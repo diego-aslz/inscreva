@@ -1,7 +1,7 @@
 class Subscription < ActiveRecord::Base
   belongs_to :event
   belongs_to :user
-  has_many :field_fills, dependent: :destroy, include: :event_field
+  has_many :field_fills, dependent: :destroy, include: :field
 
   validates_uniqueness_of :number
 
@@ -11,7 +11,7 @@ class Subscription < ActiveRecord::Base
   before_create :generate_number
 
   def receipt_fills
-    field_fills.joins(:event_field).where('event_fields.show_receipt')
+    field_fills.joins(:field).where('fields.show_receipt')
   end
 
   private

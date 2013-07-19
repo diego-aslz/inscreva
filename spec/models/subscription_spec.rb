@@ -20,10 +20,10 @@ describe 'Subscription' do
 
   describe "receipt_fills" do
     it "should return fills which field has show_receipt == true" do
-      field = create(:event_field)
-      show_field = create(:event_field, show_receipt: true)
-      fill = create(:field_fill, event_field_id: field.id)
-      show_fill = create(:field_fill, event_field_id: show_field.id, subscription_id:
+      field = create(:field)
+      show_field = create(:field, show_receipt: true)
+      fill = create(:field_fill, field_id: field.id)
+      show_fill = create(:field_fill, field_id: show_field.id, subscription_id:
           fill.subscription_id)
 
       subscription = fill.subscription

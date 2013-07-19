@@ -14,14 +14,14 @@ ActiveAdmin.register Event do
       f.input :technical_email
       f.input :email
     end
-    f.inputs t(:event_fields) do
+    f.inputs t(:fields) do
       f.has_many :fields, allow_destroy: true, heading: false do |ff|
         ff.input :name
-        ff.input :field_type, as: :select, collection: EventField::VALID_TYPES,
+        ff.input :field_type, as: :select, collection: Field::VALID_TYPES,
             include_blank: false, input_html: { class: :field_type,
                 disabled: !ff.object.new_record? }
         ff.input :extra, wrapper_html: { class: :extra, data: { :'extra-types' =>
-            EventField::TYPES_WITH_EXTRA } }
+            Field::TYPES_WITH_EXTRA } }
         ff.input :required
         ff.input :show_receipt
       end
@@ -51,11 +51,11 @@ ActiveAdmin.register Event do
       row :technical_email
       row :email
     end
-    panel EventField.model_name.human.pluralize do
-      table_for event.fields, i18n: EventField do
+    panel Field.model_name.human.pluralize do
+      table_for event.fields, i18n: Field do
         column :name
         column :field_type do |field|
-          EventField::VALID_TYPES.key(field.field_type)
+          Field::VALID_TYPES.key(field.field_type)
         end
         column :show_receipt do |field|
           field.show_receipt ? t('yes') : t('no')

@@ -1,6 +1,5 @@
 class Event < ActiveRecord::Base
-
-  has_many :fields, class_name: "EventField"
+  has_many :fields
   has_many :subscriptions
   attr_accessible :allow_edit, :closes_at, :email, :name, :opens_at, :rules_url,
       :technical_email, :fields_attributes
@@ -31,7 +30,7 @@ class Event < ActiveRecord::Base
     result = []
     fields.each do |f|
       result << FieldFill.new
-      result.last.event_field = f
+      result.last.field = f
     end if fields
     result
   end

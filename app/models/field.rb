@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class EventField < ActiveRecord::Base
+class Field < ActiveRecord::Base
   VALID_TYPES = { "Texto" => "string", "Texto Multilinha" => "text",
       "Lógico" => "boolean", "País" => 'country', "Data" => 'date',
       "Arquivo" => 'file', "Única Escolha" => 'select',

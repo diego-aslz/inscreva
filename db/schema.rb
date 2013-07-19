@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130717180546) do
+ActiveRecord::Schema.define(:version => 20130719183724) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -58,19 +58,6 @@ ActiveRecord::Schema.define(:version => 20130717180546) do
 
   add_index "areas", ["event_id"], :name => "index_areas_on_event_id"
 
-  create_table "event_fields", :force => true do |t|
-    t.string   "name"
-    t.string   "field_type"
-    t.boolean  "required"
-    t.integer  "event_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.text     "extra"
-    t.boolean  "show_receipt", :default => false
-  end
-
-  add_index "event_fields", ["event_id"], :name => "index_event_fields_on_event_id"
-
   create_table "events", :force => true do |t|
     t.string   "name"
     t.datetime "opens_at"
@@ -84,7 +71,7 @@ ActiveRecord::Schema.define(:version => 20130717180546) do
   end
 
   create_table "field_fills", :force => true do |t|
-    t.integer  "event_field_id"
+    t.integer  "field_id"
     t.integer  "subscription_id"
     t.string   "type"
     t.string   "value"
@@ -93,8 +80,21 @@ ActiveRecord::Schema.define(:version => 20130717180546) do
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "field_fills", ["event_field_id"], :name => "index_field_fills_on_event_field_id"
+  add_index "field_fills", ["field_id"], :name => "index_field_fills_on_event_field_id"
   add_index "field_fills", ["subscription_id"], :name => "index_field_fills_on_subscription_id"
+
+  create_table "fields", :force => true do |t|
+    t.string   "name"
+    t.string   "field_type"
+    t.boolean  "required"
+    t.integer  "event_id"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.text     "extra"
+    t.boolean  "show_receipt", :default => false
+  end
+
+  add_index "fields", ["event_id"], :name => "index_event_fields_on_event_id"
 
   create_table "permissions", :force => true do |t|
     t.integer  "role_id"

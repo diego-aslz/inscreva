@@ -39,10 +39,10 @@ ActiveAdmin.register Subscription do
         link_to_receipt(subscription)
       end
     end
-    panel EventField.model_name.human.pluralize do
+    panel Field.model_name.human.pluralize do
       table_for subscription.field_fills, i18n: FieldFill do
         column :name do |fill|
-          fill.event_field.name if fill.event_field
+          fill.field.name if fill.field
         end
         column :value do |fill|
           show_fill fill

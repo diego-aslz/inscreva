@@ -57,8 +57,8 @@ describe Event do
   it "creates a list of field_fill" do
     ev = create(:ongoing_event)
     ev.field_fills.should be_empty
-    ev.fields << (field = create(:event_field, event_id: ev.id))
+    ev.fields << (field = create(:field, event_id: ev.id))
     ev.field_fills.count.should == 1
-    ev.field_fills.first.event_field_id.should == field.id
+    ev.field_fills.first.field_id.should == field.id
   end
 end

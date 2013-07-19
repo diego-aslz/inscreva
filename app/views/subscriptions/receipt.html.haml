@@ -13,5 +13,5 @@
   = show.attribute :name
   = show.attribute :email
   - @subscription.receipt_fills.each do |fill|
-    = show.attribute fill.event_field.name.to_sym do
+    = show.attribute fill.field.name.to_sym do
       = show_fill fill

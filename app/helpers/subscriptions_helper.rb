@@ -5,14 +5,14 @@ module SubscriptionsHelper
   end
 
   def show_fill(fill)
-    field = fill.event_field
+    field = fill.field
     render "subscriptions/fields/#{field.field_type}_show",
         value: fill.value, field: field, fill: fill if field
   end
 
   def input_fill(form)
     fill = form.object
-    field = fill.event_field
+    field = fill.field
     render "subscriptions/fields/#{field.field_type}_field",
         fill: fill, field: field, f: form
   end

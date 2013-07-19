@@ -7,7 +7,7 @@ pt-BR:
   cancel: Cancelar
   details: Detalhes
   download: Baixar
-  event_fields: Campos para Formulário de Inscrição
+  fields: Campos para Formulário de Inscrição
   future_events: Próximos eventos
   home_title: Eventos em andamento
   no_file: Nenhum arquivo adicionado
@@ -33,7 +33,7 @@ pt-BR:
     models:
       user: Usuário
       event: Evento
-      event_field: Campo
+      field: Campo
       subscription: Inscrição
     attributes:
       subscription:
@@ -52,7 +52,7 @@ pt-BR:
         rules_url: Endereço eletrônico para Edital ou similar
         technical_email: E-mail auxílio técnico
         email: E-mail oficial de comunicação
-      event_field:
+      field:
         name: Descrição
         required: Obrigatório
         extra: Configuração

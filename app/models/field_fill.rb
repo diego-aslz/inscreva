@@ -1,10 +1,10 @@
 class FieldFill < ActiveRecord::Base
-  belongs_to :event_field
+  belongs_to :field
   belongs_to :subscription
 
   mount_uploader :file, FileFieldUploader
 
-  attr_accessible :value, :event_field_id, :subscription_id, :type, :file,
+  attr_accessible :value, :field_id, :subscription_id, :type, :file,
       :remove_file, :file_cache, :value_cb
   validates_presence_of :value, if: :require_value?
   validates_presence_of :file, if: :require_file?
@@ -20,10 +20,10 @@ class FieldFill < ActiveRecord::Base
   private
 
   def require_value?
-    event_field.required && !event_field.file?
+    field.required && !field.file?
   end
 
   def require_file?
-    event_field.required && event_field.file?
+    field.required && field.file?
   end
 end
