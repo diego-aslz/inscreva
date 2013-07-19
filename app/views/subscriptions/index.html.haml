@@ -1,0 +1,23 @@
+- model_class = Subscription
+= page_header t('.title', default: model_class.model_name.human.pluralize)
+%table.table.table-striped
+  %thead
+    %tr
+      %th= t(:'formtastic.labels.subscription.id_card')
+      %th= t(:'formtastic.labels.subscription.email')
+      %th= t(:'formtastic.labels.subscription.event')
+      %th
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @subscriptions.each do |subscription|
+      %tr
+        %td= link_to subscription.id_card, subscription_path(subscription)
+        %td= subscription.email
+        %td= subscription.event.name if subscription.event
+        %td= link_to_receipt(subscription)
+        %td= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_subscription_path(subscription), :class => 'btn btn-mini' if can? :edit, subscription
+
+= link_to t('.new', :default => t("helpers.links.new")),
+            new_subscription_path,
+            :class => 'btn btn-primary'

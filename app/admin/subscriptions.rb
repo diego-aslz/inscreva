@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 ActiveAdmin.register Subscription do
+  config.sort_order = "event_id desc, name, created_at"
   filter :event
   filter :number
   filter :name
@@ -13,19 +14,18 @@ ActiveAdmin.register Subscription do
       f.input :email
       f.has_many :field_fills, new_record: false, heading: false do |ff|
         input_fill ff
-        # ff.input :file, as: :file
       end
     end
     f.actions
   end
 
-  index do
+  index title: Subscription.model_name.human.pluralize do
     column :number
     column :name
     column :id_card
     column :email
     column :created_at
-    default_actions only: [:show]
+    default_actions
   end
 
   show do
