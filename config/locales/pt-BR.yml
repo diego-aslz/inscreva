@@ -45,18 +45,20 @@ pt-BR:
         number: Número
         receipt_at: Emissão deste Comprovante
       event:
+        allow_edit: Permitir aos inscritos alterar suas inscrições antes do fechamento
+        closes_at: Término das Inscrições
+        email: E-mail oficial de comunicação
         name: Nome
         opens_at: Início das Inscrições
-        closes_at: Término das Inscrições
-        allow_edit: Permitir aos inscritos alterar suas inscrições antes do fechamento
         rules_url: Endereço eletrônico para Edital ou similar
         technical_email: E-mail auxílio técnico
-        email: E-mail oficial de comunicação
       field:
-        name: Descrição
-        required: Obrigatório
         extra: Configuração
         field_type: Tipo
+        group_name: Agrupamento
+        name: Descrição
+        priority: Ordem
+        required: Obrigatório
         show_receipt: Exibir no Comprovante
     errors:
       messages:

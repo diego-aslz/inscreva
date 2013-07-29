@@ -13,15 +13,12 @@
     = f.input :password unless @application.user
     = f.input :password_confirmation unless @application.user
 
-    - last_section = 0
-    - # To avoid N+1, sections are loaded in an array, since the field_fills are
-    - # transient yet and cannot load them via ActiveRecord.
-    - sections = Section.where(id: @application.field_fills.map{ |ff| ff.field.section_id }.uniq)
+    - last_group = ''
     = f.semantic_fields_for :field_fills do |ff|
-      - section = sections.select{ |s| s.id == ff.object.field.section_id }.first
-      - if section.id != last_section
-        %h2= section.name
-        - last_section = section.id
+      - group = ff.object.field.group_name
+      - if group != last_group
+        %h2= group
+        - last_group = group
       = ff.input :field_id, as: :hidden, label: false
       = ff.input :type, as: :hidden, label: false
       = input_fill ff

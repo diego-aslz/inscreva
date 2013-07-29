@@ -24,6 +24,8 @@ ActiveAdmin.register Event do
             Field::TYPES_WITH_EXTRA } }
         ff.input :required
         ff.input :show_receipt
+        ff.input :group_name
+        ff.input :priority
       end
     end
     f.actions

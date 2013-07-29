@@ -57,8 +57,11 @@ describe Event do
   it "creates a list of field_fill" do
     ev = create(:ongoing_event)
     ev.field_fills.should be_empty
-    ev.fields << (field = create(:field, event_id: ev.id))
-    ev.field_fills.count.should == 1
-    ev.field_fills.first.field_id.should == field.id
+    ev.fields << (field = create(:field, event_id: ev.id, priority: 1))
+    ev.fields << (field2 = create(:field, event_id: ev.id))
+    ev.fields(true) # Forcing reload to check whether it's ordering by priority.
+    ev.field_fills.count.should == 2
+    ev.field_fills.first.field_id.should == field2.id
+    ev.field_fills.last.field_id.should == field.id
   end
 end
