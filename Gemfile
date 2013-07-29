@@ -22,6 +22,7 @@ group :development do
   gem 'bullet'
   # gem 'rack-mini-profiler'
   gem 'binding_of_caller'
+  gem 'thin'
 end
 
 group :assets do
@@ -44,7 +45,6 @@ gem 'cancan'
 gem 'formtastic-bootstrap'
 gem 'kaminari'
 gem 'nested_form'
-gem 'puma'
 gem 'responders'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'has_scope'
