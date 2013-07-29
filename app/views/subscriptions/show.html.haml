@@ -8,7 +8,12 @@
   = show.attribute :name
   = show.attribute :email
   = show.association :event
+  - last_group = ''
   - @subscription.field_fills.each do |fill|
+    - group = fill.field.group_name
+    - if group != last_group
+      %h2= group
+      - last_group = group
     = show.attribute fill.field.name.to_sym do
       = show_fill fill
 
