@@ -13,6 +13,7 @@ pt-BR:
   no_file: Nenhum arquivo adicionado
   print_receipt: Imprimir Comprovante
   subscribe: Inscrever-se
+  remove_current_file: 'Remover arquivo anexado'
 
   show_for:
     blank: "Não informado"
