@@ -23,6 +23,7 @@ group :development do
   # gem 'rack-mini-profiler'
   gem 'binding_of_caller'
   gem 'thin'
+  gem 'debugger'
 end
 
 group :assets do

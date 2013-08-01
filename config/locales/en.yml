@@ -1,2 +1,30 @@
 
 en:
+  show_for:
+    blank: "Not specified"
+    "yes": "Yes"
+    "no": "No"
+
+  helpers:
+    actions: "Actions"
+    links:
+      back: "Back"
+      cancel: "Cancel"
+      confirm: "Are you sure?"
+      destroy: "Delete"
+      new: "New"
+    titles:
+      edit: "Edit"
+      save: "Save"
+      new: "New"
+      delete: "Delete"
+
+  flash:
+    actions:
+      create:
+        notice: '%{resource_name} was successfully created.'
+      update:
+        notice: '%{resource_name} was successfully updated.'
+      destroy:
+        notice: '%{resource_name} was successfully destroyed.'
+        alert: '%{resource_name} could not be destroyed.'

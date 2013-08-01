@@ -4,14 +4,15 @@
   = f.inputs do
     = f.input :confirmed, as: :hidden
     = f.input :event_id, as: :hidden
-    = f.input :event_name, as: :xx_large_string, input_html: { readonly: true }, required: false
-    = f.input :name, as: :xx_large_string
-    = f.input :id_card
+    = input f, :event_name, model_class: Subscription, as: :xx_large_string,
+        input_html: { readonly: true }, required: false
+    = input f, :name, as: :xx_large_string, model_class: Subscription
+    = input f, :id_card, model_class: Subscription
     - if @application.new_record?
-      = f.input :email, as: :x_large_string
-      = f.input :email_confirmation, as: :x_large_string
-    = f.input :password unless @application.user
-    = f.input :password_confirmation unless @application.user
+      = input f, :email, as: :x_large_string, model_class: Subscription
+      = input f, :email_confirmation, as: :x_large_string, model_class: Subscription
+    = input f, :password, model_class: Subscription unless @application.user
+    = input f, :password_confirmation, model_class: Subscription unless @application.user
 
     - last_group = ''
     = f.semantic_fields_for :field_fills do |ff|

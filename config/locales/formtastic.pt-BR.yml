@@ -17,21 +17,14 @@ pt-BR:
         vacation: Vagas
         special_vacation: Vagas PNE
         subscription: Inscrição
-      event:
-        opens_at: "Abertura das Inscrições"
-        closes_at: "Fechamento das Inscrições"
-        allow_edit: "Permite ao candidato alterar inscrição"
-        rules_url: "Endereço do Edital"
-        technical_email: "E-mail do suporte técnico"
-        email: "E-mail oficial"
-      subscription:
-        email: E-mail
-        event_name: Evento
-        id_card: Identidade
-        name: Nome
-        email_confirmation: Redigite seu e-mail
-        password: Senha
-        password_confirmation: Redigite sua senha
+      # subscription:
+      #   email: E-mail
+      #   event_name: Evento
+      #   id_card: Identidade
+      #   name: Nome
+      #   email_confirmation: Redigite seu e-mail
+      #   password: Senha
+      #   password_confirmation: Redigite sua senha
     hints:
       user:
         password: "Deixe em branco para não alterar"

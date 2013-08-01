@@ -20,4 +20,10 @@ module ApplicationHelper
     link_to (options[:text] || t('.back', :default => t("helpers.links.back"))),
         (options[:path] || :back), :class => 'btn'
   end
+
+  def input(form, attribute, options={})
+    options[:label] ||= (options[:model_class] || form.object.class).human_attribute_name attribute
+    options.delete :model_class
+    form.input attribute, options
+  end
 end

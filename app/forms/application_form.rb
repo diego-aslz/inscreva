@@ -23,6 +23,7 @@ class ApplicationForm
       :id, :generate_number, to: :subscription
   delegate :field_fills=, :field_fills_attributes=, :email=, :id_card=, :event_id=,
       :event=, :name=, :user_id=, :user=, :persisted?, :new_record?, to: :subscription
+  delegate :human_attribute_name, to: Subscription
 
   def load_from(params, user = nil)
     subscription

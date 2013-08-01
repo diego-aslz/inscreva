@@ -14,9 +14,24 @@ pt-BR:
   print_receipt: Imprimir Comprovante
   subscribe: Inscrever-se
 
+  show_for:
+    blank: "Não informado"
+    "yes": "Sim"
+    "no": "Não"
+
+  flash:
+    actions:
+      create:
+        notice: '%{resource_name} criado(a) com sucesso.'
+      update:
+        notice: '%{resource_name} atualizado(a) com sucesso.'
+      destroy:
+        notice: '%{resource_name} removido(a) com sucesso.'
+        alert: '%{resource_name} não pôde ser removido(a).'
+
   subscriptions:
     new:
-      title: Nova %{model}
+      title: '%{model}'
     show:
       title: Inscrição
     index:
@@ -36,22 +51,6 @@ pt-BR:
       field: Campo
       subscription: Inscrição
     attributes:
-      subscription:
-        created_at: Inscrito
-        email: E-mail
-        event: Evento
-        id_card: Identidade
-        name: Nome Completo
-        number: Número
-        receipt_at: Emissão deste Comprovante
-      event:
-        allow_edit: Permitir aos inscritos alterar suas inscrições antes do fechamento
-        closes_at: Término das Inscrições
-        email: E-mail oficial de comunicação
-        name: Nome
-        opens_at: Início das Inscrições
-        rules_url: Endereço eletrônico para Edital ou similar
-        technical_email: E-mail auxílio técnico
       field:
         extra: Configuração
         field_type: Tipo
@@ -60,19 +59,39 @@ pt-BR:
         priority: Ordem
         required: Obrigatório
         show_receipt: Exibir no Comprovante
+      event:
+        allow_edit: Permitir aos inscritos alterar suas inscrições antes do fechamento
+        closes_at: Término das Inscrições
+        email: E-mail oficial de comunicação
+        name: Nome
+        opens_at: Início das Inscrições
+        rules_url: Endereço eletrônico para Edital ou similar
+        technical_email: E-mail auxílio técnico
+        subscriptions: Inscrições
+      subscription:
+        created_at: Inscrito
+        email: E-mail
+        event_name: Evento
+        id_card: Identidade
+        name: Nome Completo
+        number: Número
+        receipt_at: Emissão deste Comprovante
+        event: Evento
     errors:
       messages:
         record_invalid: Dados incorretos
+
   views:
     pagination:
       first: Início
       next: Próximo
       previous: Anterior
       last: Fim
+
   helpers:
     titles:
-      new: Criar %{model}
-      edit: Editar %{model}
+      new: 'Criar %{model}'
+      edit: 'Editar %{model}'
     actions: Ações
     links:
       edit: Editar
@@ -81,21 +100,21 @@ pt-BR:
       save: Salvar
       cancel: Cancelar
       back: Voltar
-      confirm: Tem certeza que deseja apagar %{model} "%{value}"?
+      confirm: 'Tem certeza que deseja apagar %{model} "%{value}"?'
       password_link: clique aqui para recuperar sua senha
       files:
-        confirm: "Tem certeza que deseja apagar arquivo \"%{value}\"?"
+        confirm: 'Tem certeza que deseja apagar arquivo "%{value}"?'
     select:
       prompt: Por favor selecione
     submit:
-      create: Criar %{model}
-      submit: Salvar %{model}
-      update: Atualizar %{model}
+      create: 'Criar %{model}'
+      submit: 'Salvar %{model}'
+      update: 'Atualizar %{model}'
     messages:
       subscription:
         successfully_created: Inscrição realizada com sucesso
     errors:
-      duplicity: você já possui %{model} com tal %{attr}
+      duplicity: 'você já possui %{model} com tal %{attr}'
       event:
         closes_at:
           too_soon: deve ser posterior à abertura
@@ -108,6 +127,7 @@ pt-BR:
         password:
           invalid: Deve conferir com a mesma utilizada em inscrições anteriores
         confirm: Confira as informações e envie a inscrição novamente
+
   date:
     min_day_names:
     - Do
