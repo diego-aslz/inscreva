@@ -43,7 +43,7 @@ end
 gem 'devise'
 gem 'show_for'
 gem 'cancan'
-gem 'formtastic-bootstrap'
+gem 'simple_form'
 gem 'kaminari'
 gem 'nested_form'
 gem 'responders'

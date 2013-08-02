@@ -1,7 +1,7 @@
-= semantic_form_for @application, :html => { class: 'form-horizontal', multipart: true } do |f|
-  = f.semantic_errors
+= simple_form_for @application, :html => { class: 'form-horizontal', multipart: true } do |f|
+  = f.error_notification
 
-  = f.inputs do
+  .form-inputs
     = f.input :confirmed, as: :hidden
     = f.input :event_id, as: :hidden
     = input f, :event_name, model_class: Subscription, as: :xx_large_string,
@@ -24,5 +24,5 @@
       = ff.input :type, as: :hidden, label: false
       = input_fill ff
 
-  = f.actions do
-    = f.action :submit, label: t(:subscribe), button_html: { class: 'btn btn-primary' }
+  .form-actions
+    = f.button :submit, label: t(:subscribe), button_html: { class: 'btn btn-primary' }

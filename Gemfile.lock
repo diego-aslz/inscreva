@@ -94,10 +94,6 @@ GEM
       railties (>= 3.0.0)
     ffi (1.9.0)
     formatador (0.2.4)
-    formtastic (2.2.1)
-      actionpack (>= 3.0)
-    formtastic-bootstrap (2.1.3)
-      formtastic (~> 2.2)
     guard (1.8.1)
       formatador (>= 0.2.4)
       listen (>= 1.0.0)
@@ -211,6 +207,9 @@ GEM
     show_for (0.2.6)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    simple_form (2.1.0)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     slop (3.4.5)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -258,7 +257,6 @@ DEPENDENCIES
   debugger
   devise
   factory_girl_rails
-  formtastic-bootstrap
   guard-rspec
   haml-rails
   has_scope
@@ -275,6 +273,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 3.2.3)
   show_for
+  simple_form
   therubyracer
   thin
   uglifier (>= 1.0.3)
