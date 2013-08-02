@@ -7,13 +7,11 @@ Inscreva::Application.routes.draw do
   resources :subscriptions do
     get "receipt", on: :member
   end
+  resources :events
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users
 
   root to: "home#index"
-
-  ActiveAdmin.routes(self)
 
   get "/:event", to: 'wikis#show', as: :event
   get "/:event/:wiki", to: 'wikis#show', as: :wiki

@@ -7,6 +7,7 @@ describe "AdminUser" do
     let(:ability){ Ability.new(user) }
     let(:user){ create(:admin_user) }
 
-    it{ should     be_able_to(:read,     ActiveAdmin::Page) }
+    it{ should     be_able_to(:show,     Wiki) }
+    pending 'define Event specific admins'
   end
 end

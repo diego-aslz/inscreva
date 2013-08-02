@@ -1,4 +1,3 @@
-
 $ ->
   $('.datepicker').datepicker
     "date-format": "dd/mm/yyyy"

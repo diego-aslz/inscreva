@@ -1,1 +1,2 @@
-window.print()
+$ ->
+  window.print()

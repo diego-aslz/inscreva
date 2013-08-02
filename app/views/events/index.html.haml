@@ -1,0 +1,21 @@
+- model_class = Event
+= page_header t('.title', default: model_class.model_name.human.pluralize)
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name :name
+      %th
+      %th
+      %th
+  %tbody
+    - @events.each do |event|
+      %tr
+        %td= event.name
+        %td= link_to 'Show', event
+        %td= link_to 'Edit', edit_event_path(event)
+        %td= link_to 'Destroy', event, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Event', new_event_path

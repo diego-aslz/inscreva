@@ -1,22 +1,22 @@
 FactoryGirl.define do
   sequence(:email) { |n| "email#{n}@example.com" }
 
-  factory :admin_user do
+  factory :user do
     email
     password 'password'
     password_confirmation 'password'
+
+    factory :admin_user do
+      email
+      password 'password'
+      password_confirmation 'password'
+    end
 
     factory :superadmin do
       after(:create) do |user,evaluator|
         user.roles << create(:role)
       end
     end
-  end
-
-  factory :user do
-    email
-    password 'password'
-    password_confirmation 'password'
 
     factory :candidate_user do
       after(:create) do |user,evaluator|

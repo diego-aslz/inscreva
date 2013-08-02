@@ -15,6 +15,7 @@
 //= require bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR
-//= require datepicker
 //= require maskedinput
+//= require datepicker
 //= require masks
+//= require events

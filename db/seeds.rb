@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 r = Role.find_or_create_by_name('superadmin')
-admin = AdminUser.first
-admin.update_attribute :email, 'admin@inscreva.com'
-admin.update_attributes password: 'admin1234', password_confirmation: 'admin1234'
+admin = User.find_by_email 'admin@inscreva.com'
+admin = User.create! name: 'Admin', email: 'admin@inscreva.com',
+    password: 'admin1234', password_confirmation: 'admin1234' unless admin
 admin.roles << r unless admin.has_role? r

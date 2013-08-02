@@ -47,12 +47,12 @@ gem 'formtastic-bootstrap'
 gem 'kaminari'
 gem 'nested_form'
 gem 'responders'
-gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'has_scope'
 gem 'country-select', github: 'nerde/country-select'
 gem "haml-rails"
 gem 'carrierwave'
 gem 'redcarpet'
+gem 'inherited_resources'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

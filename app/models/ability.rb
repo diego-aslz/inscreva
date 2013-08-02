@@ -5,9 +5,7 @@ class Ability
     user ||= User.new
     if user.has_role? Role.new(name: 'superadmin')
       can :manage, :all
-    elsif user.is_a? AdminUser
-      can :read, ActiveAdmin::Page, :name => "Dashboard"
-    elsif user.subscriptions.any?
+    elsif user.is_a? User and user.subscriptions.any?
       can [:edit, :update, :show, :index, :receipt], Subscription, user_id: user.id
       can :download, FieldFill, subscription: { id: user.subscription_ids }
     end
