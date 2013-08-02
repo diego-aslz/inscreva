@@ -36,4 +36,8 @@ class Event < ActiveRecord::Base
     end if fields
     result
   end
+
+  def main_wiki
+    wikis.where(wiki_id: nil).first
+  end
 end

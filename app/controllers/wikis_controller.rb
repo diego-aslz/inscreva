@@ -7,7 +7,10 @@ class WikisController < ApplicationController
     if params[:wiki]
       @wiki = @event.wikis.find_by_name(params[:wiki])
     else
-      @wiki = @event.wikis.where(wiki_id: nil).first
+      if @wiki = @event.main_wiki
+        redirect_to wiki_path(params[:event], @wiki.name)
+        return
+      end
     end
     not_found unless @wiki
   end

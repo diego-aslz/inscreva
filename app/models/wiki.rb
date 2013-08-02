@@ -1,4 +1,5 @@
 class Wiki < ActiveRecord::Base
+  has_many :wikis
   belongs_to :wiki
   belongs_to :event
   attr_accessible :content, :name, :wiki_id, :event_id, :title

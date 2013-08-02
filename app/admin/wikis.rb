@@ -1,7 +1,7 @@
 ActiveAdmin.register Wiki do
   controller do
     def new
-      @wiki = Wiki.new(event_id: params[:event_id], wiki_id: params[:wiki_id])
+      @wiki = Wiki.new(params[:wiki])
       new!
     end
   end
@@ -25,6 +25,11 @@ ActiveAdmin.register Wiki do
       row :wiki
       row :content do
         markdown wiki
+      end
+    end
+    attributes_table do
+      row :wikis do
+        link_to t(:'helpers.links.new'), new_wiki_path_for(wiki.event_id, wiki.id)
       end
     end
   end

@@ -54,7 +54,11 @@ ActiveAdmin.register Event do
       row :technical_email
       row :email
       row :wiki do
-        link_to "Wiki", "/admin#{new_wiki_path}?event_id=#{event.id}"
+        if wiki = event.main_wiki
+          link_to t(:'helpers.links.edit'), edit_admin_wiki_path(wiki.id)
+        else
+          link_to t(:'helpers.links.new'), new_wiki_path_for(event.id)
+        end
       end
     end
     panel Field.model_name.human.pluralize do
