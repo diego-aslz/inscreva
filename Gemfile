@@ -52,6 +52,7 @@ gem 'has_scope'
 gem 'country-select', github: 'nerde/country-select'
 gem "haml-rails"
 gem 'carrierwave'
+gem 'redcarpet'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
