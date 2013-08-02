@@ -14,7 +14,11 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= content_tag :strong do event.name end %></td>
+        <% if event.wikis.any? %>
+          <td><%= link_to event.name, event_path(event.identifier) %></td>
+        <% else %>
+          <td><%= content_tag :strong do event.name end %></td>
+        <% end %>
         <td><%=l event.opens_at %></td>
         <td><%=l event.closes_at %></td>
         <td><%= link_to_subscribe(event) %></td>

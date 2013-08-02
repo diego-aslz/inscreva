@@ -1,10 +1,12 @@
 class Event < ActiveRecord::Base
   has_many :fields, order: [:priority, :group_name, :id]
   has_many :subscriptions
+  has_many :wikis
   attr_accessible :allow_edit, :closes_at, :email, :name, :opens_at, :rules_url,
-      :technical_email, :fields_attributes
+      :technical_email, :fields_attributes, :identifier
 
-  validates_presence_of :name, :opens_at, :closes_at
+  validates_presence_of :name, :opens_at, :closes_at, :identifier
+  validates_uniqueness_of :identifier
 
   accepts_nested_attributes_for :fields, allow_destroy: true, :reject_if =>
       lambda { |f| f[:name].blank? }

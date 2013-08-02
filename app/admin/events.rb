@@ -6,6 +6,7 @@ ActiveAdmin.register Event do
 
   form do |f|
     f.inputs t(:details) do
+      f.input :identifier
       f.input :name
       f.input :opens_at
       f.input :closes_at
@@ -52,6 +53,9 @@ ActiveAdmin.register Event do
       row :rules_url
       row :technical_email
       row :email
+      row :wiki do
+        link_to "Wiki", "/admin#{new_wiki_path}?event_id=#{event.id}"
+      end
     end
     panel Field.model_name.human.pluralize do
       table_for event.fields, i18n: Field do

@@ -2,19 +2,20 @@ require 'spec_helper'
 
 describe 'Subscription' do
   context 'generating a subscription number' do
+    let(:subscription) { build(:subscription) }
+
     it "should generate a new one on create" do
-      sub = build(:subscription)
-      sub.number.should be_nil
-      sub.save
-      sub.number.should_not be_nil
+      subscription.number.should be_nil
+      subscription.save
+      subscription.number.should_not be_nil
     end
 
     it "should not change on update" do
-      sub = create(:subscription)
-      sub.number.should_not be_nil
+      subscription.save!
+      subscription.number.should_not be_nil
       expect {
-        sub.update_attribute :name, sub.name + sub.name
-      }.not_to change(sub, :number)
+        subscription.update_attribute :name, subscription.name + subscription.name
+      }.not_to change(subscription, :number)
     end
   end
 

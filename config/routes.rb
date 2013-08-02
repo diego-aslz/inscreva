@@ -1,10 +1,12 @@
 Inscreva::Application.routes.draw do
+  resources :wikis
+
+
   get "field_fills/:id/download", to: 'field_fills#download', as: :download_field_fill
 
   resources :subscriptions do
     get "receipt", on: :member
   end
-  resources :events
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users
@@ -13,6 +15,8 @@ Inscreva::Application.routes.draw do
 
   ActiveAdmin.routes(self)
 
+  get "/:event", to: 'wikis#show', as: :event
+  get "/:event/:wiki", to: 'wikis#show', as: :wiki
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

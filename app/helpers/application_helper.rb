@@ -26,4 +26,9 @@ module ApplicationHelper
     options.delete :model_class
     form.input attribute, options
   end
+
+  def redcarpet
+    @@redcarpet ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
+        autolink: true, tables: true)
+  end
 end

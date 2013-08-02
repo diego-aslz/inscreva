@@ -5,4 +5,8 @@ class ApplicationController < ActionController::Base
   respond_to :html
 
   protect_from_forgery
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
 end

@@ -37,6 +37,7 @@ FactoryGirl.define do
     opens_at { Time.zone.now }
     closes_at { Time.zone.now + 1.day }
     rules_url ''
+    sequence :identifier, 'event1'
 
     factory :ongoing_event do
       opens_at { Time.zone.now - 30.minutes }
@@ -94,5 +95,11 @@ FactoryGirl.define do
     factory :required_field_fill do
       association :field, factory: :required_field
     end
+  end
+
+  factory :wiki do
+    sequence :name, 'wiki1'
+    event
+    title 'Title'
   end
 end

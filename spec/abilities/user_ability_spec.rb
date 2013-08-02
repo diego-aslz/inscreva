@@ -8,16 +8,17 @@ describe "User" do
     let(:user){ nil }
 
     context "when is no one" do
-      it{ should be_able_to(:create, Subscription) }
-      it{ should be_able_to(:new, Subscription) }
+      it{ should be_able_to(:create,  Subscription) }
+      it{ should be_able_to(:new,     Subscription) }
+      it{ should be_able_to(:show,    Wiki) }
     end
 
     context "when is a candidate" do
-      let(:user){ create(:candidate_user) }
-      let(:his_subscription){ user.subscriptions.first }
-      let(:another_users_subscription){ create(:subscription) }
-      let(:his_fill){ create(:field_fill, subscription_id: his_subscription.id) }
-      let(:another_users_fill){ create(:field_fill) }
+      let(:user)                        { create(:candidate_user) }
+      let(:his_subscription)            { user.subscriptions.first }
+      let(:another_users_subscription)  { create(:subscription) }
+      let(:his_fill)                    { create(:field_fill, subscription_id: his_subscription.id) }
+      let(:another_users_fill)          { create(:field_fill) }
 
       it{ should     be_able_to(:index,    Subscription) }
       it{ should     be_able_to(:edit,     his_subscription) }
