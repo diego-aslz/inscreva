@@ -1,7 +1,7 @@
 class Wiki < ActiveRecord::Base
   has_many :wikis
   belongs_to :wiki
-  belongs_to :event
+  belongs_to :event, :counter_cache => true
   attr_accessible :content, :name, :wiki_id, :event_id, :title
 
   validates_presence_of :name, :event, :title

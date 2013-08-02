@@ -37,7 +37,7 @@ ActiveAdmin.register Event do
     column :opens_at
     column :closes_at
     column :subscriptions do |e|
-      e.subscriptions.count
+      e.subscriptions.size
     end
     default_actions
   end

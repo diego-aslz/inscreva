@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130802133633) do
+ActiveRecord::Schema.define(:version => 20130802175153) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -66,9 +66,11 @@ ActiveRecord::Schema.define(:version => 20130802133633) do
     t.string   "rules_url"
     t.string   "technical_email"
     t.string   "email"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "identifier"
+    t.integer  "wikis_count",         :default => 0
+    t.integer  "subscriptions_count", :default => 0
   end
 
   create_table "field_fills", :force => true do |t|
