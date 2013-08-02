@@ -5,15 +5,22 @@
   %thead
     %tr
       %th= model_class.human_attribute_name :name
+      %th= model_class.human_attribute_name :identifier
+      %th= model_class.human_attribute_name :opens_at
+      %th= model_class.human_attribute_name :closes_at
+      %th= model_class.human_attribute_name :subscriptions
       %th
       %th
       %th
   %tbody
     - @events.each do |event|
       %tr
-        %td= event.name
-        %td= link_to 'Show', event
-        %td= link_to 'Edit', edit_event_path(event)
+        %td= link_to event.name, event
+        %td= event.identifier
+        %td= event.opens_at
+        %td= event.closes_at
+        %td= event.subscriptions.size
+        %td= link_to_edit event, edit_event_path(event)
         %td= link_to 'Destroy', event, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br

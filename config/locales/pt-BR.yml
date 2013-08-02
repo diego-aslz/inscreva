@@ -64,6 +64,7 @@ pt-BR:
         allow_edit: Permitir aos inscritos alterar suas inscrições antes do fechamento
         closes_at: Término das Inscrições
         email: E-mail oficial de comunicação
+        identifier: Identificador
         name: Nome
         opens_at: Início das Inscrições
         rules_url: Endereço eletrônico para Edital ou similar

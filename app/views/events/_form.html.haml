@@ -1,10 +1,12 @@
-= form_for @event do |f|
-  - if @event.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
-      %ul
-        - @event.errors.full_messages.each do |msg|
-          %li= msg
+= semantic_form_for @event, :html => { class: 'form-horizontal', multipart: true } do |f|
+  = f.semantic_errors
 
-  .actions
-    = f.submit 'Save'
+  = f.inputs do
+    = f.input :name
+    = f.input :identifier
+    = f.input :opens_at
+    = f.input :closes_at
+    = f.input :allow_edit
+    = f.input :rules_url
+    = f.input :technical_email
+    = f.input :email
