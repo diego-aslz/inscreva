@@ -3,13 +3,25 @@
 - else
   - object = @wiki
 
-= simple_form_for object, :html => { class: 'form-horizontal' } do |f|
-  = f.error_notification
+%div{'ng-controller' => 'WikiCtrl', 'ng-init' => "wiki = #{@wiki.to_json}"}
+  = simple_form_for object, :html => { class: 'form-vertical' } do |f|
+    = f.error_notification
 
-  .form-inputs
-    = f.input :name
-    = f.input :title
-    = f.input :content
+    .form-inputs
+      = f.input :name, input_html: { :'ng-model' => 'wiki.name' }
+      = f.input :title, input_html: { :'ng-model' => 'wiki.title' }
+      = f.label :content
+      .tabs
+        %ul.nav.nav-pills
+          %li.active
+            %a{href: "#edit", 'data-toggle' => "pill"}= t :edit_mode
+          %li
+            %a{href: "#preview", 'data-toggle' => "pill"}= t :preview_mode
+        #edit.tab.active
+          = f.input :content, label: false, input_html: { :'ng-model' => 'wiki.content' }
+        #preview.tab
+          %div{:'ng-bind-html-unsafe' => "converter.makeHtml(wiki.content)"}
 
-  .form-actions
-    = f.button :submit, label: t(:subscribe), class: 'btn btn-primary'
+    .form-actions
+      = f.button :submit, label: t(:subscribe), class: 'btn btn-primary'
+      = link_to_back path: event_wikis_path(@event || @wiki.event) if can? :index, Subscription

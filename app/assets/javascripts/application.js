@@ -19,4 +19,6 @@
 //= require datepicker
 //= require masks
 //= require events
+//= require wikis
+//= require showdown
 //= require angular

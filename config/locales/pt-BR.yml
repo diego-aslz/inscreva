@@ -18,6 +18,8 @@ pt-BR:
   remove_field: Remover Campo
   move: Mover
   search: Buscar
+  edit_mode: Edição
+  preview_mode: Visualização
 
   show_for:
     blank: "Não informado"

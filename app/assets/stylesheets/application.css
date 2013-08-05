@@ -10,6 +10,7 @@
  *
  *= require bootstrap_and_overrides
  *= require bootstrap-datepicker
+ *= require wikis
  */
 
 html, body, .wrapper { height: 90%; }
