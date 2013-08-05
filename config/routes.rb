@@ -8,13 +8,13 @@ Inscreva::Application.routes.draw do
     get "receipt", on: :member
   end
   resources :events
+  resources :wikis
 
   devise_for :users
 
   root to: "home#index"
 
-  get "/:event", to: 'wikis#show', as: :event
-  get "/:event/:wiki", to: 'wikis#show', as: :wiki
+  get "/:event", to: 'wikis#show', as: :event_wiki
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

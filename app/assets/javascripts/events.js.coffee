@@ -3,6 +3,7 @@ $ ->
   $('div.has_many.fields').children('a').on('click', (e)->
     updateExtras()
   )
+  $( "#tabs" ).tabs()
 
 updateExtras = ->
   $('.field_type').each ->

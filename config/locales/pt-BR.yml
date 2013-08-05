@@ -70,6 +70,7 @@ pt-BR:
         rules_url: Endereço eletrônico para Edital ou similar
         technical_email: E-mail auxílio técnico
         subscriptions: Inscrições
+        fields: Campos
       subscription:
         created_at: Inscrito
         email: E-mail

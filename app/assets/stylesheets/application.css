@@ -8,9 +8,6 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require formtastic-bootstrap
- *= require formtastic_ie6
- *= require formtastic_ie7
  *= require bootstrap_and_overrides
  *= require bootstrap-datepicker
  */
@@ -30,4 +27,8 @@ body > .wrapper { height: auto; min-height: 82%; }
   background-color: whiteSmoke;
   border-top: 1px solid #E5E5E5;
   text-align: right;
+}
+
+.tabs div:not(.active) {
+  display: none;
 }
