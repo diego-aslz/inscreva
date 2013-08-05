@@ -1,0 +1,15 @@
+- if @wiki.new_record?
+  - object = [@event, @wiki]
+- else
+  - object = @wiki
+
+= simple_form_for object, :html => { class: 'form-horizontal' } do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :title
+    = f.input :content
+
+  .form-actions
+    = f.button :submit, label: t(:subscribe), class: 'btn btn-primary'

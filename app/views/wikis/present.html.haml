@@ -1,0 +1,7 @@
+- content_for :title do @wiki.title end
+
+= wiki_tree @wiki
+
+%h1= @wiki.title
+
+= markdown @wiki

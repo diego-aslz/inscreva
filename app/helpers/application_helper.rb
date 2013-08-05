@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def link_to_add(klass, path, options = {})
-    link_to t(:'helpers.links.new'), new_event_path,
+    link_to t(:'helpers.links.new'), path,
         class: (options[:class] || 'btn btn-primary') if can? :new, klass
   end
 

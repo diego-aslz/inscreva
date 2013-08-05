@@ -1,7 +1,11 @@
-- content_for :title do @wiki.title end
+- model_class = Wiki
+= page_header model_class.model_name.human
 
-= wiki_tree @wiki
+= show_for @wiki, class: 'dl-horizontal' do |show|
+  = show.attribute :name
+  = show.attribute :title
+  = show.attribute :content
 
-%h1= @wiki.title
-
-= markdown @wiki
+= form_actions do
+  = link_to_back path: event_wikis_path(@wiki.event) if can? :index, Subscription
+  = link_to_edit @wiki, edit_wiki_path(@wiki)

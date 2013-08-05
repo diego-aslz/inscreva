@@ -1,0 +1,24 @@
+- model_class = Wiki
+= page_header t('.title', default: model_class.model_name.human.pluralize)
+
+%form.form-search{action: event_wikis_path(@event)}
+  .input-append
+    %input.append.search-query.span4{type: "text", name: "term", value: params[:term]}
+    %button.btn{type: "submit"}
+      #{icon_tag "icon-search"} #{t :search}
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name :name
+      %th= model_class.human_attribute_name :title
+      %th
+  %tbody
+    - @wikis.each do |wiki|
+      %tr
+        %td= link_to wiki.name, wiki
+        %td= wiki.title
+        %td= minilink_to_edit wiki, edit_wiki_path(wiki),
+            class: 'btn btn-mini'
+
+= link_to_add Wiki, new_event_wiki_path(@event)
