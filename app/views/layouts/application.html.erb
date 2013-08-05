@@ -49,7 +49,11 @@
             <a class="brand" href="<%= root_url %>">Inscreva</a>
             <div class="container nav-collapse">
               <ul class="nav">
-                <li><%= link_to t(:'subscriptions.mine.title'), mine_subscriptions_path if can? :mine, Subscription %></li>
+                <% if can? :index, Subscription %>
+                  <li><%= link_to t(:'subscriptions.index.title'), subscriptions_path %></li>
+                <% else %>
+                  <li><%= link_to t(:'subscriptions.mine.title'), mine_subscriptions_path if can? :mine, Subscription %></li>
+                <% end %>
                 <li><%= link_to Event.model_name.human.pluralize, events_path if can? :index, Event %></li>
               </ul>
               <% if user_signed_in? %>

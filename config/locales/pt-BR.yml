@@ -38,8 +38,10 @@ pt-BR:
       title: '%{model}'
     show:
       title: Inscrição
+    index:
+      title: Inscrições
     mine:
-      title: Minhas inscrições
+      title: Minhas Inscrições
     receipt:
       title: Comprovante de Inscrição
   active_admin:
