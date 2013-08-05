@@ -52,7 +52,8 @@ class SubscriptionsController < InheritedResources::Base
   end
 
   def index
-    @subscriptions = Subscription.accessible_by(current_ability).includes :event
+    @subscriptions = Subscription.accessible_by(current_ability).includes(:event)
+    @subscriptions = @subscriptions.search(params[:term]) unless params[:term].blank?
     index!
   end
 

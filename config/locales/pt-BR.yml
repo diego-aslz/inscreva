@@ -17,6 +17,7 @@ pt-BR:
   add_field: Adicionar Campo
   remove_field: Remover Campo
   move: Mover
+  search: Buscar
 
   show_for:
     blank: "Não informado"

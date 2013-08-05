@@ -1,5 +1,12 @@
 - model_class = Subscription
 = page_header t('.title', default: model_class.model_name.human.pluralize)
+
+%form.form-search{action: subscriptions_path}
+  .input-append
+    %input.append.search-query.span4{type: "text", name: "term", value: params[:term]}
+    %button.btn{type: "submit"}
+      #{icon_tag "icon-search"} #{t :search}
+
 %table.table.table-striped
   %thead
     %tr
