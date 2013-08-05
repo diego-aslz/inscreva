@@ -6,6 +6,7 @@ Inscreva::Application.routes.draw do
 
   resources :subscriptions do
     get "receipt", on: :member
+    get "mine", on: :collection
   end
   resources :events
   resources :wikis

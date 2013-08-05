@@ -1,6 +1,7 @@
 class SubscriptionsController < InheritedResources::Base
   actions :all, except: [ :destroy, :create ]
   load_and_authorize_resource except: [:create]
+  respond_to :html
 
   def new
     unless params[:event_id] && (event = Event.find(params[:event_id])).ongoing?
@@ -51,6 +52,11 @@ class SubscriptionsController < InheritedResources::Base
   end
 
   def index
+    @subscriptions = Subscription.accessible_by(current_ability).includes :event
+    index!
+  end
+
+  def mine
     @subscriptions = Subscription.accessible_by(current_ability).includes :event
   end
 

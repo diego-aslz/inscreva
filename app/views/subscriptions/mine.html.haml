@@ -1,0 +1,19 @@
+- model_class = Subscription
+= page_header t('.title', default: model_class.model_name.human.pluralize)
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name :number
+      %th= model_class.human_attribute_name :email
+      %th= model_class.human_attribute_name :event
+      %th
+      %th
+  %tbody
+    - @subscriptions.each do |subscription|
+      %tr
+        %td= link_to subscription.number, subscription_path(subscription)
+        %td= subscription.email
+        %td= subscription.event.name if subscription.event
+        %td= link_to_receipt(subscription)
+        %td= link_to_edit subscription, edit_subscription_path(subscription),
+            class: 'btn btn-mini'

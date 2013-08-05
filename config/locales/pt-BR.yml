@@ -38,7 +38,7 @@ pt-BR:
       title: '%{model}'
     show:
       title: Inscrição
-    index:
+    mine:
       title: Minhas inscrições
     receipt:
       title: Comprovante de Inscrição

@@ -18,6 +18,9 @@
       = show_fill fill
 
 = form_actions do
-  = link_to_back path: subscriptions_path
+  - if can? :index, Subscription
+    = link_to_back path: subscriptions_path
+  - else
+    = link_to_back path: mine_subscriptions_path
   = link_to_edit @subscription, edit_subscription_path(@subscription)
   = link_to_receipt(@subscription)
