@@ -29,6 +29,10 @@ body > .wrapper { height: auto; min-height: 82%; }
   text-align: right;
 }
 
-.tabs div:not(.active) {
+.tabs .tab:not(.active) {
   display: none;
+}
+
+.datetime {
+  width: inherit;
 }

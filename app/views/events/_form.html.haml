@@ -1,15 +1,31 @@
-= simple_form_for @event, :html => { class: 'form-horizontal', multipart: true } do |f|
-  = f.error_notification
+%div{'ng-controller' => 'EventCtrl', 'ng-init' => "event = #{@event.to_json}; event.fields = #{@event.fields.to_json}; extras = #{Field::TYPES_WITH_EXTRA.to_json}"}
+  = simple_form_for @event, :html => { class: 'form-horizontal', multipart: true } do |f|
+    = f.error_notification
 
-  .form-inputs
-    = f.input :name
-    = f.input :identifier
-    = f.input :opens_at
-    = f.input :closes_at
-    = f.input :allow_edit
-    = f.input :rules_url
-    = f.input :technical_email
-    = f.input :email
+    .form-inputs
+      .tabs
+        %ul.nav.nav-pills
+          %li.active
+            %a{href: "#details", 'data-toggle' => "pill"}= t :details
+          %li
+            %a{href: "#fields", 'data-toggle' => "pill"}= Event.human_attribute_name :fields
+        #details.tab.active
+          = f.input :name, input_html: { :'ng-model' => 'event.name'}
+          = f.input :identifier, input_html: { :'ng-model' => 'event.identifier'}
+          = f.input :opens_at
+          = f.input :closes_at
+          = f.input :allow_edit, input_html: { :'ng-model' => 'event.allow_edit'}
+          = f.input :rules_url, input_html: { :'ng-model' => 'event.rules_url'}
+          = f.input :technical_email, input_html: { :'ng-model' => 'event.technical_email'}
+          = f.input :email, input_html: { :'ng-model' => 'event.email'}
+        #fields.tab
+          %div{:'ng-repeat' => 'field in event.fields', :'ng-show' => '!field._destroy'}
+            %h3 Campo {{$index + 1}}
+            = link_to t(:remove_field), 'javascript:void(0)', 'ng-click' => 'removeField($index)'
+            = f.simple_fields_for :fields, Field.new, child_index: '{{$index}}' do |ff|
+              = render 'fields_form', form: ff
+          %div
+            = link_to t(:add_field), 'javascript:void(0)', 'ng-click' => 'addField()'
 
-  .form-actions
-    = f.button :submit
+    .form-actions
+      = f.button :submit

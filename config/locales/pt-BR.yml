@@ -14,6 +14,8 @@ pt-BR:
   print_receipt: Imprimir Comprovante
   subscribe: Inscrever-se
   remove_current_file: 'Remover arquivo anexado'
+  add_field: Adicionar Campo
+  remove_field: Remover Campo
 
   show_for:
     blank: "Não informado"
@@ -80,6 +82,12 @@ pt-BR:
         number: Número
         receipt_at: Emissão deste Comprovante
         event: Evento
+      user:
+        email: E-mail
+        password: Senha
+        password_confirmation: Redigite sua senha
+        current_password: Senha atual
+        remember_me: Manter usuário conectado neste computador
     errors:
       messages:
         record_invalid: Dados incorretos

@@ -13,6 +13,8 @@ class Field < ActiveRecord::Base
   validates_presence_of :field_type, :name
   validates_inclusion_of :field_type, in: VALID_TYPES.values, if: :field_type
 
+  after_initialize :default_values
+
   def select_options
     return nil if extra.blank?
     options = extra.split /\n/
@@ -26,5 +28,9 @@ class Field < ActiveRecord::Base
 
   def file?
     field_type == 'file'
+  end
+
+  def default_values
+    self.field_type = 'string'
   end
 end

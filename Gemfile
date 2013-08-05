@@ -53,6 +53,7 @@ gem "haml-rails"
 gem 'carrierwave'
 gem 'redcarpet'
 gem 'inherited_resources'
+gem 'angularjs-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

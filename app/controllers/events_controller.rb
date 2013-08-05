@@ -5,6 +5,7 @@ class EventsController < InheritedResources::Base
     @event = Event.new
     @event.opens_at = Time.zone.now.change(:hour => 0)
     @event.closes_at = Time.zone.now.change(:hour => 23, :min => 59)
+    @event.fields.build
     new!
   end
 end

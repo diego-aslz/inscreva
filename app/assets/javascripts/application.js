@@ -19,3 +19,4 @@
 //= require datepicker
 //= require masks
 //= require events
+//= require angular

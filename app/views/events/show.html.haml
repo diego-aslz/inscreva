@@ -8,14 +8,14 @@
         %a{href: "#details", 'data-toggle' => "pill"}= t :details
       %li
         %a{href: "#fields", 'data-toggle' => "pill"}= model_class.human_attribute_name :fields
-    #details.active
+    #details.tab.active
       = show.attribute :name
       = show.attribute :opens_at
       = show.attribute :closes_at
       = show.attribute :allow_edit
       = show.attribute :rules_url
       = show.attribute :technical_email
-    #fields
+    #fields.tab
       = show.association :fields
 
 = form_actions do

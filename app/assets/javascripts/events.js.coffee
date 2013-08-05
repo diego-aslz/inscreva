@@ -1,21 +1,9 @@
-$ ->
-  updateExtras()
-  $('div.has_many.fields').children('a').on('click', (e)->
-    updateExtras()
-  )
-  $( "#tabs" ).tabs()
-
-updateExtras = ->
-  $('.field_type').each ->
-    shuffleExtra(this)
-    $(this).on('change', ->
-      shuffleExtra(this)
-    )
-
-shuffleExtra = (el)->
-  type = $(el).val()
-  extra = $(el).parent().parent().children('.extra')
-  if jQuery.inArray(type, extra.data('extra-types')) == -1
-    extra.slideUp()
-  else
-    extra.slideDown()
+@EventCtrl = ["$scope", ($scope) ->
+  $scope.event = {}
+  $scope.showExtra = (field)->
+    $scope.extras.indexOf(field.field_type) > -1
+  $scope.addField = ()->
+    $scope.event.fields.push {field_type: 'string'}
+  $scope.removeField = (idx)->
+    $scope.event.fields[idx]._destroy = true
+]

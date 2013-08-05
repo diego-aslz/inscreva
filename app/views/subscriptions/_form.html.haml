@@ -4,18 +4,18 @@
   .form-inputs
     = f.input :confirmed, as: :hidden
     = f.input :event_id, as: :hidden
-    = input f, :event_name, model_class: Subscription, as: :xx_large_string,
-        input_html: { readonly: true }, required: false
-    = input f, :name, as: :xx_large_string, model_class: Subscription
+    = input f, :event_name, model_class: Subscription,
+        input_html: { readonly: true, class: :'input-xxlarge' }, required: false
+    = input f, :name, model_class: Subscription, input_html: { class: :'input-xxlarge' }
     = input f, :id_card, model_class: Subscription
     - if @application.new_record?
-      = input f, :email, as: :x_large_string, model_class: Subscription
-      = input f, :email_confirmation, as: :x_large_string, model_class: Subscription
+      = input f, :email, model_class: Subscription, input_html: { class: :'input-xlarge' }
+      = input f, :email_confirmation, model_class: Subscription, input_html: { class: :'input-xlarge' }
     = input f, :password, model_class: Subscription unless @application.user
     = input f, :password_confirmation, model_class: Subscription unless @application.user
 
     - last_group = ''
-    = f.semantic_fields_for :field_fills do |ff|
+    = f.simple_fields_for :field_fills do |ff|
       - group = ff.object.field.group_name
       - if group != last_group
         %h2= group
