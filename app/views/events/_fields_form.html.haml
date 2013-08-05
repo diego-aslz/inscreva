@@ -1,3 +1,4 @@
+= form.input :group_name, input_html: { 'ng-model' => 'field.group_name' }
 = form.input :id, as: :hidden, input_html: { 'value' => '{{field.id}}' }
 = form.input :_destroy, as: :hidden, input_html: { 'value' => '{{field._destroy}}' }
 = form.input :name, input_html: { 'ng-model' => 'field.name', class: :'input-xlarge' },
@@ -9,5 +10,4 @@
     placeholder: t(:'simple_form.placeholders.field.extra')
 = form.input :required, input_html: { 'ng-model' => 'field.required' }
 = form.input :show_receipt, input_html: { 'ng-model' => 'field.show_receipt' }
-= form.input :group_name, input_html: { 'ng-model' => 'field.group_name' }
-= form.input :priority, input_html: { 'ng-model' => 'field.priority', class: :'input-mini' }
+= form.input :priority, as: :hidden, input_html: { value: '{{field.priority}}' }

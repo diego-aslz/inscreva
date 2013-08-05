@@ -16,6 +16,7 @@ pt-BR:
   remove_current_file: 'Remover arquivo anexado'
   add_field: Adicionar Campo
   remove_field: Remover Campo
+  move: Mover
 
   show_for:
     blank: "Não informado"
@@ -57,7 +58,7 @@ pt-BR:
       field:
         extra: Configuração
         field_type: Tipo
-        group_name: Agrupamento
+        group_name: Grupo
         name: Descrição
         priority: Ordem
         required: Obrigatório
