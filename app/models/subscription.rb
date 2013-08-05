@@ -7,6 +7,9 @@ class Subscription < ActiveRecord::Base
 
   attr_accessible :field_fills_attributes, :email, :id_card, :event_id, :name
   accepts_nested_attributes_for :field_fills
+  scope :search, lambda { |term|
+    where("upper(concat(name,email,number)) like upper(?)", "%#{term}%")
+  }
 
   before_create :generate_number
 

@@ -20,7 +20,7 @@ describe "User" do
       let(:his_fill)                    { create(:field_fill, subscription_id: his_subscription.id) }
       let(:another_users_fill)          { create(:field_fill) }
 
-      it{ should     be_able_to(:index,    Subscription) }
+      it{ should     be_able_to(:mine,     Subscription) }
       it{ should     be_able_to(:edit,     his_subscription) }
       it{ should     be_able_to(:update,   his_subscription) }
       it{ should     be_able_to(:show,     his_subscription) }

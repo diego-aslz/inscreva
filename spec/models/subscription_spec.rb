@@ -32,4 +32,17 @@ describe 'Subscription' do
       subscription.receipt_fills.include?(show_fill).should be_true
     end
   end
+
+  it 'searches by a text' do
+    s = create(:subscription, name: 'nametosearchby')
+    Subscription.search('ametosearchb').include?(s).should be_true
+    s.update_attribute :name, 'A'
+    s.update_attribute :email, 'nametosearchby@domain.com'
+    Subscription.search('ametosearchb').include?(s).should be_true
+    s.update_attribute :name, 'A'
+    s.update_attribute :email, 'abc@domain.com'
+    s.update_attribute :number, '123456789'
+    Subscription.search('23456789').include?(s).should be_true
+    Subscription.search('anythingelse').include?(s).should be_false
+  end
 end
