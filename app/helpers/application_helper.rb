@@ -11,9 +11,26 @@ module ApplicationHelper
     content_tag(:i, '', class: icon)
   end
 
+  def link_to_add(klass, path, options = {})
+    link_to t(:'helpers.links.new'), new_event_path,
+        class: (options[:class] || 'btn btn-primary') if can? :new, klass
+  end
+
   def link_to_edit(model, path, options = {})
     link_to t('.edit', :default => t("helpers.links.edit")),
-        path, :class => (options[:class] || 'btn') if can? :edit, model
+        path, class: (options[:class] || 'btn') if can? :edit, model
+  end
+
+  def minilink_to_edit(model, path, options = {})
+    link_to icon_tag('icon-pencil').html_safe,
+        path, :class => (options[:class] || 'btn btn-mini btn-warning') if can? :edit, model
+  end
+
+  def minilink_to_destroy(model, options = {})
+    link_to icon_tag('icon-trash').html_safe, model, method: :delete, data: { confirm:
+            t(:'helpers.links.confirm', model: (options[:model] ||
+                model.class.model_name.human), value: options[:value]) },
+        class: (options[:class] || 'btn btn-mini btn-danger') if can? :destroy, model
   end
 
   def link_to_back(options = {})

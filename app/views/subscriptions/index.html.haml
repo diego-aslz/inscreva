@@ -1,7 +1,7 @@
 - model_class = Subscription
 = page_header t('.title', default: model_class.model_name.human.pluralize)
 
-%form.form-search{action: subscriptions_path}
+%form.form-search{action: event_subscriptions_path(@event)}
   .input-append
     %input.append.search-query.span4{type: "text", name: "term", value: params[:term]}
     %button.btn{type: "submit"}
@@ -12,7 +12,6 @@
     %tr
       %th= model_class.human_attribute_name :number
       %th= model_class.human_attribute_name :email
-      %th= model_class.human_attribute_name :event
       %th
       %th
   %tbody
@@ -20,7 +19,6 @@
       %tr
         %td= link_to subscription.number, subscription_path(subscription)
         %td= subscription.email
-        %td= subscription.event.name if subscription.event
         %td= link_to_receipt(subscription)
         %td= link_to_edit subscription, edit_subscription_path(subscription),
             class: 'btn btn-mini'
