@@ -9,7 +9,8 @@ pt-BR:
       default_message: "Verifique os problemas abaixo:"
     hints:
       user:
-        password: "Deixe em branco para não alterar"
+        edit:
+          password: "Deixe em branco para não alterar"
       wiki:
         name: Identificador que será exibido na URL para esta página
     placeholders:

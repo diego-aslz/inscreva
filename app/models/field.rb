@@ -31,6 +31,6 @@ class Field < ActiveRecord::Base
   end
 
   def default_values
-    self.field_type = 'string'
+    self.field_type = 'string' unless self.field_type
   end
 end
