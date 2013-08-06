@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'spec_helper'
 
 describe Wiki do
@@ -16,5 +17,11 @@ describe Wiki do
       wiki2.update_attributes event_id: wiki.event_id
       should have(1).errors_on(:name)
     end
+  end
+
+  it 'should correct it\'s name to be a valid URL' do
+    w = build(:wiki, name: 'Á_çabc?$% #@-')
+    w.save
+    w.name.should be_==('_abc--')
   end
 end

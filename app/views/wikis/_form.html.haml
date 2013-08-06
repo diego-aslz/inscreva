@@ -9,10 +9,9 @@
     = f.error_notification
 
     .form-inputs
-      = f.input :name, input_html: { :'ng-model' => 'wiki.name' }
-      = f.input :title, input_html: { :'ng-model' => 'wiki.title' }
-      = f.input :wiki_id, collection: [event], as: :grouped_select,
-          group_method: :wikis
+      = f.input :title, input_html: { :'ng-model' => 'wiki.title', class: 'input-xxlarge' }
+      = f.input :name, input_html: { value: '{{ name() }}' }
+      = f.input :wiki_id, collection: [event], as: :grouped_select, group_method: :wikis
       = f.label :content
       .tabs
         %ul.nav.nav-pills

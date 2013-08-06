@@ -7,4 +7,13 @@ class Wiki < ActiveRecord::Base
 
   validates_presence_of :name, :event, :title
   validates_uniqueness_of :name, scope: :event_id
+
+  before_save :correct_name
+
+  def correct_name
+    if self.name
+      self.name.gsub! ' ', '-'
+      self.name.gsub! /[^\w_\-]/i, ''
+    end
+  end
 end
