@@ -8,7 +8,7 @@ module WikisHelper
   end
 
   def link_to_wiki(wiki)
-    link_to wiki.title, wiki_path(wiki.event.identifier, wiki.name)
+    link_to wiki.title, present_event_wiki_path(wiki.event.identifier, wiki.name)
   end
 
   def wiki_tree_node(wiki, last=true)
