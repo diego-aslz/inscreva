@@ -257,6 +257,7 @@ pt-BR:
   errors: &errors
     format: ! '%{attribute} %{message}'
     messages:
+      extension_white_list_error: Extensão não permitida
       terms:
         accepted: Você deve LER e ACEITAR os termos de uso
       accepted: deve ser aceito

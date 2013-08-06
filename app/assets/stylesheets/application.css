@@ -37,3 +37,15 @@ body > .wrapper { height: auto; min-height: 82%; }
 .datetime {
   width: inherit;
 }
+
+textarea {
+  width: 90%;
+}
+
+.checkbox.inline {
+  display: block;
+}
+
+.checkbox.inline + .checkbox.inline {
+  margin-left: 0px;
+}

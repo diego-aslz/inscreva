@@ -1,2 +1,4 @@
+#= require jquery
+
 $ ->
   window.print()
