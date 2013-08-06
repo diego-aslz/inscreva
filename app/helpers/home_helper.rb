@@ -5,6 +5,6 @@ module HomeHelper
   end
 
   def subscribe_path(event)
-    new_subscription_path + '?event_id=' + event.id.to_s
+    new_event_subscription_path(event)
   end
 end

@@ -2,6 +2,7 @@
   - object = [@event, @wiki]
 - else
   - object = @wiki
+- event = @event || @wiki.event
 
 %div{'ng-controller' => 'WikiCtrl', 'ng-init' => "wiki = #{@wiki.to_json}"}
   = simple_form_for object, :html => { class: 'form-vertical' } do |f|
@@ -10,6 +11,8 @@
     .form-inputs
       = f.input :name, input_html: { :'ng-model' => 'wiki.name' }
       = f.input :title, input_html: { :'ng-model' => 'wiki.title' }
+      = f.input :wiki_id, collection: [event], as: :grouped_select,
+          group_method: :wikis
       = f.label :content
       .tabs
         %ul.nav.nav-pills
@@ -20,8 +23,8 @@
         #edit.tab.active
           = f.input :content, label: false, input_html: { :'ng-model' => 'wiki.content' }
         #preview.tab
-          %div{:'ng-bind-html-unsafe' => "converter.makeHtml(wiki.content)"}
+          %div{:'ng-bind-html-unsafe' => "preview()"}
 
     .form-actions
       = f.button :submit, label: t(:subscribe), class: 'btn btn-primary'
-      = link_to_back path: event_wikis_path(@event || @wiki.event) if can? :index, Subscription
+      = link_to_back path: event_wikis_path(event) if can? :index, Subscription

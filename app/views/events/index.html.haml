@@ -12,16 +12,19 @@
       %th
       %th
       %th
+      %th
   %tbody
     - @events.each do |event|
       %tr
         %td= link_to event.name, event
-        %td= event.identifier
+        %td= link_to event.identifier, present_event_main_wiki_path(event.identifier)
         %td= event.opens_at
         %td= event.closes_at
         %td= link_to event.subscriptions.size, event_subscriptions_path(event)
         %td= minilink_to_edit event, edit_event_path(event)
         %td= minilink_to_destroy event, value: event.name
+        %td= link_to icon_tag('icon-file'), event_wikis_path(event),
+            class: 'btn btn-mini btn-primary'
 
 %br
 

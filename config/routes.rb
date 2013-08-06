@@ -16,5 +16,6 @@ Inscreva::Application.routes.draw do
 
   root to: "home#index"
 
-  get "/:event", to: 'wikis#present', as: :event_present_wiki
+  get "/:event", to: 'wikis#present', as: :present_event_main_wiki
+  get "/:event/:wiki", to: 'wikis#present', as: :present_event_wiki
 end
