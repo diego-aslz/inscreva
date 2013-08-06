@@ -148,7 +148,7 @@ pt-BR:
           not_ongoing: Inscrições ainda não abertas ou já encerradas.
         password:
           invalid: Deve conferir com a mesma utilizada em inscrições anteriores
-        confirm: Confira as informações e envie a inscrição novamente
+        confirm: Confira suas informações e clique em Inscrever-se novamente
 
   date:
     min_day_names:

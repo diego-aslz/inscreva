@@ -4,19 +4,22 @@ class SubscriptionsController < InheritedResources::Base
   respond_to :html
 
   def new
-    unless params[:event_id] && (event = Event.find(params[:event_id])).ongoing?
+    @event = Event.find(params[:event_id])
+    unless @event.ongoing?
       redirect_to root_url
     else
       @application = ApplicationForm.new.load_from params, current_user
       @application.user = current_user
-      @application.field_fills = event.field_fills
+      @application.field_fills = @event.field_fills
     end
   end
 
   def create
+    @event = Event.find(params[:event_id])
     @application = ApplicationForm.new.load_from(params[:subscription])
     @application.user = current_user
     @application.generate_number
+    @application.event = @event
     if @application.submit
       sign_in @application.user unless current_user
       flash[:notice] = t 'helpers.messages.subscription.successfully_created'

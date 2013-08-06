@@ -1,9 +1,14 @@
-= simple_form_for @application, :html => { class: 'form-horizontal', multipart: true } do |f|
-  = f.error_notification
+= simple_form_for @application, url: event_subscriptions_path(@event), :html => { class: 'form-horizontal', multipart: true } do |f|
+  - alert = f.error :base
+  - if alert
+    .alert.alert-warning
+      %button.close{type: "button", 'data-dismiss' => "alert"}
+        &times;
+      = alert
+    %br
 
   .form-inputs
     = f.input :confirmed, as: :hidden
-    = f.input :event_id, as: :hidden
     = input f, :event_name, model_class: Subscription,
         input_html: { readonly: true, class: :'input-xxlarge' }, required: false
     = input f, :name, model_class: Subscription, input_html: { class: :'input-xxlarge' }
@@ -25,4 +30,4 @@
       = input_fill ff
 
   .form-actions
-    = f.button :submit, label: t(:subscribe), class: 'btn btn-primary'
+    = f.button :submit, t(:subscribe), class: 'btn btn-primary'
