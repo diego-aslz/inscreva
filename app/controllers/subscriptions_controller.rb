@@ -62,7 +62,7 @@ class SubscriptionsController < InheritedResources::Base
   end
 
   def mine
-    @subscriptions = Subscription.accessible_by(current_ability).includes :event
+    @subscriptions = Subscription.accessible_by(current_ability, :mine).includes :event
   end
 
   def show

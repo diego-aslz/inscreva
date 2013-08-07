@@ -83,12 +83,15 @@ pt-BR:
       subscription:
         created_at: Inscrito
         email: E-mail
+        email_confirmation: Repita seu e-mail
         event_name: Evento
         id_card: Identidade
         name: Nome Completo
         number: Número
         receipt_at: Emissão deste Comprovante
         event: Evento
+        password: Senha
+        password_confirmation: Repita sua senha
       user:
         email: E-mail
         password: Senha
