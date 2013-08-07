@@ -17,7 +17,11 @@
     - @wikis.each do |wiki|
       %tr
         %td= link_to wiki.name, wiki
-        %td= wiki.title
+        %td
+          - if wiki.main
+            %strong= wiki.title
+          - else
+            = wiki.title
         %td= minilink_to_edit wiki, edit_wiki_path(wiki),
             class: 'btn btn-mini'
 

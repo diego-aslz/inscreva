@@ -4,6 +4,14 @@ class WikisController < InheritedResources::Base
   actions :all
   respond_to :html
 
+  def create
+    create! { event_wikis_path(@wiki.event) }
+  end
+
+  def update
+    update! { event_wikis_path(@wiki.event) }
+  end
+
   def present
     @event = Event.find_by_identifier params[:event]
     not_found unless @event

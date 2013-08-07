@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130802184020) do
+ActiveRecord::Schema.define(:version => 20130807204956) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(:version => 20130802184020) do
     t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "main"
   end
 
   add_index "wikis", ["event_id"], :name => "index_wikis_on_event_id"

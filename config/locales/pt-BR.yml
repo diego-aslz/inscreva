@@ -103,6 +103,8 @@ pt-BR:
         name: Nome
         title: Título
         content: Conteúdo
+        main: Página principal do evento
+        event_name: Evento
     errors:
       messages:
         record_invalid: Dados incorretos

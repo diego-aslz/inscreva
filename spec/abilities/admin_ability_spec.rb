@@ -8,6 +8,5 @@ describe "AdminUser" do
     let(:user){ create(:admin_user) }
 
     it{ should     be_able_to(:show,     Wiki) }
-    pending 'define Event specific admins'
   end
 end

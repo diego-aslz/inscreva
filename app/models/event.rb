@@ -38,6 +38,6 @@ class Event < ActiveRecord::Base
   end
 
   def main_wiki
-    wikis.where(wiki_id: nil).first
+    wikis.where(main: true).first || wikis.where(wiki_id: nil).first
   end
 end

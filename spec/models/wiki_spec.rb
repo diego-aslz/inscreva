@@ -24,4 +24,23 @@ describe Wiki do
     w.save
     w.name.should be_==('_abc--')
   end
+
+  it "should resets the main page when a new main page is set to the event" do
+    w1 = create(:wiki, main: true)
+    w2 = create(:wiki, main: true, event_id: w1.event_id)
+    w1.reload
+    w2.reload
+    w1.main.should be_false
+    w2.main.should be_true
+
+    w1.update_attribute :main, true
+    w1.reload
+    w2.reload
+    w1.main.should be_true
+    w2.main.should be_false
+
+    create(:wiki, main: true)
+    w1.reload
+    w1.main.should be_true
+  end
 end
