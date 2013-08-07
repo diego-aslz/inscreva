@@ -23,7 +23,7 @@
     - last_group = ''
     = f.simple_fields_for :field_fills do |ff|
       - group = ff.object.field.group_name
-      - if group != last_group
+      - if group != last_group && !group.blank?
         %h2= group
         - last_group = group
       = ff.input :field_id, as: :hidden, label: false
