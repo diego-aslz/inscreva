@@ -15,6 +15,7 @@ pt-BR:
   subscribe: Inscrever-se
   remove_current_file: 'Remover arquivo anexado'
   add_field: Adicionar Campo
+  edit_field: Alterar Campo
   remove_field: Remover Campo
   move: Mover
   search: Buscar
@@ -65,7 +66,7 @@ pt-BR:
         extra: Configuração
         field_type: Tipo
         group_name: Grupo
-        name: Descrição
+        name: Campo
         priority: Ordem
         required: Obrigatório
         show_receipt: Exibir no Comprovante

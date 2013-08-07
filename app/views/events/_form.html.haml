@@ -1,6 +1,5 @@
 %div{'ng-controller' => 'EventCtrl', 'ng-init' => "event = #{@event.to_json}; event.fields = #{@event.fields.to_json}; extras = #{Field::TYPES_WITH_EXTRA.to_json}"}
   = simple_form_for @event, :html => { class: 'form-horizontal', multipart: true } do |f|
-    = f.error_notification
 
     .form-inputs
       .tabs
@@ -19,24 +18,14 @@
           = f.input :technical_email, input_html: { :'ng-model' => 'event.technical_email'}
           = f.input :email, input_html: { :'ng-model' => 'event.email'}
         #fields.tab
-          %div{:'ng-repeat' => 'field in event.fields', :'ng-show' => '!field._destroy'}
-            %h3= Field.model_name.human + ' {{field.priority}}'
-            %div{:'ng-show' => 'fieldsLength() > 1'}
-              = t(:move) + ':'
-              = link_to icon_tag('icon-arrow-up'), 'javascript:void(0)',
-                  class: 'btn btn-mini', :'ng-show' => '$index > 0',
-                  :'ng-click' => 'fieldUp($index)'
-              = link_to icon_tag('icon-arrow-down'), 'javascript:void(0)',
-                  class: 'btn btn-mini', :'ng-show' => '$index < fieldsLength() - 1',
-                  :'ng-click' => 'fieldDown($index)'
+          .event-field{:'ng-repeat' => 'field in event.fields',
+              :'ng-show' => '!field._destroy' }
+            = render 'fields_form', f: f
 
-            = f.simple_fields_for :fields, Field.new, child_index: '{{$index}}' do |ff|
-              = render 'fields_form', form: ff
-            = link_to t(:remove_field), 'javascript:void(0)',
-                'ng-click' => 'removeField($index)'
             %hr
           %div
-            = link_to t(:add_field), 'javascript:void(0)', 'ng-click' => 'addField()'
+            = link_to icon_tag('icon-plus'), 'javascript:void(0)', 'ng-click' => 'addField()',
+                class: 'btn btn-success', title: t(:add_field)
 
     .form-actions
-      = f.button :submit
+      = f.button :submit, class: 'btn-large btn-primary'

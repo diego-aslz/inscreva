@@ -2,8 +2,10 @@
   $scope.event = {}
   $scope.showExtra = (field)->
     $scope.extras.indexOf(field.field_type) > -1
-  $scope.addField = ()->
-    $scope.event.fields.push {field_type: 'string'}
+  $scope.addField = ->
+    newField = {field_type: 'string'}
+    $scope.event.fields.splice($scope.fieldsLength(), 0, newField);
+    $scope.editField newField
     $scope.orderPriority()
   $scope.removeField = (idx)->
     fs = $scope.event.fields
@@ -33,4 +35,8 @@
     for field in $scope.event.fields
       field.priority = p++ unless field._destroy
     null
+  $scope.editField = (f)->
+    for field in $scope.event.fields
+      field.editing = false
+    f.editing = true
 ]
