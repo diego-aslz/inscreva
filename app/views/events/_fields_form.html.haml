@@ -7,6 +7,7 @@
     include_blank: false, input_html: { 'ng-model' => 'field.field_type',
     disabled: !form.object.new_record? }
 = form.input :extra, wrapper_html: { 'ng-show' => 'showExtra(field)' },
+    input_html: { 'ng-model' => 'field.extra' },
     placeholder: t(:'simple_form.placeholders.field.extra')
 = form.input :required, input_html: { 'ng-model' => 'field.required' }
 = form.input :show_receipt, input_html: { 'ng-model' => 'field.show_receipt' }
