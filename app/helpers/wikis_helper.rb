@@ -1,7 +1,18 @@
 module WikisHelper
+  def markdown_footer(wiki)
+    str = ""
+    if wiki.files.any?
+      str += "\n\n## #{t(:attachment).pluralize}\n\n"
+      for file in wiki.files
+        str += "* #{link_to file.name, file.file.url}\n"
+      end
+    end
+    "#{str}\n[subscribe_link]: #{subscribe_path(wiki.event)}"
+  end
+
   def markdown(wiki)
     if wiki.is_a? Wiki
-      redcarpet.render("#{wiki.content}\n[subscribe_link]: #{subscribe_path(wiki.event)}").html_safe
+      redcarpet.render("#{wiki.content}#{markdown_footer(wiki)}").html_safe
     else
       redcarpet.render(wiki).html_safe
     end
@@ -26,11 +37,5 @@ module WikisHelper
     content_tag :ul, class: 'breadcrumb' do
       wiki_tree_node(wiki).html_safe
     end if wiki.wiki
-  end
-
-  def new_wiki_path_for(event_id, wiki_id=nil)
-    params = ["wiki[event_id]=#{event_id}"]
-    params << ["wiki[wiki_id]=#{wiki_id}"] if wiki_id
-    "#{new_admin_wiki_path}?#{params.join '&'}"
   end
 end
