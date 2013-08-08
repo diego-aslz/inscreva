@@ -26,7 +26,7 @@ after "deploy:restart", "deploy:cleanup"
 
 namespace :deploy do
   task :setup_config, roles: :app do
-    run "mkdir -p #{shared_path}/config"
+    run "mkdir -p #{shared_path}/config/initializers"
     put File.read("config/database.yml.example"),
         "#{shared_path}/config/database.yml"
   end
@@ -34,6 +34,7 @@ namespace :deploy do
 
   task :symlink_config, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/config/initializers/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 end
