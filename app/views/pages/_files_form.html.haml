@@ -1,6 +1,6 @@
 = link_to '{{ file.name }}', '{{ file.file.url }}', :'ng-show' => 'file.file.url'
 %br
-= f.simple_fields_for :files, WikiFile.new, child_index: '{{$index}}' do |file|
+= f.simple_fields_for :files, PageFile.new, child_index: '{{$index}}' do |file|
   = file.input :file, as: :file, wrapper_html: { 'ng-show' => '! file.id' }
   = file.input :name, input_html: { 'ng-model' => 'file.name' }
   = file.input :id, as: :hidden, input_html: { 'value' => '{{file.id}}' }

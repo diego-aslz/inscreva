@@ -10,6 +10,6 @@ class Ability
       can :download, FieldFill, subscription: { id: user.subscription_ids }
     end
     can [:new, :create], Subscription
-    can :show, Wiki
+    can :show, Page
   end
 end

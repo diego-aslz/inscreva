@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe WikiFile do
+describe PageFile do
 end

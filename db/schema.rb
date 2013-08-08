@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130807204956) do
+ActiveRecord::Schema.define(:version => 20130808202307) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20130807204956) do
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
     t.string   "identifier"
-    t.integer  "wikis_count",         :default => 0
+    t.integer  "pages_count",         :default => 0
     t.integer  "subscriptions_count", :default => 0
   end
 
@@ -67,6 +67,30 @@ ActiveRecord::Schema.define(:version => 20130807204956) do
   end
 
   add_index "fields", ["event_id"], :name => "index_event_fields_on_event_id"
+
+  create_table "page_files", :force => true do |t|
+    t.integer  "page_id"
+    t.string   "file"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "page_files", ["page_id"], :name => "index_wiki_files_on_wiki_id"
+
+  create_table "pages", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.integer  "page_id"
+    t.integer  "event_id"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.boolean  "main"
+  end
+
+  add_index "pages", ["event_id"], :name => "index_wikis_on_event_id"
+  add_index "pages", ["page_id"], :name => "index_wikis_on_wiki_id"
 
   create_table "permissions", :force => true do |t|
     t.integer  "role_id"
@@ -121,29 +145,5 @@ ActiveRecord::Schema.define(:version => 20130807204956) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "wiki_files", :force => true do |t|
-    t.integer  "wiki_id"
-    t.string   "file"
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "wiki_files", ["wiki_id"], :name => "index_wiki_files_on_wiki_id"
-
-  create_table "wikis", :force => true do |t|
-    t.string   "name"
-    t.string   "title"
-    t.integer  "wiki_id"
-    t.integer  "event_id"
-    t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.boolean  "main"
-  end
-
-  add_index "wikis", ["event_id"], :name => "index_wikis_on_event_id"
-  add_index "wikis", ["wiki_id"], :name => "index_wikis_on_wiki_id"
 
 end

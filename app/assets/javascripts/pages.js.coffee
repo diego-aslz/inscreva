@@ -1,15 +1,15 @@
-@WikiCtrl = ["$scope", ($scope) ->
-  $scope.wiki = {}
+@PageCtrl = ["$scope", ($scope) ->
+  $scope.page = {}
   $scope.converter = new Showdown.converter()
   $scope.preview = ->
     title = ''
-    if $scope.wiki.title
-      title = '# ' + $scope.wiki.title + '\n\n'
-    $scope.converter.makeHtml(title + ($scope.wiki.content || ''))
+    if $scope.page.title
+      title = '# ' + $scope.page.title + '\n\n'
+    $scope.converter.makeHtml(title + ($scope.page.content || ''))
   $scope.name = ->
-    return $scope.wiki.name if $scope.wiki.name
-    return '' unless $scope.wiki.title
-    text = $scope.wiki.title
+    return $scope.page.name if $scope.page.name
+    return '' unless $scope.page.title
+    text = $scope.page.title
     text = text.replace(new RegExp('[ÁÀÂÃ]','gi'), 'a');
     text = text.replace(new RegExp('[ÉÈÊ]','gi'), 'e');
     text = text.replace(new RegExp('[ÍÌÎ]','gi'), 'i');
@@ -19,8 +19,8 @@
     text = text.replace(new RegExp('\\s','gi'), '-');
     text.replace(/[^\w_\-]/gi, '').toLowerCase()
   $scope.addFile = ->
-    $scope.wiki.files.push {}
+    $scope.page.files.push {}
   $scope.removeFile = (idx)->
-    fs = $scope.wiki.files
+    fs = $scope.page.files
     fs[idx]._destroy = true
 ]

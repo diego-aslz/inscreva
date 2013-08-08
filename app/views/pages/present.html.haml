@@ -1,0 +1,17 @@
+- content_for :title do @page.title end
+
+%ul.nav.nav-pills
+  - for w in @page.event.pages.where(page_id: nil)
+    - link = link_to w.title, present_event_page_path(@page.event.identifier, w.name)
+    - if w.name == @page.name
+      %li.active
+        = link
+    - else
+      %li
+        = link
+
+= page_tree @page
+
+%h1= @page.title
+
+= markdown @page

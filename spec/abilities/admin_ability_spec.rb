@@ -7,6 +7,6 @@ describe "AdminUser" do
     let(:ability){ Ability.new(user) }
     let(:user){ create(:admin_user) }
 
-    it{ should     be_able_to(:show,     Wiki) }
+    it{ should     be_able_to(:show,     Page) }
   end
 end

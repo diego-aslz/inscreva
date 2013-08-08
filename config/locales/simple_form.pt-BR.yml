@@ -11,7 +11,7 @@ pt-BR:
       user:
         edit:
           password: "Deixe em branco para não alterar"
-      wiki:
+      page:
         name: Identificador que será exibido na URL para esta página
     placeholders:
       user:

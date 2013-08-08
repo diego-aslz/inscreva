@@ -14,8 +14,8 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <% if event.wikis.any? %>
-          <td><%= link_to event.name, present_event_main_wiki_path(event.identifier) %></td>
+        <% if event.pages.any? %>
+          <td><%= link_to event.name, present_event_main_page_path(event.identifier) %></td>
         <% else %>
           <td><%= content_tag :strong do event.name end %></td>
         <% end %>

@@ -1,5 +1,5 @@
-class WikiFile < ActiveRecord::Base
-  belongs_to :wiki
+class PageFile < ActiveRecord::Base
+  belongs_to :page
   attr_accessible :file, :name
   mount_uploader :file, PublicFileUploader
 

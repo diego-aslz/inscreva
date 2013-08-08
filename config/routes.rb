@@ -7,7 +7,7 @@ Inscreva::Application.routes.draw do
   end
   resources :events, :shallow => true do
     resources :subscriptions
-    resources :wikis do
+    resources :pages do
       get 'present', on: :member
     end
   end
@@ -16,6 +16,6 @@ Inscreva::Application.routes.draw do
 
   root to: "home#index"
 
-  get "/:event", to: 'wikis#present', as: :present_event_main_wiki
-  get "/:event/:wiki", to: 'wikis#present', as: :present_event_wiki
+  get "/:event", to: 'pages#present', as: :present_event_main_page
+  get "/:event/:page", to: 'pages#present', as: :present_event_page
 end

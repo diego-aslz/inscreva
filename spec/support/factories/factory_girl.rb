@@ -97,8 +97,8 @@ FactoryGirl.define do
     end
   end
 
-  factory :wiki do
-    sequence :name, 'wiki1'
+  factory :page do
+    sequence :name, 'page1'
     event
     title 'Title'
   end

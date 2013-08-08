@@ -1,7 +1,7 @@
-- model_class = Wiki
+- model_class = Page
 = page_header t('.title', default: model_class.model_name.human.pluralize)
 
-%form.form-search{action: event_wikis_path(@event)}
+%form.form-search{action: event_pages_path(@event)}
   .input-append
     %input.append.search-query.span4{type: "text", name: "term", value: params[:term]}
     %button.btn{type: "submit"}
@@ -14,15 +14,15 @@
       %th= model_class.human_attribute_name :title
       %th
   %tbody
-    - @wikis.each do |wiki|
+    - @pages.each do |page|
       %tr
-        %td= link_to wiki.name, wiki
+        %td= link_to page.name, page
         %td
-          - if wiki.main
-            %strong= wiki.title
+          - if page.main
+            %strong= page.title
           - else
-            = wiki.title
-        %td= minilink_to_edit wiki, edit_wiki_path(wiki),
+            = page.title
+        %td= minilink_to_edit page, edit_page_path(page),
             class: 'btn btn-mini'
 
-= link_to_add Wiki, new_event_wiki_path(@event)
+= link_to_add Page, new_event_page_path(@event)

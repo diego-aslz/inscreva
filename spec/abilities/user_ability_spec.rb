@@ -10,7 +10,7 @@ describe "User" do
     context "when is no one" do
       it{ should be_able_to(:create,  Subscription) }
       it{ should be_able_to(:new,     Subscription) }
-      it{ should be_able_to(:show,    Wiki) }
+      it{ should be_able_to(:show,    Page) }
     end
 
     context "when is a candidate" do

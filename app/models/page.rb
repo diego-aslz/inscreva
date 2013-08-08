@@ -1,10 +1,10 @@
-class Wiki < ActiveRecord::Base
-  has_many :wikis
-  has_many :files, class_name: 'WikiFile'
-  belongs_to :wiki
+class Page < ActiveRecord::Base
+  has_many :pages
+  has_many :files, class_name: 'PageFile'
+  belongs_to :page
   belongs_to :event, :counter_cache => true
 
-  attr_accessible :content, :name, :wiki_id, :event_id, :title, :main, :event_name,
+  attr_accessible :content, :name, :page_id, :event_id, :title, :main, :event_name,
       :files_attributes
   accepts_nested_attributes_for :files, allow_destroy: true
 
@@ -28,7 +28,7 @@ class Wiki < ActiveRecord::Base
 
   def clear_mains
     if self.main
-      ws = self.event.wikis.where(main: true)
+      ws = self.event.pages.where(main: true)
       ws = ws.where('id <> ?', self.id) if self.id
       ws.update_all(main: false)
     end
