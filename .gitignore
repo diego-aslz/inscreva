@@ -18,3 +18,4 @@
 /config/initializers/secret_token.rb
 
 uploads
+public/files

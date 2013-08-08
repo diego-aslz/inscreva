@@ -18,4 +18,9 @@
     text = text.replace(new RegExp('[Ç]','gi'), 'c');
     text = text.replace(new RegExp('\\s','gi'), '-');
     text.replace(/[^\w_\-]/gi, '').toLowerCase()
+  $scope.addFile = ->
+    $scope.wiki.files.push {}
+  $scope.removeFile = (idx)->
+    fs = $scope.wiki.files
+    fs[idx]._destroy = true
 ]

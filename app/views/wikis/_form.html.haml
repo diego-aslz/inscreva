@@ -4,8 +4,8 @@
   - object = @wiki
 - event = @event || @wiki.event
 
-%div{'ng-controller' => 'WikiCtrl', 'ng-init' => "wiki = #{@wiki.to_json}"}
-  = simple_form_for object, :html => { class: 'form-vertical' } do |f|
+%div{'ng-controller' => 'WikiCtrl', 'ng-init' => "wiki = #{@wiki.to_json}; wiki.files = #{@wiki.files.to_json}"}
+  = simple_nested_form_for object, :html => { class: 'form-vertical', multipart: true } do |f|
     = f.error_notification
 
     .form-inputs
@@ -25,6 +25,11 @@
           = f.input :content, label: false, input_html: { :'ng-model' => 'wiki.content' }
         #preview.tab
           %div{:'ng-bind-html-unsafe' => "preview()"}
+      .wiki-file{:'ng-repeat' => 'file in wiki.files', :'ng-show' => '! file._destroy'}
+        = render 'files_form', f: f
+      %br
+      = link_to icon_tag('icon-plus'), 'javascript:void(0)', 'ng-click' => 'addFile()',
+          class: 'btn btn-success'
 
     .form-actions
       = f.button :submit, label: t(:subscribe), class: 'btn btn-primary'

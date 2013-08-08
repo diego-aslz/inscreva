@@ -4,6 +4,11 @@ class WikisController < InheritedResources::Base
   actions :all
   respond_to :html
 
+  def new
+    @wiki = Wiki.new
+    @wiki.wiki_files.build
+  end
+
   def create
     create! { event_wikis_path(@wiki.event) }
   end
