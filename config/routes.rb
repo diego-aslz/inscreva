@@ -13,6 +13,11 @@ Inscreva::Application.routes.draw do
   end
 
   devise_for :users
+  devise_scope :user do
+    get 'registrations/edit' => 'devise/registrations#edit', :as => 'edit_registration'
+    put 'registrations' => 'devise/registrations#update', :as => 'registration'
+  end
+  resources :users
 
   root to: "home#index"
 

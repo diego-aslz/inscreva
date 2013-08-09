@@ -1,0 +1,19 @@
+- model_class = User
+= page_header t('.title', default: model_class.model_name.human.pluralize)
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name :name
+      %th
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= link_to user.name, user
+        %td
+          = minilink_to_edit user, edit_user_path(user)
+          =# minilink_to_destroy user, value: user.name
+
+%br
+
+= link_to_add User, new_user_path

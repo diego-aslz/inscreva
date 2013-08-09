@@ -62,7 +62,7 @@ class ApplicationForm
     load_from params if params
     if valid? (new_record? ? :create : :update)
       subscription.user_id ||= User.create!(email: email, password: password,
-          password_confirmation: password_confirmation).id
+          password_confirmation: password_confirmation, name: name).id
       subscription.save!
       true
     else

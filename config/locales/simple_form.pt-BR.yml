@@ -13,10 +13,12 @@ pt-BR:
           password: "Deixe em branco para não alterar"
       page:
         name: Identificador que será exibido na URL para esta página
-    placeholders:
       user:
         edit:
           current_password: para confirmar se é você mesmo
+    placeholders:
+      user:
+        edit:
           email: um e-mail válido
       field:
         extra: "Um mapeamento por linha (chave=valor). Exemplo: 1=Carro"

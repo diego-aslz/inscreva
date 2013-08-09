@@ -1,0 +1,11 @@
+= simple_form_for(@user, :html => { class: 'form-horizontal' }) do |f|
+
+  .form-inputs
+    = f.input :name
+    = f.input :email, required: true
+    = f.input :password, required: @user.new_record?
+    = f.input :password_confirmation, required: @user.new_record?
+
+  .form-actions
+    = f.button :submit, class: 'btn-primary'
+    = link_to_back path: users_path

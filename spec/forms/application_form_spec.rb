@@ -100,6 +100,7 @@ describe 'ApplicationForm' do
       subscription.email_confirmation = 'abc' + user.email
       expect { subscription.submit.should be_true }.to change(User, :count).by(1)
       subscription.user.should_not be_nil
+      subscription.user.name.should_not be_empty
     end
 
     it "uses an existing user when e-mail is not unique" do

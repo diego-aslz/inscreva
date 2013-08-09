@@ -1,0 +1,10 @@
+- model_class = User
+= page_header model_class.model_name.human
+
+= show_for @user, class: 'dl-horizontal' do |show|
+  = show.attribute :name
+  = show.attribute :email
+
+= form_actions do
+  = link_to_back path: users_path
+  = link_to_edit @user, edit_user_path(@user)

@@ -33,10 +33,11 @@
               <ul class="nav">
                 <li><%= link_to t(:'subscriptions.mine.title'), mine_subscriptions_path if can? :mine, Subscription %></li>
                 <li><%= link_to Event.model_name.human.pluralize, events_path if can? :index, Event %></li>
+                <li><%= link_to User.model_name.human.pluralize, users_path if can? :index, User %></li>
               </ul>
               <% if user_signed_in? %>
                 <div class="pull-right">
-                  <%= current_user.email %>, <a href="<%=destroy_user_session_url%>" data-method="delete"> Sair</a>
+                  <%= link_to current_user.name || current_user.email, edit_registration_path %>, <a href="<%=destroy_user_session_url%>" data-method="delete"> Sair</a>
                 </div>
               <% else %>
                 <div style="float: right;"><%= link_to t('devise.links.sign_in'), new_user_session_url, :class => 'btn btn-primary' %></div>
