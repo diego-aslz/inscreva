@@ -6,5 +6,5 @@
   = file.input :id, as: :hidden, input_html: { 'value' => '{{file.id}}' }
   = file.input :_destroy, as: :hidden, input_html: { 'value' => '{{file._destroy}}' }
 
-= link_to icon_tag('icon-trash'), 'javascript:void(0)', 'ng-click' => 'removeFile($index)',
+= link_to icon_tag('icon-trash icon-white'), 'javascript:void(0)', 'ng-click' => 'removeFile($index)',
     class: 'btn btn-danger btn-mini', title: t(:remove_file)

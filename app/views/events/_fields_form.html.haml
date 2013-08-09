@@ -20,11 +20,11 @@
       wrapper_html: { 'ng-show' => 'field.editing' }
   = form.input :priority, as: :hidden, input_html: { value: '{{field.priority}}' }
 
-= link_to icon_tag('icon-pencil'), 'javascript:void(0)', 'ng-click' => 'editField(field)',
+= link_to icon_tag('icon-pencil icon-white'), 'javascript:void(0)', 'ng-click' => 'editField(field)',
     'ng-show' => '! field.editing', class: 'btn btn-warning btn-mini', title: t(:edit_field)
-= link_to icon_tag('icon-ok'), 'javascript:void(0)', 'ng-click' => 'field.editing = false',
+= link_to icon_tag('icon-ok icon-white'), 'javascript:void(0)', 'ng-click' => 'field.editing = false',
     'ng-show' => 'field.editing', class: 'btn btn-success btn-mini'
-= link_to icon_tag('icon-trash'), 'javascript:void(0)', 'ng-click' => 'removeField($index)',
+= link_to icon_tag('icon-trash icon-white'), 'javascript:void(0)', 'ng-click' => 'removeField($index)',
     class: 'btn btn-danger btn-mini', title: t(:remove_field)
 = link_to icon_tag('icon-arrow-up'), 'javascript:void(0)',
     class: 'btn btn-mini', :'ng-show' => 'fieldsLength() > 1 && $index > 0',

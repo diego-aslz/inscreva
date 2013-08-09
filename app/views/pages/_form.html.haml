@@ -2,7 +2,6 @@
   - object = [@event, @page]
 - else
   - object = @page
-- event = @event || @page.event
 
 %div{'ng-controller' => 'PageCtrl', 'ng-init' => "page = #{@page.to_json}; page.files = #{@page.files.to_json}"}
   = simple_nested_form_for object, :html => { class: 'form-vertical', multipart: true } do |f|
@@ -13,7 +12,7 @@
       = f.input :main
       = f.input :title, input_html: { :'ng-model' => 'page.title', class: 'input-xxlarge' }
       = f.input :name, input_html: { value: '{{ name() }}' }
-      = f.input :page_id, collection: [event], as: :grouped_select, group_method: :pages
+      = f.input :page_id, collection: [@page.event], as: :grouped_select, group_method: :pages
       = f.label :content
       .tabs
         %ul.nav.nav-pills
@@ -28,9 +27,9 @@
       .page-file{:'ng-repeat' => 'file in page.files', :'ng-show' => '! file._destroy'}
         = render 'files_form', f: f
       %br
-      = link_to icon_tag('icon-plus'), 'javascript:void(0)', 'ng-click' => 'addFile()',
+      = link_to icon_tag('icon-plus icon-white'), 'javascript:void(0)', 'ng-click' => 'addFile()',
           class: 'btn btn-success'
 
     .form-actions
       = f.button :submit, label: t(:subscribe), class: 'btn btn-primary'
-      = link_to_back path: event_pages_path(event) if can? :index, Subscription
+      = link_to_back path: event_pages_path(@page.event) if can? :index, Subscription

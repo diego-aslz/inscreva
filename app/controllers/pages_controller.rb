@@ -6,7 +6,8 @@ class PagesController < InheritedResources::Base
 
   def new
     @page = Page.new
-    @page.page_files.build
+    @page.event = @event
+    @page.files.build
   end
 
   def create

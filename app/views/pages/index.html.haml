@@ -22,7 +22,6 @@
             %strong= page.title
           - else
             = page.title
-        %td= minilink_to_edit page, edit_page_path(page),
-            class: 'btn btn-mini'
+        %td= minilink_to_edit page, edit_page_path(page)
 
 = link_to_add Page, new_event_page_path(@event)
