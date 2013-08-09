@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130809180047) do
+ActiveRecord::Schema.define(:version => 20130809195212) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -104,9 +104,10 @@ ActiveRecord::Schema.define(:version => 20130809180047) do
   add_index "permissions", ["user_id", "user_type"], :name => "index_permissions_on_user_id_and_user_type"
 
   create_table "roles", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "action"
+    t.string   "subject_class"
   end
 
   create_table "subscriptions", :force => true do |t|

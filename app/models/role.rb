@@ -1,5 +1,4 @@
 class Role < ActiveRecord::Base
-  attr_accessible :name
-  validates_presence_of :name
-  validates_uniqueness_of :name
+  validates_presence_of :action, :subject_class
+  validates_uniqueness_of :action, scope: :subject_class
 end

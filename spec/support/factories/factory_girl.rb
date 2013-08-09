@@ -24,7 +24,8 @@ FactoryGirl.define do
   end
 
   factory :role do
-    name 'superadmin'
+    sequence :action, 'index0'
+    subject_class 'Event'
   end
 
   factory :event do
