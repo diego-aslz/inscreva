@@ -3,7 +3,7 @@ class Ability
 
   def initialize(user)
     user ||= User.new
-    if user.has_role? Role.new(name: 'superadmin')
+    if user.admin?
       can :manage, :all
     elsif user.subscriptions.any?
       can [:edit, :update, :show, :mine, :receipt], Subscription, user_id: user.id

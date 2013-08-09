@@ -2,6 +2,7 @@
 
   .form-inputs
     = f.input :name
+    = f.input :admin
     = f.input :email, required: true
     = f.input :password, required: @user.new_record?
     = f.input :password_confirmation, required: @user.new_record?

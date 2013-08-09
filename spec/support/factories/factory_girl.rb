@@ -12,10 +12,8 @@ FactoryGirl.define do
       password_confirmation 'password'
     end
 
-    factory :superadmin do
-      after(:create) do |user,evaluator|
-        user.roles << create(:role)
-      end
+    factory :admin do
+      admin true
     end
 
     factory :candidate_user do

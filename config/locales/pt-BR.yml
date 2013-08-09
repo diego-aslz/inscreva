@@ -98,6 +98,7 @@ pt-BR:
       user:
         email: E-mail
         name: Nome
+        admin: Administrador
         password: Senha
         password_confirmation: Redigite a senha
         current_password: Senha atual
