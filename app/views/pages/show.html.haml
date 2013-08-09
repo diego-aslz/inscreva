@@ -4,7 +4,8 @@
 = show_for @page, class: 'dl-horizontal' do |show|
   = show.attribute :name
 
-= markdown @page
+.md-page
+  = markdown @page
 
 = form_actions do
   = link_to_back path: event_pages_path(@page.event) if can? :index, Subscription

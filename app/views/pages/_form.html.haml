@@ -23,7 +23,7 @@
         #edit.tab.active
           = f.input :content, label: false, input_html: { :'ng-model' => 'page.content' }
         #preview.tab
-          %div{:'ng-bind-html-unsafe' => "preview()"}
+          .md-page{:'ng-bind-html-unsafe' => "preview()"}
       .page-file{:'ng-repeat' => 'file in page.files', :'ng-show' => '! file._destroy'}
         = render 'files_form', f: f
       %br
