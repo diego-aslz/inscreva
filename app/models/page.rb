@@ -1,17 +1,20 @@
 class Page < ActiveRecord::Base
   has_many :pages
-  has_many :files, class_name: 'PageFile'
+  has_many :files, class_name: 'PageFile', dependent: :destroy
   belongs_to :page
   belongs_to :event, :counter_cache => true
 
   attr_accessible :content, :name, :page_id, :event_id, :title, :main, :event_name,
       :files_attributes
-  accepts_nested_attributes_for :files, allow_destroy: true
+  accepts_nested_attributes_for :files, allow_destroy: true, reject_if:
+      lambda { |f| f[:name].blank? }
 
   validates_presence_of :name, :event, :title
   validates_uniqueness_of :name, scope: :event_id
 
   before_save :correct_name, :clear_mains
+
+  scope :search, ->(term) { where('upper(concat(pages.name,pages.title)) like upper(?)', "%#{term}%") }
 
   def event_name=(e) end
 

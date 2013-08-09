@@ -43,4 +43,13 @@ describe Page do
     w1.reload
     w1.main.should be_true
   end
+
+  it 'searches by a text' do
+    s = create(:page, name: 'nametosearchby')
+    Page.search('ametosearchb').include?(s).should be_true
+    s.update_attribute :name, 'A'
+    s.update_attribute :title, 'nametosearchby'
+    Page.search('ametosearchb').include?(s).should be_true
+    Page.search('anythingelse').include?(s).should be_false
+  end
 end

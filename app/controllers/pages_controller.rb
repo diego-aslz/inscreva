@@ -18,6 +18,11 @@ class PagesController < InheritedResources::Base
     update! { event_pages_path(@page.event) }
   end
 
+  def index
+    @pages = @pages.search(params[:term]) unless params[:term].blank?
+    index!
+  end
+
   def present
     @event = Event.find_by_identifier params[:event]
     not_found unless @event
