@@ -107,6 +107,7 @@ pt-BR:
         content: Conteúdo
         main: Página principal do evento
         event_name: Evento
+        page_id: Página pai
     errors:
       messages:
         record_invalid: Dados incorretos
