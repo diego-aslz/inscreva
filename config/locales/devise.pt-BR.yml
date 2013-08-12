@@ -28,6 +28,7 @@ pt-BR:
       sign_out: Sair
       forgot: Esqueci minha senha
       confirmation: Quero receber novamente as instruções de confirmação
+      edit: Alterar Dados
     failure:
       already_authenticated: Você já está autenticado.
       unauthenticated: ''

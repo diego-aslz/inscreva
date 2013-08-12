@@ -32,14 +32,31 @@
                   %li= link_to Event.model_name.human.pluralize, events_path
                 - if can? :index, User
                   %li= link_to User.model_name.human.pluralize, users_path
-              - if user_signed_in?
-                .pull-right
-                  = link_to current_user.name || current_user.email, edit_registration_path
-                  ,
-                  %a{href: destroy_user_session_url, :'data-method' => "delete"} Sair
-              - else
-                .pull-right
+              .pull-right
+                - if user_signed_in?
+                  .btn-group
+                    %a.btn.dropdown-toggle{:'data-toggle' => :dropdown, href: :'#'}
+                      = current_user.name || current_user.email
+                      %span.caret
+                    %ul.dropdown-menu
+                      %li
+                        %a{href: edit_registration_path}
+                          = t :'devise.links.edit'
+                      %li.divider
+                      %li
+                        %a{href: destroy_user_session_url, :'data-method' => "delete"}
+                          = t :'devise.links.sign_out'
+                - else
                   = link_to t('devise.links.sign_in'), new_user_session_url, :class => 'btn btn-primary'
+                .btn-group
+                  %a.btn.dropdown-toggle{:'data-toggle' => :dropdown, href: :'#'}
+                    = image_tag "#{locale}.png", alt: locale, width: "16", height: "16"
+                    %span.caret
+                  %ul.dropdown-menu
+                    - (I18n.available_locales - [locale]).each do |loc|
+                      %li
+                        %a{href: :'#'}
+                          = image_tag "#{loc}.png", alt: loc, width: "16", height: "16"
       .container
         .row
           .span12
