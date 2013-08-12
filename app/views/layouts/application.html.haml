@@ -26,9 +26,12 @@
             %a.brand{href: root_url} Inscreva
             .container.nav-collapse
               %ul.nav
-                %li= link_to t(:'subscriptions.mine.title'), mine_subscriptions_path if can? :mine, Subscription
-                %li= link_to Event.model_name.human.pluralize, events_path if can? :index, Event
-                %li= link_to User.model_name.human.pluralize, users_path if can? :index, User
+                - if can? :mine, Subscription
+                  %li= link_to t(:'subscriptions.mine.title'), mine_subscriptions_path
+                - if can? :index, Event
+                  %li= link_to Event.model_name.human.pluralize, events_path
+                - if can? :index, User
+                  %li= link_to User.model_name.human.pluralize, users_path
               - if user_signed_in?
                 .pull-right
                   = link_to current_user.name || current_user.email, edit_registration_path
