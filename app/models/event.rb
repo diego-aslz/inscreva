@@ -39,6 +39,6 @@ class Event < ActiveRecord::Base
   end
 
   def main_page
-    pages.where(main: true).first || pages.where(page_id: nil).first
+    pages.by_language(I18n.locale).where(main: true).first || pages.where(page_id: nil).first
   end
 end
