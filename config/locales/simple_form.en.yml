@@ -1,0 +1,25 @@
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+    error_notification:
+      default_message: "Check the errors below:"
+    hints:
+      user:
+        edit:
+          password: "Keep blank to not change"
+      page:
+        name: Will compose the URL to this page
+      user:
+        edit:
+          current_password: to check if it's really you
+    placeholders:
+      user:
+        edit:
+          email: a valid e-mail
+      field:
+        extra: "One mapping per line (key=value). Example: 1=Car"
+        name: Will be displayed in the subscription form

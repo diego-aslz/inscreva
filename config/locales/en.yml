@@ -1,0 +1,161 @@
+en:
+  'no': No
+  'yes': Yes
+  cancel: Cancel
+  details: Details
+  download: Download
+  fields: Fields for the Subscription Form
+  future_events: Future events
+  home_title: Ongoing Events
+  no_file: No file added
+  print_receipt: Print Receipt
+  subscribe: Inscrever-se
+  remove_current_file: Remove current file
+  add_field: Add Field
+  edit_field: Edit Field
+  remove_field: Remove Field
+  remove_file: Remove File
+  move: Move
+  search: Search
+  edit_mode: Edit
+  preview_mode: Preview
+  attachment: Attachment
+  all: All
+
+  show_for:
+    'no': No
+    'yes': Yes
+    blank: No data
+
+  flash:
+    actions:
+      create:
+        notice: '%{resource_name} created successfully.'
+      update:
+        notice: '%{resource_name} updated successfully.'
+      destroy:
+        notice: '%{resource_name} removed successfully.'
+        alert: '%{resource_name} could not be removed.'
+
+  subscriptions:
+    new:
+      title: '%{model}'
+    show:
+      title: Subscription
+    index:
+      title: Subscriptions
+    mine:
+      title: My Subscriptions
+    receipt:
+      title: Subscription Receipt
+  active_admin:
+    access_denied:
+      message: Access denied
+  unauthorized:
+    manage:
+      message: Access denied
+  activerecord:
+    models:
+      user: User
+      event: Event
+      field: Field
+      subscription: Subscription
+      page: Page
+    attributes:
+      field:
+        extra: Configuration
+        field_type: Type
+        group_name: Group
+        name: Field
+        priority: Order
+        required: Required
+        show_receipt: Show in Receipt
+      event:
+        allow_edit: Allow subscribers to change their subscription before event closes
+        closes_at: Closing date
+        email: Official e-mail
+        identifier: Identifier
+        name: Name
+        opens_at: Opening date
+        rules_url: Rules URL
+        technical_email: Technical Support e-mail
+        subscriptions: Subscriptions
+        fields: Fields
+      subscription:
+        created_at: Subscribed at
+        email: E-mail
+        email_confirmation: E-mail confirmation
+        event_name: Event
+        id_card: ID Card
+        name: Complete name
+        number: Number
+        receipt_at: At
+        event: Event
+        password: Password
+        password_confirmation: Password confirmation
+      user:
+        email: E-mail
+        name: Name
+        admin: Administrator
+        password: Password
+        password_confirmation: Password confirmation
+        current_password: Current password
+        remember_me: Remember Me
+      page:
+        content: Content
+        event_name: Event
+        language: Language
+        main: Event's main page
+        name: Name
+        page_id: Parent page
+        title: Title
+    errors:
+      messages:
+        record_invalid: Incorrect data
+
+  views:
+    pagination:
+      first: First
+      next: Next
+      previous: Previous
+      last: Last
+
+  helpers:
+    titles:
+      new: 'Create %{model}'
+      edit: 'Edit %{model}'
+    actions: Actions
+    links:
+      edit: Edit
+      new: Add
+      destroy: Delete
+      save: Save
+      cancel: Cancel
+      back: Back
+      confirm: 'Are you sure you want to delete %{model} "%{value}"?'
+      password_link: click to recover your password
+      files:
+        confirm: 'Are you sure you want to delete the file "%{value}"?'
+    select:
+      prompt: Please select
+    submit:
+      create: 'Create %{model}'
+      submit: 'Save %{model}'
+      update: 'Update %{model}'
+    messages:
+      subscription:
+        successfully_created: Successfully subscribed
+    errors:
+      duplicity: 'you already have a(n) %{model} with this %{attr}'
+      event:
+        closes_at:
+          too_soon: must be after opening
+      subscription:
+        invalid_user: "Your e-mail is already registered.<br />Please, use the same password you used last time. <strong>In case you don't remember it</strong>, %{password_link}."
+        email:
+          differs_from_confirmation: Doesn't match with its confirmation.
+        event_id:
+          not_ongoing: Not receiving subscriptions.
+        password:
+          invalid: Must be the same used in previous subscriptions
+        confirm: Check your information and click in Subscribe again.

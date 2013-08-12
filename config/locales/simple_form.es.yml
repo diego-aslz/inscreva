@@ -1,0 +1,25 @@
+es:
+  simple_form:
+    "yes": 'Sí'
+    "no": 'No'
+    required:
+      text: 'obrigatorio'
+      mark: '*'
+    error_notification:
+      default_message: "Hay los siguientes errores en el forma:"
+    hints:
+      user:
+        edit:
+          password: "Dejar en blanco para no cambiar"
+      page:
+        name: Identificador que aparece en la URL de esta página
+      user:
+        edit:
+          current_password: para confirmar si se trata de ti mismo
+    placeholders:
+      user:
+        edit:
+          email: una dirección de correo electrónico válida
+      field:
+        extra: "Una asignación por línea (clave=valor). Ejemplo: 1=Coche"
+        name: Aparecerá en el formulario de inscripción

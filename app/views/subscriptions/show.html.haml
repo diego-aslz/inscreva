@@ -19,7 +19,7 @@
 
 = form_actions do
   - if can? :index, Subscription
-    = link_to_back path: subscriptions_path
+    = link_to_back path: event_subscriptions_path(@subscription.event)
   - else
     = link_to_back path: mine_subscriptions_path
   = link_to_edit @subscription, edit_subscription_path(@subscription)

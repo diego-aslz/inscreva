@@ -1,0 +1,161 @@
+es:
+  'no': No
+  'yes': Sí
+  cancel: Cancelar
+  details: Detalles
+  download: Descarga
+  fields: Campos de Formulario de Inscripción
+  future_events: Próximos eventos
+  home_title: Eventos en curso
+  no_file: Ningún archivo agregado
+  print_receipt: Impresión de prueba
+  subscribe: Suscribir
+  remove_current_file: Eliminar archivo adjunto
+  add_field: Agregar Campo
+  edit_field: Cambio de Campo
+  remove_field: Eliminar Campo
+  remove_file: Eliminar Arquivo
+  move: Mover
+  search: Búsqueda
+  edit_mode: Edición
+  preview_mode: Visualização
+  attachment: Anexo
+  all: Todos
+
+  show_for:
+    blank: "No Dice"
+    "yes": "Sí"
+    "no": "No"
+
+  flash:
+    actions:
+      create:
+        notice: '%{resource_name} creado(a) con éxito.'
+      update:
+        notice: '%{resource_name} actualizado(a) con éxito.'
+      destroy:
+        notice: '%{resource_name} eliminado(a) con éxito.'
+        alert: '%{resource_name} no podía ser removido(a).'
+
+  subscriptions:
+    new:
+      title: '%{model}'
+    show:
+      title: Inscripción
+    index:
+      title: Inscripciones
+    mine:
+      title: Mis Inscripciones
+    receipt:
+      title: Prueba de Inscripción
+  active_admin:
+    access_denied:
+      message: Permiso denegado
+  unauthorized:
+    manage:
+      all: Permiso denegado
+  activerecord:
+    models:
+      user: Usuario
+      event: Evento
+      field: Campo
+      subscription: Inscripción
+      page: Página
+    attributes:
+      field:
+        extra: Configuración
+        field_type: Tipo
+        group_name: Grupo
+        name: Campo
+        priority: Orden
+        required: Obrigatorio
+        show_receipt: Mostrar en la Prueba
+      event:
+        allow_edit: Permitir que los abonados cambien sus entradas antes del cierre
+        closes_at: Terminación de Registro
+        email: E-mail de comunicación
+        identifier: Identificador
+        name: Nombre
+        opens_at: El registro comienza a partir de
+        rules_url: Dirección al Edital
+        technical_email: E-mail de apoyo técnico
+        subscriptions: Subscripciones
+        fields: Campos
+      subscription:
+        created_at: Registrado
+        email: Correo electrónico
+        email_confirmation: Repita su correo electrónico
+        event_name: Evento
+        id_card: Identidad
+        name: Nombre Completo
+        number: Número
+        receipt_at: En
+        event: Evento
+        password: Contraseña
+        password_confirmation: Repita su contraseña
+      user:
+        email: Correo electrónico
+        name: Nombre
+        admin: Administrador
+        password: Contraseña
+        password_confirmation: Repita su contraseña
+        current_password: Contraseña actual
+        remember_me: No cerrar sesión
+      page:
+        content: Contenido
+        event_name: Evento
+        language: Idioma
+        main: Pagina principal del evento
+        name: Nombre
+        page_id: Pagina mestre
+        title: Título
+    errors:
+      messages:
+        record_invalid: Datos incorrectos
+
+  views:
+    pagination:
+      first: Primero
+      next: Proximo
+      previous: Anterior
+      last: Final
+
+  helpers:
+    titles:
+      new: 'Crear %{model}'
+      edit: 'Editar %{model}'
+    actions: Acciones
+    links:
+      edit: Editar
+      new: Adicionar
+      destroy: Eliminar
+      save: Guardar
+      cancel: Cancelar
+      back: Volver
+      confirm: '¿Está seguro que desea eliminar %{model} "%{value}"?'
+      password_link: haga clic aquí para recuperar su contraseña
+      files:
+        confirm: '¿Está seguro que desea eliminar el archivo "%{value}"?'
+    select:
+      prompt: 'Por favor, seleccione'
+    submit:
+      create: 'Crear %{model}'
+      submit: 'Salvar %{model}'
+      update: 'Actualizar %{model}'
+    messages:
+      subscription:
+        successfully_created: Inscripción registrada con éxito
+    errors:
+      duplicity: 'ya tienes %{model} con ese %{attr}'
+      event:
+        closes_at:
+          too_soon: debe ser posterior a la apertura
+      subscription:
+        invalid_user: "Su correo electrónico ya ha sido registrado en nuestro sistema.<br /> Por favor, use la misma contraseña utilizada en su última inscripción. <strong>Si usted no recuerda</strong>, %{password_link}."
+        email:
+          differs_from_confirmation: No coincide con la confirmación del correo electrónico.
+        event_id:
+          not_ongoing: Registro aún no se ha abierto o ya se ha cerrado.
+        password:
+          invalid: Debe coincidir con el mismo utilizado en las entradas anteriores
+        confirm: Revise su información y haga clic en Suscribir nuevo
