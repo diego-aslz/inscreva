@@ -5,7 +5,7 @@ class Page < ActiveRecord::Base
   belongs_to :event, :counter_cache => true
 
   attr_accessible :content, :name, :page_id, :event_id, :title, :main, :event_name,
-      :files_attributes
+      :files_attributes, :language
   accepts_nested_attributes_for :files, allow_destroy: true, reject_if:
       lambda { |f| f[:name].blank? }
 
@@ -14,7 +14,12 @@ class Page < ActiveRecord::Base
 
   before_save :correct_name, :clear_mains
 
-  scope :search, ->(term) { where('upper(concat(pages.name,pages.title)) like upper(?)', "%#{term}%") }
+  scope :search, ->(term) {
+    where('upper(concat(pages.name,pages.title)) like upper(?)', "%#{term}%")
+  }
+  scope :by_language, ->(lang) {
+    where("pages.`language` is null or pages.`language` = '' or pages.`language` = ?", lang)
+  }
 
   def event_name=(e) end
 
@@ -32,6 +37,7 @@ class Page < ActiveRecord::Base
   def clear_mains
     if self.main
       ws = self.event.pages.where(main: true)
+      ws = ws.by_language(self.language) unless self.language.nil? or self.language.empty?
       ws = ws.where('id <> ?', self.id) if self.id
       ws.update_all(main: false)
     end

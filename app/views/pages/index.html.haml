@@ -13,12 +13,14 @@
   %thead
     %tr
       %th= model_class.human_attribute_name :name
+      %th= model_class.human_attribute_name :language
       %th= model_class.human_attribute_name :title
       %th
   %tbody
     - @pages.each do |page|
       %tr
         %td= link_to page.name, page
+        %td= page.language
         %td
           - if page.main
             %strong= page.title

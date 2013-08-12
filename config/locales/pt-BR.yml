@@ -104,12 +104,13 @@ pt-BR:
         current_password: Senha atual
         remember_me: Mantenha-me conectado
       page:
-        name: Nome
-        title: Título
         content: Conteúdo
-        main: Página principal do evento
         event_name: Evento
+        language: Idioma
+        main: Página principal do evento
+        name: Nome
         page_id: Página pai
+        title: Título
     errors:
       messages:
         record_invalid: Dados incorretos

@@ -25,7 +25,7 @@ describe Page do
     w.name.should be_==('_abc--')
   end
 
-  it "should resets the main page when a new main page is set to the event" do
+  it "should reset the main page when a new main page is set to the event" do
     w1 = create(:page, main: true)
     w2 = create(:page, main: true, event_id: w1.event_id)
     w1.reload
@@ -51,5 +51,15 @@ describe Page do
     s.update_attribute :title, 'nametosearchby'
     Page.search('ametosearchb').include?(s).should be_true
     Page.search('anythingelse').include?(s).should be_false
+  end
+
+  it "scopes by the language, including the ones without it" do
+    p1 = create(:page, language: 'pt-BR')
+    p2 = create(:page, language: 'es')
+    p3 = create(:page, language: nil)
+    pages = Page.by_language('es')
+    pages.include?(p1).should be_false
+    pages.include?(p2).should be_true
+    pages.include?(p3).should be_true
   end
 end
