@@ -48,4 +48,8 @@ module ApplicationHelper
     @@redcarpet ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
         autolink: true, tables: true)
   end
+
+  def locale_flag(locale)
+    image_tag "#{locale}.png", alt: locale, width: "16", height: "16" if locale && !locale.blank?
+  end
 end

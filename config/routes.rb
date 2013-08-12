@@ -1,5 +1,6 @@
 Inscreva::Application.routes.draw do
   get "field_fills/:id/download", to: 'field_fills#download', as: :download_field_fill
+  get 'locales/:locale' => 'locales#show', :as => :locale
 
   resources :subscriptions, only: [:receipt, :mine] do
     get "receipt", on: :member

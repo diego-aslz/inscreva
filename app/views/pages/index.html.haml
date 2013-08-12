@@ -20,7 +20,7 @@
     - @pages.each do |page|
       %tr
         %td= link_to page.name, page
-        %td= page.language
+        %td= locale_flag page.language
         %td
           - if page.main
             %strong= page.title

@@ -47,7 +47,7 @@
                         %a{href: destroy_user_session_url, :'data-method' => "delete"}
                           = t :'devise.links.sign_out'
                 - else
-                  = link_to t('devise.links.sign_in'), new_user_session_url, :class => 'btn btn-primary'
+                  = link_to t('devise.links.sign_in'), new_user_session_url, class: 'btn btn-primary'
                 .btn-group
                   %a.btn.dropdown-toggle{:'data-toggle' => :dropdown, href: :'#'}
                     = image_tag "#{locale}.png", alt: locale, width: "16", height: "16"
@@ -55,8 +55,8 @@
                   %ul.dropdown-menu
                     - (I18n.available_locales - [locale]).each do |loc|
                       %li
-                        %a{href: :'#'}
-                          = image_tag "#{loc}.png", alt: loc, width: "16", height: "16"
+                        %a{href: locale_path(loc)}
+                          = locale_flag loc
       .container
         .row
           .span12
