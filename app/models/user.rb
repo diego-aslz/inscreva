@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :admin
 
-  has_many :roles, as: :user
-  has_many :permissions, through: :roles
   has_many :subscriptions
+  has_many :delegations
 end

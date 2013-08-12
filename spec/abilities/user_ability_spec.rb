@@ -31,5 +31,25 @@ describe "User" do
       it{ should_not be_able_to(:show,     another_users_subscription) }
       it{ should_not be_able_to(:download, another_users_fill) }
     end
+
+    context "when it has permissions" do
+      let(:event) { create :event }
+      let(:user) { create :user }
+
+      before(:each) do
+        d = create(:delegation, event_id: event.id)
+        d.role = create(:role)
+        d.role.permissions << create(:permission, action: 'an_action',
+            subject_class: 'Event')
+        user.delegations << d
+      end
+
+      it 'should scope by event when the permission is scoped' do
+        another_event = create(:event)
+
+        ability.should      be_able_to(:an_action, event)
+        ability.should_not  be_able_to(:an_action, another_event)
+      end
+    end
   end
 end

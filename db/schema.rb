@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130812113816) do
+ActiveRecord::Schema.define(:version => 20130812125423) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,18 @@ ActiveRecord::Schema.define(:version => 20130812113816) do
   end
 
   add_index "areas", ["event_id"], :name => "index_areas_on_event_id"
+
+  create_table "delegations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "delegations", ["event_id"], :name => "index_delegations_on_event_id"
+  add_index "delegations", ["role_id"], :name => "index_delegations_on_role_id"
+  add_index "delegations", ["user_id"], :name => "index_delegations_on_user_id"
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -99,18 +111,19 @@ ActiveRecord::Schema.define(:version => 20130812113816) do
     t.string   "subject_class"
   end
 
-  create_table "roles", :force => true do |t|
-    t.integer  "role_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "user_id"
-    t.string   "user_type"
-    t.integer  "event_id"
+  create_table "permissions_roles", :id => false, :force => true do |t|
+    t.integer "permission_id"
+    t.integer "role_id"
   end
 
-  add_index "roles", ["event_id"], :name => "index_permissions_on_event_id"
-  add_index "roles", ["role_id"], :name => "index_permissions_on_role_id"
-  add_index "roles", ["user_id", "user_type"], :name => "index_permissions_on_user_id_and_user_type"
+  add_index "permissions_roles", ["permission_id"], :name => "index_permissions_roles_on_permission_id"
+  add_index "permissions_roles", ["role_id"], :name => "index_permissions_roles_on_role_id"
+
+  create_table "roles", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "name"
+  end
 
   create_table "subscriptions", :force => true do |t|
     t.string   "id_card"

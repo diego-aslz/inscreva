@@ -28,6 +28,16 @@ FactoryGirl.define do
     subject_class 'Event'
   end
 
+  factory :role do
+    name 'Test'
+  end
+
+  factory :delegation do
+    role
+    user
+    event
+  end
+
   factory :event do
     name 'Contest sample'
     email

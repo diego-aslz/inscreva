@@ -1,7 +1,5 @@
 class Role < ActiveRecord::Base
-  belongs_to :user, polymorphic: true
-  belongs_to :role
-  belongs_to :event
-
-  attr_accessible :role_id, :user_id
+  has_many :delegations
+  has_and_belongs_to_many :permissions
+  validates_presence_of :name
 end
