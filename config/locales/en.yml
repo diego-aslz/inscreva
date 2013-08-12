@@ -1,6 +1,6 @@
 en:
-  'no': No
-  'yes': Yes
+  'no': 'No'
+  'yes': 'Yes'
   cancel: Cancel
   details: Details
   download: Download
@@ -23,8 +23,8 @@ en:
   all: All
 
   show_for:
-    'no': No
-    'yes': Yes
+    'no': 'No'
+    'yes': 'Yes'
     blank: No data
 
   flash:
