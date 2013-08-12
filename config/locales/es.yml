@@ -1,6 +1,6 @@
 es:
-  'no': No
-  'yes': Sí
+  'yes': 'Sí'
+  'no': 'No'
   cancel: Cancelar
   details: Detalles
   download: Descarga
