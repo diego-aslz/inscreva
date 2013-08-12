@@ -23,7 +23,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :role do
+  factory :permission do
     sequence :action, 'index0'
     subject_class 'Event'
   end

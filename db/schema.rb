@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130809195954) do
+ActiveRecord::Schema.define(:version => 20130812113816) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -93,6 +93,13 @@ ActiveRecord::Schema.define(:version => 20130809195954) do
   add_index "pages", ["page_id"], :name => "index_wikis_on_wiki_id"
 
   create_table "permissions", :force => true do |t|
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "action"
+    t.string   "subject_class"
+  end
+
+  create_table "roles", :force => true do |t|
     t.integer  "role_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -101,16 +108,9 @@ ActiveRecord::Schema.define(:version => 20130809195954) do
     t.integer  "event_id"
   end
 
-  add_index "permissions", ["event_id"], :name => "index_permissions_on_event_id"
-  add_index "permissions", ["role_id"], :name => "index_permissions_on_role_id"
-  add_index "permissions", ["user_id", "user_type"], :name => "index_permissions_on_user_id_and_user_type"
-
-  create_table "roles", :force => true do |t|
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.string   "action"
-    t.string   "subject_class"
-  end
+  add_index "roles", ["event_id"], :name => "index_permissions_on_event_id"
+  add_index "roles", ["role_id"], :name => "index_permissions_on_role_id"
+  add_index "roles", ["user_id", "user_type"], :name => "index_permissions_on_user_id_and_user_type"
 
   create_table "subscriptions", :force => true do |t|
     t.string   "id_card"

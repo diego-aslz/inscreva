@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Role do
+describe Permission do
   context "validating" do
-    let(:role) { build :role }
-    subject { role }
+    let(:permission) { build :permission }
+    subject { permission }
 
     it { should require_presence_of(:action) }
     it { should require_presence_of(:subject_class) }
