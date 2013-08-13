@@ -15,11 +15,14 @@
   table {
     @extend .table;
     @extend .table-striped;
+    th,td[align=center] {
+      text-align: center;
+    }
     td[align=right],th[align=right] {
       text-align: right;
     }
-    td[align=center],th[align=center] {
-      text-align: center;
+    th[align=left] {
+      text-align: left;
     }
   }
   h1 {
