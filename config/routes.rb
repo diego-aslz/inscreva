@@ -24,4 +24,6 @@ Inscreva::Application.routes.draw do
 
   get "/:event", to: 'pages#present', as: :present_event_main_page
   get "/:event/:page", to: 'pages#present', as: :present_event_page
+
+  mount Markitup::Rails::Engine, at: "markitup", as: "markitup"
 end

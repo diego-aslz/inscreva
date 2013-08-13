@@ -1,11 +1,6 @@
 @PageCtrl = ["$scope", ($scope) ->
   $scope.page = {}
-  $scope.converter = new Showdown.converter()
-  $scope.preview = ->
-    title = ''
-    if $scope.page.title
-      title = '# ' + $scope.page.title + '\n\n'
-    $scope.converter.makeHtml(title + ($scope.page.content || ''))
+  $scope.previewButton = null
   $scope.name = ->
     return $scope.page.name if $scope.page.name
     return '' unless $scope.page.title
@@ -23,4 +18,7 @@
   $scope.removeFile = (idx)->
     fs = $scope.page.files
     fs[idx]._destroy = true
+  $scope.refreshPreview = ->
+    $scope.previewButton = $('.preview a') unless $scope.previewButton
+    $scope.previewButton.trigger('mouseup')
 ]

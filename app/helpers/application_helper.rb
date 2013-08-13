@@ -45,6 +45,10 @@ module ApplicationHelper
   end
 
   def redcarpet
+    ApplicationHelper.redcarpet
+  end
+
+  def self.redcarpet
     @@redcarpet ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
         autolink: true, tables: true)
   end

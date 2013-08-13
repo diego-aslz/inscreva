@@ -12,6 +12,8 @@
  *= require bootstrap-datepicker
  *= require pages
  *= require events
+ *= require markitup/skins/simple/style
+ *= require markitup/sets/markdown/style
  */
 
 html, body, .wrapper { height: 90%; }
