@@ -3,16 +3,21 @@
   width: 95%;
 }
 
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/tables";
+
 .md-page {
   p {
     text-align: justify;
     text-indent: 50px;
   }
-  td {
-    padding: 5px;
-  }
-  tr {
-    border-bottom: 1px solid;
+  table {
+    @extend .table;
+    @extend .table-striped;
+    td[align=right],th[align=right] {
+      text-align: right;
+    }
   }
   h1 {
     margin-bottom: 20px;
