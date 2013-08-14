@@ -5,12 +5,12 @@ unless User.any?
 end
 
 event_permissions = {
-    [:edit, :update, :show, :index] => 'Event',
-    [:edit, :update, :show, :index, :new, :create] => 'Page',
-    [:edit, :update, :show, :index, :new, :create, :receipt] => 'Subscription'
+    'Event' => [:update, :read],
+    'Page' => [:update, :read, :create],
+    'Subscription' => [:update, :read, :create, :receipt]
   }
 unless Permission.any?
-  event_permissions.each do |k,v|
+  event_permissions.each do |v,k|
     for permission in k do
       Permission.create!(action: permission.to_s, subject_class: v)
     end
@@ -20,7 +20,7 @@ end
 # Default roles
 unless Role.any?
   manager = Role.create!(name: 'Manager')
-  event_permissions.each do |k,v|
+  event_permissions.each do |v,k|
     for permission in k do
       p = Permission.where(action: permission.to_s, subject_class: v).first
       manager.permissions << p if p
@@ -29,10 +29,10 @@ unless Role.any?
 
   consultant = Role.create!(name: 'Consultant')
   {
-    [:show, :index] => 'Event',
-    [:show, :index] => 'Page',
-    [:show, :index, :receipt] => 'Subscription'
-  }.each do |k,v|
+    'Event' => [:read],
+    'Page' => [:read],
+    'Subscription' => [:read, :receipt]
+  }.each do |v,k|
     for permission in k do
       p = Permission.where(action: permission.to_s, subject_class: v).first
       consultant.permissions << p if p
