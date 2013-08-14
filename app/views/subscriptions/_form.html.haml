@@ -3,29 +3,29 @@
   - alert = f.error :base
   - if alert
     .alert.alert-warning
-      %button.close{type: "button", 'data-dismiss' => "alert"}
+      %button.close{type: "button", :'data-dismiss' => "alert"}
         &times;
       = alert
     %br
 
   .form-inputs
     = f.input :confirmed, as: :hidden
-    = input f, :event_name, model_class: Subscription,
-        input_html: { readonly: true, class: :'input-xxlarge' }, required: false
-    = input f, :name, model_class: Subscription, input_html: { class: :'input-xxlarge' }
-    = input f, :id_card, model_class: Subscription
+    = f.input :event_name do
+      %span.input-xxlarge.uneditable-input
+        = @application.event_name
+    = f.input :name, input_html: { class: :'input-xxlarge' }
+    = f.input :id_card
     - if @application.new_record?
-      = input f, :email, model_class: Subscription, input_html: { class: :'input-xlarge' }
-      = input f, :email_confirmation, model_class: Subscription, input_html: { class: :'input-xlarge' }
-    = input f, :password, model_class: Subscription unless @application.user
-    = input f, :password_confirmation, model_class: Subscription unless @application.user
+      = f.input :email, input_html: { class: :'input-xlarge' }
+      = f.input :email_confirmation, input_html: { class: :'input-xlarge' }
+    = f.input :password unless @application.user
+    = f.input :password_confirmation unless @application.user
 
     - last_group = ''
     = f.simple_fields_for :field_fills do |ff|
       - group = ff.object.field.group_name
       - if group != last_group && !group.blank?
-        %h2= group
-        - last_group = group
+        %h2= last_group = group
       = ff.input :field_id, as: :hidden, label: false
       = ff.input :type, as: :hidden, label: false
       = input_fill ff

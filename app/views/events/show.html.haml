@@ -22,7 +22,7 @@
         %tbody
           - last_group = ''
           - for f in @event.fields
-            - if !f.group_name.nil? && f.group_name != last_group
+            - if !(f.group_name.nil? || f.group_name.blank?) && f.group_name != last_group
               %tr
                 %th{colspan: 2}= last_group = f.group_name
             %tr

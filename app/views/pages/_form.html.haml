@@ -8,7 +8,9 @@
     = f.error_notification
 
     .form-inputs
-      = f.input :event_name, input_html: { readonly: true, class: :'input-xxlarge' }
+      = f.input :event_name do
+        %span.input-xxlarge.uneditable-input
+          = @page.event_name
       = f.input :main
       = f.input :language, as: :radio_buttons, collection: I18n.available_locales.map{ |l| [locale_flag(l), l] }.<<([t(:all), '']), item_wrapper_class: 'inline'
       = f.input :title, input_html: { :'ng-model' => 'page.title', class: 'input-xxlarge' }
