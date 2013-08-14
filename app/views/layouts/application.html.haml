@@ -26,7 +26,7 @@
             %a.brand{href: root_url} Inscreva
             .container.nav-collapse
               %ul.nav
-                - if can? :mine, Subscription
+                - if current_user.subscriptions.any? and can? :mine, Subscription
                   %li= link_to t(:'subscriptions.mine.title'), mine_subscriptions_path
                 - if can? :index, Event
                   %li= link_to Event.model_name.human.pluralize, events_path

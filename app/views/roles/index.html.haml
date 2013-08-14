@@ -10,7 +10,7 @@
     - @roles.each do |role|
       %tr
         %td= link_to role.name, role
-        %td
+        %td.actions
           = minilink_to_edit role, edit_role_path(role)
           = minilink_to_destroy role, value: role.name
 

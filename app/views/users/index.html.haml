@@ -10,9 +10,8 @@
     - @users.each do |user|
       %tr
         %td= link_to user.name, user
-        %td
+        %td.actions
           = minilink_to_edit user, edit_user_path(user)
-          =# minilink_to_destroy user, value: user.name
 
 %br
 

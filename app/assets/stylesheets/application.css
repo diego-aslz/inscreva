@@ -53,3 +53,7 @@ textarea {
 .checkbox.inline + .checkbox.inline {
   margin-left: 0px;
 }
+
+td.actions {
+  text-align: right;
+}
