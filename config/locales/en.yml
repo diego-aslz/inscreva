@@ -12,9 +12,11 @@ en:
   subscribe: Inscrever-se
   remove_current_file: Remove current file
   add_field: Add Field
+  add_delegation: Add Member
   edit_field: Edit Field
   remove_field: Remove Field
   remove_file: Remove File
+  remove_delegation: Remove Member
   move: Move
   search: Search
   edit_mode: Edit
@@ -61,7 +63,11 @@ en:
       field: Field
       subscription: Subscription
       page: Page
+      delegation: Member
     attributes:
+      delegation:
+        user: User
+        role: Role
       field:
         extra: Configuration
         field_type: Type
@@ -81,6 +87,7 @@ en:
         technical_email: Technical Support e-mail
         subscriptions: Subscriptions
         fields: Fields
+        delegations: Members
       subscription:
         created_at: Subscribed at
         email: E-mail

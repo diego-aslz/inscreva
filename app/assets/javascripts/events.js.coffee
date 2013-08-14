@@ -4,9 +4,13 @@
     $scope.extras.indexOf(field.field_type) > -1
   $scope.addField = ->
     newField = {field_type: 'string'}
-    $scope.event.fields.splice($scope.fieldsLength(), 0, newField);
+    $scope.event.fields.splice($scope.fieldsLength(), 0, newField)
     $scope.editField newField
     $scope.orderPriority()
+  $scope.addDelegation = ->
+    $scope.event.delegations.push {}
+  $scope.removeDelegation = (idx)->
+    $scope.event.delegations[idx]._destroy = true
   $scope.removeField = (idx)->
     fs = $scope.event.fields
     fs[idx]._destroy = true

@@ -12,9 +12,11 @@ es:
   subscribe: Suscribir
   remove_current_file: Eliminar archivo adjunto
   add_field: Agregar Campo
+  add_delegation: Agregar Miembro
   edit_field: Cambio de Campo
   remove_field: Eliminar Campo
   remove_file: Eliminar Arquivo
+  remove_delegation: Eliminar Miembro
   move: Mover
   search: Búsqueda
   edit_mode: Edición
@@ -61,7 +63,11 @@ es:
       field: Campo
       subscription: Inscripción
       page: Página
+      delegation: Miembro
     attributes:
+      delegation:
+        user: Usuario
+        role: Papel
       field:
         extra: Configuración
         field_type: Tipo
@@ -81,6 +87,7 @@ es:
         technical_email: E-mail de apoyo técnico
         subscriptions: Subscripciones
         fields: Campos
+        delegations: Miembros
       subscription:
         created_at: Registrado
         email: Correo electrónico

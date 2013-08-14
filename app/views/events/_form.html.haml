@@ -1,4 +1,4 @@
-%div{'ng-controller' => 'EventCtrl', 'ng-init' => "event = #{@event.to_json}; event.fields = #{@event.fields.to_json}; extras = #{Field::TYPES_WITH_EXTRA.to_json}"}
+%div{'ng-controller' => 'EventCtrl', 'ng-init' => "event = #{@event.to_json}; event.fields = #{@event.fields.to_json}; extras = #{Field::TYPES_WITH_EXTRA.to_json}; event.delegations = #{@event.delegations.to_json}"}
   = simple_form_for @event, :html => { class: 'form-horizontal', multipart: true } do |f|
 
     .form-inputs
@@ -8,6 +8,8 @@
             %a{href: "#details", 'data-toggle' => "pill"}= t :details
           %li
             %a{href: "#fields", 'data-toggle' => "pill"}= Event.human_attribute_name :fields
+          %li
+            %a{href: "#delegations", 'data-toggle' => "pill"}= Event.human_attribute_name :delegations
         #details.tab.active
           = f.input :name, input_html: { :'ng-model' => 'event.name'}
           = f.input :identifier, input_html: { :'ng-model' => 'event.identifier'}
@@ -21,11 +23,17 @@
           .event-field{:'ng-repeat' => 'field in event.fields',
               :'ng-show' => '!field._destroy' }
             = render 'fields_form', f: f
-
             %hr
           %div
-            = link_to icon_tag('icon-plus'), 'javascript:void(0)', 'ng-click' => 'addField()',
+            = link_to icon_tag('icon-plus icon-white'), 'javascript:void(0)', 'ng-click' => 'addField()',
                 class: 'btn btn-success', title: t(:add_field)
+        #delegations.tab
+          .delegation-field{:'ng-repeat' => 'delegation in event.delegations',
+              :'ng-show' => '!delegation._destroy' }
+            = render 'delegations_form', f: f
+          %div
+            = link_to icon_tag('icon-plus icon-white'), 'javascript:void(0)', 'ng-click' => 'addDelegation()',
+                class: 'btn btn-success', title: t(:add_delegation)
 
     .form-actions
       = f.button :submit, class: 'btn-large btn-primary'

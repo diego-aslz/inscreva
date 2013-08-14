@@ -12,9 +12,11 @@ pt-BR:
   subscribe: Inscrever-se
   remove_current_file: 'Remover arquivo anexado'
   add_field: Adicionar Campo
+  add_delegation: Adicionar Membro
   edit_field: Alterar Campo
   remove_field: Remover Campo
   remove_file: Remover Arquivo
+  remove_delegation: Remover Membro
   move: Mover
   search: Buscar
   edit_mode: Edição
@@ -61,7 +63,11 @@ pt-BR:
       field: Campo
       subscription: Inscrição
       page: Página
+      delegation: Membro
     attributes:
+      delegation:
+        user: Usuário
+        role: Papel
       field:
         extra: Configuração
         field_type: Tipo
@@ -81,6 +87,7 @@ pt-BR:
         technical_email: E-mail auxílio técnico
         subscriptions: Inscrições
         fields: Campos
+        delegations: Membros
       subscription:
         created_at: Inscrito
         email: E-mail

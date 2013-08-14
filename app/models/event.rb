@@ -4,13 +4,15 @@ class Event < ActiveRecord::Base
   has_many :pages
   has_many :delegations
   attr_accessible :allow_edit, :closes_at, :email, :name, :opens_at, :rules_url,
-      :technical_email, :fields_attributes, :identifier
+      :technical_email, :fields_attributes, :delegations_attributes, :identifier
 
   validates_presence_of :name, :opens_at, :closes_at, :identifier
   validates_uniqueness_of :identifier
 
   accepts_nested_attributes_for :fields, allow_destroy: true, :reject_if =>
       lambda { |f| f[:name].blank? }
+  accepts_nested_attributes_for :delegations, allow_destroy: true, :reject_if =>
+      lambda { |f| f[:user_id].blank? }
 
   validate :valid_period?
   scope :ongoing, -> { where('? between opens_at and closes_at', Time.zone.now) }
