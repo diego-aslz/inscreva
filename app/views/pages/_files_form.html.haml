@@ -1,10 +1,11 @@
-= link_to '{{ file.name }}', '{{ file.file.url }}', :'ng-show' => 'file.file.url'
-%br
 = f.simple_fields_for :files, PageFile.new, child_index: '{{$index}}' do |file|
+  = file.input :file, as: :file, wrapper_html: { 'ng-show' => 'file.file.url' } do
+    = link_to '{{ file.name }}', '{{ file.file.url }}'
   = file.input :file, as: :file, wrapper_html: { 'ng-show' => '! file.id' }
   = file.input :name, input_html: { 'ng-model' => 'file.name' }
   = file.input :id, as: :hidden, input_html: { 'value' => '{{file.id}}' }
   = file.input :_destroy, as: :hidden, input_html: { 'value' => '{{file._destroy}}' }
-
-= link_to icon_tag('icon-trash icon-white'), 'javascript:void(0)', 'ng-click' => 'removeFile($index)',
-    class: 'btn btn-danger btn-mini', title: t(:remove_file)
+  = file.input :_destroy, label: false do
+    = link_to icon_tag('icon-trash icon-white'), 'javascript:void(0)',
+        'ng-click' => 'removeFile($index)', class: 'btn btn-danger btn-mini', title: t(:remove_file)
+  %hr

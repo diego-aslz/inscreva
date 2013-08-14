@@ -109,6 +109,9 @@ pt-BR:
         name: Nome
         page_id: Página pai
         title: Título
+      page_file:
+        file: Arquivo
+        name: Nome
     errors:
       messages:
         record_invalid: Dados incorretos

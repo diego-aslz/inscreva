@@ -4,7 +4,7 @@
   - object = @page
 
 %div{'ng-controller' => 'PageCtrl', 'ng-init' => "page = #{@page.to_json}; page.files = #{@page.files.to_json}"}
-  = simple_nested_form_for object, :html => { class: 'form-vertical', multipart: true } do |f|
+  = simple_nested_form_for object, :html => { class: 'form-horizontal', multipart: true } do |f|
     = f.error_notification
 
     .form-inputs
@@ -14,24 +14,25 @@
       = f.input :title, input_html: { :'ng-model' => 'page.title', class: 'input-xxlarge' }
       = f.input :name, input_html: { value: '{{ name() }}' }
       = f.input :page_id, collection: [@page.event], as: :grouped_select, group_method: :pages
-      = f.label :content
-      .tabs
-        %ul.nav.nav-pills
-          %li.active
-            %a{href: "#edit", 'data-toggle' => "pill"}= t :edit_mode
-          %li
-            %a{href: "#preview", 'data-toggle' => "pill", :'ng-click' => 'refreshPreview()'}
-              = t :preview_mode
-        #edit.tab.active
-          = f.input :content, label: false, input_html: { :'ng-model' => 'page.content',
-              class: 'markdown' }
-        #preview.tab
-          .md-page
-      .page-file{:'ng-repeat' => 'file in page.files', :'ng-show' => '! file._destroy'}
-        = render 'files_form', f: f
-      %br
-      = link_to icon_tag('icon-plus icon-white'), 'javascript:void(0)', 'ng-click' => 'addFile()',
-          class: 'btn btn-success'
+      = f.input :content do
+        .tabs
+          %ul.nav.nav-pills
+            %li.active
+              %a{href: "#edit", 'data-toggle' => "pill"}= t :edit_mode
+            %li
+              %a{href: "#preview", 'data-toggle' => "pill", :'ng-click' => 'refreshPreview()'}
+                = t :preview_mode
+          #edit.tab.active
+            = f.text_area :content, label: false, :'ng-model' => 'page.content',
+                class: 'markdown'
+          #preview.tab
+            .md-page
+    %h2= t(:attachment).pluralize
+    .page-file{:'ng-repeat' => 'file in page.files', :'ng-show' => '! file._destroy'}
+      = render 'files_form', f: f
+    %br
+    = link_to icon_tag('icon-plus icon-white'), 'javascript:void(0)', 'ng-click' => 'addFile()',
+        class: 'btn btn-success'
 
     .form-actions
       = f.button :submit, label: t(:subscribe), class: 'btn btn-primary'

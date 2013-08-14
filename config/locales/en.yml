@@ -109,6 +109,9 @@ en:
         name: Name
         page_id: Parent page
         title: Title
+      page_file:
+        file: File
+        name: Name
     errors:
       messages:
         record_invalid: Incorrect data

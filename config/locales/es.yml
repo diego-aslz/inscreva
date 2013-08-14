@@ -109,6 +109,9 @@ es:
         name: Nombre
         page_id: Pagina mestre
         title: Título
+      page_file:
+        file: Archivo
+        name: Nombre
     errors:
       messages:
         record_invalid: Datos incorrectos
