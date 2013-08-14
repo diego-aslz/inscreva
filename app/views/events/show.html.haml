@@ -8,6 +8,8 @@
         %a{href: "#details", 'data-toggle' => "pill"}= t :details
       %li
         %a{href: "#fields", 'data-toggle' => "pill"}= model_class.human_attribute_name :fields
+      %li
+        %a{href: "#delegations", 'data-toggle' => "pill"}= model_class.human_attribute_name :delegations
     #details.tab.active
       = show.attribute :name
       = show.attribute :opens_at
@@ -16,8 +18,28 @@
       = show.attribute :rules_url
       = show.attribute :technical_email
     #fields.tab
-      = show.association :fields
+      %table
+        %tbody
+          - last_group = ''
+          - for f in @event.fields
+            - if !f.group_name.nil? && f.group_name != last_group
+              %tr
+                %th{colspan: 2}= last_group = f.group_name
+            %tr
+              %td.left-col
+                = f.name
+              %td
+                %strong.muted #{Field.type_to_s f.field_type}
+    #delegations.tab
+      %table
+        %tbody
+          - for d in @event.delegations.includes(:role, :user).order('roles.name, users.name')
+            %tr
+              %td.left-col
+                %strong.muted #{d.role.name}
+              %td
+                #{d.user.name || d.user.email}
 
 = form_actions do
-  = link_to_back path: events_path
   = link_to_edit @event, edit_event_path(@event)
+  = link_to_back path: events_path

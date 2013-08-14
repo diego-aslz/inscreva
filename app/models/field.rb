@@ -33,4 +33,8 @@ class Field < ActiveRecord::Base
   def default_values
     self.field_type = 'string' unless self.field_type
   end
+
+  def self.type_to_s(type)
+    VALID_TYPES.select{ |k,v| v == type }.keys[0]
+  end
 end

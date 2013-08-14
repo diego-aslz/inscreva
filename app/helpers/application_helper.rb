@@ -18,7 +18,7 @@ module ApplicationHelper
 
   def link_to_edit(model, path, options = {})
     link_to t('.edit', :default => t("helpers.links.edit")),
-        path, class: (options[:class] || 'btn') if can? :edit, model
+        path, class: (options[:class] || 'btn btn-warning') if can? :edit, model
   end
 
   def minilink_to_edit(model, path, options = {})

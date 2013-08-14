@@ -2,3 +2,7 @@
 .event-field:hover {
   background-color: #fcf8e3;
 }
+
+.left-col {
+  padding-right: 30px;
+}
