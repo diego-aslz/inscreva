@@ -5,6 +5,7 @@ class Ability
     user ||= User.new
     if user.admin?
       can :manage, :all
+      cannot :mine, Subscription unless user.subscriptions.any?
     elsif user.subscriptions.any?
       can [:update, :show, :mine, :receipt], Subscription, user_id: user.id
       can :download, FieldFill, subscription: { id: user.subscription_ids }
