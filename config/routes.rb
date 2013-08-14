@@ -19,6 +19,7 @@ Inscreva::Application.routes.draw do
     put 'registrations' => 'devise/registrations#update', :as => 'registration'
   end
   resources :users
+  resources :roles
 
   root to: "home#index"
 

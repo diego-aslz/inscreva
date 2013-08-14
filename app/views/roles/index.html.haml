@@ -1,0 +1,17 @@
+- model_class = Role
+= page_header t('.title', default: model_class.model_name.human.pluralize)
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name :name
+      %th
+  %tbody
+    - @roles.each do |role|
+      %tr
+        %td= link_to role.name, role
+        %td
+          = minilink_to_edit role, edit_role_path(role)
+          = minilink_to_destroy role, value: role.name
+
+= link_to_add @role, new_role_path

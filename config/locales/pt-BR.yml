@@ -39,6 +39,14 @@ pt-BR:
         notice: '%{resource_name} removido(a) com sucesso.'
         alert: '%{resource_name} não pôde ser removido(a).'
 
+  permissions:
+    create: 'Criar'
+    update: 'Atualizar'
+    read: 'Visualizar'
+    delete: 'Excluir'
+    subscription:
+      receipt: Emitir Comprovante
+
   subscriptions:
     new:
       title: '%{model}'
@@ -64,6 +72,7 @@ pt-BR:
       subscription: Inscrição
       page: Página
       delegation: Membro
+      role: Papel
     attributes:
       delegation:
         user: Usuário
@@ -119,6 +128,9 @@ pt-BR:
       page_file:
         file: Arquivo
         name: Nome
+      role:
+        name: Nome
+        permissions: Permissões
     errors:
       messages:
         record_invalid: Dados incorretos

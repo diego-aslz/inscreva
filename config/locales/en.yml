@@ -39,6 +39,14 @@ en:
         notice: '%{resource_name} removed successfully.'
         alert: '%{resource_name} could not be removed.'
 
+  permissions:
+    create: 'Create'
+    update: 'Update'
+    read: 'Read'
+    delete: 'Delete'
+    subscription:
+      receipt: Print Receipt
+
   subscriptions:
     new:
       title: '%{model}'
@@ -64,6 +72,7 @@ en:
       subscription: Subscription
       page: Page
       delegation: Member
+      role: Role
     attributes:
       delegation:
         user: User
@@ -119,6 +128,9 @@ en:
       page_file:
         file: File
         name: Name
+      role:
+        name: Name
+        permissions: Permissions
     errors:
       messages:
         record_invalid: Incorrect data

@@ -1,0 +1,16 @@
+.checkbox_container {
+  display: inline-block;
+  vertical-align: -1px;
+  margin: 5px;
+  margin-right: 25px;
+
+  input {
+    display: inline;
+  }
+
+  .collection_check_boxes {
+    display: inline;
+    vertical-align: -5px;
+    margin-left: 5px;
+  }
+}

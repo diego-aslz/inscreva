@@ -10,6 +10,8 @@ ActiveSupport::Inflector.inflections do |inflect|
 #   inflect.uncountable %w( fish sheep )
   inflect.plural /ão$/i, 'ões'
   inflect.singular /ões$/i, 'ão'
+  inflect.plural /el$/i, 'éis'
+  inflect.singular /éis$/i, 'el'
 end
 #
 # These inflection rules are supported but not enabled by default:

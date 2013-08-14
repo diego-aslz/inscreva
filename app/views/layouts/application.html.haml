@@ -32,6 +32,8 @@
                   %li= link_to Event.model_name.human.pluralize, events_path
                 - if can? :index, User
                   %li= link_to User.model_name.human.pluralize, users_path
+                - if can? :index, Role
+                  %li= link_to Role.model_name.human.pluralize, roles_path
               .pull-right
                 - if user_signed_in?
                   .btn-group

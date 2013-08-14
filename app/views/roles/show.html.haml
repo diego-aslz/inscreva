@@ -1,0 +1,14 @@
+- model_class = Role
+= page_header "#{model_class.model_name.human} - #{@role.name}"
+
+= show_for @role, class: 'dl-horizontal' do |show|
+  - last_class = ''
+  = show.attribute :permissions do |p|
+    - if last_class != p.subject_class
+      - last_class = p.subject_class
+      %h3= p.target_class.model_name.human.pluralize
+    %li= p
+
+= form_actions do
+  = link_to_back path: roles_path if can? :index, Role
+  = link_to_edit @role, edit_role_path(@role)

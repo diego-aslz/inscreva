@@ -8,7 +8,7 @@ es:
   future_events: Próximos eventos
   home_title: Eventos en curso
   no_file: Ningún archivo agregado
-  print_receipt: Impresión de prueba
+  print_receipt: Impresión de Prueba
   subscribe: Suscribir
   remove_current_file: Eliminar archivo adjunto
   add_field: Agregar Campo
@@ -39,6 +39,14 @@ es:
         notice: '%{resource_name} eliminado(a) con éxito.'
         alert: '%{resource_name} no podía ser removido(a).'
 
+  permissions:
+    create: 'Crear'
+    update: 'Actualizar'
+    read: 'Visualizar'
+    delete: 'Eliminar'
+    subscription:
+      receipt: Impresión de Prueba
+
   subscriptions:
     new:
       title: '%{model}'
@@ -64,6 +72,7 @@ es:
       subscription: Inscripción
       page: Página
       delegation: Miembro
+      role: Papel
     attributes:
       delegation:
         user: Usuario
@@ -119,6 +128,9 @@ es:
       page_file:
         file: Archivo
         name: Nombre
+      role:
+        name: Nombre
+        permissions: Permisos
     errors:
       messages:
         record_invalid: Datos incorrectos
