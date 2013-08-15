@@ -9,7 +9,7 @@ class Field < ActiveRecord::Base
   belongs_to :event
   has_many :field_fills, dependent: :destroy
   attr_accessible :field_type, :name, :extra, :required, :show_receipt,
-      :group_name, :priority
+      :group_name, :priority, :searchable
   validates_presence_of :field_type, :name
   validates_inclusion_of :field_type, in: VALID_TYPES.values, if: :field_type
 

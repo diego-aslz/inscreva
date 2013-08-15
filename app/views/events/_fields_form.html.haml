@@ -18,6 +18,8 @@
       wrapper_html: { 'ng-show' => 'field.editing' }
   = form.input :show_receipt, input_html: { 'ng-model' => 'field.show_receipt' },
       wrapper_html: { 'ng-show' => 'field.editing' }
+  = form.input :searchable, input_html: { 'ng-model' => 'field.searchable' },
+      wrapper_html: { 'ng-show' => 'field.editing' }
   = form.input :priority, as: :hidden, input_html: { value: '{{field.priority}}' }
 
 = link_to icon_tag('icon-pencil icon-white'), 'javascript:void(0)', 'ng-click' => 'editField(field)',
