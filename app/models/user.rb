@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
 
   has_many :subscriptions
   has_many :delegations
+
+  scope :search, ->(term) {
+    where('concat(COALESCE(name,\'\'),email) like ?', "%#{term}%")
+  }
 end

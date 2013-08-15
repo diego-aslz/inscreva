@@ -1,15 +1,23 @@
 - model_class = User
 = page_header t('.title', default: model_class.model_name.human.pluralize)
 
+%form.form-search{action: users_path}
+  .input-append
+    %input.append.search-query.span4{type: "text", name: "term", value: params[:term]}
+    %button.btn{type: "submit"}
+      #{icon_tag "icon-search"} #{t :search}
+
 %table.table.table-striped
   %thead
     %tr
       %th= model_class.human_attribute_name :name
+      %th= model_class.human_attribute_name :email
       %th
   %tbody
     - @users.each do |user|
       %tr
         %td= link_to user.name, user
+        %td= user.email
         %td.actions
           = minilink_to_edit user, edit_user_path(user)
 
