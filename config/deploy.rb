@@ -23,6 +23,7 @@ role :db,  "madeira", :primary => true # This is where Rails migrations will run
 
 # if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
+after "deploy:restart", "deploy:restart_service"
 
 namespace :deploy do
   task :setup_config, roles: :app do
@@ -39,4 +40,11 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/public/files #{release_path}/public/files"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
+
+  desc "Restart the service"
+  task :restart_service, roles: :web do
+    run "service #{application} stop"
+    sleep 1
+    run "service #{application} start"
+  end
 end
