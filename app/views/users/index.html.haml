@@ -21,6 +21,8 @@
         %td.actions
           = minilink_to_edit user, edit_user_path(user)
 
+= paginate @users
+
 %br
 
 = link_to_add User, new_user_path

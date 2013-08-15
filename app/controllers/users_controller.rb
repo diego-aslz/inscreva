@@ -3,7 +3,8 @@ class UsersController < InheritedResources::Base
   respond_to :html
 
   def index
-    @users = User.search(params[:term]) unless params[:term].blank?
+    @users = User.page(params[:page])
+    @users = @users.search(params[:term]) unless params[:term].blank?
   end
 
   def update
