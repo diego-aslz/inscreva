@@ -22,9 +22,11 @@ Inscreva::Application.routes.draw do
   resources :roles
 
   root to: "home#index"
+  match "(/errors)/:status", to: 'errors#show', constraints: { status: /\d{3}/ }
 
   get "/:event", to: 'pages#present', as: :present_event_main_page
   get "/:event/:page", to: 'pages#present', as: :present_event_page
+
 
   mount Markitup::Rails::Engine, at: "markitup", as: "markitup"
 end

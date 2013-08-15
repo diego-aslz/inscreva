@@ -1,0 +1,16 @@
+%h1.muted 422 - Rejeitado
+%hr
+
+%p
+  Desculpe-nos, mas a alteração que você tentou fazer foi rejeitada. Talvez
+  você tentou alterar algum objeto ao qual não possui acesso.
+  = link_to "Voltar para página inicial.", root_path
+
+- if @exception
+  %br
+  %br
+  %br
+  %h3.muted
+    Detalhes Técnicos
+  %p.muted
+    = @exception.message

@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :set_locale
 
-  protected
-
-  def not_found
-    raise ActionController::RoutingError.new('Not Found')
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
   end
+
+  protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:account_update) { |u| u.slice(:email,

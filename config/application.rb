@@ -59,5 +59,9 @@ module Inscreva
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.1'
+
+    config.action_dispatch.rescue_responses["PagesController::NotFound"] = :not_found
+
+    config.exceptions_app = self.routes
   end
 end

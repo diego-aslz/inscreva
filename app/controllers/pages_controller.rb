@@ -1,4 +1,6 @@
+# -*- encoding : utf-8 -*-
 class PagesController < InheritedResources::Base
+  class NotFound < StandardError; end
   load_and_authorize_resource except: :present
   belongs_to :event, shallow: true
   actions :all
@@ -25,7 +27,7 @@ class PagesController < InheritedResources::Base
 
   def present
     @event = Event.find_by_identifier params[:event]
-    not_found unless @event
+    not_found(params[:event]) unless @event
     if params[:page]
       @page = @event.pages.find_by_name(params[:page])
     else
@@ -34,6 +36,12 @@ class PagesController < InheritedResources::Base
         return
       end
     end
-    not_found unless @page
+    not_found(params[:page]) unless @page
+  end
+
+  protected
+
+  def not_found(page=nil)
+    raise NotFound, (page.nil? ? nil : "Não há Evento ou Página com o identificador '#{page}'")
   end
 end

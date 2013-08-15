@@ -1,0 +1,15 @@
+%h1.muted 404 - Não Encontrado
+%hr
+
+%p
+  Desculpe-nos, mas o que você procura não existe.
+  = link_to "Voltar para página inicial.", root_path
+
+- if @exception
+  %br
+  %br
+  %br
+  %h3.muted
+    Detalhes Técnicos
+  %p.muted
+    = @exception.message

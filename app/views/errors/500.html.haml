@@ -1,0 +1,19 @@
+%h1.muted 500 - Erro de Servidor
+%hr
+
+%p
+  Estranho, este sistema foi bem testado...
+
+%p
+  Desculpe-nos, mas alguma falha interna ocorreu. Tentaremos resolver o problema
+  assim que possível.
+  = link_to "Voltar para página inicial.", root_path
+
+- if @exception
+  %br
+  %br
+  %br
+  %h3.muted
+    Detalhes Técnicos
+  %p.muted
+    = @exception.message
