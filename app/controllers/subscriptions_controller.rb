@@ -54,15 +54,8 @@ class SubscriptionsController < InheritedResources::Base
     end
   end
 
-  def index
-    @event = Event.find(params[:event_id])
-    @subscriptions = @event.subscriptions.accessible_by(current_ability)
-    @subscriptions = @subscriptions.search(params[:term]) unless params[:term].blank?
-    index!
-  end
-
   def mine
-    @subscriptions = current_user.subscriptions.includes :event
+    @subscriptions = current_user.subscriptions.includes(:event).page(params[:page])
   end
 
   def show
@@ -72,5 +65,13 @@ class SubscriptionsController < InheritedResources::Base
   def receipt
     @subscription = Subscription.find(params[:id])
     render layout: 'printing_page'
+  end
+
+  protected
+
+  def collection
+    @event = Event.find(params[:event_id])
+    @subscriptions = @event.subscriptions.accessible_by(current_ability).page(params[:page])
+    @subscriptions = @subscriptions.search(params[:term]) unless params[:term].blank?
   end
 end
