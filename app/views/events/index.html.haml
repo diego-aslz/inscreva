@@ -29,6 +29,8 @@
               class: 'btn btn-mini btn-primary',
               title: Page.model_name.human.pluralize if can? :index, Page
 
+= paginate @events
+
 %br
 
 = link_to_add Event, new_event_path

@@ -8,4 +8,10 @@ class EventsController < InheritedResources::Base
     @event.fields.build
     new!
   end
+
+  protected
+
+  def collection
+    @events = @events.page(params[:page])
+  end
 end
