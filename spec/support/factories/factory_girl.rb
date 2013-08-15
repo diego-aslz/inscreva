@@ -16,7 +16,7 @@ FactoryGirl.define do
       admin true
     end
 
-    factory :candidate_user do
+    factory :subscriber_user do
       after(:create) do |user,evaluator|
         user.subscriptions << create(:subscription)
       end

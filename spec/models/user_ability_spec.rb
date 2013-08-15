@@ -11,7 +11,7 @@ describe User do
 
     context 'when user is a candidate' do
       subject { user }
-      let(:user) { create(:candidate_user) }
+      let(:user) { create(:subscriber_user) }
 
       it { should have_ability([:show, :edit, :update], for: user.subscriptions.
           first)}

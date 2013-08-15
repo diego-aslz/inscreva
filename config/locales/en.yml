@@ -23,6 +23,7 @@ en:
   preview_mode: Preview
   attachment: Attachment
   all: All
+  include_subscribers: Include subscribers' users
 
   show_for:
     'no': 'No'

@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
   scope :search, ->(term) {
     where('concat(COALESCE(name,\'\'),email) like ?', "%#{term}%")
   }
+  scope :not_subscribers, -> {
+    where('users.id in (select distinct user_id from delegations) or ' +
+        'users.id not in (select distinct user_id from subscriptions)')
+  }
 end

@@ -5,6 +5,7 @@ class UsersController < InheritedResources::Base
   def index
     @users = User.page(params[:page])
     @users = @users.search(params[:term]) unless params[:term].blank?
+    @users = @users.not_subscribers if params[:subscribers].blank?
   end
 
   def update

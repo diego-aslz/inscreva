@@ -23,6 +23,7 @@ es:
   preview_mode: Visualização
   attachment: Anexo
   all: Todos
+  include_subscribers: Incluir usuarios inscritos
 
   show_for:
     blank: "No Dice"

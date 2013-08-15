@@ -13,7 +13,7 @@ describe "User" do
     end
 
     context "when is a candidate" do
-      let(:user)                        { create(:candidate_user) }
+      let(:user)                        { create(:subscriber_user) }
       let(:his_subscription)            { user.subscriptions.first }
       let(:another_users_subscription)  { create(:subscription) }
       let(:his_fill)                    { create(:field_fill, subscription_id: his_subscription.id) }

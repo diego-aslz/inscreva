@@ -23,6 +23,7 @@ pt-BR:
   preview_mode: Visualização
   attachment: Anexo
   all: Todos
+  include_subscribers: Incluir usuários de inscritos
 
   show_for:
     blank: "Não informado"
