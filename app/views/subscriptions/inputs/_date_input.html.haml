@@ -1,0 +1,14 @@
+.control-group
+  - id_b = "#{id}_b"
+  - id_e = "#{id}_e"
+  - v_b = begin values[field.id.to_s]['value']['b'] rescue nil end
+  - v_e = begin values[field.id.to_s]['value']['e'] rescue nil end
+  = label_tag id_b, field.name, class: :'control-label'
+  .controls
+    = text_field_tag id_b, v_b, name: "fields[#{field.id}][value][b]",
+        data: { "date-language" => I18n.locale },
+        class: 'datepicker input-small'
+    = label_tag id_e, t(:until)
+    = text_field_tag id_e, v_e, name: "fields[#{field.id}][value][e]",
+        data: { "date-language" => I18n.locale },
+        class: 'datepicker input-small'

@@ -1,4 +1,4 @@
 - if value.blank?
   &nbsp;
 - else
-  = l Date.strptime(value, '%d/%m/%Y'), format: :long
+  = l fill.value_as_date, format: :long

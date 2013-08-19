@@ -1,23 +1,45 @@
 - model_class = Subscription
-= page_header t('.title', default: model_class.model_name.human.pluralize)
+= page_header "#{t('.title', default: model_class.model_name.human.pluralize)} - #{@event.name}"
 
-%form.form-search{action: event_subscriptions_path(@event)}
-  .input-append
-    %input.append.search-query.span4{type: "text", name: "term", value: params[:term]}
-    %button.btn{type: "submit"}
-      #{icon_tag "icon-search"} #{t :search}
+= form_tag event_subscriptions_path(@event), method: :get, class: 'form-search form-horizontal' do
+  - values = params[:fields] || {}
+  - @event.fields.where(searchable: true).each do |field|
+    = hidden_field_tag "fields[#{field.id}][type]", field.field_type
+    = render "subscriptions/inputs/#{field.field_type}_input",
+        field: field,
+        value: begin values[field.id.to_s][:value] rescue nil end,
+        values: values,
+        id: dom_id(field) rescue nil
+
+  .control-group
+    = label_tag 'search', t(:search), class: :'control-label'
+    .controls
+      = text_field_tag 'name', params[:term], name: "term", class: 'span4'
+
+  .control-group
+    .controls
+      = button_tag type: "submit", class: :'btn btn-primary' do
+        #{icon_tag("icon-search icon-white")}
+        #{t(:search)}
+      = link_to icon_tag("icon-remove icon-white").html_safe,
+          event_subscriptions_path(@event), title: t(:clear_fields),
+          class: 'btn btn-warning'
 
 %table.table.table-striped
   %thead
     %tr
+      %th= model_class.human_attribute_name :created_at
       %th= model_class.human_attribute_name :number
+      %th= model_class.human_attribute_name :name
       %th= model_class.human_attribute_name :email
       %th
       %th
   %tbody
     - @subscriptions.each do |subscription|
       %tr
+        %td= l subscription.created_at, format: :short
         %td= link_to subscription.number, subscription_path(subscription)
+        %td= subscription.name
         %td= subscription.email
         %td.actions
           = minilink_to_edit subscription, edit_subscription_path(subscription)

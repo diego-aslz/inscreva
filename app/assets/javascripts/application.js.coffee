@@ -17,13 +17,13 @@
 #= require bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR
 #= require bootstrap-datepicker/locales/bootstrap-datepicker.es
 #= require maskedinput
+#= require angular
 #= require datepicker
+#= require markitup
+#= require markdown.set
 #= require masks
 #= require events
 #= require pages
-#= require markitup
-#= require markdown.set
-#= require angular
 
 $ ->
   $("textarea.markdown").markItUp mdSettings

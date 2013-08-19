@@ -1,0 +1,5 @@
+.control-group
+  = label_tag id, field.name, class: :'control-label'
+  .controls
+    = select_tag id, options_for_select(field.select_options, value),
+        name: "fields[#{field.id}][value]", include_blank: true, class: 'input-xxlarge'

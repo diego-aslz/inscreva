@@ -7,9 +7,9 @@
   %br
   %br
   .input-append
-    %input.append.search-query.span4{type: "text", name: "term", value: params[:term]}
-    %button.btn{type: "submit"}
-      #{icon_tag "icon-search"} #{t :search}
+    = text_field_tag 'name', params[:term], name: "term", class: 'append search-query span4'
+    = button_tag type: "submit", class: :btn do
+      #{icon_tag("icon-search")} #{t(:search)}
 
 %table.table.table-striped
   %thead

@@ -1,0 +1,5 @@
+.control-group
+  = label_tag id, field.name, class: :'control-label'
+  .controls
+    = country_select 'fields', field.id, priority_countries, {include_blank: true,
+        selected: value}, id: id, name: "fields[#{field.id}][value]", class: 'input-xlarge'

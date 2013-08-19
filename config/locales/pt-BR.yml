@@ -24,6 +24,8 @@ pt-BR:
   attachment: Anexo
   all: Todos
   include_subscribers: Incluir usuários de inscritos
+  until: até
+  clear_fields: Limpar Campos
 
   show_for:
     blank: "Não informado"
@@ -86,6 +88,7 @@ pt-BR:
         priority: Ordem
         required: Obrigatório
         show_receipt: Exibir no Comprovante
+        searchable: Pesquisável
       event:
         allow_edit: Permitir aos inscritos alterar suas inscrições antes do fechamento
         closes_at: Término das Inscrições

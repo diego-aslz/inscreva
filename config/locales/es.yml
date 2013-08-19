@@ -24,6 +24,8 @@ es:
   attachment: Anexo
   all: Todos
   include_subscribers: Incluir usuarios inscritos
+  until: hasta
+  clear_fields: Limpiar los Campos
 
   show_for:
     blank: "No Dice"
@@ -86,6 +88,7 @@ es:
         priority: Orden
         required: Obrigatorio
         show_receipt: Mostrar en la Prueba
+        searchable: Buscar
       event:
         allow_edit: Permitir que los abonados cambien sus entradas antes del cierre
         closes_at: Terminación de Registro

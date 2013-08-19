@@ -9,9 +9,11 @@ describe User do
     u = create(:user, name: 'searching', email: 'a@bcd.com')
     User.search('cearchin').include?(u).should be_false
     User.search('earchin').include?(u).should be_true
+    User.search('EARCHIN').include?(u).should be_true
     u.update_attributes name: nil, email: 'searching@bcd.com'
     User.search('cearchin').include?(u).should be_false
     User.search('earchin').include?(u).should be_true
+    User.search('EARCHIN').include?(u).should be_true
   end
 
   it "scopes by not subscribers, but includes them when they have some permission" do

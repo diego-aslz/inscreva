@@ -13,6 +13,16 @@ describe FieldFill do
     fill.value.should == '3,5'
   end
 
+  it "generates a date from value" do
+    fill.value = '2013-12-31'
+    fill.value_date.should == '31/12/2013'
+  end
+
+  it "receives values from date input" do
+    fill.value_date = '31/12/2013'
+    fill.value.should == '2013-12-31'
+  end
+
   context "validating" do
     it "requires a value when Field is required and not a file" do
       fill.field.required = true

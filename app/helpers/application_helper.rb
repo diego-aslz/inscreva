@@ -52,4 +52,8 @@ module ApplicationHelper
   def locale_flag(locale)
     image_tag "#{locale}.png", alt: locale, width: "16", height: "16" if locale && !locale.blank?
   end
+
+  def priority_countries
+    %w[BRA ARG BOL CHL COL CUB MEX PER PRY URY VEN]
+  end
 end

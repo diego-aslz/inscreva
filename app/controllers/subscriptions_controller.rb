@@ -2,6 +2,7 @@ class SubscriptionsController < InheritedResources::Base
   actions :all, except: [ :destroy, :create ]
   load_and_authorize_resource except: [:create]
   respond_to :html
+  include SubscriptionsHelper
 
   def new
     @event = Event.find(params[:event_id])
@@ -73,5 +74,12 @@ class SubscriptionsController < InheritedResources::Base
     @event = Event.find(params[:event_id])
     @subscriptions = @event.subscriptions.accessible_by(current_ability).page(params[:page])
     @subscriptions = @subscriptions.search(params[:term]) unless params[:term].blank?
+    params[:fields].each do |k,v|
+      if v.key?(:value) and filter_valid?(k, v[:value], v[:type])
+        clause, query_params = filter_clause(k, v[:value], v[:type])
+        @subscriptions = @subscriptions.where('subscriptions.id in (select ' +
+            "subscription_id from field_fills where #{clause})", *query_params)
+      end
+    end if params[:fields]
   end
 end

@@ -1,0 +1,4 @@
+.control-group
+  = label_tag id, field.name, class: :'control-label'
+  .controls
+    = text_field_tag id, value, name: "fields[#{field.id}][value]", class: 'input-xxlarge'

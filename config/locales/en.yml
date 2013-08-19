@@ -24,6 +24,8 @@ en:
   attachment: Attachment
   all: All
   include_subscribers: Include subscribers' users
+  until: until
+  clear_fields: Clear Fields
 
   show_for:
     'no': 'No'
@@ -86,6 +88,7 @@ en:
         priority: Order
         required: Required
         show_receipt: Show in Receipt
+        searchable: Searchable
       event:
         allow_edit: Allow subscribers to change their subscription before event closes
         closes_at: Closing date
