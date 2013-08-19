@@ -40,7 +40,8 @@ class FieldFill < ActiveRecord::Base
   end
 
   def value_date=(value_date)
-    self.value = Time.strptime(value_date, '%d/%m/%Y').strftime('%Y-%m-%d')
+    self.value = begin Time.strptime(value_date, '%d/%m/%Y').
+        strftime('%Y-%m-%d') rescue '' end
   end
 
   private
