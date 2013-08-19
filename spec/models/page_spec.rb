@@ -22,7 +22,7 @@ describe Page do
   it 'should correct it\'s name to be a valid URL' do
     w = build(:page, name: 'Á_çabc?$% #@-')
     w.save
-    w.name.should be_==('_abc--')
+    w.name.should == '_abc--'
   end
 
   it "should reset the main page when a new main page is set to the event" do
