@@ -9,6 +9,8 @@ class FieldFill < ActiveRecord::Base
   validates_presence_of :value, if: :require_value?
   validates_presence_of :file, if: :require_file?
 
+  after_save :clean_remove_file
+
   def value_cb
     value.split ',' if value
   end
@@ -27,6 +29,14 @@ class FieldFill < ActiveRecord::Base
     rescue
       ''
     end
+  end
+
+  def changed?
+    !!(super or remove_file)
+  end
+
+  def clean_remove_file
+    self.remove_file = nil
   end
 
   def value_date=(value_date)
