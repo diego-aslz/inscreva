@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130815184542) do
+ActiveRecord::Schema.define(:version => 20130819193326) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20130815184542) do
     t.string   "group_name"
     t.integer  "priority",     :default => 0
     t.boolean  "searchable",   :default => false
+    t.boolean  "is_numeric",   :default => false
   end
 
   add_index "fields", ["event_id"], :name => "index_event_fields_on_event_id"

@@ -8,8 +8,13 @@ class FieldFill < ActiveRecord::Base
       :remove_file, :file_cache, :value_cb, :value_date
   validates_presence_of :value, if: :require_value?
   validates_presence_of :file, if: :require_file?
+  validates :value, numericality: true, if: :validate_numeric?
 
   after_save :clean_remove_file
+
+  def validate_numeric?
+    field.is_numeric? && !value.blank?
+  end
 
   def value_cb
     value.split ',' if value

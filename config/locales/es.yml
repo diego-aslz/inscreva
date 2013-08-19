@@ -89,6 +89,7 @@ es:
         required: Obrigatorio
         show_receipt: Mostrar en la Prueba
         searchable: Buscar
+        is_numeric: Aceptar sólo números
       event:
         allow_edit: Permitir que los abonados cambien sus entradas antes del cierre
         closes_at: Terminación de Registro

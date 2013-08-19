@@ -51,5 +51,15 @@ describe FieldFill do
       fill.field.field_type = 'string'
       fill.should_not require_presence_of(:file)
     end
+
+    it "requires numericality of value when it is numeric" do
+      fill.field.update_attributes is_numeric: true, required: false, field_type: 'string'
+      fill.value = 'abc'
+      fill.should have(1).errors_on(:value)
+      fill.value = '123456'
+      fill.should have(0).errors_on(:value)
+      fill.value = ''
+      fill.should have(0).errors_on(:value)
+    end
   end
 end
