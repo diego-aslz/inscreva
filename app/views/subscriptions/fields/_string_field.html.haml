@@ -1,1 +1,2 @@
-= f.input :value, label: field.name, as: :string, required: field.required
+= f.input :value, label: field.name, as: :string, required: field.required,
+    hint: field.hint.blank? ? nil : field.hint

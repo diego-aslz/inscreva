@@ -90,6 +90,7 @@ pt-BR:
         show_receipt: Exibir no Comprovante
         searchable: Pesquisável
         is_numeric: Aceitar apenas números
+        hint: Texto de auxílio
       event:
         allow_edit: Permitir aos inscritos alterar suas inscrições antes do fechamento
         closes_at: Término das Inscrições

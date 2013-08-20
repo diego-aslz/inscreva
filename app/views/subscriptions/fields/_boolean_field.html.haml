@@ -1,1 +1,3 @@
-= f.input :value, label: field.name, as: :radio_buttons, required: field.required, collection: { t('yes') => true, t('no') => false }, item_wrapper_class: 'inline'
+= f.input :value, label: field.name, as: :radio_buttons, required: field.required,
+    collection: { t('yes') => true, t('no') => false }, item_wrapper_class: 'inline',
+    hint: field.hint.blank? ? nil : field.hint

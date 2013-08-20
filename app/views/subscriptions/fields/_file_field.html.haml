@@ -1,4 +1,5 @@
-= f.input :file, label: field.name, as: :file, required: field.required
+= f.input :file, label: field.name, as: :file, required: field.required,
+    hint: field.hint.blank? ? nil : field.hint
 = f.input :file_cache, label: false, as: :hidden
 - if fill.file? && !field.required
   = f.input :remove_file, label: t(:remove_current_file), as: :boolean

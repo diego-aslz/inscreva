@@ -90,6 +90,7 @@ en:
         show_receipt: Show in Receipt
         searchable: Searchable
         is_numeric: Accept just numbers
+        hint: Hint
       event:
         allow_edit: Allow subscribers to change their subscription before event closes
         closes_at: Closing date
