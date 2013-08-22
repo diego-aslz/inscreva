@@ -7,7 +7,7 @@
   = form.input :_destroy, as: :hidden, input_html: { 'value' => '{{field._destroy}}' }
   = form.input :name, input_html: { 'ng-model' => 'field.name', class: :'input-xxlarge' },
       placeholder: t(:'simple_form.placeholders.field.name')
-  = form.input :field_type, as: :select, collection: Field::VALID_TYPES,
+  = form.input :field_type, as: :select, collection: Field.valid_types_to_collection,
       include_blank: false, input_html: { 'ng-model' => 'field.field_type',
       disabled: !form.object.new_record? },
       wrapper_html: { 'ng-show' => 'field.editing' }

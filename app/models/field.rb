@@ -1,9 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Field < ActiveRecord::Base
-  VALID_TYPES = { "Texto" => "string", "Texto Multilinha" => "text",
-      "Lógico" => "boolean", "País" => 'country', "Data" => 'date',
-      "Arquivo" => 'file', "Única Escolha" => 'select',
-      "Múltipla Escolha" => 'check_boxes' }
+  VALID_TYPES = [ :string, :text, :boolean, :country, :date, :file, :select,
+      :check_boxes ]
   TYPES_WITH_EXTRA = [:select, :check_boxes]
 
   belongs_to :event
@@ -11,7 +9,7 @@ class Field < ActiveRecord::Base
   attr_accessible :field_type, :name, :extra, :required, :show_receipt,
       :group_name, :priority, :searchable, :is_numeric, :hint
   validates_presence_of :field_type, :name
-  validates_inclusion_of :field_type, in: VALID_TYPES.values, if: :field_type
+  validates_inclusion_of :field_type, in: VALID_TYPES, if: :field_type
 
   after_initialize :default_values
 
@@ -36,5 +34,9 @@ class Field < ActiveRecord::Base
 
   def self.type_to_s(type)
     VALID_TYPES.select{ |k,v| v == type }.keys[0]
+  end
+
+  def self.valid_types_to_collection
+    Hash[Field::VALID_TYPES.map { |sym| [I18n.t("types.#{sym}"), sym] }]
   end
 end

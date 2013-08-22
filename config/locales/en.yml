@@ -9,7 +9,7 @@ en:
   home_title: Ongoing Events
   no_file: No file added
   print_receipt: Print Receipt
-  subscribe: Inscrever-se
+  subscribe: Subscribe
   remove_current_file: Remove current file
   add_field: Add Field
   add_delegation: Add Member
@@ -49,6 +49,16 @@ en:
     delete: 'Delete'
     subscription:
       receipt: Print Receipt
+
+  types:
+    boolean: Boolean
+    string: Text
+    text: Text Area
+    country: Country
+    date: Date
+    file: File
+    select: Select One
+    check_boxes: Select Many
 
   subscriptions:
     new:

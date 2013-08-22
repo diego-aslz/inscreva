@@ -50,6 +50,16 @@ pt-BR:
     subscription:
       receipt: Emitir Comprovante
 
+  types:
+    boolean: Lógico
+    string: Texto
+    text: Texto Multilinha
+    country: País
+    date: Data
+    file: Arquivo
+    select: Única Escolha
+    check_boxes: Múltipla Escolha
+
   subscriptions:
     new:
       title: '%{model}'

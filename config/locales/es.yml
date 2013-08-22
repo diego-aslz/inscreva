@@ -50,6 +50,16 @@ es:
     subscription:
       receipt: Impresión de Prueba
 
+  types:
+    boolean: Lógico
+    string: Texto
+    text: Texto Multilínea
+    country: País
+    date: Fecha
+    file: Archivo
+    select: Elija Uno
+    check_boxes: Elección Múltiple
+
   subscriptions:
     new:
       title: '%{model}'
