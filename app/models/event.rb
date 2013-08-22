@@ -6,7 +6,7 @@ class Event < ActiveRecord::Base
   attr_accessible :allow_edit, :closes_at, :email, :name, :opens_at, :rules_url,
       :technical_email, :fields_attributes, :delegations_attributes, :identifier
 
-  validates_presence_of :name, :opens_at, :closes_at, :identifier
+  validates_presence_of :name, :identifier
   validates_uniqueness_of :identifier
 
   accepts_nested_attributes_for :fields, allow_destroy: true, :reject_if =>

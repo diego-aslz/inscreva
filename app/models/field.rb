@@ -9,7 +9,7 @@ class Field < ActiveRecord::Base
   attr_accessible :field_type, :name, :extra, :required, :show_receipt,
       :group_name, :priority, :searchable, :is_numeric, :hint
   validates_presence_of :field_type, :name
-  validates_inclusion_of :field_type, in: VALID_TYPES, if: :field_type
+  validates_inclusion_of :field_type, in: VALID_TYPES.map(&:to_s), if: :field_type
 
   after_initialize :default_values
 
@@ -33,10 +33,10 @@ class Field < ActiveRecord::Base
   end
 
   def self.type_to_s(type)
-    VALID_TYPES.select{ |k,v| v == type }.keys[0]
+    I18n.t("types.#{type}")
   end
 
   def self.valid_types_to_collection
-    Hash[Field::VALID_TYPES.map { |sym| [I18n.t("types.#{sym}"), sym] }]
+    Hash[Field::VALID_TYPES.map { |sym| [type_to_s(sym), sym] }]
   end
 end

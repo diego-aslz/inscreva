@@ -6,8 +6,6 @@ describe Event do
     subject { event }
 
     it { should require_presence_of(:name) }
-    it { should require_presence_of(:opens_at) }
-    it { should require_presence_of(:closes_at) }
     it { should require_presence_of(:identifier) }
     it { should require_uniqueness_of(:identifier, used_value: create(:event).identifier) }
     it { should require_valid(:closes_at, invalid: event.opens_at - 1.day,
@@ -28,6 +26,12 @@ describe Event do
 
   it "is not ongoing when opens_at is in the future" do
     build(:future_event).ongoing?.should be_false
+  end
+
+  it "is not ongoing when opens_at or closes_at are null" do
+    build(:ongoing_event, opens_at: nil).ongoing?.should be_false
+    build(:ongoing_event, closes_at: nil).ongoing?.should be_false
+    build(:ongoing_event, opens_at: nil, closes_at: nil).ongoing?.should be_false
   end
 
   it "scopes ongoing events" do
