@@ -1,0 +1,35 @@
+- model_class = Event
+.page-header
+  %h1= t(:home_title)
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:opens_at)
+      %th= model_class.human_attribute_name(:closes_at)
+      %th
+  %tbody
+    - @events.each do |event|
+      %tr
+        - if event.pages.any?
+          %td= link_to event.name, present_event_main_page_path(event.identifier)
+        - else
+          %td= content_tag :strong do event.name end
+        %td= l event.opens_at
+        %td= l event.closes_at
+        %td= link_to_subscribe(event)
+- if @future_events && @future_events.any?
+  .page-header
+    %h2= t(:future_events)
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= model_class.human_attribute_name(:name)
+        %th= model_class.human_attribute_name(:opens_at)
+        %th= model_class.human_attribute_name(:closes_at)
+    %tbody
+      - @future_events.each do |event|
+        %tr
+          %td= content_tag :strong do event.name end
+          %td= l event.opens_at
+          %td= l event.closes_at
