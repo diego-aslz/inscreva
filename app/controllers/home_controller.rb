@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @events = Event.ongoing
-    @future_events = Event.future
+    @events = Event.ongoing.where(published: true)
+    @published_events = Event.where(published: true)
   end
 end

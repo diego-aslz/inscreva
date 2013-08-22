@@ -5,7 +5,6 @@ es:
   details: Detalles
   download: Descarga
   fields: Campos de Formulario de Inscripción
-  future_events: Próximos eventos
   home_title: Eventos en curso
   no_file: Ningún archivo agregado
   print_receipt: Impresión de Prueba
@@ -113,6 +112,7 @@ es:
         subscriptions: Subscripciones
         fields: Campos
         delegations: Miembros
+        published: Publicar en la página de inicio
       subscription:
         created_at: Registrado
         email: Correo electrónico

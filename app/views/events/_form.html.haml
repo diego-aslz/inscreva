@@ -17,6 +17,7 @@
           = f.input :identifier, input_html: { :'ng-model' => 'event.identifier'}
           = f.input :rules_url, input_html: { :'ng-model' => 'event.rules_url'}
           = f.input :email, input_html: { :'ng-model' => 'event.email'}
+          = f.input :published
         #subscriptions.tab
           = f.input :opens_at, include_blank: true
           = f.input :closes_at, include_blank: true

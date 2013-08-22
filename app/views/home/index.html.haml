@@ -19,9 +19,7 @@
           %td= l event.opens_at
           %td= l event.closes_at
           %td.actions= link_to_subscribe(event)
-- if @future_events && @future_events.any?
-  .page-header
-    %h2= t(:future_events)
+- if @published_events && @published_events.any?
   %table.table.table-striped
     %thead
       %tr
@@ -29,7 +27,7 @@
         %th= model_class.human_attribute_name(:opens_at)
         %th= model_class.human_attribute_name(:closes_at)
     %tbody
-      - @future_events.each do |event|
+      - @published_events.each do |event|
         %tr
           %td= content_tag :strong do event.name end
           %td= l event.opens_at

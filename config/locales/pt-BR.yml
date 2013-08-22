@@ -5,7 +5,6 @@ pt-BR:
   details: Detalhes
   download: Baixar
   fields: Campos para Formulário de Inscrição
-  future_events: Próximos eventos
   home_title: Inscrições abertas
   no_file: Nenhum arquivo adicionado
   print_receipt: Imprimir Comprovante
@@ -113,6 +112,7 @@ pt-BR:
         subscriptions: Inscrições
         fields: Campos
         delegations: Membros
+        published: Publicar na página inicial
       subscription:
         created_at: Inscrito
         email: E-mail

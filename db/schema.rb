@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130820210012) do
+ActiveRecord::Schema.define(:version => 20130822195321) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -45,11 +45,12 @@ ActiveRecord::Schema.define(:version => 20130820210012) do
     t.string   "rules_url"
     t.string   "technical_email"
     t.string   "email"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "identifier"
     t.integer  "pages_count",         :default => 0
     t.integer  "subscriptions_count", :default => 0
+    t.boolean  "published",           :default => false
   end
 
   create_table "field_fills", :force => true do |t|

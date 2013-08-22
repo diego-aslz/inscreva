@@ -5,7 +5,6 @@ en:
   details: Details
   download: Download
   fields: Fields for the Subscription Form
-  future_events: Future events
   home_title: Ongoing Events
   no_file: No file added
   print_receipt: Print Receipt
@@ -113,6 +112,7 @@ en:
         subscriptions: Subscriptions
         fields: Fields
         delegations: Members
+        published: Publish in the front page
       subscription:
         created_at: Subscribed at
         email: E-mail
