@@ -25,6 +25,8 @@ pt-BR:
   include_subscribers: Incluir usuários de inscritos
   until: até
   clear_fields: Limpar Campos
+  begin: início
+  end: fim
 
   show_for:
     blank: "Não informado"

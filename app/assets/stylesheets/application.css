@@ -15,6 +15,7 @@
  *= require events
  *= require pages
  *= require roles
+ *= require home
  */
 
 html, body, .wrapper { height: 90%; }

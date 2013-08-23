@@ -25,6 +25,8 @@ es:
   include_subscribers: Incluir usuarios inscritos
   until: hasta
   clear_fields: Limpiar los Campos
+  begin: inicio
+  end: final
 
   show_for:
     blank: "No Dice"

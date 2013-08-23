@@ -1,34 +1,29 @@
 - model_class = Event
 - if @events && @events.any?
-  .page-header
-    %h1= t(:home_title)
-  %table.table.table-striped
-    %thead
-      %tr
-        %th
-        %th= model_class.human_attribute_name(:opens_at)
-        %th= model_class.human_attribute_name(:closes_at)
-        %th
-    %tbody
-      - @events.each do |event|
-        %tr
-          - if event.pages.any?
-            %td= link_to event.name, present_event_main_page_path(event.identifier)
-          - else
-            %td= content_tag :strong do event.name end
-          %td= l event.opens_at
-          %td= l event.closes_at
-          %td.actions= link_to_subscribe(event)
-- if @published_events && @published_events.any?
-  %table.table.table-striped
-    %thead
-      %tr
-        %th= model_class.human_attribute_name(:name)
-        %th= model_class.human_attribute_name(:opens_at)
-        %th= model_class.human_attribute_name(:closes_at)
-    %tbody
-      - @published_events.each do |event|
-        %tr
-          %td= content_tag :strong do event.name end
-          %td= l event.opens_at
-          %td= l event.closes_at
+  - 0.upto @events.count/3 do |i|
+    .row-fluid.home
+      - 0.upto 2 do |j|
+        - event = @events[i*3 + j]
+        - if event
+          .span4
+            - if event.pages.any?
+              %h2= link_to event.name, present_event_main_page_path(event.identifier)
+            - else
+              %h2= event.name
+            %p= event.description
+            - if event.opens_at && event.closes_at
+              %table
+                %tr
+                  %th{colspan: 2}= Subscription.model_name.human.pluralize
+                %tr
+                  %th.left-head
+                    = t(:begin).titleize
+                  %td.actions
+                    #{l event.opens_at}
+                %tr
+                  %th.left-head
+                    = t(:end).titleize
+                  %td.actions
+                    #{l event.closes_at}
+            - if event.ongoing?
+              %p= link_to_subscribe(event)
