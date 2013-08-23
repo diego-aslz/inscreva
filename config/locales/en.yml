@@ -113,6 +113,7 @@ en:
         fields: Fields
         delegations: Members
         published: Publish in the front page
+        description: Description
       subscription:
         created_at: Subscribed at
         email: E-mail

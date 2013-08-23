@@ -5,7 +5,7 @@ class Event < ActiveRecord::Base
   has_many :delegations
   attr_accessible :allow_edit, :closes_at, :email, :name, :opens_at, :rules_url,
       :technical_email, :fields_attributes, :delegations_attributes, :identifier,
-      :published
+      :published, :description
 
   validates_presence_of :name, :identifier
   validates_uniqueness_of :identifier

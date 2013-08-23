@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130822195321) do
+ActiveRecord::Schema.define(:version => 20130823124712) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20130822195321) do
     t.integer  "pages_count",         :default => 0
     t.integer  "subscriptions_count", :default => 0
     t.boolean  "published",           :default => false
+    t.text     "description"
   end
 
   create_table "field_fills", :force => true do |t|

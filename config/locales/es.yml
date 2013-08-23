@@ -113,6 +113,7 @@ es:
         fields: Campos
         delegations: Miembros
         published: Publicar en la página de inicio
+        description: Descripción
       subscription:
         created_at: Registrado
         email: Correo electrónico
