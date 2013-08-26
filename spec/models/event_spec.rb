@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Event do
   context "validating" do
-    let(:event) { build :event }
+    let(:event) { build :event, opens_at: Time.now }
     subject { event }
 
     it { should require_presence_of(:name) }
