@@ -68,11 +68,19 @@ class SubscriptionsController < InheritedResources::Base
     render layout: 'printing_page'
   end
 
+  def index
+    index! do |format|
+      format.html { @subscriptions = @subscriptions.page(params[:page]) }
+      format.csv { send_data @subscriptions.to_csv }
+      format.xls
+    end
+  end
+
   protected
 
   def collection
     @event = Event.find(params[:event_id])
-    @subscriptions = @event.subscriptions.accessible_by(current_ability).page(params[:page])
+    @subscriptions = @event.subscriptions.accessible_by(current_ability)
     @subscriptions = @subscriptions.search(params[:term]) unless params[:term].blank?
     params[:fields].each do |k,v|
       if v.key?(:value) and filter_valid?(k, v[:value], v[:type])

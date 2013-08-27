@@ -46,3 +46,10 @@
           = minilink_to_receipt(subscription)
 
 = paginate @subscriptions
+
+= link_to icon_tag('icon-download-alt icon-white') + " CSV",
+    event_subscriptions_path(@event, format: 'csv', params: params.slice(:fields)),
+    class: 'btn btn-inverse'
+= link_to icon_tag('icon-download-alt icon-white') + " XLS",
+    event_subscriptions_path(@event, format: 'xls', params: params.slice(:fields)),
+    class: 'btn btn-success'

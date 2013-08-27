@@ -18,6 +18,16 @@ class Subscription < ActiveRecord::Base
     field_fills.joins(:field).where('fields.show_receipt')
   end
 
+  def self.to_csv(options = {})
+    fields = ["number", "name", "email"]
+    CSV.generate(options) do |csv|
+      csv << fields.map { |f| self.human_attribute_name f }
+      all.each do |sub|
+        csv << sub.attributes.values_at(*fields)
+      end
+    end
+  end
+
   private
 
   def generate_number

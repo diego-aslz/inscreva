@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="<%= Subscription.model_name.human.pluralize %>">
+    <Table>
+      <Column ss:Width="3 cm" />
+      <Column ss:Width="3.5 cm" />
+      <Column ss:Width="10 cm" />
+      <Column ss:Width="5 cm" />
+      <Row>
+        <Cell><Data ss:Type="String"><B><%= Subscription.human_attribute_name :created_at %></B></Data></Cell>
+        <Cell><Data ss:Type="String"><B><%= Subscription.human_attribute_name :number %></B></Data></Cell>
+        <Cell><Data ss:Type="String"><B><%= Subscription.human_attribute_name :name %></B></Data></Cell>
+        <Cell><Data ss:Type="String"><B><%= Subscription.human_attribute_name :email %></B></Data></Cell>
+      </Row>
+    <% @subscriptions.each do |subscription| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= l subscription.created_at, format: :short %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= subscription.number %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= subscription.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= subscription.email %></Data></Cell>
+        <!-- <Cell><Data ss:Type="Number"><%= subscription.email %></Data></Cell> -->
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
