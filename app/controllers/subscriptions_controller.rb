@@ -70,8 +70,9 @@ class SubscriptionsController < InheritedResources::Base
 
   def index
     index! do |format|
+      puts "FIELDS: #{@fields}"
       format.html { @subscriptions = @subscriptions.page(params[:page]) }
-      format.csv { send_data @subscriptions.to_csv }
+      format.csv { send_data @subscriptions.to_csv(include_fields: @fields) }
       format.xls
     end
   end
@@ -82,6 +83,15 @@ class SubscriptionsController < InheritedResources::Base
     @event = Event.find(params[:event_id])
     @subscriptions = @event.subscriptions.accessible_by(current_ability)
     @subscriptions = @subscriptions.search(params[:term]) unless params[:term].blank?
+    unless (fields = params[:field_ids]).blank?
+      @fields = @event.fields.where("id in (?) and field_type != 'file'",
+          fields).select([:id, :name, :field_type, :is_numeric])
+      @subscriptions = @subscriptions.includes(:field_fills).
+          where('field_fills.field_id in (?)', fields.map(&:to_i))
+    else
+      @fields = []
+    end
+    puts "FIELDS: #{@fields}"
     params[:fields].each do |k,v|
       if v.key?(:value) and filter_valid?(k, v[:value], v[:type])
         clause, query_params = filter_clause(k, v[:value], v[:type])

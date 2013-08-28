@@ -6,7 +6,7 @@
   xmlns:html="http://www.w3.org/TR/REC-html40">
   <Worksheet ss:Name="<%= Subscription.model_name.human.pluralize %>">
     <Table>
-      <Column ss:Width="3 cm" />
+      <Column ss:Width="3.5 cm" />
       <Column ss:Width="3.5 cm" />
       <Column ss:Width="10 cm" />
       <Column ss:Width="5 cm" />
@@ -15,14 +15,22 @@
         <Cell><Data ss:Type="String"><B><%= Subscription.human_attribute_name :number %></B></Data></Cell>
         <Cell><Data ss:Type="String"><B><%= Subscription.human_attribute_name :name %></B></Data></Cell>
         <Cell><Data ss:Type="String"><B><%= Subscription.human_attribute_name :email %></B></Data></Cell>
+      <% for field in @fields -%>
+        <Cell><Data ss:Type="String"><B><%= field.name %></B></Data></Cell>
+      <% end -%>
       </Row>
     <% @subscriptions.each do |subscription| %>
       <Row>
-        <Cell><Data ss:Type="String"><%= l subscription.created_at, format: :short %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= subscription.created_at.strftime('%Y-%m-%d %H:%M:%S') %></Data></Cell>
         <Cell><Data ss:Type="String"><%= subscription.number %></Data></Cell>
         <Cell><Data ss:Type="String"><%= subscription.name %></Data></Cell>
         <Cell><Data ss:Type="String"><%= subscription.email %></Data></Cell>
-        <!-- <Cell><Data ss:Type="Number"><%= subscription.email %></Data></Cell> -->
+      <% for field in @fields %>
+        <% fill = subscription.field_fills.where(field_id: field.id).first %>
+        <% if fill %>
+        <Cell><Data ss:Type="<%= field.is_numeric ? 'Number' : 'String' %>"><%= fill.value_to_s %></Data></Cell>
+        <% end %>
+      <% end %>
       </Row>
     <% end %>
     </Table>

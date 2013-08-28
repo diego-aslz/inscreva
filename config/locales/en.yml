@@ -27,6 +27,8 @@ en:
   clear_fields: Clear Fields
   begin: begin
   end: end
+  select: select
+  include_fields: Include Fields
 
   show_for:
     'no': 'No'

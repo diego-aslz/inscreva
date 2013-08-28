@@ -27,6 +27,8 @@ pt-BR:
   clear_fields: Limpar Campos
   begin: início
   end: fim
+  select: selecione
+  include_fields: Incluir Campos
 
   show_for:
     blank: "Não informado"

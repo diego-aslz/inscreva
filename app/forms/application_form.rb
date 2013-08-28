@@ -17,7 +17,7 @@ class ApplicationForm
   validates_presence_of :password, on: :create, unless: :user
   validates_presence_of :email_confirmation, if: :email, on: :create
   validates_presence_of :password_confirmation, if: :password
-  validates_associated :field_fills
+  validates_associated :field_fills, includes: :field
 
   delegate :field_fills, :email, :id_card, :event_id, :event, :name, :user_id, :user,
       :id, :generate_number, to: :subscription
@@ -45,8 +45,8 @@ class ApplicationForm
     ActiveModel::Name.new(self, nil, "Subscription")
   end
 
-  def self.human_attribute_name(attribute)
-    Subscription.human_attribute_name attribute
+  def self.human_attribute_name(*args)
+    Subscription.human_attribute_name *args
   end
 
   def event_name

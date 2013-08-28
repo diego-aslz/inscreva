@@ -11,6 +11,7 @@ module SubscriptionsHelper
   end
 
   def show_fill(fill)
+    return '' unless fill
     field = fill.field
     render "subscriptions/fields/#{field.field_type}_show",
         value: fill.value, field: field, fill: fill if field

@@ -16,6 +16,7 @@
  *= require pages
  *= require roles
  *= require home
+ *= require chosen
  */
 
 html, body, .wrapper { height: 90%; }

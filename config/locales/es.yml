@@ -27,6 +27,8 @@ es:
   clear_fields: Limpiar los Campos
   begin: inicio
   end: final
+  select: seleccionar
+  include_fields: Incluir Campos
 
   show_for:
     blank: "No Dice"

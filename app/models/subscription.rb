@@ -19,11 +19,17 @@ class Subscription < ActiveRecord::Base
   end
 
   def self.to_csv(options = {})
-    fields = ["number", "name", "email"]
+    fields = ["created_at", "number", "name", "email"]
+    include_fields = options.delete(:include_fields) || []
     CSV.generate(options) do |csv|
-      csv << fields.map { |f| self.human_attribute_name f }
+      csv << fields.map { |f| self.human_attribute_name f } + include_fields.map(&:name)
       all.each do |sub|
-        csv << sub.attributes.values_at(*fields)
+        values = sub.attributes.values_at(*fields) + include_fields.map{ |f|
+          fill = sub.field_fills.where(field_id: f.id).first
+          next fill.value_to_s if fill
+          ''
+        }
+        csv << values
       end
     end
   end

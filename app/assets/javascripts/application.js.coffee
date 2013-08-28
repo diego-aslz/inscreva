@@ -12,6 +12,7 @@
 #
 #= require jquery
 #= require jquery_ujs
+#= require chosen.jquery
 #= require bootstrap
 #= require bootstrap-datepicker/core
 #= require bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR
@@ -27,3 +28,4 @@
 
 $ ->
   $("textarea.markdown").markItUp mdSettings
+  $('.chosen').chosen()
