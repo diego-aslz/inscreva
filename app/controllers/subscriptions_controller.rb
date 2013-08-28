@@ -32,7 +32,7 @@ class SubscriptionsController < InheritedResources::Base
 
   def edit
     sub = Subscription.find(params[:id])
-    if sub.event.ongoing? && sub.event.allow_edit
+    if sub.event.ongoing?
       @application = ApplicationForm.new
       @application.subscription = sub
     else
@@ -44,7 +44,7 @@ class SubscriptionsController < InheritedResources::Base
     @application = ApplicationForm.new
     sub = Subscription.find(params[:id])
     @application.subscription = sub
-    if sub.event.ongoing? && sub.event.allow_edit
+    if sub.event.ongoing?
       if @application.submit params[:subscription]
         redirect_to sub
       else

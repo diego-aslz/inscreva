@@ -3,7 +3,6 @@ FactoryGirl.define do
     name 'Contest sample'
     email
     technical_email 'systems@nomail.com'
-    allow_edit true
     rules_url ''
     sequence :identifier, 'event1'
 

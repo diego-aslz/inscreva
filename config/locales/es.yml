@@ -105,7 +105,6 @@ es:
         is_numeric: Aceptar sólo números
         hint: Texto de ayuda
       event:
-        allow_edit: Permitir que los abonados cambien sus entradas antes del cierre
         closes_at: Terminación de Registro
         email: E-mail de comunicación
         identifier: Identificador

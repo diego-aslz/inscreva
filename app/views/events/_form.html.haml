@@ -22,7 +22,6 @@
         #subscriptions.tab
           = f.input :opens_at, include_blank: true
           = f.input :closes_at, include_blank: true
-          = f.input :allow_edit, input_html: { :'ng-model' => 'event.allow_edit'}
           = f.input :technical_email, input_html: { :'ng-model' => 'event.technical_email'}
         #fields.tab
           .event-field{:'ng-repeat' => 'field in event.fields',

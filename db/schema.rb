@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130823124712) do
+ActiveRecord::Schema.define(:version => 20130828191426) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(:version => 20130823124712) do
     t.string   "name"
     t.datetime "opens_at"
     t.datetime "closes_at"
-    t.boolean  "allow_edit"
     t.string   "rules_url"
     t.string   "technical_email"
     t.string   "email"

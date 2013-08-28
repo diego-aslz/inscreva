@@ -3,11 +3,13 @@ class Ability
 
   def initialize(user)
     user ||= User.new
+    can :create, Subscription
     if user.admin?
       can :manage, :all
       cannot :mine, Subscription unless user.subscriptions.any?
     elsif user.subscriptions.any?
-      can [:update, :show, :mine, :receipt], Subscription, user_id: user.id
+      can [:show, :mine, :receipt], Subscription, user_id: user.id
+      can [:update], Subscription, user_id: user.id
       can :download, FieldFill, subscription: { id: user.subscription_ids }
     end
     for delegation in user.delegations
@@ -19,6 +21,5 @@ class Ability
         end
       end
     end
-    can :create, Subscription
   end
 end
