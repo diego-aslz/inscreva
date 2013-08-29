@@ -44,10 +44,6 @@ body > .wrapper { height: auto; min-height: 82%; }
   width: inherit;
 }
 
-textarea {
-  width: 90%;
-}
-
 .checkbox.inline {
   display: block;
 }

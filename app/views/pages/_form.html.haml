@@ -25,7 +25,7 @@
               %a{href: "#preview", 'data-toggle' => "pill", :'ng-click' => 'refreshPreview()'}
                 = t :preview_mode
           #edit.tab.active
-            = f.text_area :content, label: false, :'ng-model' => 'page.content',
+            = f.input_field :content, label: false, :'ng-model' => 'page.content',
                 class: 'markdown'
           #preview.tab
             .md-page

@@ -1,2 +1,2 @@
 = f.input :value, label: field.name, as: :text, required: field.required,
-    hint: field.hint.blank? ? nil : field.hint
+    hint: field.hint.blank? ? nil : field.hint, input_html: { class: 'input-block-level' }
