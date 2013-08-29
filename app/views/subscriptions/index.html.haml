@@ -51,7 +51,7 @@
         %td= subscription.name
         %td= subscription.email
         - for field in @fields
-          - fill = subscription.field_fills.where(field_id: field.id).first
+          - fill = subscription.fills.where(field_id: field.id).first
           %td= fill.value_to_s if fill
         %td.actions
           = minilink_to_edit subscription, edit_subscription_path(subscription)
