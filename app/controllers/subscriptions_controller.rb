@@ -1,26 +1,25 @@
 class SubscriptionsController < InheritedResources::Base
   actions :all, except: [ :destroy, :create ]
-  load_and_authorize_resource except: [:create]
+  load_and_authorize_resource except: [:new, :create]
   respond_to :html
   include SubscriptionsHelper
 
   def new
     @event = Event.find(params[:event_id])
-    unless @event.ongoing?
-      redirect_to root_url
-    else
-      @application = ApplicationForm.new.load_from params, current_user
-      @application.user = current_user
-      @application.field_fills = @event.field_fills
-    end
+    @application = ApplicationForm.new.load_from params, current_user
+    @application.user = current_user
+    authorize! :new, @application.subscription
+    @application.field_fills = @event.field_fills
   end
 
   def create
     @event = Event.find(params[:event_id])
     @application = ApplicationForm.new.load_from(params[:subscription])
+    @application.event = @event
+    authorize! :create, @application.subscription
+
     @application.user = current_user
     @application.generate_number
-    @application.event = @event
     if @application.submit
       sign_in @application.user unless current_user
       flash[:notice] = t 'helpers.messages.subscription.successfully_created'
@@ -32,35 +31,23 @@ class SubscriptionsController < InheritedResources::Base
 
   def edit
     sub = Subscription.find(params[:id])
-    if sub.event.ongoing?
-      @application = ApplicationForm.new
-      @application.subscription = sub
-    else
-      redirect_to root_url
-    end
+    @application = ApplicationForm.new
+    @application.subscription = sub
   end
 
   def update
     @application = ApplicationForm.new
     sub = Subscription.find(params[:id])
     @application.subscription = sub
-    if sub.event.ongoing?
-      if @application.submit params[:subscription]
-        redirect_to sub
-      else
-        render :edit
-      end
+    if @application.submit params[:subscription]
+      redirect_to sub
     else
-      redirect_to root_url
+      render :edit
     end
   end
 
   def mine
     @subscriptions = current_user.subscriptions.includes(:event).page(params[:page])
-  end
-
-  def show
-    @subscription = Subscription.find(params[:id])
   end
 
   def receipt

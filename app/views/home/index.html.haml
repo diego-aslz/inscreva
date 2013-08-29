@@ -25,5 +25,5 @@
                     = t(:end).titleize
                   %td.actions
                     #{l event.closes_at}
-            - if event.ongoing?
+            - if can? :create, event.subscriptions.build
               %p= link_to_subscribe(event)
