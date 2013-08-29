@@ -66,4 +66,14 @@ Inscreva::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.assets.precompile += %w( ie6.css ie7.css )
+
+  # E-mail
+  config.action_mailer.default_url_options = {:host => 'yourdomain.com'}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => "127.0.0.1",
+    :port    => 25,
+    :domain  => 'yourdomain.com'
+  }
+
 end
