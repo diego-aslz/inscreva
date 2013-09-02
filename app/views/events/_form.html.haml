@@ -14,7 +14,7 @@
             %a{href: "#delegations", 'data-toggle' => "pill"}= Event.human_attribute_name :delegations
         #details.tab.active
           = f.input :name, input_html: { :'ng-model' => 'event.name', class: :'input-xxlarge' }
-          = f.input :description
+          = f.input :description, input_html: { class: :'input-block-level' }
           = f.input :identifier, input_html: { :'ng-model' => 'event.identifier'}
           = f.input :rules_url, input_html: { :'ng-model' => 'event.rules_url'}
           = f.input :email, input_html: { :'ng-model' => 'event.email'}

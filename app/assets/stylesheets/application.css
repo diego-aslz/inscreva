@@ -55,3 +55,7 @@ body > .wrapper { height: auto; min-height: 82%; }
 td.actions {
   text-align: right;
 }
+
+.help-block {
+  color: #999999;
+}

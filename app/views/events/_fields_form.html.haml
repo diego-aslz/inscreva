@@ -12,7 +12,7 @@
       disabled: !form.object.new_record? },
       wrapper_html: { 'ng-show' => 'field.editing' }
   = form.input :extra, wrapper_html: { 'ng-show' => 'field.editing && showExtra(field)' },
-      input_html: { 'ng-model' => 'field.extra' },
+      input_html: { 'ng-model' => 'field.extra', class: :'input-block-level' },
       placeholder: t(:'simple_form.placeholders.field.extra')
   = form.input :hint, input_html: { 'ng-model' => 'field.hint', class: :'input-xxlarge' },
       wrapper_html: { 'ng-show' => 'field.editing' }
