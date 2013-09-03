@@ -50,7 +50,7 @@ describe 'ApplicationForm' do
       it "is confirmed when everything else is valid" do
         subscription.confirmed = false
         subscription.valid?(:create).should be_false
-        subscription.confirmed.should be_true
+        subscription.confirmed?.should be_true
         subscription.errors.count.should == 1
         subscription.errors[:base].should_not be_empty
       end
@@ -60,11 +60,27 @@ describe 'ApplicationForm' do
         subscription.valid?(:create).should be_true
       end
 
-      it "falls back to not confirmed if there's something invalid" do
-        subscription.confirmed = 'true'
-        subscription.name = nil
-        subscription.valid?(:create).should be_false
-        subscription.confirmed?.should be_false
+      it "requires a password only after it's confirmed" do
+        subscription.confirmed = 'false'
+        subscription.password = nil
+        subscription.password_confirmation = nil
+        subscription.should_not be_valid(:create)
+        subscription.confirmed?.should be_true
+        subscription.errors[:password].size.should == 0
+
+        subscription.should_not be_valid(:create)
+        subscription.confirmed?.should be_true
+        subscription.errors[:password].size.should > 0
+
+        subscription.password = '123123123'
+        subscription.password_confirmation = '12312312'
+        subscription.should_not be_valid(:create)
+        subscription.confirmed?.should be_true
+        subscription.errors[:password].size.should > 0
+
+        subscription.password_confirmation = '123123123'
+        subscription.valid?(:create)
+        subscription.should be_valid(:create)
       end
     end
 

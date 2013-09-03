@@ -18,8 +18,8 @@
     - if @application.new_record?
       = f.input :email, input_html: { class: :'input-xlarge' }
       = f.input :email_confirmation, input_html: { class: :'input-xlarge' }
-    = f.input :password unless @application.user
-    = f.input :password_confirmation unless @application.user
+    = f.input :password unless @application.user || !@application.confirmed?
+    = f.input :password_confirmation unless @application.user || !@application.confirmed?
 
     - last_group = ''
     = f.simple_fields_for :field_fills do |ff|

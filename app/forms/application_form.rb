@@ -13,8 +13,8 @@ class ApplicationForm
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   validates_confirmation_of :email, message: I18n.t('helpers.errors.' +
       'subscription.email.differs_from_confirmation')
-  validates_confirmation_of :password
-  validates_presence_of :password, on: :create, unless: :user
+  validates_confirmation_of :password, if: :validate_password?
+  validates_presence_of :password, on: :create, if: :validate_password?
   validates_presence_of :email_confirmation, if: :email, on: :create
   validates_presence_of :password_confirmation, if: :password
   validates_associated :field_fills, includes: :field
@@ -79,14 +79,10 @@ class ApplicationForm
 
   def valid?(context = nil)
     valid = super(context)
-    unless valid
-      self.confirmed = false
-    else
-      if !confirmed? && context == :create
-        errors.add :base, I18n.t('helpers.errors.subscription.confirm')
-        self.confirmed = true
-        return false
-      end
+    if valid && !confirmed? && context == :create
+      errors.add :base, I18n.t('helpers.errors.subscription.confirm')
+      self.confirmed = 'true'
+      return false
     end
     valid
   end
@@ -112,5 +108,9 @@ class ApplicationForm
       errors.add :base, msg
       self.user = nil
     end
+  end
+
+  def validate_password?
+    !user && confirmed?
   end
 end

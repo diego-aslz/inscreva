@@ -92,12 +92,12 @@ describe "Subscription" do
     page.should have_content 'Some Great Event'
     click_on I18n.t(:subscribe)
 
+    page.should_not have_content(Subscription.human_attribute_name(:password))
+    page.should_not have_content(Subscription.human_attribute_name(:password_confirmation))
     fill_in Subscription.human_attribute_name(:name),                  with: 'My Name'
     fill_in Subscription.human_attribute_name(:id_card),               with: '123321123'
     fill_in Subscription.human_attribute_name(:email),                 with: 'some@mail.com'
     fill_in Subscription.human_attribute_name(:email_confirmation),    with: 'some@mail.com'
-    fill_in Subscription.human_attribute_name(:password),              with: '123456789'
-    fill_in Subscription.human_attribute_name(:password_confirmation), with: '123456789'
     fill_in "Street", with: 'Some St.'
     fill_in "About Yourself", with: "I don't like to talk about me."
     choose I18n.t('yes')
@@ -109,6 +109,7 @@ describe "Subscription" do
     check 'Refrigerator'
     click_on I18n.t(:subscribe)
 
+    page.should have_content(I18n.t(:'helpers.errors.subscription.confirm'))
     fill_in Subscription.human_attribute_name(:password),              with: '123456789'
     fill_in Subscription.human_attribute_name(:password_confirmation), with: '123456789'
     click_on I18n.t(:subscribe)
@@ -126,5 +127,11 @@ describe "Subscription" do
     page.should have_content('Black')
     page.should have_content('Refrigerator, TV')
     page.should have_link(I18n.t(:print_receipt))
+
+    click_on I18n.t(:'helpers.links.edit')
+    fill_in "Street", with: 'Another St.'
+    click_on I18n.t(:subscribe)
+    page.should_not have_selector("form")
+    page.should have_content('Another St.')
   end
 end
