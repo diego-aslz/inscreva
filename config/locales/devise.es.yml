@@ -15,14 +15,14 @@ es:
       forgot: ¿Olvidó su contraseña?
       change: Cambiar mi contraseña
     buttons:
-      sign_in: El acceso al sistema
+      sign_in: Acceder al sistema
       sign_up: Confirmar registro
       forgot: Envíe instrucciones para cambiar la contraseña
       confirmation: Envíe instrucciones para confirmar
       change: Cambiar mi contraseña
       update: Cambiar mis datos
     links:
-      sign_in: Acceso
+      sign_in: Acceder
       sign_up: Quiero registrarme
       sign_out: Salir
       forgot: Olvidé mi contraseña
