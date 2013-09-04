@@ -18,8 +18,6 @@
     - if @application.new_record?
       = f.input :email, input_html: { class: :'input-xlarge' }
       = f.input :email_confirmation, input_html: { class: :'input-xlarge' }
-    = f.input :password unless @application.user || !@application.confirmed?
-    = f.input :password_confirmation unless @application.user || !@application.confirmed?
 
     - last_group = ''
     = f.simple_fields_for :field_fills do |ff|
@@ -29,6 +27,11 @@
       = ff.input :field_id, as: :hidden, label: false
       = ff.input :type, as: :hidden, label: false
       = input_fill ff
+
+    - unless @application.user || !@application.confirmed?
+      %h2= t :choose_password
+      = f.input :password, required: true
+      = f.input :password_confirmation
 
   .form-actions
     = f.button :submit, t(:subscribe), class: 'btn btn-primary'
