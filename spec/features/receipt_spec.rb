@@ -2,10 +2,11 @@
 require 'spec_helper'
 
 describe "Print Receipt" do
-  let(:subscription) { create(:subscription, name: 'My Test') }
+  let(:subscription) { create(:subscription, name: 'My Test', user_id: create(:user,
+      password: '123456789', password_confirmation: '123456789').id) }
 
   before(:each) do
-    sign_in subscription.user
+    sign_in subscription.user, '123456789'
   end
 
   it "shows the subscription's details" do

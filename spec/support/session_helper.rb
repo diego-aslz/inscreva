@@ -1,9 +1,9 @@
 module SessionHelper
-  def sign_in(user)
+  def sign_in(user, password=nil)
     visit new_user_session_path
-    fill_in 'E-mail', with: user.email
-    fill_in 'Senha', with: user.password
-    click_button 'Acessar o sistema'
+    fill_in User.human_attribute_name(:email), with: (user.is_a?(User) ? user.email : user)
+    fill_in User.human_attribute_name(:password), with: (password || (user.is_a?(User) ? user.password : ''))
+    click_button I18n.t(:'devise.buttons.sign_in')
   end
 end
 

@@ -4,6 +4,5 @@ FactoryGirl.define do
     email
     id_card '1234567890'
     name 'Jorge'
-    user
   end
 end
