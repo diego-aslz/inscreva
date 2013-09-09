@@ -1,33 +1,59 @@
 - model_class = Event
 = page_header t('.title', default: model_class.model_name.human.pluralize)
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th= model_class.human_attribute_name :name
-      %th= model_class.human_attribute_name :identifier
-      %th= model_class.human_attribute_name :opens_at
-      %th= model_class.human_attribute_name :closes_at
-      %th= model_class.human_attribute_name :subscriptions
-      %th
-      %th
-  %tbody
-    - @events.each do |event|
+%div{:'ng-controller' => :EventIndexCtrl}
+  %table.table.table-striped
+    %thead
       %tr
-        %td= link_to event.name, event
-        %td= link_to event.identifier, present_event_main_page_path(event.identifier)
-        %td= l event.opens_at if event.opens_at
-        %td= l event.closes_at if event.closes_at
-        - if can? :index, Subscription
-          %td= link_to event.subscriptions.size, event_subscriptions_path(event)
-        - else
-          %td= event.subscriptions.size
-        %td.actions
-          = minilink_to_edit event, edit_event_path(event)
-          = minilink_to_destroy event, value: event.name
-          = link_to icon_tag('icon-file icon-white'), event_pages_path(event),
-              class: 'btn btn-mini btn-primary',
-              title: Page.model_name.human.pluralize if can? :index, Page
+        %th= model_class.human_attribute_name :name
+        %th= model_class.human_attribute_name :identifier
+        %th= model_class.human_attribute_name :opens_at
+        %th= model_class.human_attribute_name :closes_at
+        %th= model_class.human_attribute_name :subscriptions
+        %th
+        %th
+    %tbody
+      - @events.each do |event|
+        %tr
+          %td= link_to event.name, event
+          %td= link_to event.identifier, present_event_main_page_path(event.identifier)
+          %td= l event.opens_at if event.opens_at
+          %td= l event.closes_at if event.closes_at
+          - if can? :index, Subscription
+            %td= link_to event.subscriptions.size, event_subscriptions_path(event)
+          - else
+            %td= event.subscriptions.size
+          %td.actions
+            = minilink_to_edit event, edit_event_path(event)
+            = minilink_to_destroy event, value: event.name
+            = link_to icon_tag('icon-file icon-white'), event_pages_path(event),
+                class: 'btn btn-mini btn-primary',
+                title: Page.model_name.human.pluralize if can? :index, Page
+            = link_to icon_tag('icon-tasks icon-white'), '#copy_fields',
+                class: 'btn btn-mini btn-success', :'data-toggle' => "modal",
+                title: '', :'ng-click' => "copyFrom(#{event.to_json(only: [:id, :name])})" if can? :copy_fields, event
+
+  #copy_fields.modal.hide.fade{tabindex: -1, role: 'dialog'}
+    .modal-header
+      %button.close{:'data-dismiss' => :modal, type: :button} x
+      %h3#myModalLabel= t(:'copy_fields')
+    = simple_form_for OpenStruct.new, as: 'copy', method: :put,
+        url: copy_fields_events_path, html: {class: 'form-horizontal'} do |f|
+      .modal-body
+        = f.input :from_event_name, label: t(:from), input_html: { class: 'input-large',
+            :'ng-model' => 'fromEvent', autocomplete: "off",
+            typeahead: "event as event.name for event in ahead($viewValue, '#{ahead_events_path}')" }
+        = f.input :from_event_id, as: :hidden, input_html: { value: '{{ fromEvent.id }}' }
+        = f.input :to_event_name, label: t(:to), input_html: { class: 'input-large',
+            :'ng-model' => 'toEvent', autocomplete: "off",
+            typeahead: "event as event.name for event in ahead($viewValue, '#{ahead_events_path}')" }
+        = f.input :to_event_id, as: :hidden, input_html: { value: '{{ toEvent.id }}' }
+        %p.muted
+          Esta operação duplicará os campos de um evento para o outro. Nenhum
+          campo já presente no evento de destino será removido.
+      .modal-footer
+        %button.btn{:'data-dismiss' => :modal}= t :'helpers.links.cancel'
+        = f.button :submit, t(:'copy_fields'), class: 'btn-success'
 
 = paginate @events
 

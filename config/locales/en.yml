@@ -30,6 +30,9 @@ en:
   end: end
   select: select
   include_fields: Include Fields
+  copy_fields: Copy Fields
+  from: from
+  to: to
 
   show_for:
     'no': 'No'

@@ -30,6 +30,9 @@ es:
   end: final
   select: seleccionar
   include_fields: Incluir Campos
+  copy_fields: Copiar Campos
+  from: de
+  to: para
 
   show_for:
     blank: "No Dice"

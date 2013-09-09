@@ -1,3 +1,5 @@
+app = angular.module('Inscreva', ['ui.bootstrap']);
+
 @EventCtrl = ["$scope", ($scope) ->
   $scope.event = {}
   $scope.showExtra = (field)->
@@ -43,4 +45,12 @@
     for field in $scope.event.fields
       field.editing = false
     f.editing = true
+]
+
+@EventIndexCtrl = ["$scope", "$http", ($scope, $http) ->
+  $scope.copyFrom = (ev) ->
+    $scope.fromEvent = ev
+  $scope.ahead = (term, url) ->
+    $http.get(url + "?term=" + term).then (response) ->
+      response.data
 ]

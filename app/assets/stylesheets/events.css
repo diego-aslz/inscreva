@@ -6,3 +6,11 @@
 .left-col {
   padding-right: 30px;
 }
+
+.modal form {
+  margin: 0 0 0;
+}
+
+.modal-body {
+  position: inherit;
+}

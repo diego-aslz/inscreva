@@ -11,6 +11,8 @@ Inscreva::Application.routes.draw do
     resources :pages do
       get 'present', on: :member
     end
+    put 'copy_fields', on: :collection
+    get 'ahead', on: :collection
   end
 
   devise_for :users
@@ -26,7 +28,6 @@ Inscreva::Application.routes.draw do
 
   get "/:event", to: 'pages#present', as: :present_event_main_page
   get "/:event/:page", to: 'pages#present', as: :present_event_page
-
 
   mount Markitup::Rails::Engine, at: "markitup", as: "markitup"
 end

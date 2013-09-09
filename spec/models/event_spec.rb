@@ -64,4 +64,29 @@ describe Event do
     ev.field_fills.first.field_id.should == field2.id
     ev.field_fills.last.field_id.should == field.id
   end
+
+  it 'copies fields from another event' do
+    f1 = create(:field, name: 'Field 1')
+    f2 = create(:field, name: 'Field 2', event_id: f1.event_id)
+    e1 = f1.event
+
+    e2 = create(:event)
+    e2.copy_fields_from e1
+    e2.fields.size.should == 2
+    e2.fields[0].name.should == f1.name
+    e2.fields[1].name.should == f2.name
+    e2.fields[0].priority.should == 1
+    e2.fields[1].priority.should == 2
+
+    e2.fields << Field.new(name: "Another One", priority: 3)
+    e2.copy_fields_from e1
+    e2.fields.size.should == 5
+    e2.fields[3].name.should == f1.name
+    e2.fields[4].name.should == f2.name
+    e2.fields[3].priority.should == 4
+    e2.fields[4].priority.should == 5
+
+    e2.save.should be_true
+    e2.fields[4].should_not be_new_record
+  end
 end

@@ -18,6 +18,7 @@ class Event < ActiveRecord::Base
   validate :valid_period?
   scope :ongoing, -> { where('? between opens_at and closes_at', Time.zone.now) }
   scope :future, -> { where('? < opens_at and closes_at', Time.zone.now) }
+  scope :by_name, ->(name) { where("lower(events.name) like lower(?)", "%#{name}%") }
 
   def ongoing?
     opens_at && closes_at && Time.zone.now.between?(opens_at, closes_at)
@@ -43,5 +44,14 @@ class Event < ActiveRecord::Base
 
   def main_page
     pages.by_language(I18n.locale).where(main: true).first || pages.where(page_id: nil).first
+  end
+
+  def copy_fields_from(event)
+    p = fields.last.try(:priority) || 0
+    event.fields.each do |field|
+      self.fields.build(field.attributes.with_indifferent_access.slice(
+          :field_type, :name, :extra, :required, :show_receipt, :group_name,
+          :searchable, :is_numeric, :hint).merge(priority: (p += 1)))
+    end
   end
 end
