@@ -1,40 +1,52 @@
-= f.simple_fields_for :fields, Field.new, child_index: '{{$index}}' do |form|
+= f.simple_fields_for :fields, Field.new, child_index: '{{ $index }}' do |form|
   %h3{'ng-show' => 'field.group_name'}
     {{ field.group_name }}
-  = form.input :group_name, input_html: { 'ng-model' => 'field.group_name' },
+  = form.input :group_name, input_html: { 'ng-model' => 'field.group_name',
+      id: 'event_fields_attributes_{{$index}}_group_name' },
       wrapper_html: { 'ng-show' => 'field.editing' }
   = form.input :id, as: :hidden, input_html: { 'value' => '{{field.id}}' }
   = form.input :_destroy, as: :hidden, input_html: { 'value' => '{{field._destroy}}' }
-  = form.input :name, input_html: { 'ng-model' => 'field.name', class: :'input-xxlarge' },
-      placeholder: t(:'simple_form.placeholders.field.name')
+  = form.input :name, label_html: { for: 'event_fields_attributes_{{$index}}_name' } do
+    = form.input_field :name, 'ng-model' => 'field.name', class: :'input-xxlarge',
+        placeholder: t(:'simple_form.placeholders.field.name'),
+        id: 'event_fields_attributes_{{$index}}_name'
+    = link_to icon_tag('icon-pencil icon-white'), 'javascript:void(0)',
+        'ng-click' => 'editField(field)',
+        'ng-show' => '! field.editing', class: 'btn btn-warning btn-mini', title: t(:edit_field)
+    = link_to icon_tag('icon-ok icon-white'), 'javascript:void(0)',
+        'ng-click' => 'field.editing = false',
+        'ng-show' => 'field.editing', class: 'btn btn-success btn-mini'
+    = link_to icon_tag('icon-trash icon-white'), 'javascript:void(0)',
+        'ng-click' => 'removeField($index)',
+        class: 'btn btn-danger btn-mini', title: t(:remove_field)
+    = link_to icon_tag('icon-arrow-up'), 'javascript:void(0)',
+        class: 'btn btn-mini', :'ng-show' => 'fieldsLength() > 1 && $index > 0',
+        :'ng-click' => 'fieldUp($index)', title: t(:move)
+    = link_to icon_tag('icon-arrow-down'), 'javascript:void(0)',
+        class: 'btn btn-mini', :'ng-show' => 'fieldsLength() > 1 && $index < fieldsLength() - 1',
+        :'ng-click' => 'fieldDown($index)', title: t(:move)
   = form.input :field_type, as: :select, collection: Field.valid_types_to_collection,
       include_blank: false, input_html: { 'ng-model' => 'field.field_type',
-      disabled: !form.object.new_record? },
+      disabled: !form.object.new_record?, id: 'event_fields_attributes_{{$index}}_field_type' },
       wrapper_html: { 'ng-show' => 'field.editing' }
   = form.input :extra, wrapper_html: { 'ng-show' => 'field.editing && showExtra(field)' },
-      input_html: { 'ng-model' => 'field.extra', class: :'input-block-level' },
+      input_html: { 'ng-model' => 'field.extra', class: :'input-block-level',
+      id: 'event_fields_attributes_{{$index}}_extra' },
       placeholder: t(:'simple_form.placeholders.field.extra')
-  = form.input :hint, input_html: { 'ng-model' => 'field.hint', class: :'input-xxlarge' },
+  = form.input :hint, input_html: { 'ng-model' => 'field.hint', class: :'input-xxlarge',
+      id: 'event_fields_attributes_{{$index}}_hint' },
       wrapper_html: { 'ng-show' => 'field.editing' }
-  = form.input :required, input_html: { 'ng-model' => 'field.required' },
+  = form.input :required, input_html: { 'ng-model' => 'field.required',
+      id: 'event_fields_attributes_{{$index}}_required' },
       wrapper_html: { 'ng-show' => 'field.editing' }
-  = form.input :show_receipt, input_html: { 'ng-model' => 'field.show_receipt' },
+  = form.input :show_receipt, input_html: { 'ng-model' => 'field.show_receipt',
+      id: 'event_fields_attributes_{{$index}}_show_receipt' },
       wrapper_html: { 'ng-show' => 'field.editing' }
-  = form.input :searchable, input_html: { 'ng-model' => 'field.searchable' },
+  = form.input :searchable, input_html: { 'ng-model' => 'field.searchable',
+      id: 'event_fields_attributes_{{$index}}_searchable' },
       wrapper_html: { 'ng-show' => 'field.editing && field.field_type != "file"' }
-  = form.input :is_numeric, input_html: { 'ng-model' => 'field.is_numeric' },
+  = form.input :is_numeric, input_html: { 'ng-model' => 'field.is_numeric',
+      id: 'event_fields_attributes_{{$index}}_is_numeric' },
       wrapper_html: { 'ng-show' => 'field.editing && field.field_type == "string"' }
   = form.input :priority, as: :hidden, input_html: { value: '{{field.priority}}' }
 
-= link_to icon_tag('icon-pencil icon-white'), 'javascript:void(0)', 'ng-click' => 'editField(field)',
-    'ng-show' => '! field.editing', class: 'btn btn-warning btn-mini', title: t(:edit_field)
-= link_to icon_tag('icon-ok icon-white'), 'javascript:void(0)', 'ng-click' => 'field.editing = false',
-    'ng-show' => 'field.editing', class: 'btn btn-success btn-mini'
-= link_to icon_tag('icon-trash icon-white'), 'javascript:void(0)', 'ng-click' => 'removeField($index)',
-    class: 'btn btn-danger btn-mini', title: t(:remove_field)
-= link_to icon_tag('icon-arrow-up'), 'javascript:void(0)',
-    class: 'btn btn-mini', :'ng-show' => 'fieldsLength() > 1 && $index > 0',
-    :'ng-click' => 'fieldUp($index)', title: t(:move)
-= link_to icon_tag('icon-arrow-down'), 'javascript:void(0)',
-    class: 'btn btn-mini', :'ng-show' => 'fieldsLength() > 1 && $index < fieldsLength() - 1',
-    :'ng-click' => 'fieldDown($index)', title: t(:move)
