@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130828191426) do
+ActiveRecord::Schema.define(:version => 20130911190114) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -71,15 +71,16 @@ ActiveRecord::Schema.define(:version => 20130828191426) do
     t.string   "field_type"
     t.boolean  "required"
     t.integer  "event_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.text     "extra"
-    t.boolean  "show_receipt", :default => false
+    t.boolean  "show_receipt",            :default => false
     t.string   "group_name"
-    t.integer  "priority",     :default => 0
-    t.boolean  "searchable",   :default => false
-    t.boolean  "is_numeric",   :default => false
+    t.integer  "priority",                :default => 0
+    t.boolean  "searchable",              :default => false
+    t.boolean  "is_numeric",              :default => false
     t.string   "hint"
+    t.text     "allowed_file_extensions"
   end
 
   add_index "fields", ["event_id"], :name => "index_event_fields_on_event_id"

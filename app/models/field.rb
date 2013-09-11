@@ -7,9 +7,10 @@ class Field < ActiveRecord::Base
   belongs_to :event
   has_many :field_fills, dependent: :destroy
   attr_accessible :field_type, :name, :extra, :required, :show_receipt,
-      :group_name, :priority, :searchable, :is_numeric, :hint
+      :group_name, :priority, :searchable, :is_numeric, :hint, :allowed_file_extensions
   validates_presence_of :field_type, :name
   validates_inclusion_of :field_type, in: VALID_TYPES.map(&:to_s), if: :field_type
+  serialize :allowed_file_extensions, Array
 
   after_initialize :default_values
 

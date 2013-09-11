@@ -108,6 +108,21 @@ describe FieldFill do
       fill.should_not require_presence_of(:file)
     end
 
+    it "requires a file with valid extension according to Field" do
+      fill.field.required = true
+      fill.field.field_type = 'file'
+      fill.field.allowed_file_extensions = %w(png doc)
+
+      fill.file = File.open '/tmp/test.png', 'w'
+      fill.should be_valid
+
+      fill.file = File.open '/tmp/test.doc', 'w'
+      fill.should be_valid
+
+      fill.file = File.open '/tmp/test.pdf', 'w'
+      fill.should have(1).errors_on :file
+    end
+
     it "does not require a file when Field is not a file" do
       fill.field.required = true
       fill.field.field_type = 'string'

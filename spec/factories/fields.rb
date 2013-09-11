@@ -3,6 +3,7 @@ FactoryGirl.define do
     association :event, factory: :ongoing_event
     sequence(:name) { |n| "field#{n}" }
     field_type 'string'
+    allowed_file_extensions ['pdf']
 
     factory :select_field do
       field_type 'select'
