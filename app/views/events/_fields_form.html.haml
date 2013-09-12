@@ -29,6 +29,19 @@
       include_blank: false, input_html: { 'ng-model' => 'field.field_type',
       disabled: !form.object.new_record?, id: 'event_fields_attributes_{{$index}}_field_type' },
       wrapper_html: { 'ng-show' => 'field.editing' }
+  = form.input :allowed_file_extensions,
+      as: :check_boxes, wrapper_html: { 'ng-show' => "field.editing && field.field_type == 'file'",
+      :'ng-init' => "idx = $index; types = ['jpg', 'jpeg', 'gif', 'png', 'pdf',
+      'doc', 'xls', 'odt', 'ods']; labels = ['Imagem JPG', 'Imagem JPEG', 'Imagem GIF',
+      'Imagem PNG', 'Documento PDF', 'Word (DOC)', 'Excel (XLS)', 'OpenOffice Texto (ODT)',
+      'OpenOffice Calc (ODS)']" } do
+    %label.checkbox{:'ng-repeat' => "type in types"}
+      %input.check_boxes.optional{ id: 'event_fields_attributes_{{idx}}_allowed_file_extensions', |
+        name: "event[fields_attributes][{{idx}}][allowed_file_extensions][]",    |
+        :'ng-checked' => 'field.allowed_file_extensions.indexOf(type) > -1',     |
+        type: "checkbox", value: '{{type}}'} {{labels[$index]}}                            |
+    %input{name: "event[fields_attributes][{{idx}}][allowed_file_extensions][]",
+        type: "hidden", value: ""}
   = form.input :extra, wrapper_html: { 'ng-show' => 'field.editing && showExtra(field)' },
       input_html: { 'ng-model' => 'field.extra', class: :'input-block-level',
       id: 'event_fields_attributes_{{$index}}_extra' },

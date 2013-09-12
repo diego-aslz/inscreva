@@ -108,6 +108,7 @@ pt-BR:
         searchable: Pesquisável
         is_numeric: Aceitar apenas números
         hint: Texto de auxílio
+        allowed_file_extensions: Extensões permitidas
       event:
         closes_at: Término das Inscrições
         email: E-mail oficial de comunicação

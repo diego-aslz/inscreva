@@ -108,6 +108,7 @@ en:
         searchable: Searchable
         is_numeric: Accept just numbers
         hint: Hint
+        allowed_file_extensions: Allowed extensions
       event:
         closes_at: Closing date
         email: Official e-mail

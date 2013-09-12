@@ -108,6 +108,7 @@ es:
         searchable: Buscar
         is_numeric: Aceptar sólo números
         hint: Texto de ayuda
+        allowed_file_extensions: Extensiones de archivo
       event:
         closes_at: Terminación de Registro
         email: E-mail de comunicación
