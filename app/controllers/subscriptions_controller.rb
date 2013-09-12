@@ -57,7 +57,6 @@ class SubscriptionsController < InheritedResources::Base
 
   def index
     index! do |format|
-      puts "FIELDS: #{@fields}"
       format.html { @subscriptions = @subscriptions.page(params[:page]) }
       format.csv { send_data @subscriptions.to_csv(include_fields: @fields) }
       format.xls

@@ -57,4 +57,4 @@ gem 'angularjs-rails'
 gem 'unicorn'
 gem 'capistrano'
 gem 'markitup-rails'
-gem 'rubyzip',  "~> 0.9.9"
+gem 'rubyzip', '< 1.0.0'

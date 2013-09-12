@@ -298,7 +298,7 @@ DEPENDENCIES
   redcarpet
   responders
   rspec-rails
-  rubyzip (~> 0.9.9)
+  rubyzip (< 1.0.0)
   sass-rails (~> 3.2.3)
   show_for
   simple_form
