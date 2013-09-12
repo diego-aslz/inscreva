@@ -60,8 +60,12 @@
 = paginate @subscriptions
 
 = link_to icon_tag('icon-download-alt icon-white') + " CSV",
-    event_subscriptions_path(@event, format: 'csv', params: params.slice(:fields, :field_ids)),
-    class: 'btn btn-inverse'
+    event_subscriptions_path(@event, format: 'csv', params: params.slice(:fields,
+    :field_ids, :term)), class: 'btn btn-inverse', title: t(:'export.csv')
 = link_to icon_tag('icon-download-alt icon-white') + " XLS",
-    event_subscriptions_path(@event, format: 'xls', params: params.slice(:fields, :field_ids)),
-    class: 'btn btn-success'
+    event_subscriptions_path(@event, format: 'xls', params: params.slice(:fields,
+    :field_ids, :term)), class: 'btn btn-success', title: t(:'export.xls')
+= link_to icon_tag('icon-download-alt icon-white') + " ZIP", '#download_fields',
+    class: 'btn btn-info', :'data-toggle' => "modal", title: t(:'export.zip')
+
+= render 'download_dialog', params: params, event: @event

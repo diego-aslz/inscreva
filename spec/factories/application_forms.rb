@@ -4,7 +4,7 @@ FactoryGirl.define do
     email
     email_confirmation { email }
     id_card '1234567890'
-    name 'Jorge'
+    name 'Jorge Silva'
     password 'JorgeJorge'
     password_confirmation 'JorgeJorge'
     confirmed 'true'

@@ -34,6 +34,11 @@ en:
   from: from
   to: to
 
+  export:
+    csv: Export to CSV
+    xls: Export to Excel
+    zip: Download attached files
+
   show_for:
     'no': 'No'
     'yes': 'Yes'

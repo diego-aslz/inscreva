@@ -34,6 +34,11 @@ es:
   from: de
   to: para
 
+  export:
+    csv: Exportar CSV
+    xls: Exportar Excel
+    zip: Descargar archivos adjuntos
+
   show_for:
     blank: "No Dice"
     "yes": "Sí"

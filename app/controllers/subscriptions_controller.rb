@@ -61,6 +61,10 @@ class SubscriptionsController < InheritedResources::Base
       format.html { @subscriptions = @subscriptions.page(params[:page]) }
       format.csv { send_data @subscriptions.to_csv(include_fields: @fields) }
       format.xls
+      format.zip {
+        fds = FileDownloaderService.new(@subscriptions)
+        send_file fds.zip_file(params[:download][:field_ids])
+      }
     end
   end
 
@@ -78,7 +82,6 @@ class SubscriptionsController < InheritedResources::Base
     else
       @fields = []
     end
-    puts "FIELDS: #{@fields}"
     params[:fields].each do |k,v|
       if v.key?(:value) and filter_valid?(k, v[:value], v[:type])
         clause, query_params = filter_clause(k, v[:value], v[:type])

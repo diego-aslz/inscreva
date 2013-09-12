@@ -60,4 +60,26 @@ module SubscriptionsHelper
   def to_date(str)
     begin Date.strptime(str, '%d/%m/%Y').strftime('%Y-%m-%d') rescue nil end
   end
+
+  def hide_params(params, options={})
+    only, prefix = options[:only], options[:prefix]
+    pars = only.nil? ? params : params.slice(*(only.is_a?(Hash) ? only.keys : [only]))
+    result = ''
+    pars.each_pair do |k, v|
+      value = v
+      id = prefix.nil? ? k : "#{prefix}[#{k}]"
+      if value.is_a? Hash
+        only.is_a?(Hash) ? only = only[k] : only = nil
+        result += hide_params(value, only: only, prefix: id)
+      elsif value.is_a? Array
+        for val in value
+          result += hidden_field_tag(id + '[]', val)
+        end
+        result += hidden_field_tag(id + '[]', '')
+      else
+        result += hidden_field_tag(id, value)
+      end
+    end
+    result.html_safe
+  end
 end
