@@ -61,6 +61,8 @@ pt-BR:
     delete: 'Excluir'
     subscription:
       receipt: Emitir Comprovante
+    field_fill:
+      download: Baixar Anexos
 
   types:
     boolean: Lógico
@@ -94,6 +96,7 @@ pt-BR:
       user: Usuário
       event: Evento
       field: Campo
+      field_fill: Preenchimento
       subscription: Inscrição
       page: Página
       delegation: Membro

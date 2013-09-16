@@ -61,6 +61,8 @@ es:
     delete: 'Eliminar'
     subscription:
       receipt: Impresión de Prueba
+    field_fill:
+      download: Descargar Archivos
 
   types:
     boolean: Lógico
@@ -94,6 +96,7 @@ es:
       user: Usuario
       event: Evento
       field: Campo
+      field_fill: Información
       subscription: Inscripción
       page: Página
       delegation: Miembro

@@ -61,6 +61,8 @@ en:
     delete: 'Delete'
     subscription:
       receipt: Print Receipt
+    field_fill:
+      download: Download Attachments
 
   types:
     boolean: Boolean
@@ -94,6 +96,7 @@ en:
       user: User
       event: Event
       field: Field
+      field_fill: Fills
       subscription: Subscription
       page: Page
       delegation: Member

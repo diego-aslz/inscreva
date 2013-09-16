@@ -26,6 +26,8 @@ class Ability
       delegation.permissions.each do |p|
         if p.target_class == Event
           can p.action.to_sym, p.target_class, id: delegation.event_id
+        elsif p.target_class == FieldFill
+          can p.action.to_sym, p.target_class, subscription: { event_id: delegation.event_id }
         else
           can p.action.to_sym, p.target_class, event_id: delegation.event_id
         end
