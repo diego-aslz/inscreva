@@ -163,6 +163,8 @@ en:
         permissions: Permissions
     errors:
       messages:
+        size_too_big: 'File size must be less than %{file_size}'
+        size_too_small: 'File size must be greater than %{file_size}'
         record_invalid: Incorrect data
 
   views:

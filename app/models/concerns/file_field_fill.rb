@@ -7,6 +7,7 @@ module Concerns
       mount_uploader :file, FileFieldUploader
       after_save :clean_remove_file
       validates_presence_of :file, if: :require_file?
+      validates :file, file_size: { maximum: 1.megabyte.to_i }
     end
 
     def changed?

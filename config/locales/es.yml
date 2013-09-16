@@ -163,6 +163,8 @@ es:
         permissions: Permisos
     errors:
       messages:
+        size_too_big: 'Tamaño de archivo arriba de lo permitido (%{file_size})'
+        size_too_small: 'Tamaño de archivo abajo de lo permitido (%{file_size})'
         record_invalid: Datos incorrectos
 
   views:
