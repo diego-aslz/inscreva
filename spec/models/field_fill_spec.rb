@@ -123,6 +123,15 @@ describe FieldFill do
       fill.should have(1).errors_on :file
     end
 
+    it 'requires the file to not be greater than the size defined in the Field' do
+      fill.field.max_file_size = 1.kilobyte
+      fill.file = File.open "#{Rails.root}/spec/support/files/blank.pdf", 'r'
+      fill.should have(1).errors_on :file
+
+      fill.field.max_file_size = 2.kilobytes
+      fill.should have(0).errors_on :file
+    end
+
     it "does not require a file when Field is not a file" do
       fill.field.required = true
       fill.field.field_type = 'string'

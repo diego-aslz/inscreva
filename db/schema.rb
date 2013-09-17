@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130916194223) do
+ActiveRecord::Schema.define(:version => 20130917132957) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20130916194223) do
     t.boolean  "is_numeric",              :default => false
     t.string   "hint"
     t.text     "allowed_file_extensions"
+    t.integer  "max_file_size"
   end
 
   add_index "fields", ["event_id"], :name => "index_event_fields_on_event_id"
