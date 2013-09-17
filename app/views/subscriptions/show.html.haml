@@ -11,7 +11,7 @@
   - last_group = ''
   - @subscription.field_fills.each do |fill|
     - group = fill.field.group_name
-    - if group != last_group
+    - if !group.blank? && group != last_group
       %h2= group
       - last_group = group
     = show.attribute fill.field.name.to_sym do

@@ -64,8 +64,14 @@ class ApplicationForm
   def submit(params = nil)
     load_from params if params
     if valid? (new_record? ? :create : :update)
-      subscription.user_id ||= User.create!(email: email, password: password,
-          password_confirmation: password_confirmation, name: name).id
+      unless subscription.user_id
+        user = User.new(email: email, password: password, name: name,
+            password_confirmation: password_confirmation)
+        Rails.logger.info "Erro no usuario: #{user.errors.full_messages}" unless user.valid?
+        user.save!
+        subscription.user_id = user.id
+      end
+
       subscription.save!
       true
     else
@@ -95,13 +101,12 @@ class ApplicationForm
   end
 
   def valid_user?
-    valid = self.user || (self.user = User.where(email: email).first).nil? || self.user.
+    valid = self.user || (self.user = User.find_by_email(email)).nil? || self.user.
         valid_password?(password)
     unless valid
       helper = Rails.application.routes.url_helpers
       base_helper = ActionController::Base.helpers
-      errors.add :password, I18n.t('helpers.errors.subscription.' +
-          'password.invalid')
+      errors.add :password, I18n.t(:'helpers.errors.subscription.password.invalid')
       msg = I18n.t('helpers.errors.subscription.invalid_user',
           password_link: base_helper.link_to(I18n.t('helpers.links.password_link'),
               helper.new_user_password_path, target: :_blank)).html_safe
