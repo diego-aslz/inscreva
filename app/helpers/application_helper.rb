@@ -57,7 +57,8 @@ module ApplicationHelper
     %w[BRA ARG BOL CHL COL CUB MEX PER PRY URY VEN]
   end
 
-  def abbr(text, options={size: 15, ending: '...'})
+  def abbr(text, options={})
+    options = {size: 15, ending: '...'}.merge options
     size = options[:size]
     ab = options[:abbr]
     ending = options[:ending]
