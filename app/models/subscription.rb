@@ -1,8 +1,8 @@
 class Subscription < ActiveRecord::Base
   belongs_to :event, :counter_cache => true
   belongs_to :user
-  has_many :field_fills, dependent: :destroy, include: :field
-  has_many :fills, class_name: 'FieldFill'
+  has_many :field_fills, include: :field
+  has_many :fills, class_name: 'FieldFill', dependent: :destroy
 
   validates_uniqueness_of :number
 

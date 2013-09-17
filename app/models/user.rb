@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :admin
 
-  has_many :subscriptions
-  has_many :delegations
+  has_many :subscriptions, dependent: :destroy
+  has_many :delegations, dependent: :destroy
 
   scope :search, ->(term) {
     where('concat(COALESCE(name,\'\'),email) like ?', "%#{term}%")
