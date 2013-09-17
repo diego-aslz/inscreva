@@ -48,7 +48,7 @@
       %tr
         %td= l subscription.created_at, format: :short
         %td= link_to subscription.number, subscription_path(subscription)
-        %td= subscription.name
+        %td= abbr(subscription.name, size: 60)
         %td= subscription.email
         - for field in @fields
           - fill = subscription.fills.where(field_id: field.id).first
