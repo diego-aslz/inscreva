@@ -14,7 +14,7 @@ class ApplicationForm
   validates_confirmation_of :email, message: I18n.t('helpers.errors.' +
       'subscription.email.differs_from_confirmation')
   validates_confirmation_of :password, if: :validate_password?
-  validates_presence_of :password, on: :create, if: :validate_password?
+  validates :password, presence: true, length: { minimum: 8 }, on: :create, if: :validate_password?
   validates_presence_of :email_confirmation, if: :email, on: :create
   validates_presence_of :password_confirmation, if: :password
   validates_associated :field_fills, includes: :field
@@ -67,7 +67,6 @@ class ApplicationForm
       unless subscription.user_id
         user = User.new(email: email, password: password, name: name,
             password_confirmation: password_confirmation)
-        Rails.logger.info "Erro no usuario: #{user.errors.full_messages}" unless user.valid?
         user.save!
         subscription.user_id = user.id
       end
