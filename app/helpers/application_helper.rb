@@ -56,4 +56,15 @@ module ApplicationHelper
   def priority_countries
     %w[BRA ARG BOL CHL COL CUB MEX PER PRY URY VEN]
   end
+
+  def abbr(text, options={size: 15, ending: '...'})
+    size = options[:size]
+    ab = options[:abbr]
+    ending = options[:ending]
+    if text.size <= size.to_i
+      text
+    else
+      content_tag :abbr, "#{ab || text[0..size-1]}#{ending}", title: text
+    end
+  end
 end
