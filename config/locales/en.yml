@@ -117,6 +117,7 @@ en:
         is_numeric: Accept just numbers
         hint: Hint
         allowed_file_extensions: Allowed extensions
+        max_file_size: Max File Size
       event:
         closes_at: Closing date
         email: Official e-mail

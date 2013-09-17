@@ -130,6 +130,10 @@ describe FieldFill do
 
       fill.field.max_file_size = 2.kilobytes
       fill.should have(0).errors_on :file
+      fill.field.max_file_size = 0
+      fill.should have(0).errors_on :file
+      fill.field.max_file_size = -1
+      fill.should have(0).errors_on :file
     end
 
     it "does not require a file when Field is not a file" do

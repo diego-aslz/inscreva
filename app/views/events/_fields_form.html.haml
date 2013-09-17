@@ -29,6 +29,15 @@
       include_blank: false, input_html: { 'ng-model' => 'field.field_type',
       disabled: !form.object.new_record?, id: 'event_fields_attributes_{{$index}}_field_type' },
       wrapper_html: { 'ng-show' => 'field.editing' }
+  = form.input_field :max_file_size, value: '{{ field.max_size * 1024 * 1024 }}', as: :hidden
+  = form.input :max_file_size, input_html: { :'ng-model' => 'field.max_file_size',
+      id: 'event_fields_attributes_{{$index}}_max_size' },
+      wrapper_html: { :'ng-show' => "field.editing && field.field_type == 'file'" } do
+    .input-append
+      = text_field_tag nil, '', id: 'event_fields_attributes_{{$index}}_max_size',
+          :'ng-init' => 'field.max_size = field.max_file_size / 1024 / 1024',
+          :'ng-model' => 'field.max_size', class: :'input-mini'
+      %span.add-on MB
   = form.input :allowed_file_extensions,
       as: :check_boxes, wrapper_html: { 'ng-show' => "field.editing && field.field_type == 'file'",
       :'ng-init' => "idx = $index; types = ['jpg', 'jpeg', 'gif', 'png', 'pdf',

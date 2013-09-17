@@ -117,6 +117,7 @@ es:
         is_numeric: Aceptar sólo números
         hint: Texto de ayuda
         allowed_file_extensions: Extensiones de archivo
+        max_file_size: Tamaño Máximo de Archivo
       event:
         closes_at: Terminación de Registro
         email: E-mail de comunicación

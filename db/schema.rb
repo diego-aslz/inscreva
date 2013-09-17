@@ -13,18 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130917132957) do
 
-  create_table "areas", :force => true do |t|
-    t.string   "name"
-    t.string   "requirement"
-    t.integer  "vacation"
-    t.integer  "special_vacation"
-    t.integer  "event_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "areas", ["event_id"], :name => "index_areas_on_event_id"
-
   create_table "delegations", :force => true do |t|
     t.integer  "user_id"
     t.integer  "event_id"
