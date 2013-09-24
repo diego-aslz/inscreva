@@ -33,6 +33,7 @@ en:
   copy_fields: Copy Fields
   from: from
   to: to
+  total: 'Total: %{count}'
 
   export:
     csv: Export to CSV

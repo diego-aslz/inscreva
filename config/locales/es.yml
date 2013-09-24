@@ -33,6 +33,7 @@ es:
   copy_fields: Copiar Campos
   from: de
   to: para
+  total: 'Total: %{count}'
 
   export:
     csv: Exportar CSV
