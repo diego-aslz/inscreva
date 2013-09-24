@@ -20,7 +20,9 @@ Inscreva::Application.routes.draw do
     get 'registrations/edit' => 'devise/registrations#edit', :as => 'edit_registration'
     put 'registrations' => 'devise/registrations#update', :as => 'registration'
   end
-  resources :users
+  resources :users do
+    get 'ahead', on: :collection
+  end
   resources :roles
 
   root to: "home#index"

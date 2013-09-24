@@ -54,4 +54,19 @@ class Event < ActiveRecord::Base
           :searchable, :is_numeric, :hint, :allowed_file_extensions).merge(priority: (p += 1)))
     end
   end
+
+  def to_ng
+    to_json(
+      include: {
+        fields: {},
+        delegations: {
+          include: {
+            user: {
+              only: [:id, :name]
+            }
+          }
+        }
+      }
+    )
+  end
 end

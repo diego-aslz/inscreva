@@ -1,11 +1,21 @@
 class UsersController < InheritedResources::Base
-  load_and_authorize_resource
+  load_and_authorize_resource except: :ahead
   respond_to :html
 
   def index
     @users = User.page(params[:page])
     @users = @users.search(params[:term]) unless params[:term].blank?
     @users = @users.not_subscribers if params[:subscribers].blank?
+  end
+
+  def ahead
+    authorize! :update, Event
+    @users = User.by_name(params[:term]).select([:id, :name]).order(:name)
+    ar = []
+    for e in @users.limit(20) do
+      ar << {id: e.id, name: e.name}
+    end
+    render json: ar
   end
 
   def update

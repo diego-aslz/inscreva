@@ -1,6 +1,5 @@
-%div{'ng-controller' => 'EventCtrl', 'ng-init' => "event = #{@event.to_json}; event.fields = #{@event.fields.to_json}; extras = #{Field::TYPES_WITH_EXTRA.to_json}; event.delegations = #{@event.delegations.to_json}"}
+%div{'ng-controller' => 'EventCtrl', 'ng-init' => "event = #{@event.to_ng}; extras = #{Field::TYPES_WITH_EXTRA.to_json}"}
   = simple_form_for @event, :html => { class: 'form-horizontal', multipart: true } do |f|
-
     .form-inputs
       .tabs
         %ul.nav.nav-pills
