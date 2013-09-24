@@ -22,7 +22,7 @@ class Ability
     end
 
     # Users with permissions
-    for delegation in user.delegations
+    for delegation in user.delegations.includes(:permissions)
       delegation.permissions.each do |p|
         if p.target_class == Event
           can p.action.to_sym, p.target_class, id: delegation.event_id

@@ -42,12 +42,10 @@ describe "User" do
       let(:user) { create :user }
 
       before(:each) do
-        d = create(:delegation, event_id: event.id)
+        d = create(:delegation, event_id: event.id, user_id: user.id)
         d.role = create(:role)
-        d.role.permissions << create(:permission, action: 'read',
-            subject_class: 'Event')
-        d.role.permissions << create(:permission, action: 'read',
-            subject_class: 'Subscription')
+        d.role.permissions << Permission.find_or_create_by_action_and_subject_class('read', 'Event')
+        d.role.permissions << Permission.find_or_create_by_action_and_subject_class('read', 'Subscription')
         user.delegations << d
       end
 

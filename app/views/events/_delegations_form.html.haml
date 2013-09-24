@@ -1,8 +1,10 @@
 = f.simple_fields_for :delegations, Delegation.new, child_index: '{{$index}}' do |form|
-  = form.input :id, as: :hidden, input_html: { 'value' => '{{delegation.id}}' }
-  = form.input :_destroy, as: :hidden, input_html: { 'value' => '{{delegation._destroy}}' }
-  = form.association :user, input_html: { 'ng-model' => 'delegation.user_id' }
-  = form.association :role, input_html: { 'ng-model' => 'delegation.role_id' }
+  = form.input_field :id, as: :hidden, value: '{{delegation.id}}'
+  = form.input_field :_destroy, as: :hidden, value: '{{delegation._destroy}}'
+  = form.association :user, input_html: { :'ng-model' => 'delegation.user_id',
+  		id: 'event_delegations_attributes_{{$index}}_user_id' }
+  = form.association :role, input_html: { 'ng-model' => 'delegation.role_id',
+  		id: 'event_delegations_attributes_{{$index}}_role_id' }
   = form.input :_destroy, label: false do
     = link_to icon_tag('icon-trash icon-white'), 'javascript:void(0)', 'ng-click' => 'removeDelegation($index)', class: 'btn btn-danger btn-mini', title: t(:remove_delegation)
 %hr
