@@ -86,9 +86,6 @@ pt-BR:
       title: Minhas Inscrições
     receipt:
       title: Comprovante de Inscrição
-  active_admin:
-    access_denied:
-      message: 'Permissão negada'
   unauthorized:
     manage:
       all: 'Permissão negada'

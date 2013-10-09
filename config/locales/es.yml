@@ -4,23 +4,23 @@ es:
   'no': 'No'
   cancel: Cancelar
   details: Detalles
-  download: Descarga
+  download: Descargar
   fields: Campos de Formulario de Inscripción
   home_title: Eventos en curso
   no_file: Ningún archivo agregado
-  print_receipt: Impresión de Prueba
+  print_receipt: Impresión de Comprobante
   subscribe: Suscribir
   remove_current_file: Eliminar archivo adjunto
   add_field: Agregar Campo
   add_delegation: Agregar Miembro
-  edit_field: Cambio de Campo
-  remove_field: Eliminar Campo
+  edit_field: Modificar Campo
+  remove_field: Borrar Campo
   remove_file: Eliminar Arquivo
   remove_delegation: Eliminar Miembro
   move: Mover
   search: Búsqueda
   edit_mode: Edición
-  preview_mode: Visualização
+  preview_mode: Visualización
   attachment: Anexo
   all: Todos
   include_subscribers: Incluir usuarios inscritos
@@ -53,7 +53,7 @@ es:
         notice: '%{resource_name} actualizado(a) con éxito.'
       destroy:
         notice: '%{resource_name} eliminado(a) con éxito.'
-        alert: '%{resource_name} no podía ser removido(a).'
+        alert: '%{resource_name} no pudo ser removido(a).'
 
   permissions:
     create: 'Crear'
@@ -61,7 +61,7 @@ es:
     read: 'Visualizar'
     delete: 'Eliminar'
     subscription:
-      receipt: Impresión de Prueba
+      receipt: Emisión de Comprobante
     field_fill:
       download: Descargar Archivos
 
@@ -85,10 +85,7 @@ es:
     mine:
       title: Mis Inscripciones
     receipt:
-      title: Prueba de Inscripción
-  active_admin:
-    access_denied:
-      message: Permiso denegado
+      title: Comprobante de Inscripción
   unauthorized:
     manage:
       all: Permiso denegado
@@ -112,22 +109,22 @@ es:
         group_name: Grupo
         name: Campo
         priority: Orden
-        required: Obrigatorio
-        show_receipt: Mostrar en la Prueba
+        required: Obligatorio
+        show_receipt: Mostrar en el comprobante
         searchable: Buscar
         is_numeric: Aceptar sólo números
         hint: Texto de ayuda
         allowed_file_extensions: Extensiones de archivo
         max_file_size: Tamaño Máximo de Archivo
       event:
-        closes_at: Terminación de Registro
-        email: E-mail de comunicación
+        closes_at: Término de las Inscripciones
+        email: Correo electrónico de comunicación
         identifier: Identificador
         name: Nombre
-        opens_at: El registro comienza a partir de
-        rules_url: Dirección al Edital
-        technical_email: E-mail de apoyo técnico
-        subscriptions: Subscripciones
+        opens_at: Inicio de las Inscripciones
+        rules_url: Dirección electrónica para edicto o similar
+        technical_email: Correo electrónico de apoyo técnico
+        subscriptions: Inscripciones
         fields: Campos
         delegations: Miembros
         published: Publicar en la página de inicio
@@ -156,9 +153,9 @@ es:
         content: Contenido
         event_name: Evento
         language: Idioma
-        main: Pagina principal del evento
+        main: Página principal del evento
         name: Nombre
-        page_id: Pagina mestre
+        page_id: Página maestra
         title: Título
       page_file:
         file: Archivo
@@ -174,8 +171,8 @@ es:
 
   views:
     pagination:
-      first: Primero
-      next: Proximo
+      first: Inicio
+      next: Próximo
       previous: Anterior
       last: Final
 
@@ -191,15 +188,15 @@ es:
       save: Guardar
       cancel: Cancelar
       back: Volver
-      confirm: '¿Está seguro que desea eliminar %{model} "%{value}"?'
+      confirm: '¿Está seguro de que desea eliminar %{model} "%{value}"?'
       password_link: haga clic aquí para recuperar su contraseña
       files:
-        confirm: '¿Está seguro que desea eliminar el archivo "%{value}"?'
+        confirm: '¿Está seguro de que desea eliminar el archivo "%{value}"?'
     select:
       prompt: 'Por favor, seleccione'
     submit:
       create: 'Crear %{model}'
-      submit: 'Salvar %{model}'
+      submit: 'Guardar %{model}'
       update: 'Actualizar %{model}'
     messages:
       subscription:
@@ -210,11 +207,11 @@ es:
         closes_at:
           too_soon: debe ser posterior a la apertura
       subscription:
-        invalid_user: "Su correo electrónico ya ha sido registrado en nuestro sistema.<br /> Por favor, use la misma contraseña utilizada en su última inscripción. <strong>Si usted no recuerda</strong>, %{password_link}."
+        invalid_user: "Su correo electrónico ya ha sido registrado en nuestro sistema.<br /> Por favor, use la misma contraseña utilizada en su última inscripción. <strong>Si usted no recuerda su contraseña</strong>, %{password_link}."
         email:
-          differs_from_confirmation: No coincide con la confirmación del correo electrónico.
+          differs_from_confirmation: No corresponde a la confirmación del correo electrónico.
         event_id:
-          not_ongoing: Registro aún no se ha abierto o ya se ha cerrado.
+          not_ongoing: Las inscripciones aún no se han abierto o se han cerrado.
         password:
-          invalid: Debe coincidir con el mismo utilizado en las entradas anteriores
-        confirm: Revise su información y haga clic en Suscribir nuevo
+          invalid: Debe coincidir con la misma utilizada en las entradas anteriores
+        confirm: Revise su información y haga clic en Suscribir

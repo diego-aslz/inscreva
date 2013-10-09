@@ -3,7 +3,7 @@ es:
     "yes": 'Sí'
     "no": 'No'
     required:
-      text: 'obrigatorio'
+      text: 'obligatorio'
       mark: '*'
     error_notification:
       default_message: "Hay los siguientes errores en el forma:"

@@ -86,9 +86,6 @@ en:
       title: My Subscriptions
     receipt:
       title: Subscription Receipt
-  active_admin:
-    access_denied:
-      message: Access denied
   unauthorized:
     manage:
       message: Access denied
