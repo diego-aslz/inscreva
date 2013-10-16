@@ -24,6 +24,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'thin'
   gem 'debugger'
+  gem 'capistrano', '~> 2.15.5'
 end
 
 group :assets do
@@ -55,6 +56,5 @@ gem 'redcarpet'
 gem 'inherited_resources'
 gem 'angularjs-rails'
 gem 'unicorn'
-gem 'capistrano'
 gem 'markitup-rails'
 gem 'rubyzip', '< 1.0.0'
