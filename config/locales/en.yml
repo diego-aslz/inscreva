@@ -175,6 +175,7 @@ en:
       next: Next
       previous: Previous
       last: Last
+      truncate: ...
 
   helpers:
     titles:

@@ -175,6 +175,7 @@ pt-BR:
       next: Próximo
       previous: Anterior
       last: Fim
+      truncate: ...
 
   helpers:
     titles:
