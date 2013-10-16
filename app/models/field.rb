@@ -27,6 +27,10 @@ class Field < ActiveRecord::Base
     field_type == 'file'
   end
 
+  def date?
+    field_type == 'date'
+  end
+
   def default_values
     self.field_type = 'string' unless self.field_type
   end

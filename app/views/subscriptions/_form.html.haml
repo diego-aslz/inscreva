@@ -24,8 +24,8 @@
       - group = ff.object.field.group_name
       - if group != last_group && !group.blank?
         %h2= last_group = group
-      = ff.input :field_id, as: :hidden, label: false
-      = ff.input :type, as: :hidden, label: false
+      = ff.input_field :field_id, as: :hidden, label: false
+      = ff.input_field :type, as: :hidden, label: false
       = input_fill ff
 
     - unless @application.user || !@application.confirmed?

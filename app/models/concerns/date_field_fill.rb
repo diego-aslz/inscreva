@@ -1,6 +1,12 @@
 
 module Concerns
   module DateFieldFill
+    extend ActiveSupport::Concern
+
+    included do
+      validates_presence_of :value_date, if: :require_date?
+    end
+
     def value_as_date
       Date.strptime(value, '%Y-%m-%d')
     end
@@ -15,7 +21,11 @@ module Concerns
 
     def value_date=(value_date)
       self.value = begin Time.strptime(value_date, '%d/%m/%Y').
-          strftime('%Y-%m-%d') rescue '' end
+          strftime('%Y-%m-%d') rescue nil end
+    end
+
+    def require_date?
+      require_value? && field.date?
     end
   end
 end

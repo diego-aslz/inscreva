@@ -76,7 +76,6 @@ class SubscriptionsController < InheritedResources::Base
   protected
 
   def resource_params
-    debugger
     return [] if request.get?
     [params.require(:subscription).permit(
       :email,

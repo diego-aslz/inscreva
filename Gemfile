@@ -41,7 +41,7 @@ group :assets do
 end
 
 gem 'devise', github: 'plataformatec/devise', branch: 'v3.1.0.rc2'
-gem 'show_for'
+gem 'show_for', github: 'plataformatec/show_for'
 gem 'cancan'
 gem 'simple_form', '~> 3.0.0.rc'
 gem 'kaminari'
