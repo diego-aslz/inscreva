@@ -44,8 +44,8 @@ describe "User" do
       before(:each) do
         d = create(:delegation, event_id: event.id, user_id: user.id)
         d.role = create(:role)
-        d.role.permissions << Permission.find_or_create_by_action_and_subject_class('read', 'Event')
-        d.role.permissions << Permission.find_or_create_by_action_and_subject_class('read', 'Subscription')
+        d.role.permissions << Permission.find_or_create_by(action: 'read', subject_class: 'Event')
+        d.role.permissions << Permission.find_or_create_by(action: 'read', subject_class: 'Subscription')
         user.delegations << d
       end
 

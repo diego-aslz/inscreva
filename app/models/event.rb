@@ -1,11 +1,8 @@
 class Event < ActiveRecord::Base
-  has_many :fields, order: [:priority, :group_name, :id], dependent: :destroy
+  has_many :fields, -> { order :priority, :group_name, :id }, dependent: :destroy
   has_many :subscriptions
   has_many :pages
   has_many :delegations
-  attr_accessible :closes_at, :email, :name, :opens_at, :rules_url,
-      :technical_email, :fields_attributes, :delegations_attributes, :identifier,
-      :published, :description
 
   validates_presence_of :name, :identifier
   validates_uniqueness_of :identifier

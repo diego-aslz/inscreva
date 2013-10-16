@@ -31,4 +31,18 @@ class EventsController < InheritedResources::Base
   def collection
     @events = @events.order('opens_at desc, closes_at desc').page(params[:page])
   end
+
+  def resource_params
+    return [] if request.get?
+    [params.require(:event).permit(:closes_at, :email, :name, :opens_at, :rules_url,
+      :technical_email, :identifier, :published, :description,
+      fields_attributes: {
+        :field_type, :name, :extra, :required, :show_receipt,
+        :group_name, :priority, :searchable, :is_numeric, :hint,
+        :allowed_file_extensions, :max_file_size
+      },
+      delegations_attributes: {
+        :user_id, :user_name, :event_id, :role_id
+      })]
+  end
 end

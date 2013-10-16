@@ -1,7 +1,5 @@
 class ApplicationForm
-  extend ActiveModel::Naming
-  include ActiveModel::Conversion
-  include ActiveModel::Validations
+  include ActiveModel::Model
   include ActiveRecord::Validations
 
   ATTRIBUTES = [:password, :password_confirmation, :email_confirmation, :confirmed]
@@ -9,20 +7,24 @@ class ApplicationForm
 
   validate :event_is_ongoing?, if: :event_id
   validate :valid_user?, on: :create
-  validates_presence_of :email, :id_card, :event_id, :event, :name
+  validates :email, :id_card, :event_id, :event, :name, presence: true
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
-  validates_confirmation_of :email, message: I18n.t('helpers.errors.' +
-      'subscription.email.differs_from_confirmation')
   validates_confirmation_of :password, if: :validate_password?
   validates :password, presence: true, length: { minimum: 8 }, on: :create, if: :validate_password?
   validates_presence_of :email_confirmation, if: :email, on: :create
   validates_presence_of :password_confirmation, if: :password
+  validates :email, confirmation: { message: I18n.t('helpers.errors.' +
+        'subscription.email.differs_from_confirmation') }
   validates_associated :field_fills, includes: :field
 
   delegate :field_fills, :email, :id_card, :event_id, :event, :name, :user_id, :user,
       :id, :generate_number, to: :subscription
   delegate :field_fills=, :field_fills_attributes=, :email=, :id_card=, :event_id=,
       :event=, :name=, :user_id=, :user=, :persisted?, :new_record?, to: :subscription
+
+  def self.reflect_on_association(*args)
+    Subscription.reflect_on_association args
+  end
 
   def load_from(params, user = nil)
     subscription

@@ -20,10 +20,11 @@ end
 
 RSpec::Matchers.define :require_confirmation_of do |attrib, options = {}|
   match do |model|
-    model.send(attrib.to_s + '=', '1234567890')
-    model.send(attrib.to_s + '_confirmation=', '1234567891')
+    @attrib_conf = "#{attrib}_confirmation"
+    model.send("#{attrib}=", '1234567890')
+    model.send("#{@attrib_conf}=", '1234567891')
     model.valid? options[:context]
-    @errors = model.errors[attrib].count
+    @errors = model.errors[@attrib_conf.to_sym].count
     @expected_errors = (options[:errors] || 1)
     @errors == @expected_errors
   end
@@ -31,7 +32,7 @@ RSpec::Matchers.define :require_confirmation_of do |attrib, options = {}|
   failure_message_for_should do |model|
     attrib,options = expected
     message = "expected #{model} to have #{@expected_errors}" +
-        " errors for #{attrib}, but it has #{@errors}."
+        " errors for #{@attrib_conf}, but it has #{@errors}."
   end
 
   description do

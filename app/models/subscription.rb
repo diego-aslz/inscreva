@@ -1,12 +1,11 @@
 class Subscription < ActiveRecord::Base
   belongs_to :event, :counter_cache => true
   belongs_to :user
-  has_many :field_fills, include: :field
+  has_many :field_fills, -> { includes :field }
   has_many :fills, class_name: 'FieldFill', dependent: :destroy
 
   validates_uniqueness_of :number
 
-  attr_accessible :field_fills_attributes, :email, :id_card, :event_id, :name
   accepts_nested_attributes_for :field_fills
   scope :search, lambda { |term|
     where("upper(concat(subscriptions.name,subscriptions.email," +
@@ -34,8 +33,6 @@ class Subscription < ActiveRecord::Base
       end
     end
   end
-
-  private
 
   def generate_number
     begin

@@ -12,17 +12,15 @@ describe 'ApplicationForm' do
     it { should require_presence_of :name }
     it { should require_presence_of :id_card }
     it { should require_presence_of :event_id }
-    it { should require_presence_of :password, context: :create, errors: 3 }
-    it { should require_presence_of :password_confirmation }
     it { should require_presence_of :email_confirmation, context: :create }
     it { should_not require_presence_of :email_confirmation, context: :update }
-    it { should require_presence_of :email, errors: 3 }
-    it { should require_confirmation_of :email, errors: 2 }
-    it { should require_confirmation_of :password, errors: 1 }
+    it { should require_presence_of :email, errors: 2 }
+    it { should require_confirmation_of :email }
+    it { should require_confirmation_of :password }
 
-    it { should require_valid(:email, errors: 2, valid: subscription.email,
+    it { should require_valid(:email, valid: subscription.email,
         invalid: "anything") }
-    it { should require_valid(:email, errors: 2, valid: subscription.email,
+    it { should require_valid(:email, valid: subscription.email,
         invalid: "invalid_mail@example.com second_mail@example.com") }
 
     it "should validate that event is ongoing" do
@@ -76,7 +74,7 @@ describe 'ApplicationForm' do
         subscription.password_confirmation = '12312312'
         subscription.should_not be_valid(:create)
         subscription.confirmed?.should be_true
-        subscription.errors[:password].size.should > 0
+        subscription.errors[:password_confirmation].size.should > 0
 
         subscription.password_confirmation = '123123123'
         subscription.valid?(:create)

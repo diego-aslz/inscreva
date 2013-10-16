@@ -6,6 +6,7 @@ class SubscriptionsController < InheritedResources::Base
 
   def new
     @event = Event.find(params[:event_id])
+    params.permit!
     @application = ApplicationForm.new.load_from params, current_user
     @application.user = current_user
     authorize! :new, @application.subscription
@@ -14,6 +15,7 @@ class SubscriptionsController < InheritedResources::Base
 
   def create
     @event = Event.find(params[:event_id])
+    params.permit!
     @application = ApplicationForm.new.load_from(params[:subscription])
     @application.event = @event
     authorize! :create, @application.subscription
@@ -39,6 +41,7 @@ class SubscriptionsController < InheritedResources::Base
     @application = ApplicationForm.new
     sub = Subscription.find(params[:id])
     @application.subscription = sub
+    params.permit!
     if @application.submit params[:subscription]
       redirect_to sub
     else
@@ -71,6 +74,27 @@ class SubscriptionsController < InheritedResources::Base
   end
 
   protected
+
+  def resource_params
+    debugger
+    return [] if request.get?
+    [params.require(:subscription).permit(
+      :email,
+      :id_card,
+      :event_id,
+      :name,
+      field_fills_attributes: [
+        :value,
+        :field_id,
+        :subscription_id,
+        :type,
+        :file,
+        :remove_file,
+        :file_cache,
+        :value_cb,
+        :value_date
+      ])]
+  end
 
   def collection
     @event = Event.find(params[:event_id])

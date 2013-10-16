@@ -4,8 +4,6 @@ class Page < ActiveRecord::Base
   belongs_to :page
   belongs_to :event, :counter_cache => true
 
-  attr_accessible :content, :name, :page_id, :event_id, :title, :main, :event_name,
-      :files_attributes, :language
   accepts_nested_attributes_for :files, allow_destroy: true, reject_if:
       lambda { |f| f[:name].blank? }
 

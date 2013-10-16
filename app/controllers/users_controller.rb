@@ -25,4 +25,12 @@ class UsersController < InheritedResources::Base
     end
     update!
   end
+
+  protected
+
+  def resource_params
+    return [] if request.get?
+    [params.require(:user).permit(:email, :password, :password_confirmation,
+      :remember_me, :name, :admin)]
+  end
 end

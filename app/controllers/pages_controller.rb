@@ -41,6 +41,14 @@ class PagesController < InheritedResources::Base
 
   protected
 
+  def resource_params
+    return [] if request.get?
+    [params.require(:page).permit(:content, :name, :page_id, :event_id, :title,
+      :main, :event_name, :language, files_attributes: {
+        :file, :name
+      })]
+  end
+
   def not_found(page=nil)
     raise NotFound, (page.nil? ? nil : "Não há Evento ou Página com o identificador '#{page}'")
   end

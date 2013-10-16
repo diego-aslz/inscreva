@@ -9,8 +9,6 @@ class FieldFill < ActiveRecord::Base
   belongs_to :field
   belongs_to :subscription
 
-  attr_accessible :value, :field_id, :subscription_id, :type, :file,
-      :remove_file, :file_cache, :value_cb, :value_date
   validates_presence_of :value, if: :require_value?
   validates :value, numericality: true, if: :validate_numeric?
 
