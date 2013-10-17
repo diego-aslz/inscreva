@@ -29,14 +29,15 @@
             %hr
           %div
             = link_to icon_tag('icon-plus icon-white'), 'javascript:void(0)', 'ng-click' => 'addField()',
-                class: 'btn btn-success', title: t(:add_field)
+                class: 'btn btn-success', title: t(:add_field), id: 'add_field'
         #delegations.tab
           .delegation-field{:'ng-repeat' => 'delegation in event.delegations',
               :'ng-show' => '!delegation._destroy' }
             = render 'delegations_form', f: f
           %div
-            = link_to icon_tag('icon-plus icon-white'), 'javascript:void(0)', 'ng-click' => 'addDelegation()',
-                class: 'btn btn-success', title: t(:add_delegation)
+            = link_to icon_tag('icon-plus icon-white'), 'javascript:void(0)',
+              'ng-click' => 'addDelegation()', id: 'add_delegation',
+              class: 'btn btn-success', title: t(:add_delegation)
 
     .form-actions
       = f.button :submit, class: 'btn-large btn-primary'

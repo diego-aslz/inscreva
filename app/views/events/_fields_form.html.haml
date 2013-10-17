@@ -17,7 +17,7 @@
         'ng-click' => 'field.editing = false',
         'ng-show' => 'field.editing', class: 'btn btn-success btn-mini'
     = link_to icon_tag('icon-trash icon-white'), 'javascript:void(0)',
-        'ng-click' => 'removeField($index)',
+        'ng-click' => 'removeField($index)', id: 'event_fields_attributes_{{$index}}_destroy_link',
         class: 'btn btn-danger btn-mini', title: t(:remove_field)
     = link_to icon_tag('icon-arrow-up'), 'javascript:void(0)',
         class: 'btn btn-mini', :'ng-show' => 'fieldsLength() > 1 && $index > 0',

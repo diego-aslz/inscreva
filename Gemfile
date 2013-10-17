@@ -15,6 +15,8 @@ group :test do
   gem 'zeus'
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'guard-rspec'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -27,19 +29,14 @@ group :development do
   gem 'capistrano', '~> 2.15.5'
 end
 
-group :assets do
-  gem 'sass-rails',   '~> 4.0.0'
-  gem 'coffee-rails', '~> 4.0.0'
-  gem 'jquery-rails', "2.3.0"
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.3.0'
-  gem "bootstrap-sass"
-  gem 'bootstrap-datepicker-rails'
-  gem 'maskedinput-rails'
-end
+gem 'sass-rails',   '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'jquery-rails', "2.3.0"
+gem 'therubyracer', :platforms => :ruby
+gem 'uglifier', '>= 1.3.0'
+gem "bootstrap-sass"
+gem 'bootstrap-datepicker-rails'
+gem 'maskedinput-rails'
 
 gem 'devise', github: 'plataformatec/devise', branch: 'v3.1.0.rc2'
 gem 'show_for', github: 'plataformatec/show_for'
