@@ -91,7 +91,8 @@ class SubscriptionsController < InheritedResources::Base
         :remove_file,
         :file_cache,
         :value_cb,
-        :value_date
+        :value_date,
+        :id
       ])]
   end
 

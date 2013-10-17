@@ -45,7 +45,7 @@ class PagesController < InheritedResources::Base
     return [] if request.get?
     [params.require(:page).permit(:content, :name, :page_id, :event_id, :title,
       :main, :event_name, :language, files_attributes: [
-        :file, :name
+        :file, :name, :id, :_destroy
       ])]
   end
 
