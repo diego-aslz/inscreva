@@ -41,9 +41,9 @@
   = form.input :allowed_file_extensions,
       as: :check_boxes, wrapper_html: { 'ng-show' => "field.editing && field.field_type == 'file'",
       :'ng-init' => "idx = $index; types = ['jpg', 'jpeg', 'gif', 'png', 'pdf',
-      'doc', 'xls', 'odt', 'ods']; labels = ['Imagem JPG', 'Imagem JPEG', 'Imagem GIF',
+      'doc', 'xls', 'odt', 'ods', 'zip']; labels = ['Imagem JPG', 'Imagem JPEG', 'Imagem GIF',
       'Imagem PNG', 'Documento PDF', 'Word (DOC)', 'Excel (XLS)', 'OpenOffice Texto (ODT)',
-      'OpenOffice Calc (ODS)']" } do
+      'OpenOffice Calc (ODS)', 'Arquivo Compactado (ZIP)']" } do
     %label.checkbox{:'ng-repeat' => "type in types"}
       %input.check_boxes.optional{ id: 'event_fields_attributes_{{idx}}_allowed_file_extensions', |
         name: "event[fields_attributes][{{idx}}][allowed_file_extensions][]",    |
