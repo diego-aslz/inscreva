@@ -39,7 +39,7 @@ class EventsController < InheritedResources::Base
       fields_attributes: [
         :field_type, :name, :extra, :required, :show_receipt,
         :group_name, :priority, :searchable, :is_numeric, :hint,
-        :allowed_file_extensions, :max_file_size, :id, :_destroy
+        :max_file_size, :id, :_destroy, allowed_file_extensions: []
       ],
       delegations_attributes: [
         :user_id, :user_name, :event_id, :role_id, :id, :_destroy
