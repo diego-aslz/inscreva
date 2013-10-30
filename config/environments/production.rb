@@ -59,7 +59,7 @@ Inscreva::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  config.assets.precompile += %w( printing_page.css printing_page.js )
+  config.assets.precompile += %w( printing_page.css printing_page.js chosen-sprite.png markitup/skins/simple/*.png markitup/sets/markdown/*.png )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
