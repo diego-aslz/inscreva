@@ -1,6 +1,16 @@
 
 # CHANGELOG
 
+## v1.13
+
+1. Correção: Token incorreto enviado ao e-mail do usuário para redefinição de senha;
+2. Correção: Compilação de imagens para plugin `chosen` e `markitup`.
+
+## v1.12
+
+1. Correção: Impossível definir tipos de arquivos permitidos para campo personalizado;
+3. Pequenas melhorias de layout.
+
 ## v1.11
 
 1. Correção: Alteração de evento duplica campos e delegações.
