@@ -67,7 +67,9 @@ describe Event do
 
   it 'copies fields from another event' do
     f1 = create(:field, name: 'Field 1')
-    f2 = create(:field, name: 'Field 2', event_id: f1.event_id)
+    f2 = create(:field, name: 'Field 2', event_id: f1.event_id, extra: '1=A',
+        group_name: 'Testtt', allowed_file_extensions: ['pdf'], max_file_size: 1,
+        hint: 'Hintt')
     e1 = f1.event
 
     e2 = create(:event)
@@ -75,6 +77,12 @@ describe Event do
     e2.fields.size.should == 2
     e2.fields[0].name.should == f1.name
     e2.fields[1].name.should == f2.name
+    e2.fields[1].extra.should == f2.extra
+    e2.fields[1].group_name.should == f2.group_name
+    e2.fields[1].allowed_file_extensions.should == f2.allowed_file_extensions
+    e2.fields[1].max_file_size.should == f2.max_file_size
+    e2.fields[1].hint.should == f2.hint
+
     e2.fields[0].priority.should == 1
     e2.fields[1].priority.should == 2
 

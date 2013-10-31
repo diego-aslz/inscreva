@@ -48,7 +48,8 @@ class Event < ActiveRecord::Base
     event.fields.each do |field|
       self.fields.build(field.attributes.with_indifferent_access.slice(
           :field_type, :name, :extra, :required, :show_receipt, :group_name,
-          :searchable, :is_numeric, :hint, :allowed_file_extensions).merge(priority: (p += 1)))
+          :searchable, :is_numeric, :hint, :allowed_file_extensions, :max_file_size).
+          merge(priority: (p += 1)))
     end
   end
 
