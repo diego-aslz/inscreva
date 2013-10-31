@@ -12,9 +12,17 @@
         id: dom_id(field) rescue nil
 
   .control-group
-    = label_tag 'search', t(:search), class: :'control-label'
+    = label_tag 'name', t(:search), class: :'control-label'
     .controls
       = text_field_tag 'name', params[:term], name: "term", class: 'span4'
+
+  .control-group
+    = label_tag 'selects', t(:show).titleize, class: :'control-label'
+    .controls
+      - ['email', 'id_card'].each do |att|
+        %span.checkbox_container
+          = check_box_tag "selects[]", att, params['selects'].try(:include?, att), id: "select_#{att}"
+          = label_tag "select_#{att}", Subscription.human_attribute_name(att), class: :collection_check_boxes
 
   .control-group
     = label_tag 'field_ids[]', t(:include_fields), class: :'control-label'
@@ -39,7 +47,8 @@
       %th= model_class.human_attribute_name :created_at
       %th= model_class.human_attribute_name :number
       %th= model_class.human_attribute_name :name
-      %th= model_class.human_attribute_name :email
+      - for select in permitted_selects
+        %th= model_class.human_attribute_name select
       - for field in @fields
         %th= field.name
       %th
@@ -49,7 +58,8 @@
         %td= l subscription.created_at, format: :short
         %td= link_to subscription.number, subscription_path(subscription)
         %td= abbr(subscription.name, size: 60)
-        %td= subscription.email
+        - for select in permitted_selects
+          %td= subscription.attributes[select]
         - for field in @fields
           - fill = subscription.fills.where(field_id: field.id).first
           %td= fill.value_to_s if fill
@@ -65,10 +75,10 @@
 
 = link_to icon_tag('icon-download-alt icon-white') + " CSV",
     event_subscriptions_path(@event, format: 'csv', params: params.slice(:fields,
-    :field_ids, :term)), class: 'btn btn-inverse', title: t(:'export.csv')
+    :field_ids, :term, :selects)), class: 'btn btn-inverse', title: t(:'export.csv')
 = link_to icon_tag('icon-download-alt icon-white') + " XLS",
     event_subscriptions_path(@event, format: 'xls', params: params.slice(:fields,
-    :field_ids, :term)), class: 'btn btn-success', title: t(:'export.xls')
+    :field_ids, :term, :selects)), class: 'btn btn-success', title: t(:'export.xls')
 = link_to icon_tag('icon-download-alt icon-white') + " ZIP", '#download_fields',
     class: 'btn btn-info', :'data-toggle' => "modal", title: t(:'export.zip')
 

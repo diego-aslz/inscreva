@@ -29,6 +29,7 @@ en:
   begin: begin
   end: end
   select: select
+  show: show
   include_fields: Include Fields
   copy_fields: Copy Fields
   from: from

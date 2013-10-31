@@ -29,6 +29,7 @@ es:
   begin: inicio
   end: final
   select: seleccionar
+  show: mostrar
   include_fields: Incluir Campos
   copy_fields: Copiar Campos
   from: de

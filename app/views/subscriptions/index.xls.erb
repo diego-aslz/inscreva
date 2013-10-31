@@ -14,7 +14,9 @@
         <Cell><Data ss:Type="String"><B><%= Subscription.human_attribute_name :created_at %></B></Data></Cell>
         <Cell><Data ss:Type="String"><B><%= Subscription.human_attribute_name :number %></B></Data></Cell>
         <Cell><Data ss:Type="String"><B><%= Subscription.human_attribute_name :name %></B></Data></Cell>
-        <Cell><Data ss:Type="String"><B><%= Subscription.human_attribute_name :email %></B></Data></Cell>
+      <% for select in permitted_selects %>
+        <Cell><Data ss:Type="String"><B><%= Subscription.human_attribute_name select %></B></Data></Cell>
+      <% end -%>
       <% for field in @fields -%>
         <Cell><Data ss:Type="String"><B><%= field.name %></B></Data></Cell>
       <% end -%>
@@ -24,7 +26,9 @@
         <Cell><Data ss:Type="String"><%= subscription.created_at.strftime('%Y-%m-%d %H:%M:%S') %></Data></Cell>
         <Cell><Data ss:Type="String"><%= subscription.number %></Data></Cell>
         <Cell><Data ss:Type="String"><%= subscription.name %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= subscription.email %></Data></Cell>
+      <% for select in permitted_selects %>
+        <Cell><Data ss:Type="String"><%= subscription.attributes[select] %></Data></Cell>
+      <% end -%>
       <% for field in @fields %>
         <% fill = subscription.field_fills.where(field_id: field.id).first %>
         <% if fill %>

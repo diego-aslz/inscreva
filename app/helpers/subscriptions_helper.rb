@@ -82,4 +82,8 @@ module SubscriptionsHelper
     end
     result.html_safe
   end
+
+  def permitted_selects
+    params[:selects].try(:&, ['email', 'id_card']) || []
+  end
 end

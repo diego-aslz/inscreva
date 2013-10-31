@@ -64,7 +64,8 @@ class SubscriptionsController < InheritedResources::Base
         @count = @subscriptions.count
         @subscriptions = @subscriptions.page(params[:page])
       }
-      format.csv { send_data @subscriptions.to_csv(include_fields: @fields) }
+      format.csv { send_data @subscriptions.to_csv(include_fields: @fields,
+          selects: permitted_selects) }
       format.xls
       format.zip {
         fds = FileDownloaderService.new(@subscriptions)
