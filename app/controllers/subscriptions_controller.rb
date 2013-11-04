@@ -105,7 +105,7 @@ class SubscriptionsController < InheritedResources::Base
       @fields = @event.fields.where("id in (?) and field_type != 'file'",
           fields).select([:id, :name, :field_type, :is_numeric])
       @subscriptions = @subscriptions.includes(:field_fills).
-          where('field_fills.field_id in (?)', fields.map(&:to_i))
+          where('field_fills.field_id in (?)', fields.map(&:to_i)).references(:field_fills)
     else
       @fields = []
     end

@@ -1,5 +1,9 @@
 .control-group
   = label_tag id, field.name, class: :'control-label'
   .controls
-    = select_tag id, options_for_select(field.select_options, value),
-        name: "fields[#{field.id}][value]", include_blank: true, class: 'input-xxlarge'
+    - field.select_options.each do |opt|
+      %span.checkbox_container
+        - cb_id = "#{id}_#{opt[1]}"
+        = check_box_tag cb_id, opt[1], value.try(:include?, opt[1]), name: "fields[#{field.id}][value][]"
+        = label_tag cb_id, opt[0], class: :collection_check_boxes
+      %br

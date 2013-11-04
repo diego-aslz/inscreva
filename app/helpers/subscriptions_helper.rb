@@ -42,6 +42,9 @@ module SubscriptionsHelper
         pars << val
       end
       [clauses.join(' and '), pars]
+    elsif 'select' == type
+      ["field_fills.field_id = ? and field_fills.value in (?)",
+          [field_id, value]]
     elsif %w(string text select).include?(type)
       ["field_fills.field_id = ? and field_fills.value like ?", [field_id, "%#{value}%"]]
     elsif type == "check_boxes"
