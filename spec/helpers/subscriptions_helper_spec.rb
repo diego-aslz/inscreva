@@ -23,12 +23,8 @@ describe 'SubscriptionsHelper' do
   end
 
   context "generating clause and parameters for filters" do
-    it 'generates a like statement for string, select and text' do
+    it 'generates a like statement for string, and text' do
       clause, params = filter_clause(1, 'a', 'string')
-      clause.should include("like ?")
-      params.should include('%a%')
-
-      clause, params = filter_clause(1, 'a', 'select')
       clause.should include("like ?")
       params.should include('%a%')
 
@@ -65,6 +61,16 @@ describe 'SubscriptionsHelper' do
       clause, params = filter_clause(1, 'true', 'boolean')
       clause.should include("= ?")
       params.should include('true')
+    end
+
+    it "generates an IN statement for country, and select" do
+      clause, params = filter_clause(1, ['a', 'b'], 'select')
+      clause.should include("in (?)")
+      params.should == [1, ['a', 'b']]
+
+      clause, params = filter_clause(2, ['BRA', 'PRY'], 'country')
+      clause.should include("in (?)")
+      params.should == [2, ['BRA', 'PRY']]
     end
   end
 end
