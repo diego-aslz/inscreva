@@ -46,7 +46,8 @@ gem 'kaminari'
 gem 'nested_form'
 gem 'responders'
 gem 'has_scope'
-gem 'country-select', github: 'nerde/country-select', branch: :rails4
+gem 'country-select', github: 'nerde/country-select'
+#gem 'country-select', path: '~/git/country-select/'
 gem "haml-rails"
 gem 'carrierwave'
 gem 'redcarpet'

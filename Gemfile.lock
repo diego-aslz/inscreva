@@ -1,7 +1,6 @@
 GIT
   remote: git://github.com/nerde/country-select.git
-  revision: be318a918a00baac71f6d48dd106e6b438633569
-  branch: rails4
+  revision: 8911131a49d2848aad3dc2dfb9fa2278da98ab9d
   specs:
     country-select (1.2.3)
 

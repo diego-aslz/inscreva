@@ -1,5 +1,9 @@
 .control-group
   = label_tag id, field.name, class: :'control-label'
   .controls
-    = country_select 'fields', field.id, priority_countries, {include_blank: true,
-        selected: value}, id: id, name: "fields[#{field.id}][value]", class: 'input-xlarge'
+    - FieldFill.select('distinct value').where(field_id: field.id).each do |ff|
+      %span.checkbox_container
+        - cb_id = "#{id}_#{ff.value}"
+        = check_box_tag cb_id, ff.value, value.try(:include?, ff.value),
+            name: "fields[#{field.id}][value][]"
+        = label_tag cb_id, t(:"countries.#{ff.value}"), class: :collection_check_boxes
