@@ -105,16 +105,19 @@ class SubscriptionsController < InheritedResources::Base
       @fields = @event.fields.where("id in (?) and field_type != 'file'",
           fields).select([:id, :name, :field_type, :is_numeric])
       @subscriptions = @subscriptions.includes(:field_fills).
-          where('field_fills.field_id in (?)', fields.map(&:to_i)).references(:field_fills)
+          where('field_fills.field_id in (?)', fields.map(&:to_i))
     else
       @fields = []
     end
-    params[:fields].each do |k,v|
-      if v.key?(:value) and filter_valid?(k, v[:value], v[:type])
-        clause, query_params = filter_clause(k, v[:value], v[:type])
-        @subscriptions = @subscriptions.where('subscriptions.id in (select ' +
-            "subscription_id from field_fills where #{clause})", *query_params)
+    if params[:fields]
+      params[:fields].each do |k,v|
+        if v.key?(:value) and filter_valid?(k, v[:value], v[:type])
+          clause, query_params = filter_clause(k, v[:value], v[:type])
+          @subscriptions = @subscriptions.where('subscriptions.id in (select ' +
+              "subscription_id from field_fills where #{clause})", *query_params)
+        end
       end
-    end if params[:fields]
+      @subscriptions = @subscriptions.references(:field_fills)
+    end
   end
 end
