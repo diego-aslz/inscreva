@@ -1,5 +1,7 @@
 require "bundler/capistrano"
 
+production = (ENV['STAGE'] == 'production')
+
 set :application, "inscreva"
 set :repository,  "https://github.com/nerde/inscreva.git"
 
@@ -7,7 +9,6 @@ set :scm, :git
 # set :git_enable_submodules, 1
 
 set :deploy_to, "/var/www/#{application}"
-set :user, 'root'
 set :use_sudo, false
 set :normalize_asset_timestamps, false
 
@@ -17,9 +18,17 @@ set :default_environment, {
   'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
 }
 
-role :web, "madeira"                          # Your HTTP server, Apache/etc
-role :app, "madeira"                          # This may be the same as your `Web` server
-role :db,  "madeira", :primary => true # This is where Rails migrations will run
+if production
+  role :web,       "realserver"
+  role :app,       "realserver"
+  role :db,        "realserver", :primary => true
+  set :user,       'root'
+else
+  role :web,       "localhost:2222"
+  role :app,       "localhost:2222"
+  role :db,        "localhost:2222", :primary => true
+  set :user,       'vagrant'
+end
 
 # if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
@@ -43,8 +52,8 @@ namespace :deploy do
 
   desc "Restart the service"
   task :restart_service, roles: :web do
-    run "service #{application} stop"
+    run "#{'sudo ' unless production}/etc/init.d/#{application} stop"
     sleep 1
-    run "service #{application} start"
+    run "#{'sudo ' unless production}/etc/init.d/#{application} start"
   end
 end
