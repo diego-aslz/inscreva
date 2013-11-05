@@ -24,46 +24,6 @@ module SubscriptionsHelper
         fill: fill, field: field, f: form
   end
 
-  def filter_valid?(field_id, value, type)
-    (type == "date" and !(value[:b].blank? and value[:e].blank?)) or
-    (type != "date" and not value.blank?)
-  end
-
-  def filter_clause(field_id, value, type)
-    if type == "date"
-      clauses = ["field_fills.field_id = ?"]
-      pars = [field_id]
-      if !value[:b].blank? && (val = to_date(value[:b]))
-        clauses << "field_fills.value >= ?"
-        pars << val
-      end
-      if !value[:e].blank? && (val = to_date(value[:e]))
-        clauses << "field_fills.value <= ?"
-        pars << val
-      end
-      [clauses.join(' and '), pars]
-    elsif %w(select country).include? type
-      ["field_fills.field_id = ? and field_fills.value in (?)",
-          [field_id, value]]
-    elsif %w(string text).include?(type)
-      ["field_fills.field_id = ? and field_fills.value like ?", [field_id, "%#{value}%"]]
-    elsif type == "check_boxes"
-      clauses = []
-      pars = [field_id]
-      for val in value
-        clauses << "FIND_IN_SET(?, field_fills.value) > 0"
-        pars << val
-      end
-      ["field_fills.field_id = ? and (#{clauses.join ' or '})", pars]
-    else
-      ["field_fills.field_id = ? and field_fills.value = ?", [field_id, value]]
-    end
-  end
-
-  def to_date(str)
-    begin Date.strptime(str, '%d/%m/%Y').strftime('%Y-%m-%d') rescue nil end
-  end
-
   def hide_params(params, options={})
     only, prefix = options[:only], options[:prefix]
     pars = only.nil? ? params : params.slice(*(only.is_a?(Hash) ? only.keys : [only]))

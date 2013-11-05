@@ -1,0 +1,17 @@
+= modal_dialog id: 'email_dialog' do
+  = modal_header do
+    = modal_close
+    %h3= t(:send_email)
+  = simple_form_for OpenStruct.new, as: 'email', url: email_event_subscriptions_path(@event),
+      html: {class: 'form-horizontal'} do |f|
+    = modal_body do
+      = hide_params(params, only: { term: true, fields: :value })
+      = f.input :title, as: :string, label: t('activerecord.attributes.email.title'),
+          input_html: { class: 'input-xlarge' }
+      = f.input :respond_to, as: :email, label: t('activerecord.attributes.email.respond_to'),
+          input_html: { class: 'input-xlarge' }
+      = f.input :message, as: :text, label: t('activerecord.attributes.email.message'),
+          input_html: { class: 'input-block-level' }
+    = modal_footer do
+      = modal_cancel caption: t(:'helpers.links.cancel')
+      = f.button :submit, t(:send_email), class: 'btn-success'

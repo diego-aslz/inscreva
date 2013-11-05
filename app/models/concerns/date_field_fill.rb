@@ -27,5 +27,9 @@ module Concerns
     def require_date?
       require_value? && field.date?
     end
+
+    def self.to_date(str)
+      begin Date.strptime(str, '%d/%m/%Y').strftime('%Y-%m-%d') rescue nil end
+    end
   end
 end

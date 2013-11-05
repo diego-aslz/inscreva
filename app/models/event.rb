@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
   has_many :subscriptions
   has_many :pages
   has_many :delegations
+  has_many :notifications
 
   validates_presence_of :name, :identifier
   validates_uniqueness_of :identifier

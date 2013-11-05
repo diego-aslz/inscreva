@@ -1,14 +1,14 @@
-#download_fields.modal.hide.fade{tabindex: -1, role: 'dialog'}
-  .modal-header
-    %button.close{:'data-dismiss' => :modal, type: :button} x
-    %h3#myModalLabel= t(:download)
+= modal_dialog id: 'download_fields' do
+  = modal_header do
+    = modal_close
+    %h3= t(:download)
   = simple_form_for OpenStruct.new, as: 'download', url: event_subscriptions_path(@event,
       format: 'zip'), method: :get,
       html: {class: 'form-horizontal'} do |f|
-    .modal-body
+    = modal_body do
       = hide_params(params, only: { term: true, fields: :value })
       = f.input :field_ids, as: :check_boxes, label: t(:attachment).pluralize,
           collection: event.fields.where(field_type: 'file')
-    .modal-footer
-      %button.btn{:'data-dismiss' => :modal}= t :'helpers.links.cancel'
+    = modal_footer do
+      = modal_cancel caption: t(:'helpers.links.cancel')
       = f.button :submit, t(:download), class: 'btn-success'

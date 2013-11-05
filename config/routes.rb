@@ -3,16 +3,18 @@ Inscreva::Application.routes.draw do
   get 'locales/:locale' => 'locales#show', :as => :locale
 
   resources :subscriptions, only: [:receipt, :mine] do
-    get "receipt", on: :member
-    get "mine", on: :collection
+    get :receipt, on: :member
+    get :mine, on: :collection
   end
+
   resources :events, :shallow => true do
     resources :subscriptions
+    resources :notifications, only: [:new, :create]
     resources :pages do
-      get 'present', on: :member
+      get :present, on: :member
     end
-    put 'copy_fields', on: :collection
-    get 'ahead', on: :collection
+    put :copy_fields, on: :collection
+    get :ahead, on: :collection
   end
 
   devise_for :users

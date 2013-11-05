@@ -100,6 +100,7 @@ es:
       page: Página
       delegation: Miembro
       role: Papel
+      notification: E-mail
     attributes:
       delegation:
         user: Usuario
@@ -164,6 +165,11 @@ es:
       role:
         name: Nombre
         permissions: Permisos
+      notification:
+        message: Mensaje
+        subject: Tema
+        respond: Responder a
+        recipients_text: Destinatarios
     errors:
       messages:
         size_too_big: 'Tamaño de archivo arriba de lo permitido (%{file_size})'
@@ -182,6 +188,8 @@ es:
     titles:
       new: 'Crear %{model}'
       edit: 'Editar %{model}'
+      notification:
+        new: 'Enviar %{model}'
     actions: Acciones
     links:
       edit: Editar
@@ -200,6 +208,8 @@ es:
       create: 'Crear %{model}'
       submit: 'Guardar %{model}'
       update: 'Actualizar %{model}'
+      notification:
+        create: 'Enviar %{model}'
     messages:
       subscription:
         successfully_created: Inscripción registrada con éxito

@@ -35,6 +35,7 @@ pt-BR:
   from: de
   to: para
   total: 'Total: %{count}'
+  send_email: Enviar E-mail
 
   export:
     csv: Exportar para CSV
@@ -100,6 +101,7 @@ pt-BR:
       page: Página
       delegation: Membro
       role: Papel
+      notification: E-mail
     attributes:
       delegation:
         user: Usuário
@@ -164,6 +166,11 @@ pt-BR:
       role:
         name: Nome
         permissions: Permissões
+      notification:
+        message: Mensagem
+        respond: Responder para
+        subject: Assunto
+        recipients_text: Destinatários
     errors:
       messages:
         size_too_big: 'Tamanho acima do permitido (%{file_size})'
@@ -182,6 +189,8 @@ pt-BR:
     titles:
       new: 'Criar %{model}'
       edit: 'Editar %{model}'
+      notification:
+        new: 'Enviar %{model}'
     actions: Ações
     links:
       edit: Editar
@@ -200,6 +209,8 @@ pt-BR:
       create: 'Criar %{model}'
       submit: 'Salvar %{model}'
       update: 'Atualizar %{model}'
+      notification:
+        create: 'Enviar %{model}'
     messages:
       subscription:
         successfully_created: Inscrição realizada com sucesso

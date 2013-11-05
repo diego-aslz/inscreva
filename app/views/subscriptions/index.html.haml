@@ -4,7 +4,6 @@
 = form_tag event_subscriptions_path(@event), method: :get, class: 'form-search form-horizontal' do
   - values = params[:fields] || {}
   - @event.fields.where(searchable: true).each do |field|
-    = hidden_field_tag "fields[#{field.id}][type]", field.field_type
     = render "subscriptions/inputs/#{field.field_type}_input",
         field: field,
         value: begin values[field.id.to_s][:value] rescue nil end,
@@ -81,5 +80,9 @@
     :field_ids, :term, :selects)), class: 'btn btn-success', title: t(:'export.xls')
 = link_to icon_tag('icon-download-alt icon-white') + " ZIP", '#download_fields',
     class: 'btn btn-info', :'data-toggle' => "modal", title: t(:'export.zip')
+= link_to icon_tag('icon-envelope icon-white') + " E-mail",
+    new_event_notification_path(@event, filters: params[:fields]),
+    class: 'btn btn-danger', :'data-toggle' => "modal", title: t(:'send_email')
 
 = render 'download_dialog', params: params, event: @event
+=# render 'email_dialog', params: params, event: @event

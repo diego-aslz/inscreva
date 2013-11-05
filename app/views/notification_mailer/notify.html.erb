@@ -1,0 +1,7 @@
+<% @notification.message.split(/\n/).each do |message| %>
+  <% unless message.blank? %>
+    <p>
+      <%= message %>
+    </p>
+  <% end %>
+<% end %>
