@@ -7,13 +7,12 @@ end
 event_permissions = {
     'Event' => [:update, :read],
     'Page' => [:update, :read, :create],
-    'Subscription' => [:update, :read, :create, :receipt]
+    'Subscription' => [:update, :read, :create, :receipt],
+    'Notification' => [:create]
   }
-unless Permission.any?
-  event_permissions.each do |v,k|
-    for permission in k do
-      Permission.create!(action: permission.to_s, subject_class: v)
-    end
+event_permissions.each do |v,k|
+  for permission in k do
+    Permission.create!(action: permission.to_s, subject_class: v) unless Permission.exists?(action: permission.to_s, subject_class: v)
   end
 end
 

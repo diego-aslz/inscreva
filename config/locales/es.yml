@@ -65,6 +65,8 @@ es:
       receipt: Emisión de Comprobante
     field_fill:
       download: Descargar Archivos
+    notification:
+      create: 'Enviar'
 
   types:
     boolean: Lógico

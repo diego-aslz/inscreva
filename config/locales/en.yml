@@ -47,6 +47,9 @@ en:
     blank: No data
 
   flash:
+    notifications:
+      create:
+        notice: '%{resource_name} will be sent in minutes.'
     actions:
       create:
         notice: '%{resource_name} created successfully.'
@@ -65,6 +68,8 @@ en:
       receipt: Print Receipt
     field_fill:
       download: Download Attachments
+    notification:
+      create: 'Send'
 
   types:
     boolean: Boolean

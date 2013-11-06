@@ -68,6 +68,7 @@ class SubscriptionsController < InheritedResources::Base
           selects: permitted_selects) }
       format.xls
       format.zip {
+        authorize! :download, @subscriptions.first.field_fills.build
         fds = FileDownloaderService.new(@subscriptions)
         send_file fds.zip_file(params[:download][:field_ids])
       }

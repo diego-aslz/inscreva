@@ -7,6 +7,8 @@ class RolesController < InheritedResources::Base
 
   def resource_params
     return [] if request.get?
-    [params.require(:role).permit(:name, :permission_ids)]
+    [params.require(:role).permit(:name).tap do |white|
+      white[:permission_ids] = params[:role][:permission_ids]
+    end]
   end
 end

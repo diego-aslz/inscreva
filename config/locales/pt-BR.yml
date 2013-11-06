@@ -69,6 +69,8 @@ pt-BR:
       receipt: Emitir Comprovante
     field_fill:
       download: Baixar Anexos
+    notification:
+      create: 'Enviar'
 
   types:
     boolean: Lógico
