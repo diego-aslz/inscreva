@@ -1,6 +1,12 @@
 
 # CHANGELOG
 
+## v1.14
+
+1. Funcionalidade: Envio de e-mails para candidatos;
+1. Funcionalidade: Inclusão de campos fixos na busca de inscritos;
+2. Pequenas correções.
+
 ## v1.13
 
 1. Correção: Token incorreto enviado ao e-mail do usuário para redefinição de senha;
