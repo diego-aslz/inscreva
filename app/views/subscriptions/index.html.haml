@@ -79,10 +79,10 @@
     event_subscriptions_path(@event, format: 'xls', params: params.slice(:fields,
     :field_ids, :term, :selects)), class: 'btn btn-success', title: t(:'export.xls')
 = link_to icon_tag('icon-download-alt icon-white') + " ZIP", '#download_fields',
-    class: 'btn btn-info', :'data-toggle' => "modal", title: t(:'export.zip') if can? :download, @subscriptions.first.field_fills.build
+    class: 'btn btn-info', :'data-toggle' => "modal", title: t(:'export.zip') if @subscriptions.first and can?(:download, @subscriptions.first.field_fills.build)
 = link_to icon_tag('icon-envelope icon-white') + " E-mail",
     new_event_notification_path(@event, filters: params[:fields]),
     class: 'btn btn-danger', :'data-toggle' => "modal", title: t(:'send_email') if can? :create, @event.notifications.build
 
--  if can? :download, @subscriptions.first.field_fills.build
+-  if @subscriptions.first and can?(:download, @subscriptions.first.field_fills.build)
   = render 'download_dialog', params: params, event: @event
