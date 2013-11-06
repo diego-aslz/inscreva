@@ -15,7 +15,11 @@ class NotificationsController < InheritedResources::Base
     create! do |suc,fail|
       suc.html {
         NotificationMailer.notify(@notification).deliver
-        redirect_to event_subscriptions_path(@event, fields: @notification.filters)
+        if @notification.filters and not @notification.filters.empty?
+          redirect_to event_subscriptions_path(@event, fields: @notification.filters)
+        else
+          redirect_to events_path
+        end
       }
     end
   end

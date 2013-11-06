@@ -48,6 +48,9 @@ pt-BR:
     "no": "Não"
 
   flash:
+    notifications:
+      create:
+        notice: '%{resource_name} será enviado em minutos.'
     actions:
       create:
         notice: '%{resource_name} criado(a) com sucesso.'

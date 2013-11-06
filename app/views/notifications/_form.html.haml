@@ -4,6 +4,8 @@
     = f.input :respond, as: :email, input_html: { class: 'input-xlarge' }
     = hide_params(@notification.filters, prefix: 'notification[filters]') if @notification.filters
     = f.input :recipients_text, as: :text, input_html: { class: 'input-block-level' }
+    = f.input :recipients_count, label: false do
+      %strong= t :total, count: @notification.recipients.size
     = f.input :message, input_html: { class: 'input-block-level' }
 
   .form-actions
