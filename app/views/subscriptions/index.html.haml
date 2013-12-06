@@ -61,6 +61,7 @@
           %td= subscription.attributes[select]
         - for field in @fields
           - fill = subscription.fills.where(field_id: field.id).first
+          - fill.field = field
           %td= fill.value_to_s if fill
         %td.actions
           = minilink_to_edit subscription, edit_subscription_path(subscription)

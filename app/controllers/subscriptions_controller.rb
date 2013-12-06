@@ -2,6 +2,7 @@ class SubscriptionsController < InheritedResources::Base
   actions :all, except: [ :destroy, :create ]
   load_and_authorize_resource except: [:new, :create]
   respond_to :html
+  respond_to :json, only: :index
   include SubscriptionsHelper
 
   def new
