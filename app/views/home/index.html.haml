@@ -5,7 +5,7 @@
       - 0.upto 2 do |j|
         - event = @events[i*3 + j]
         - if event
-          .span4
+          .col-md-4
             - if event.pages.any?
               %h2= link_to event.name, present_event_main_page_path(event.identifier)
             - else
