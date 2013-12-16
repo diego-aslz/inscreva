@@ -14,10 +14,10 @@
       %span.input-xxlarge.uneditable-input
         = @application.event_name
     = f.input :name, input_html: { class: :'input-xxlarge' }
-    = f.input :id_card
     - if @application.new_record?
       = f.input :email, input_html: { class: :'input-xlarge' }
       = f.input :email_confirmation, input_html: { class: :'input-xlarge' }
+    = f.input :id_card
 
     - last_group = ''
     = f.simple_fields_for :field_fills do |ff|

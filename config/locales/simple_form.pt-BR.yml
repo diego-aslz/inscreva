@@ -16,6 +16,8 @@ pt-BR:
       user:
         edit:
           current_password: para confirmar se é você mesmo
+      subscription:
+        id_card: Número do Documento
     placeholders:
       user:
         edit:
