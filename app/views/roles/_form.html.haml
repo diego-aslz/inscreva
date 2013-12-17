@@ -1,4 +1,5 @@
-= simple_form_for @role, html: { class: 'form-horizontal', multipart: true } do |f|
+= simple_form_for @role, html: { class: 'form-horizontal', multipart: true },
+  wrapper: :horizontal do |f|
   = f.error_notification
 
   .form-inputs
@@ -6,11 +7,15 @@
     %h2= Role.human_attribute_name :permissions
     - for klass in Permission.subject_classes do
       = f.input :permissions, label: klass.constantize.model_name.human.pluralize do
+        .row
         = f.collection_check_boxes :permission_ids,
-            Permission.where(subject_class: klass), :id, :to_s,
-            {item_wrapper_class: 'checkbox_container', item_wrapper: :div}
+            Permission.where(subject_class: klass), :id, :to_s do |input|
+          .col-sm-3
+            = input.check_box
+            = input.label
 
 
-  .form-actions
-    = f.button :submit, class: 'btn btn-primary'
-    = link_to_back path: roles_path if can? :index, Role
+  .form-actions.row
+    .col-sm-9.col-sm-offset-3
+      = f.button :submit, class: 'btn btn-primary'
+      = link_to_back path: roles_path if can? :index, Role
