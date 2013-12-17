@@ -50,7 +50,7 @@
             :'ng-model' => 'toEvent',
             typeahead: "event as event.name for event in ahead($viewValue, '#{ahead_events_path}')" }
         = f.input_field :to_event_id, as: :hidden, value: '{{ toEvent.id }}'
-        %p.muted
+        %p.text-muted
           Esta operação duplicará os campos de um evento para o outro. Nenhum
           campo já presente no evento de destino será removido.
       = modal_footer do
