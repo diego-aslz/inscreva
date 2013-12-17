@@ -1,12 +1,11 @@
-= f.simple_fields_for :fields, Field.new, child_index: '{{ $index }}',
-  wrapper: :horizontal do |form|
+= f.simple_fields_for :fields, Field.new, child_index: '{{ $index }}' do |form|
   %h3{'ng-show' => 'field.group_name'}
     {{ field.group_name }}
   = form.input :group_name, input_html: { 'ng-model' => 'field.group_name',
       id: 'event_fields_attributes_{{$index}}_group_name' },
       wrapper_html: { 'ng-show' => 'field.editing' }
-  = form.input :id, as: :hidden, input_html: { 'value' => '{{field.id}}' }
-  = form.input :_destroy, as: :hidden, input_html: { 'value' => '{{field._destroy}}' }
+  = form.input_field :id, as: :hidden, value: '{{field.id}}'
+  = form.input_field :_destroy, as: :hidden, value: '{{field._destroy}}'
   = form.input :name, label_html: { for: 'event_fields_attributes_{{$index}}_name',
     class: 'col-sm-3' } do
     .row
@@ -64,10 +63,10 @@
     %input{name: "event[fields_attributes][{{idx}}][allowed_file_extensions][]",
         type: "hidden", value: ""}
   = form.input :extra, wrapper_html: { 'ng-show' => 'field.editing && showExtra(field)' },
-      input_html: { 'ng-model' => 'field.extra', class: :'input-block-level',
+      input_html: { 'ng-model' => 'field.extra',
       id: 'event_fields_attributes_{{$index}}_extra' },
       placeholder: t(:'simple_form.placeholders.field.extra')
-  = form.input :hint, input_html: { 'ng-model' => 'field.hint', class: :'input-xxlarge',
+  = form.input :hint, input_html: { 'ng-model' => 'field.hint',
       id: 'event_fields_attributes_{{$index}}_hint' },
       wrapper_html: { 'ng-show' => 'field.editing' }
   = form.input :required, input_html: { 'ng-model' => 'field.required',

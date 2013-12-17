@@ -1,13 +1,13 @@
 - model_class = Page
-= page_header t('.title', default: model_class.model_name.human.pluralize)
-
-%h3=@event.name
+= page_header t('.title', default: model_class.model_name.human.pluralize) + |
+     " - " + "#{@event.name}" |
 
 %form.form-search{action: event_pages_path(@event)}
-  .input-append
-    %input.append.search-query.span4{type: "text", name: "term", value: params[:term]}
-    %button.btn{type: "submit"}
-      #{icon_tag "icon-search"} #{t :search}
+  .input-group
+    %input.search-query.form-control{type: "text", name: "term", value: params[:term]}
+    %span.input-group-btn
+      %button.btn.btn-default{type: "submit"}
+        #{icon_tag "icon-search"} #{t :search}
 
 %table.table.table-striped
   %thead

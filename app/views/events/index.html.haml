@@ -42,12 +42,12 @@
         = modal_close
         %h3= t(:copy_fields)
       = modal_body do
-        = f.input :from_event_name, label: t(:from), input_html: { class: 'input-block-level',
-            :'ng-model' => 'fromEvent', autocomplete: "off",
+        = f.input :from_event_name, label: t(:from), input_html: { autocomplete: "off",
+            :'ng-model' => 'fromEvent',
             typeahead: "event as event.name for event in ahead($viewValue, '#{ahead_events_path}')" }
         = f.input_field :from_event_id, as: :hidden, value: '{{ fromEvent.id }}'
-        = f.input :to_event_name, label: t(:to), input_html: { class: 'input-block-level',
-            :'ng-model' => 'toEvent', autocomplete: "off",
+        = f.input :to_event_name, label: t(:to), input_html: { autocomplete: "off",
+            :'ng-model' => 'toEvent',
             typeahead: "event as event.name for event in ahead($viewValue, '#{ahead_events_path}')" }
         = f.input_field :to_event_id, as: :hidden, value: '{{ toEvent.id }}'
         %p.muted

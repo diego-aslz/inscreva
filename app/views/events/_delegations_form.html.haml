@@ -14,7 +14,7 @@
         = link_to icon_tag('icon-trash'), 'javascript:void(0)',
             'ng-click' => 'removeDelegation($index)',
             id: 'event_delegations_attributes_{{$index}}_destroy_link',
-            class: 'btn btn-danger btn-mini', title: t(:remove_delegation)
+            class: 'btn btn-danger', title: t(:remove_delegation)
   = form.association :role, input_html: { 'ng-model' => 'delegation.role_id',
       id: 'event_delegations_attributes_{{$index}}_role_id' }
 %hr

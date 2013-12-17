@@ -1,11 +1,16 @@
-= f.simple_fields_for :files, PageFile.new, child_index: '{{$index}}' do |file|
+= f.simple_fields_for :files, PageFile.new, child_index: '{{ $index }}' do |file|
   = file.input :file, as: :file, wrapper_html: { 'ng-show' => 'file.file.url' } do
     = link_to '{{ file.name }}', '{{ file.file.url }}'
-  = file.input :file, as: :file, wrapper_html: { 'ng-show' => '! file.id' }
-  = file.input :name, input_html: { 'ng-model' => 'file.name' }
-  = file.input :id, as: :hidden, input_html: { 'value' => '{{file.id}}' }
-  = file.input :_destroy, as: :hidden, input_html: { 'value' => '{{file._destroy}}' }
-  = file.input :_destroy, label: false do
-    = link_to icon_tag('icon-trash icon-white'), 'javascript:void(0)',
-        'ng-click' => 'removeFile($index)', class: 'btn btn-danger btn-mini', title: t(:remove_file)
+  = file.input :file, as: :file, wrapper_html: { 'ng-show' => '! file.id' },
+    label_html: { for: 'page_files_attributes_{{$index}}_file', class: 'col-sm-3' } do
+    .row
+      .col-sm-11
+        = file.input_field :file, as: :file, id: 'page_files_attributes_{{$index}}_file'
+      .col-sm-1.text-right
+        = link_to icon_tag('icon-trash'), 'javascript:void(0)',
+            'ng-click' => 'removeFile($index)', class: 'btn btn-danger', title: t(:remove_file)
+  = file.input :name, input_html: { 'ng-model' => 'file.name',
+    id: 'page_files_attributes_{{$index}}_name' }
+  = file.input_field :id, as: :hidden, value: '{{file.id}}'
+  = file.input_field :_destroy, as: :hidden, value: '{{file._destroy}}'
   %hr

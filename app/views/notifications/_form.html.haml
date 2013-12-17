@@ -1,12 +1,12 @@
 = simple_form_for([@event, @notification], :html => { class: 'form-horizontal' }) do |f|
   .form-inputs
-    = f.input :subject, input_html: { class: 'input-xxlarge' }
-    = f.input :respond, as: :email, input_html: { class: 'input-xlarge' }
+    = f.input :subject
+    = f.input :respond, as: :email
     = hide_params(@notification.filters, prefix: 'notification[filters]') if @notification.filters
-    = f.input :recipients_text, as: :text, input_html: { class: 'input-block-level' }
+    = f.input :recipients_text, as: :text
     = f.input :recipients_count, label: false do
       %strong= t :total, count: @notification.recipients.size
-    = f.input :message, input_html: { class: 'input-block-level' }
+    = f.input :message
 
   .form-actions
     = f.button :submit, class: 'btn-primary'

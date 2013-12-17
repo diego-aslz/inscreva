@@ -4,38 +4,41 @@
   - object = @page
 
 %div{'ng-controller' => 'PageCtrl', 'ng-init' => "page = #{@page.to_json}; page.files = #{@page.files.to_json}"}
-  = simple_nested_form_for object, :html => { class: 'form-horizontal', multipart: true } do |f|
+  = simple_nested_form_for object, :html => { class: 'form-horizontal',
+    multipart: true }, wrapper: :horizontal do |f|
     = f.error_notification
 
     .form-inputs
-      = f.input :event_name do
-        %span.input-xxlarge.uneditable-input
-          = @page.event_name
+      = f.input :event_name, input_html: { disabled: true }
       = f.input :main
-      = f.input :language, as: :radio_buttons, collection: I18n.available_locales.map{ |l| [locale_flag(l), l] }.<<([t(:all), '']), item_wrapper_class: 'inline'
-      = f.input :title, input_html: { :'ng-model' => 'page.title', class: 'input-xxlarge' }
+      = f.input :language, as: :radio_buttons,
+        collection: I18n.available_locales.map{ |l| [locale_flag(l), l] }.<<([t(:all), ''])
+      = f.input :title, input_html: { :'ng-model' => 'page.title' }
       = f.input :name, input_html: { value: '{{ name() }}' }
       = f.input :page_id, collection: [@page.event], as: :grouped_select, group_method: :pages
       = f.input :content do
-        .tabs
-          %ul.nav.nav-pills
-            %li.active
-              %a{href: "#edit", 'data-toggle' => "pill"}= t :edit_mode
-            %li
-              %a{href: "#preview", 'data-toggle' => "pill", :'ng-click' => 'refreshPreview()'}
-                = t :preview_mode
-          #edit.tab.active
+        %ul.nav.nav-tabs
+          %li.active
+            %a(href="#edit" data-toggle="tab")= t :edit_mode
+          %li
+            %a(href="#preview" data-toggle="tab" ng-click="refreshPreview()")
+              = t :preview_mode
+        .tab-content
+          .tab-pane#edit.active
             = f.input_field :content, label: false, :'ng-model' => 'page.content',
                 class: 'markdown'
-          #preview.tab
+          .tab-pane#preview
             .md-page
     %h2= t(:attachment).pluralize
     .page-file{:'ng-repeat' => 'file in page.files', :'ng-show' => '! file._destroy'}
       = render 'files_form', f: f
-    %br
-    = link_to icon_tag('icon-plus icon-white'), 'javascript:void(0)', 'ng-click' => 'addFile()',
-        class: 'btn btn-success'
+    .row
+      .col-sm-9.col-sm-offset-3
+        = link_to icon_tag('icon-plus'), 'javascript:void(0)',
+          'ng-click' => 'addFile()', class: 'btn btn-success'
+    %hr
 
-    .form-actions
-      = f.button :submit, label: t(:subscribe), class: 'btn btn-primary'
-      = link_to_back path: event_pages_path(@page.event) if can? :index, Subscription
+    .form-actions.row
+      .col-sm-9.col-sm-offset-3
+        = f.button :submit, label: t(:subscribe), class: 'btn btn-primary'
+        = link_to_back path: event_pages_path(@page.event) if can? :index, Subscription

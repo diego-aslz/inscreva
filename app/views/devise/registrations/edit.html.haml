@@ -4,8 +4,8 @@
 = simple_form_for(resource, :as => resource_name, :url => registration_path, :html => { :method => :put }) do |f|
 
   .form-inputs
-    = f.input :name, :autofocus => true, input_html: { class: 'input-xxlarge' }
-    = f.input :email, :required => true, input_html: { class: 'input-xlarge' }
+    = f.input :name, :autofocus => true
+    = f.input :email, :required => true
 
     = f.input :password, :autocomplete => "off", :required => false
     = f.input :password_confirmation, :required => false
