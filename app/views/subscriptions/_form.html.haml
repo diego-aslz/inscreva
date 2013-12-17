@@ -13,10 +13,10 @@
     = f.input_field :confirmed, as: :hidden
     = f.input :event_name, input_html: { disabled: true }
     = f.input :name
-    = f.input :id_card
     - if @application.new_record?
       = f.input :email
       = f.input :email_confirmation
+    = f.input :id_card
 
     - last_group = ''
     = f.simple_fields_for :field_fills do |ff|
