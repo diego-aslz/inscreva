@@ -37,7 +37,7 @@ module ApplicationHelper
 
   def link_to_back(options = {})
     link_to (options[:text] || t('.back', :default => t("helpers.links.back"))),
-        (options[:path] || :back), :class => 'btn btn-default'
+        options.fetch(:path) { :back }, :class => 'btn btn-default'
   end
 
   def redcarpet

@@ -48,7 +48,8 @@
                       %a{href: destroy_user_session_url, :'data-method' => "delete"}
                         = t :'devise.links.sign_out'
                 - else
-                  = link_to t('devise.links.sign_in'), new_user_session_url, class: 'btn btn-primary'
+                  = link_to t('devise.links.sign_in'), new_user_session_url,
+                    class: 'navbar-link'
               %li
                 %a.dropdown-toggle(data-toggle="dropdown" href="#")
                   = image_tag "#{locale}.png", alt: locale, width: "16", height: "16"
@@ -61,10 +62,7 @@
       .container
         .row
           .col-lg-12
-            - flash.each do |k,v|
-              %div{class: "alert alert-#{k == :notice ? 'success' : 'error'}"}
-                %button.close{type: "button", :'data-dismiss' => "alert"} &times;
-                = v
+            = bootstrap_flash
             = yield
     .footer
       .container
