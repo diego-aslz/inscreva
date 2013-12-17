@@ -3,6 +3,11 @@
   background-color: #fcf8e3;
 }
 
+.event-field {
+  padding-top: 15px;
+  border-bottom: 1px solid #eeeeee;
+}
+
 .left-col {
   padding-right: 30px;
 }

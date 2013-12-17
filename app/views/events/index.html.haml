@@ -26,14 +26,15 @@
           %td.actions
             = minilink_to_edit event, edit_event_path(event)
             = minilink_to_destroy event, value: event.name
-            = link_to icon_tag('icon-file icon-white'), event_pages_path(event),
-                class: 'btn btn-mini btn-primary',
+            = link_to icon_tag('icon-file'), event_pages_path(event),
+                class: 'btn btn-xs btn-primary',
                 title: Page.model_name.human.pluralize if can? :index, Page
-            = link_to icon_tag('icon-tasks icon-white'), '#copy_fields',
-                class: 'btn btn-mini btn-success', :'data-toggle' => "modal",
+            = link_to icon_tag('icon-tasks'), '#copy_fields',
+                class: 'btn btn-xs btn-success', :'data-toggle' => "modal",
                 title: '', :'ng-click' => "copyFrom(#{event.to_json(only: [:id, :name])})" if can? :copy_fields, event
-            = link_to icon_tag('icon-envelope icon-white'), new_event_notification_path(event),
-                class: 'btn btn-mini btn-inverse', title: t(:send_email) if can? :create, event.notifications.build
+            = link_to icon_tag('icon-envelope'), new_event_notification_path(event),
+                class: 'btn btn-xs btn-info', title: t(:send_email) if can? :create,
+                event.notifications.build
 
   #copy_fields.modal.hide.fade{tabindex: -1, role: 'dialog'}
     .modal-header

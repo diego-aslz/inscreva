@@ -35,12 +35,13 @@ body > .wrapper { height: auto; min-height: 82%; }
   text-align: right;
 }
 
-.tabs .tab:not(.active) {
-  display: none;
+.tab-content {
+  padding-top: 1em;
 }
 
-.datetime {
-  width: inherit;
+select.datetime {
+  width: 120px;
+  display: inline;
 }
 
 .checkbox.inline {

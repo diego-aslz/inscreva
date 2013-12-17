@@ -1,44 +1,50 @@
 %div{'ng-controller' => 'EventCtrl', 'ng-init' => "event = #{@event.to_ng}; extras = #{Field::TYPES_WITH_EXTRA.to_json}"}
-  = simple_form_for @event, :html => { class: 'form-horizontal', multipart: true } do |f|
+  = simple_form_for @event, :html => { class: 'form-horizontal', multipart: true },
+    wrapper: :horizontal do |f|
     .form-inputs
-      .tabs
-        %ul.nav.nav-pills
-          %li.active
-            %a{href: "#details", 'data-toggle' => "pill"}= t :details
-          %li
-            %a{href: "#subscriptions", 'data-toggle' => "pill"}= Subscription.model_name.human.pluralize
-          %li
-            %a{href: "#fields", 'data-toggle' => "pill"}= Event.human_attribute_name :fields
-          %li
-            %a{href: "#delegations", 'data-toggle' => "pill"}= Event.human_attribute_name :delegations
-        #details.tab.active
-          = f.input :name, input_html: { :'ng-model' => 'event.name', class: :'input-xxlarge' }
-          = f.input :description, input_html: { class: :'input-block-level' }
+      %ul.nav.nav-tabs
+        %li.active
+          %a(href="#details" data-toggle="tab")= t :details
+        %li
+          %a(href="#subscriptions" data-toggle="tab")= Subscription.model_name.human.pluralize
+        %li
+          %a(href="#fields" data-toggle="tab")= Event.human_attribute_name :fields
+        %li
+          %a(href="#delegations" data-toggle="tab")= Event.human_attribute_name :delegations
+      .tab-content
+        .tab-pane.active#details
+          = f.input :name, input_html: { :'ng-model' => 'event.name' }
+          = f.input :description
           = f.input :identifier, input_html: { :'ng-model' => 'event.identifier'}
           = f.input :rules_url, input_html: { :'ng-model' => 'event.rules_url'}
           = f.input :email, input_html: { :'ng-model' => 'event.email'}
           = f.input :published
-        #subscriptions.tab
+        .tab-pane#subscriptions
           = f.input :opens_at, include_blank: true
           = f.input :closes_at, include_blank: true
           = f.input :technical_email, input_html: { :'ng-model' => 'event.technical_email'}
-        #fields.tab
+        .tab-pane#fields
           .event-field{:'ng-repeat' => 'field in event.fields',
               :'ng-show' => '!field._destroy' }
             = render 'fields_form', f: f
-            %hr
-          %div
-            = link_to icon_tag('icon-plus icon-white'), 'javascript:void(0)', 'ng-click' => 'addField()',
-                class: 'btn btn-success', title: t(:add_field), id: 'add_field'
-        #delegations.tab
+          .row
+            .col-sm-9.col-sm-offset-3
+              = link_to icon_tag('icon-plus'), 'javascript:void(0)', 'ng-click' => 'addField()',
+                  class: 'btn btn-success', title: t(:add_field), id: 'add_field'
+          %hr
+        .tab-pane#delegations
           .delegation-field{:'ng-repeat' => 'delegation in event.delegations',
               :'ng-show' => '!delegation._destroy' }
             = render 'delegations_form', f: f
-          %div
-            = link_to icon_tag('icon-plus icon-white'), 'javascript:void(0)',
-              'ng-click' => 'addDelegation()', id: 'add_delegation',
-              class: 'btn btn-success', title: t(:add_delegation)
+          .row
+            %div.col-sm-9.col-sm-offset-3
+              = link_to icon_tag('icon-plus'), 'javascript:void(0)',
+                'ng-click' => 'addDelegation()', id: 'add_delegation',
+                class: 'btn btn-success', title: t(:add_delegation)
+          %hr
 
     .form-actions
-      = f.button :submit, class: 'btn-large btn-primary'
-      = link_to_back
+      .row
+        %div.col-sm-9.col-sm-offset-3
+          = f.button :submit, class: 'btn-large btn-primary'
+          = link_to_back
