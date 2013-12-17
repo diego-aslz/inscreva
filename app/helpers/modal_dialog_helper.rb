@@ -1,6 +1,10 @@
 module ModalDialogHelper
   def modal_dialog(options={},&block)
-    content_tag :div, {class: 'modal hide fade', tabindex: -1, role: 'dialog'}.merge(options), &block
+    content_tag :div, {class: 'modal fade', tabindex: -1, role: 'dialog'}.merge(options) do
+      content_tag :div, class: 'modal-dialog' do
+        content_tag :div, class: 'modal-content', &block
+      end
+    end
   end
 
   def modal_header(options={},&block)
@@ -16,10 +20,12 @@ module ModalDialogHelper
   end
 
   def modal_close(options={})
-    content_tag :button, 'X', {class: 'close', :'data-dismiss' => :modal, type: :button}.merge(options)
+    content_tag :button, '&times;'.html_safe, {class: 'close', type: :button,
+      :'data-dismiss' => :modal, 'aria-hidden' => 'true'}.merge(options)
   end
 
   def modal_cancel(options={})
-    content_tag :button, options.delete(:caption), {class: 'btn', :'data-dismiss' => :modal}.merge(options)
+    content_tag :button, options.delete(:caption), {class: 'btn btn-default',
+      :'data-dismiss' => :modal}.merge(options)
   end
 end

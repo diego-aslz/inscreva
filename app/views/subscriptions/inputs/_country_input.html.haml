@@ -1,9 +1,9 @@
-.control-group
-  = label_tag id, field.name, class: :'control-label'
-  .controls
+.form-group
+  = label_tag id, field.name, class: :'control-label col-sm-3'
+  .col-sm-9
     - FieldFill.select('distinct value').where(field_id: field.id).each do |ff|
-      %span.checkbox_container
-        - cb_id = "#{id}_#{ff.value}"
+      - cb_id = "#{id}_#{ff.value}"
+      %label.checkbox
         = check_box_tag cb_id, ff.value, value.try(:include?, ff.value),
             name: "fields[#{field.id}][value][]"
-        = label_tag cb_id, t(:"countries.#{ff.value}"), class: :collection_check_boxes
+        = t(:"countries.#{ff.value}")

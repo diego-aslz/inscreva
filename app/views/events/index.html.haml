@@ -11,7 +11,6 @@
         %th= model_class.human_attribute_name :closes_at
         %th= model_class.human_attribute_name :subscriptions
         %th
-        %th
     %tbody
       - @events.each do |event|
         %tr
@@ -36,26 +35,26 @@
                 class: 'btn btn-xs btn-info', title: t(:send_email) if can? :create,
                 event.notifications.build
 
-  #copy_fields.modal.hide.fade{tabindex: -1, role: 'dialog'}
-    .modal-header
-      %button.close{:'data-dismiss' => :modal, type: :button} x
-      %h3#myModalLabel= t(:'copy_fields')
-    = simple_form_for OpenStruct.new, as: 'copy', method: :put,
-        url: copy_fields_events_path, html: {class: 'form-horizontal'} do |f|
-      .modal-body
+  = simple_form_for OpenStruct.new, as: 'copy', method: :put, wrapper: :horizontal,
+      url: copy_fields_events_path, html: { class: 'form-horizontal' } do |f|
+    = modal_dialog id: :copy_fields do
+      = modal_header do
+        = modal_close
+        %h3= t(:copy_fields)
+      = modal_body do
         = f.input :from_event_name, label: t(:from), input_html: { class: 'input-block-level',
             :'ng-model' => 'fromEvent', autocomplete: "off",
             typeahead: "event as event.name for event in ahead($viewValue, '#{ahead_events_path}')" }
-        = f.input :from_event_id, as: :hidden, input_html: { value: '{{ fromEvent.id }}' }
+        = f.input_field :from_event_id, as: :hidden, value: '{{ fromEvent.id }}'
         = f.input :to_event_name, label: t(:to), input_html: { class: 'input-block-level',
             :'ng-model' => 'toEvent', autocomplete: "off",
             typeahead: "event as event.name for event in ahead($viewValue, '#{ahead_events_path}')" }
-        = f.input :to_event_id, as: :hidden, input_html: { value: '{{ toEvent.id }}' }
+        = f.input_field :to_event_id, as: :hidden, value: '{{ toEvent.id }}'
         %p.muted
           Esta operação duplicará os campos de um evento para o outro. Nenhum
           campo já presente no evento de destino será removido.
-      .modal-footer
-        %button.btn{:'data-dismiss' => :modal}= t :'helpers.links.cancel'
+      = modal_footer do
+        = modal_cancel caption: t(:'helpers.links.cancel')
         = f.button :submit, t(:'copy_fields'), class: 'btn-success'
 
 = paginate @events

@@ -1,10 +1,10 @@
-.control-group
-  = label_tag id, field.name, class: :'control-label'
-  .controls
+.form-group
+  = label_tag id, field.name, class: :'control-label col-sm-3'
+  .col-sm-9
     - field.select_options.each do |opt|
-      %span.checkbox_container
-        - f_id = opt[1]
-        - domid = "#{dom_id(field)}_#{f_id}"
+      - f_id = opt[1]
+      - domid = "#{dom_id(field)}_#{f_id}"
+      %label.checkbox.inline
         = check_box_tag "fields[#{field.id}][value][]", f_id,
             value && value.include?(f_id), id: domid
-        = label_tag domid, opt[0], class: 'collection_check_boxes'
+        = opt[0]

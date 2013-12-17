@@ -1,7 +1,8 @@
 - model_class = Subscription
 = page_header "#{t('.title', default: model_class.model_name.human.pluralize)} - #{@event.name}"
 
-= form_tag event_subscriptions_path(@event), method: :get, class: 'form-search form-horizontal' do
+= form_tag event_subscriptions_path(@event), method: :get,
+  class: 'form-search form-horizontal' do
   - values = params[:fields] || {}
   - @event.fields.where(searchable: true).each do |field|
     = render "subscriptions/inputs/#{field.field_type}_input",
@@ -10,35 +11,34 @@
         values: values,
         id: dom_id(field) rescue nil
 
-  .control-group
-    = label_tag 'name', t(:search), class: :'control-label'
-    .controls
-      = text_field_tag 'name', params[:term], name: "term", class: 'span4'
+  .form-group
+    = label_tag 'name', t(:search), class: :'control-label col-sm-3'
+    .col-sm-9
+      = text_field_tag 'name', params[:term], name: "term", class: 'form-control'
 
-  .control-group
-    = label_tag 'selects', t(:show).titleize, class: :'control-label'
-    .controls
+  .form-group
+    = label_tag 'selects', t(:show).titleize, class: :'control-label col-sm-3'
+    .col-sm-9
       - ['email', 'id_card'].each do |att|
-        %span.checkbox_container
-          = check_box_tag "selects[]", att, params['selects'].try(:include?, att), id: "select_#{att}"
-          = label_tag "select_#{att}", Subscription.human_attribute_name(att), class: :collection_check_boxes
+        %label.checkbox.inline
+          = check_box_tag "selects[]", att, params['selects'].try(:include?, att),
+            id: "select_#{att}"
+          = Subscription.human_attribute_name(att)
 
-  .control-group
-    = label_tag 'field_ids[]', t(:include_fields), class: :'control-label'
-    .controls
+  .form-group
+    = label_tag 'field_ids[]', t(:include_fields), class: :'control-label col-sm-3'
+    .col-sm-9
       = select_tag 'field_ids[]', options_from_collection_for_select(@event.         |
           fields.where("field_type != 'file'"), :id, :name, params['field_ids']),    |
-          multiple: '', class: 'chosen input-xxlarge',   |
-          :'data-placeholder' => t(:select).titleize   |
+          multiple: '', class: 'chosen', :'data-placeholder' => t(:select).titleize  |
 
-  .control-group
-    .controls
+  .form-group
+    .col-sm-9.col-sm-offset-3
       = button_tag type: "submit", class: :'btn btn-primary' do
-        #{icon_tag("icon-search icon-white")}
+        #{icon_tag("icon-search")}
         #{t(:search)}
-      = link_to icon_tag("icon-remove icon-white").html_safe,
-          event_subscriptions_path(@event), title: t(:clear_fields),
-          class: 'btn btn-warning'
+      = link_to icon_tag("icon-remove"), event_subscriptions_path(@event),
+          title: t(:clear_fields), class: 'btn btn-warning'
 
 %table.table.table-striped
   %thead
@@ -67,23 +67,29 @@
           = minilink_to_edit subscription, edit_subscription_path(subscription)
           = minilink_to_receipt(subscription)
 
+= paginate @subscriptions
+
 .pull-right
   %strong
     = t :total, count: @count
 
-= paginate @subscriptions
 
-= link_to icon_tag('icon-download-alt icon-white') + " CSV",
-    event_subscriptions_path(@event, format: 'csv', params: params.slice(:fields,
-    :field_ids, :term, :selects)), class: 'btn btn-inverse', title: t(:'export.csv')
-= link_to icon_tag('icon-download-alt icon-white') + " XLS",
-    event_subscriptions_path(@event, format: 'xls', params: params.slice(:fields,
-    :field_ids, :term, :selects)), class: 'btn btn-success', title: t(:'export.xls')
-= link_to icon_tag('icon-download-alt icon-white') + " ZIP", '#download_fields',
-    class: 'btn btn-info', :'data-toggle' => "modal", title: t(:'export.zip') if @subscriptions.first and can?(:download, @subscriptions.first.field_fills.build)
-= link_to icon_tag('icon-envelope icon-white') + " E-mail",
-    new_event_notification_path(@event, filters: params[:fields]),
-    class: 'btn btn-danger', :'data-toggle' => "modal", title: t(:'send_email') if can? :create, @event.notifications.build
+.row
+  .col-sm-1
+    = link_to icon_tag('icon-download-alt') + " CSV",
+        event_subscriptions_path(@event, format: 'csv', params: params.slice(:fields,
+        :field_ids, :term, :selects)), class: 'btn btn-default', title: t(:'export.csv')
+  .col-sm-1
+    = link_to icon_tag('icon-download-alt') + " XLS",
+        event_subscriptions_path(@event, format: 'xls', params: params.slice(:fields,
+        :field_ids, :term, :selects)), class: 'btn btn-success', title: t(:'export.xls')
+  .col-sm-1
+    = link_to icon_tag('icon-download-alt') + " ZIP", '#download_fields',
+        class: 'btn btn-info', :'data-toggle' => "modal", title: t(:'export.zip') if @subscriptions.first and can?(:download, @subscriptions.first.field_fills.build)
+  .col-sm-1
+    = link_to icon_tag('icon-envelope') + " E-mail",
+        new_event_notification_path(@event, filters: params[:fields]),
+        class: 'btn btn-danger', :'data-toggle' => "modal", title: t(:'send_email') if can? :create, @event.notifications.build
 
--  if @subscriptions.first and can?(:download, @subscriptions.first.field_fills.build)
+- if @subscriptions.first and can?(:download, @subscriptions.first.field_fills.build)
   = render 'download_dialog', params: params, event: @event
