@@ -25,7 +25,7 @@
 #= require masks
 #= require events
 #= require pages
-#= require ui-bootstrap-tpls-0.5.0
+#= require ui-bootstrap-tpls-0.7.0
 
 $ ->
   $("textarea.markdown").markItUp mdSettings
