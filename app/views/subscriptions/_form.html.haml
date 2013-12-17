@@ -29,8 +29,8 @@
 
     - unless @application.user || !@application.confirmed?
       %h2= t :choose_password
-      = horizontal_input f, :password, required: true
-      = horizontal_input f, :password_confirmation
+      = f.input :password, required: true
+      = f.input :password_confirmation
 
   .form-actions
     .row
