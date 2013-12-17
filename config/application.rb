@@ -21,6 +21,7 @@ module Inscreva
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :'pt-BR'
     config.i18n.locale = :'pt-BR'
+    I18n.enforce_available_locales = true
 
     config.action_dispatch.rescue_responses["PagesController::NotFound"] = :not_found
 
