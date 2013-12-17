@@ -1,5 +1,6 @@
 - url = (@application.new_record? ? event_subscriptions_path(@event) : subscription_path(@application.subscription))
-= simple_form_for @application, url: url, :html => { class: 'form-horizontal', multipart: true } do |f|
+= simple_form_for @application, url: url, :html => { class: 'form-horizontal', multipart: true },
+  wrapper: :horizontal do |f|
   - alert = f.error :base
   - if alert
     .alert.alert-warning
@@ -9,15 +10,13 @@
     %br
 
   .form-inputs
-    = f.input :confirmed, as: :hidden
-    = f.input :event_name do
-      %span.input-xxlarge.uneditable-input
-        = @application.event_name
-    = f.input :name, input_html: { class: :'input-xxlarge' }
+    = f.input_field :confirmed, as: :hidden
+    = f.input :event_name, input_html: { disabled: true }
+    = f.input :name
     = f.input :id_card
     - if @application.new_record?
-      = f.input :email, input_html: { class: :'input-xlarge' }
-      = f.input :email_confirmation, input_html: { class: :'input-xlarge' }
+      = f.input :email
+      = f.input :email_confirmation
 
     - last_group = ''
     = f.simple_fields_for :field_fills do |ff|
@@ -30,8 +29,10 @@
 
     - unless @application.user || !@application.confirmed?
       %h2= t :choose_password
-      = f.input :password, required: true
-      = f.input :password_confirmation
+      = horizontal_input f, :password, required: true
+      = horizontal_input f, :password_confirmation
 
   .form-actions
-    = f.button :submit, t(:subscribe), class: 'btn btn-primary'
+    .row
+      .col-md-9.col-md-offset-3
+        = f.button :submit, t(:subscribe), class: 'btn btn-primary'

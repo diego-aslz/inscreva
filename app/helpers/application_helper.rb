@@ -22,16 +22,16 @@ module ApplicationHelper
   end
 
   def minilink_to_edit(model, path, options = {})
-    link_to icon_tag('icon-pencil icon-white').html_safe,
-        path, :class => (options[:class] || 'btn btn-mini btn-warning'),
+    link_to icon_tag('icon-pencil').html_safe,
+        path, :class => (options[:class] || 'btn btn-xs btn-warning'),
         title: t(:'helpers.links.edit') if can? :edit, model
   end
 
   def minilink_to_destroy(model, options = {})
-    link_to icon_tag('icon-trash icon-white').html_safe, model, method: :delete, data: { confirm:
+    link_to icon_tag('icon-trash').html_safe, model, method: :delete, data: { confirm:
             t(:'helpers.links.confirm', model: (options[:model] ||
                 model.class.model_name.human), value: options[:value]) },
-        class: (options[:class] || 'btn btn-mini btn-danger'),
+        class: (options[:class] || 'btn btn-xs btn-danger'),
         title: t(:'helpers.links.destroy') if can? :destroy, model
   end
 

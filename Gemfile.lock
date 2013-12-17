@@ -343,7 +343,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   selenium-webdriver
   show_for!
-  simple_form (~> 3.0.0.rc)
+  simple_form (~> 3.0.1)
   sqlite3
   therubyracer
   thin

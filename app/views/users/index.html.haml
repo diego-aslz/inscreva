@@ -1,15 +1,19 @@
 - model_class = User
 = page_header t('.title', default: model_class.model_name.human.pluralize)
 
-%form.form-search{action: users_path}
-  %input#subscribers{type: "checkbox", name: "subscribers", checked: !params[:subscribers].blank?}
-  %label{for: :subscribers}=t :include_subscribers
+%form.form-inline{action: users_path}
+  .form-group
+    %label(for="term" class="sr-only") Search
+    = text_field_tag 'name', params[:term], id: :term, name: "term", class: 'form-control'
+  .checkbox
+    %label
+      %input#subscribers{type: "checkbox", name: "subscribers", checked: !params[:subscribers].blank?}
+      = t :include_subscribers
+  = button_tag type: "submit", class: 'btn btn-default' do
+    #{icon_tag("icon-search")} #{t(:search)}
+
   %br
   %br
-  .input-append
-    = text_field_tag 'name', params[:term], name: "term", class: 'append search-query span4'
-    = button_tag type: "submit", class: :btn do
-      #{icon_tag("icon-search")} #{t(:search)}
 
 %table.table.table-striped
   %thead
