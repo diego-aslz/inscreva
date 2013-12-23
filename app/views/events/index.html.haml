@@ -32,8 +32,8 @@
                 class: 'btn btn-xs btn-success', :'data-toggle' => "modal",
                 title: '', :'ng-click' => "copyFrom(#{event.to_json(only: [:id, :name])})" if can? :copy_fields, event
             = link_to icon_tag('icon-envelope'), new_event_notification_path(event),
-                class: 'btn btn-xs btn-info', title: t(:send_email) if can? :create,
-                event.notifications.build
+                class: 'btn btn-xs btn-info', title: t(:send_email),
+                id: "#event_#{event.id}_notify_link" if can? :create, event.notifications.build
 
   = simple_form_for OpenStruct.new, as: 'copy', method: :put, wrapper: :horizontal,
       url: copy_fields_events_path, html: { class: 'form-horizontal' } do |f|

@@ -22,31 +22,34 @@ describe Notification do
   end
 
   context "loading recipients" do
+    let(:sub1) { build(:subscription, email: 'abc@def.com') }
+    let(:sub2) { build(:subscription, email: 'abc@def.com') }
+    let(:sub3) { build(:subscription, email: 'ghi@jkl.com') }
+    let(:sub4) { build(:subscription, email: 'xyz@jkl.com') }
+
     before(:each) do
-      @s1 = build(:subscription, email: 'abc@def.com')
-      @s2 = build(:subscription, email: 'abc@def.com')
-      @s3 = build(:subscription, email: 'ghi@jkl.com')
-      notification.event.subscriptions << @s1
-      notification.event.subscriptions << @s2
-      notification.event.subscriptions << @s3
+      notification.event.subscriptions << sub1
+      notification.event.subscriptions << sub2
+      notification.event.subscriptions << sub3
+      notification.event.subscriptions << sub4
       notification.filters = nil
       notification.load_recipients
     end
 
     it "does not repeat recipients" do
-      notification.recipients.should == ['abc@def.com', 'ghi@jkl.com']
+      notification.recipients.should == ['abc@def.com', 'ghi@jkl.com', 'xyz@jkl.com']
     end
 
     it "filters the subscribers" do
       f = create(:field, field_type: 'select', extra: 'ABC=abc')
-      create(:field_fill, value: 'ABC', subscription_id: @s3.id, field_id: f.id)
+      create(:field_fill, value: 'ABC', subscription_id: sub3.id, field_id: f.id)
       notification.filters = { f.id => { type: 'select', value: 'ABC' } }
       notification.load_recipients
       notification.recipients.should == ['ghi@jkl.com']
     end
 
     it "converts recipients to text" do
-      notification.recipients_text.should == 'abc@def.com, ghi@jkl.com'
+      notification.recipients_text.should == 'abc@def.com, ghi@jkl.com, xyz@jkl.com'
     end
 
     it "converts recipients from text" do

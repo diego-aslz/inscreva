@@ -4,6 +4,7 @@ class NotificationsController < InheritedResources::Base
   load_and_authorize_resource
 
   def new
+    @notification.event = @event
     @notification.respond = current_user.email
     @notification.filters = params[:filters]
     @notification.load_recipients
