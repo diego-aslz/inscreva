@@ -1,11 +1,18 @@
 
 # CHANGELOG
 
+## v1.15
+
+1. Melhoria: Twitter Bootstrap 3;
+2. Correção: Carregamento incorreto de e-mails ao abrir formulário de
+notificação de usuários;
+3. Pequenas melhorias e correções.
+
 ## v1.14
 
 1. Funcionalidade: Envio de e-mails para candidatos;
-1. Funcionalidade: Inclusão de campos fixos na busca de inscritos;
-2. Pequenas correções.
+2. Funcionalidade: Inclusão de campos fixos na busca de inscritos;
+3. Pequenas correções.
 
 ## v1.13
 
