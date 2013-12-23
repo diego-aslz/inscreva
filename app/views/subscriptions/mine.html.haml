@@ -14,7 +14,7 @@
         %td= link_to subscription.number, subscription_path(subscription)
         %td= subscription.email
         %td= subscription.event.name if subscription.event
-        %td.actions
+        %td.text-right
           = minilink_to_edit subscription, edit_subscription_path(subscription)
           = minilink_to_receipt(subscription)
 

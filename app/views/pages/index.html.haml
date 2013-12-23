@@ -26,7 +26,7 @@
             %strong= page.title
           - else
             = page.title
-        %td.actions
+        %td.text-right
           = minilink_to_edit page, edit_page_path(page)
           = minilink_to_destroy page, value: page.title
 

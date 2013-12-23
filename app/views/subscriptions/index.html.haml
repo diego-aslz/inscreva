@@ -63,7 +63,7 @@
           - fill = subscription.fills.where(field_id: field.id).first
           - fill.field = field
           %td= fill.value_to_s if fill
-        %td.actions
+        %td.text-right
           = minilink_to_edit subscription, edit_subscription_path(subscription)
           = minilink_to_receipt(subscription)
 

@@ -5,7 +5,7 @@
       - 0.upto 2 do |j|
         - event = @events[i*3 + j]
         - if event
-          .col-md-4
+          .col-md-4.text-center
             - if event.pages.any?
               %h2= link_to event.name, present_event_main_page_path(event.identifier)
             - else
@@ -14,16 +14,16 @@
             - if event.opens_at && event.closes_at
               %table
                 %tr
-                  %th{colspan: 2}= Subscription.model_name.human.pluralize
+                  %th.text-center(colspan="2")= Subscription.model_name.human.pluralize
                 %tr
-                  %th.left-head
+                  %th.text-left
                     = t(:begin).titleize
-                  %td.actions
+                  %td.text-right
                     #{l event.opens_at}
                 %tr
-                  %th.left-head
+                  %th.text-left
                     = t(:end).titleize
-                  %td.actions
+                  %td.text-right
                     #{l event.closes_at}
             - if can? :create, event.subscriptions.build
               %p= link_to_subscribe(event)

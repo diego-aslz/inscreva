@@ -1,14 +1,6 @@
-.home {
-  text-align: center;
-}
-
 .home table {
   width: 100%;
   margin-bottom: 1em;
-}
-
-th.left-head {
-  text-align: left;
 }
 
 .row-fluid.home {

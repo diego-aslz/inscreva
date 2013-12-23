@@ -22,7 +22,7 @@
             %td= link_to event.subscriptions.size, event_subscriptions_path(event)
           - else
             %td= event.subscriptions.size
-          %td.actions
+          %td.text-right
             = minilink_to_edit event, edit_event_path(event)
             = minilink_to_destroy event, value: event.name
             = link_to icon_tag('icon-file'), event_pages_path(event),
