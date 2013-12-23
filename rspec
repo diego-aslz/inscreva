@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rspec spec/abilities spec/forms spec/mailers spec/models
+rspec spec/features

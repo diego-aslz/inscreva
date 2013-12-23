@@ -4,20 +4,20 @@ FactoryGirl.define do
     email
     technical_email 'systems@nomail.com'
     rules_url ''
-    sequence :identifier, 'event1'
+    sequence :identifier, 'event01'
 
     factory :ongoing_event do
-      opens_at { Time.zone.now - 30.minutes }
+      opens_at  { Time.zone.now - 30.minutes }
       closes_at { Time.zone.now + 30.minutes }
     end
 
     factory :past_event do
-      opens_at { Time.zone.now - 1.hour }
+      opens_at  { Time.zone.now - 1.hour }
       closes_at { Time.zone.now - 30.minutes }
     end
 
     factory :future_event do
-      opens_at { Time.zone.now + 30.minutes }
+      opens_at  { Time.zone.now + 30.minutes }
       closes_at { Time.zone.now + 1.hour }
     end
   end

@@ -3,27 +3,29 @@ require "cancan/matchers"
 
 describe "User" do
   describe "abilities" do
-    subject { ability }
-    let(:ability){ Ability.new(user) }
-    let(:user){ nil }
+    subject            { ability }
+    let(:ability)      { Ability.new(user) }
+    let(:user)         { nil }
 
-    let(:past_event){ build(:past_event) }
-    let(:event){ create(:ongoing_event) }
-    let(:future_event){ build(:future_event) }
+    let(:past_event)   { build( :past_event) }
+    let(:event)        { create(:ongoing_event) }
+    let(:future_event) { build( :future_event) }
 
-    context "when is no one" do
+    context "is no one" do
       it{ should     be_able_to(:create,  event.subscriptions.build) }
       it{ should_not be_able_to(:create,  past_event.subscriptions.build) }
       it{ should_not be_able_to(:create,  future_event.subscriptions.build) }
     end
 
-    context "when is a candidate" do
-      let(:user)                        { create(:subscriber_user) }
-      let(:his_subscription)            { user.subscriptions.first }
-      let(:his_past_subscription)       { s = user.subscriptions.first; s.event = past_event; s }
-      let(:another_users_subscription)  { create(:subscription, event_id: event.id) }
-      let(:his_fill)                    { create(:field_fill, subscription_id: his_subscription.id) }
-      let(:another_users_fill)          { create(:field_fill) }
+    context "is a subscriber" do
+      let(:user)                       { create(:subscriber_user) }
+      let(:his_subscription)           { user.subscriptions.first }
+      let(:his_past_subscription)      { s = user.subscriptions.first
+        s.event = past_event; s }
+      let(:his_fill)                   { create(:field_fill,
+        subscription_id: his_subscription.id) }
+      let(:another_users_subscription) { create(:subscription,event_id: event.id) }
+      let(:another_users_fill)         { create(:field_fill) }
 
       it{ should     be_able_to(:mine,     Subscription) }
       it{ should     be_able_to(:update,   his_subscription) }
@@ -38,7 +40,7 @@ describe "User" do
       it{ should_not be_able_to(:download, another_users_fill) }
     end
 
-    context "when it has permissions" do
+    context "has permissions" do
       let(:user) { create :user }
 
       before(:each) do

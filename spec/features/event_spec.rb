@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'feature_spec_helper'
 
 describe "Event" do
   let(:admin) { create(:admin, password: '123456789', password_confirmation: '123456789') }

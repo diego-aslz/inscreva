@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'feature_spec_helper'
 
 describe "Subscription" do
   context "displaying dynamic fields" do
