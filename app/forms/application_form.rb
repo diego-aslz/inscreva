@@ -92,10 +92,14 @@ class ApplicationForm
   end
 
   def field_fills
-    return [] unless event
-    event.field_fills do |field|
-      @subscription.field_fills.detect { |ff| ff.field_id == field.id }
+    return [] unless event && subscription
+    result = []
+    event.fields.each do |field|
+      result << (subscription.field_fills.detect do |ff|
+        ff.field_id == field.id
+      end || FieldFill.new(field: field))
     end
+    result
   end
 
   private

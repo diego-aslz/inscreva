@@ -144,9 +144,9 @@ describe 'ApplicationForm' do
     end
 
     it "loads the field_fills from the event" do
-      fills = event.field_fills
-      event.should_receive(:field_fills).and_return fills
-      form.field_fills.should == fills
+      fills = form.field_fills
+      fills.length.should == 1
+      fills[0].field_id.should == 1
     end
 
     context "subscription has a FieldFill for some Field" do

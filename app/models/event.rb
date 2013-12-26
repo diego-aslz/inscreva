@@ -31,17 +31,6 @@ class Event < ActiveRecord::Base
     name
   end
 
-  def field_fills
-    result = []
-    fields.each do |f|
-      ff = nil
-      ff = yield(f) if block_given?
-      ff = FieldFill.new(field: f) unless ff
-      result << ff
-    end if fields
-    result
-  end
-
   def main_page
     pages.by_language(I18n.locale).where(main: true).first || pages.where(page_id: nil).first
   end
