@@ -1,6 +1,12 @@
 
 # CHANGELOG
 
+## v1.16
+
+1. Correção: campos personalizados adicionados após criação de inscrições não
+sendo exibidos no formulário de alteração;
+2. Pequenas melhorias gerais.
+
 ## v1.15
 
 1. Melhoria: Twitter Bootstrap 3;
