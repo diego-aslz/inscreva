@@ -4,6 +4,7 @@ class ApplicationForm
 
   ATTRIBUTES = [:password, :password_confirmation, :email_confirmation, :confirmed]
   attr_accessor *ATTRIBUTES
+  attr_writer :subscription
 
   validate :event_is_ongoing?, if: :event_id
   validate :valid_user?, on: :create
@@ -17,7 +18,7 @@ class ApplicationForm
         'subscription.email.differs_from_confirmation') }
   validates_associated :field_fills, includes: :field
 
-  delegate :field_fills, :email, :id_card, :event_id, :event, :name, :user_id, :user,
+  delegate :email, :id_card, :event_id, :event, :name, :user_id, :user,
       :id, :generate_number, to: :subscription
   delegate :field_fills=, :field_fills_attributes=, :email=, :id_card=, :event_id=,
       :event=, :name=, :user_id=, :user=, :persisted?, :new_record?, to: :subscription
@@ -59,10 +60,6 @@ class ApplicationForm
     @subscription ||= Subscription.new
   end
 
-  def subscription=(s)
-    @subscription = s
-  end
-
   def submit(params = nil)
     load_from params if params
     if valid? (new_record? ? :create : :update)
@@ -92,6 +89,13 @@ class ApplicationForm
       return false
     end
     valid
+  end
+
+  def field_fills
+    return [] unless event
+    event.field_fills do |field|
+      @subscription.field_fills.detect { |ff| ff.field_id == field.id }
+    end
   end
 
   private

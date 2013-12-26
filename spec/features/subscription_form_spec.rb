@@ -67,6 +67,31 @@ describe "Subscription" do
       page.should have_selector("input#subscription_field_fills_attributes_0_value_cb_2[type=checkbox][value=\"2\"]")
       page.should have_selector("input#subscription_field_fills_attributes_0_value_cb_4[type=checkbox][value=\"4\"]")
     end
+
+    context "existing subscription" do
+      let(:user) { create(:user, password: '123456789', password_confirmation: '123456789') }
+      let(:subscription) { create(:subscription, event_id: field.event_id, user_id: user.id) }
+      let(:field)        { create(:field, field_type: 'string', name: 'Address') }
+
+      before(:each) do
+        sign_in user, '123456789'
+      end
+
+      it "renders fresh created fields" do
+        visit edit_subscription_path(subscription)
+        page.should have_field("Address")
+      end
+
+      it "orders fresh created fields" do
+        subscription.field_fills << FieldFill.create(field_id: field.id)
+        field2 = create(:field, field_type: 'string', name: 'City', priority: 1,
+          event_id: field.event_id)
+        field.update_attribute :priority, 2
+
+        visit edit_subscription_path(subscription)
+        page.document.text.should =~ /City.*Address/
+      end
+    end
   end
 
   it "orders fields and groups them when there is a group_name" do

@@ -35,7 +35,13 @@ describe 'ApplicationForm' do
 
     let(:valid_fill) { build :required_field_fill, subscription_id: subscription.id }
     let(:invalid_fill) { build :required_field_fill, subscription_id: subscription.id, value: nil }
-    it { should require_valid(:field_fills, valid: [valid_fill], invalid: [invalid_fill]) }
+    it 'validates its field_fills' do
+      Event.any_instance.stub(:fields).and_return [valid_fill.field, invalid_fill.field]
+      subject.stub(:field_fills).and_return [valid_fill]
+      expect(subject).to have(0).errors_on :field_fills
+      subject.stub(:field_fills).and_return [invalid_fill]
+      expect(subject).to have(1).errors_on :field_fills
+    end
 
     context 'data confirmation' do
       it "is NOT confirmed if it's not valid yet" do
@@ -124,6 +130,31 @@ describe 'ApplicationForm' do
       subscription.password_confirmation = user.password
       expect { subscription.submit.should be_true }.not_to change(User, :count)
       subscription.user.should_not be_nil
+    end
+  end
+
+  describe "field_fills" do
+    let(:event)        { Event.new }
+    let(:subscription) { Subscription.new(event: event) }
+    let(:form)         { ApplicationForm.new(subscription: subscription) }
+    let(:field)        { Field.new(id: 1) }
+
+    before(:each) do
+      event.fields << field
+    end
+
+    it "loads the field_fills from the event" do
+      fills = event.field_fills
+      event.should_receive(:field_fills).and_return fills
+      form.field_fills.should == fills
+    end
+
+    context "subscription has a FieldFill for some Field" do
+      it "should load the existing FieldFill instead of a new one" do
+        fill = FieldFill.new(field: field, value: '12')
+        subscription.field_fills << fill
+        form.field_fills.should == [fill]
+      end
     end
   end
 end

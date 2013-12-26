@@ -34,8 +34,10 @@ class Event < ActiveRecord::Base
   def field_fills
     result = []
     fields.each do |f|
-      result << FieldFill.new
-      result.last.field = f
+      ff = nil
+      ff = yield(f) if block_given?
+      ff = FieldFill.new(field: f) unless ff
+      result << ff
     end if fields
     result
   end

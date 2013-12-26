@@ -44,7 +44,7 @@ RSpec::Matchers.define :require_valid do |attrib, options = {}|
   match do |model|
     @expected_errors = (options[:errors] || 1)
     model.send(attrib.to_s + '=', options[:invalid])
-    model.valid? options[:context]
+    model.valid?(options[:context])
     @errors = model.errors[attrib].count
     next false unless @errors == @expected_errors
 

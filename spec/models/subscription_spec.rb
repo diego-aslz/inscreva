@@ -2,11 +2,12 @@ require 'spec_helper'
 
 describe Subscription do
   let(:subscription) { build(:subscription) }
+  let(:event) { subscription.event }
 
   context 'generating a subscription number' do
     it "should generate a new one on create" do
       subscription.number.should be_nil
-      subscription.save
+      subscription.save!
       subscription.number.should_not be_nil
     end
 
@@ -76,10 +77,10 @@ describe Subscription do
       create(:field_fill, field_id: f1.id, value: 'ABC', subscription_id: subscription.id)
       create(:field_fill, field_id: f2.id, value: 'DEF', subscription_id: subscription.id)
 
-      Subscription.by_field(f1.id, 'B', 'string').should be_include(subscription)
-      Subscription.by_field(f2.id, 'B', 'string').should_not be_include(subscription)
-      Subscription.by_field(f1.id, 'B', 'text').should be_include(subscription)
-      Subscription.by_field(f2.id, 'B', 'text').should_not be_include(subscription)
+      Subscription.by_field(f1.id, 'B', 'string').should include(subscription)
+      Subscription.by_field(f2.id, 'B', 'string').should_not include(subscription)
+      Subscription.by_field(f1.id, 'B', 'text').should include(subscription)
+      Subscription.by_field(f2.id, 'B', 'text').should_not include(subscription)
     end
 
     it 'searches by a date field' do
@@ -88,10 +89,10 @@ describe Subscription do
       create(:field_fill, field_id: f1.id, value: '2013-01-31', subscription_id: subscription.id)
       create(:field_fill, field_id: f2.id, value: '2013-02-01', subscription_id: subscription.id)
 
-      Subscription.by_field(f1.id, {b: '31/01/2013'}, 'date').should be_include(subscription)
-      Subscription.by_field(f1.id, {e: '31/01/2013'}, 'date').should be_include(subscription)
-      Subscription.by_field(f1.id, {b: '31/01/2013', e: '31/01/2013'}, 'date').should be_include(subscription)
-      Subscription.by_field(f2.id, {b: '31/01/2013', e: '31/01/2013'}, 'date').should_not be_include(subscription)
+      Subscription.by_field(f1.id, {b: '31/01/2013'}, 'date').should include(subscription)
+      Subscription.by_field(f1.id, {e: '31/01/2013'}, 'date').should include(subscription)
+      Subscription.by_field(f1.id, {b: '31/01/2013', e: '31/01/2013'}, 'date').should include(subscription)
+      Subscription.by_field(f2.id, {b: '31/01/2013', e: '31/01/2013'}, 'date').should_not include(subscription)
     end
 
     it 'searches by a check_boxes field' do
@@ -100,10 +101,10 @@ describe Subscription do
       create(:field_fill, field_id: f1.id, value: '1,2', subscription_id: subscription.id)
       create(:field_fill, field_id: f2.id, value: '3', subscription_id: subscription.id)
 
-      Subscription.by_field(f1.id, ['2'], 'check_boxes').should be_include(subscription)
-      Subscription.by_field(f1.id, ['1', '2'], 'check_boxes').should be_include(subscription)
-      Subscription.by_field(f2.id, ['1', '3'], 'check_boxes').should be_include(subscription)
-      Subscription.by_field(f2.id, ['1'], 'check_boxes').should_not be_include(subscription)
+      Subscription.by_field(f1.id, ['2'], 'check_boxes').should include(subscription)
+      Subscription.by_field(f1.id, ['1', '2'], 'check_boxes').should include(subscription)
+      Subscription.by_field(f2.id, ['1', '3'], 'check_boxes').should include(subscription)
+      Subscription.by_field(f2.id, ['1'], 'check_boxes').should_not include(subscription)
     end
 
     it 'searches by a boolean field' do
@@ -112,8 +113,8 @@ describe Subscription do
       create(:field_fill, field_id: f1.id, value: 'true', subscription_id: subscription.id)
       create(:field_fill, field_id: f2.id, value: 'false', subscription_id: subscription.id)
 
-      Subscription.by_field(f1.id, 'true', 'boolean').should be_include(subscription)
-      Subscription.by_field(f1.id, 'false', 'boolean').should_not be_include(subscription)
+      Subscription.by_field(f1.id, 'true', 'boolean').should include(subscription)
+      Subscription.by_field(f1.id, 'false', 'boolean').should_not include(subscription)
     end
 
     it 'searches by a select field' do
@@ -122,9 +123,9 @@ describe Subscription do
       create(:field_fill, field_id: f1.id, value: '1', subscription_id: subscription.id)
       create(:field_fill, field_id: f2.id, value: '2', subscription_id: subscription.id)
 
-      Subscription.by_field(f1.id, ['1'     ], 'select').should     be_include(subscription)
-      Subscription.by_field(f1.id, ['1', '2'], 'select').should     be_include(subscription)
-      Subscription.by_field(f2.id, ['1'     ], 'select').should_not be_include(subscription)
+      Subscription.by_field(f1.id, ['1'     ], 'select').should     include(subscription)
+      Subscription.by_field(f1.id, ['1', '2'], 'select').should     include(subscription)
+      Subscription.by_field(f2.id, ['1'     ], 'select').should_not include(subscription)
     end
 
     it 'searches by a country field' do
@@ -133,9 +134,9 @@ describe Subscription do
       create(:field_fill, field_id: f1.id, value: 'BRA', subscription_id: subscription.id)
       create(:field_fill, field_id: f2.id, value: 'PRY', subscription_id: subscription.id)
 
-      Subscription.by_field(f1.id, ['BRA'       ], 'country').should     be_include(subscription)
-      Subscription.by_field(f1.id, ['BRA', 'PRY'], 'country').should     be_include(subscription)
-      Subscription.by_field(f2.id, ['BRA'       ], 'country').should_not be_include(subscription)
+      Subscription.by_field(f1.id, ['BRA'       ], 'country').should     include(subscription)
+      Subscription.by_field(f1.id, ['BRA', 'PRY'], 'country').should     include(subscription)
+      Subscription.by_field(f2.id, ['BRA'       ], 'country').should_not include(subscription)
     end
   end
 end

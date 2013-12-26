@@ -11,7 +11,6 @@ class SubscriptionsController < InheritedResources::Base
     @application = ApplicationForm.new.load_from params, current_user
     @application.user = current_user
     authorize! :new, @application.subscription
-    @application.field_fills = @event.field_fills
   end
 
   def create
