@@ -22,7 +22,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.navbar-brand{href: root_url} Inscreva
+          %a.navbar-brand{href: root_path} Inscreva
           .nav-collapse.navbar-responsive-collapse
             %ul.nav.navbar-nav
               - if can? :mine, Subscription
@@ -45,10 +45,10 @@
                         = t :'devise.links.edit'
                     %li.divider
                     %li
-                      %a{href: destroy_user_session_url, :'data-method' => "delete"}
+                      %a{href: destroy_user_session_path, :'data-method' => "delete"}
                         = t :'devise.links.sign_out'
                 - else
-                  = link_to t('devise.links.sign_in'), new_user_session_url,
+                  = link_to t('devise.links.sign_in'), new_user_session_path,
                     class: 'navbar-link'
               %li
                 %a.dropdown-toggle(data-toggle="dropdown" href="#")
