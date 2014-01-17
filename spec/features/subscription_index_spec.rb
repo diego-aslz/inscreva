@@ -164,7 +164,104 @@ describe "Subscription" do
     page.should_not have_content(s2.number)
   end
 
-  it "filters a Select field" do
+  it "shows a String field when it is included" do
+    f = create(:field, field_type: 'string', name: 'Test Address', searchable: true)
+    s1 = create :subscription, event_id: f.event_id
+    s2 = create :subscription, event_id: f.event_id
+    s1.field_fills << create(:field_fill, field_id: f.id, value: 'ABC')
+    s2.field_fills << create(:field_fill, field_id: f.id, value: 'DEF')
+
+    visit event_subscriptions_path(f.event)
+    page.find('table').should_not have_content("ABC")
+    page.find('table').should_not have_content("DEF")
+    select 'Test Address'
+    click_on "Buscar"
+    page.find('table').should have_content("ABC")
+    page.find('table').should have_content("DEF")
+  end
+
+  it "shows a Text field when it is included" do
+    f = create(:field, field_type: 'text', name: 'Big Text Example', searchable: true)
+    s1 = create :subscription, event_id: f.event_id
+    s2 = create :subscription, event_id: f.event_id
+    s1.field_fills << create(:field_fill, field_id: f.id, value: 'ABC')
+    s2.field_fills << create(:field_fill, field_id: f.id, value: 'DEF')
+
+    visit event_subscriptions_path(f.event)
+    page.find('table').should_not have_content("ABC")
+    page.find('table').should_not have_content("DEF")
+    select 'Big Text Example'
+    click_on "Buscar"
+    page.find('table').should have_content("ABC")
+    page.find('table').should have_content("DEF")
+  end
+
+  it "shows a Boolean field when it is included" do
+    f = create(:field, field_type: 'boolean', name: 'Is it', searchable: true)
+    s1 = create :subscription, event_id: f.event_id
+    s2 = create :subscription, event_id: f.event_id
+    s1.field_fills << create(:field_fill, field_id: f.id, value: 'true')
+    s2.field_fills << create(:field_fill, field_id: f.id, value: 'false')
+
+    visit event_subscriptions_path(f.event)
+    page.find('table').should_not have_content("Sim")
+    page.find('table').should_not have_content("Não")
+    select 'Is it'
+    click_on "Buscar"
+    page.find('table').should have_content("Sim")
+    page.find('table').should have_content("Não")
+  end
+
+  it "shows a CheckBoxes field when it is included" do
+    f = create(:field, field_type: 'check_boxes', name: 'You Eat', searchable: true,
+        extra: "A=ABC\nB10=DEF")
+    s1 = create :subscription, event_id: f.event_id
+    s2 = create :subscription, event_id: f.event_id
+    s1.field_fills << create(:field_fill, field_id: f.id, value_cb: ['A', 'B10'])
+    s2.field_fills << create(:field_fill, field_id: f.id, value_cb: ['A'])
+
+    visit event_subscriptions_path(f.event)
+    page.find('table').should_not have_content("ABC")
+    page.find('table').should_not have_content("DEF")
+    select 'You Eat'
+    click_on "Buscar"
+    page.find('table').should have_content("ABC")
+    page.find('table').should have_content("DEF")
+  end
+
+  it "shows a Country field when it is included" do
+    f = create(:field, field_type: 'country', name: 'Birth Country', searchable: true)
+    s1 = create :subscription, event_id: f.event_id
+    s2 = create :subscription, event_id: f.event_id
+    s1.field_fills << create(:field_fill, field_id: f.id, value: 'BRA')
+    s2.field_fills << create(:field_fill, field_id: f.id, value: 'PRY')
+
+    visit event_subscriptions_path(f.event)
+    page.find('table').should_not have_content("Brasil")
+    page.find('table').should_not have_content("Paraguai")
+    select 'Birth Country'
+    click_on "Buscar"
+    page.find('table').should have_content("Brasil")
+    page.find('table').should have_content("Paraguai")
+  end
+
+  it "shows a Date field when it is included" do
+    f = create(:field, field_type: 'date', name: 'Birth Date', searchable: true)
+    s1 = create :subscription, event_id: f.event_id
+    s2 = create :subscription, event_id: f.event_id
+    s1.field_fills << create(:field_fill, field_id: f.id, value_date: '01/01/1980')
+    s2.field_fills << create(:field_fill, field_id: f.id, value_date: '01/01/1981')
+
+    visit event_subscriptions_path(f.event)
+    page.find('table').should_not have_content("01/01/1980")
+    page.find('table').should_not have_content("01/01/1981")
+    select 'Birth Date'
+    click_on "Buscar"
+    page.find('table').should have_content("01/01/1980")
+    page.find('table').should have_content("01/01/1981")
+  end
+
+  it "shows a Select field when it is included" do
     f = create(:field, field_type: 'select', name: 'Choose One',
         extra: "A=ABC\nB10=DEF")
     s1 = create :subscription, event_id: f.event_id
@@ -173,12 +270,11 @@ describe "Subscription" do
     s2.field_fills << create(:field_fill, field_id: f.id, value: 'B10')
 
     visit event_subscriptions_path(f.event)
-    page.should_not have_content("ABC")
-    page.should_not have_content("DEF")
+    page.find('table').should_not have_content("ABC")
+    page.find('table').should_not have_content("DEF")
     select 'Choose One'
-    save_and_open_page
     click_on "Buscar"
-    page.should have_content("ABC")
-    page.should have_content("DEF")
+    page.find('table').should have_content("ABC")
+    page.find('table').should have_content("DEF")
   end
 end

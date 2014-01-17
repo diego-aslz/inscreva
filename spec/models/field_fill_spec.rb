@@ -43,7 +43,7 @@ describe FieldFill do
       fill.value = nil
       fill.value_to_s.should == ''
       fill.value_date = '31/12/2013'
-      fill.value_to_s.should == '2013-12-31'
+      fill.value_to_s.should == '31/12/2013'
     end
   end
 
