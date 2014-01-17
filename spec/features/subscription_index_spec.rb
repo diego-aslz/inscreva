@@ -163,4 +163,22 @@ describe "Subscription" do
     page.should have_content(s1.number)
     page.should_not have_content(s2.number)
   end
+
+  it "filters a Select field" do
+    f = create(:field, field_type: 'select', name: 'Choose One',
+        extra: "A=ABC\nB10=DEF")
+    s1 = create :subscription, event_id: f.event_id
+    s2 = create :subscription, event_id: f.event_id
+    s1.field_fills << create(:field_fill, field_id: f.id, value: 'A')
+    s2.field_fills << create(:field_fill, field_id: f.id, value: 'B10')
+
+    visit event_subscriptions_path(f.event)
+    page.should_not have_content("ABC")
+    page.should_not have_content("DEF")
+    select 'Choose One'
+    save_and_open_page
+    click_on "Buscar"
+    page.should have_content("ABC")
+    page.should have_content("DEF")
+  end
 end
