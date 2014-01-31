@@ -62,7 +62,8 @@ class SubscriptionsController < InheritedResources::Base
     index! do |format|
       format.html {
         @count = @subscriptions.count
-        @subscriptions = @subscriptions.page(params[:page])
+        @subscriptions = @subscriptions.order(created_at: :desc).
+          page(params[:page])
       }
       format.csv { send_data @subscriptions.to_csv(include_fields: @fields,
           selects: permitted_selects) }
