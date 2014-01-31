@@ -15,6 +15,9 @@ describe "User" do
       it{ should     be_able_to(:create,  event.subscriptions.build) }
       it{ should_not be_able_to(:create,  past_event.subscriptions.build) }
       it{ should_not be_able_to(:create,  future_event.subscriptions.build) }
+      it{ should_not be_able_to(:read,    event) }
+      it{ should_not be_able_to(:update,  event) }
+      it{ should_not be_able_to(:create,  event) }
     end
 
     context "is a subscriber" do
@@ -67,7 +70,7 @@ describe "User" do
     end
 
     context 'is the creator of an event' do
-      let(:user)  { create :user }
+      let(:user)  { create :user, can_create_events: true }
       let(:event) { create(:event, created_by_id: user.id) }
       let(:his_events_subscription) { create(:subscription, event_id: event.id) }
       let(:his_events_page)         { build(:page,          event_id: event.id) }
