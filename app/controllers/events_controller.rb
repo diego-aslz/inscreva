@@ -7,6 +7,11 @@ class EventsController < InheritedResources::Base
     new!
   end
 
+  def create
+    @event.created_by = current_user
+    create!
+  end
+
   def copy_fields
     from = Event.find params[:copy][:from_event_id]
     @event = Event.find params[:copy][:to_event_id]

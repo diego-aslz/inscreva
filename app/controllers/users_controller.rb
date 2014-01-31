@@ -31,6 +31,6 @@ class UsersController < InheritedResources::Base
   def resource_params
     return [] if request.get?
     [params.require(:user).permit(:email, :password, :password_confirmation,
-      :remember_me, :name, :admin)]
+      :remember_me, :name, :admin, :can_create_events)]
   end
 end

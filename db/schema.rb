@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131104165427) do
+ActiveRecord::Schema.define(version: 20140130132403) do
 
   create_table "delegations", force: true do |t|
     t.integer  "user_id"
@@ -39,7 +39,10 @@ ActiveRecord::Schema.define(version: 20131104165427) do
     t.integer  "subscriptions_count", default: 0
     t.boolean  "published",           default: false
     t.text     "description"
+    t.integer  "created_by_id"
   end
+
+  add_index "events", ["created_by_id"], name: "index_events_on_created_by_id", using: :btree
 
   create_table "field_fills", force: true do |t|
     t.integer  "field_id"
@@ -168,6 +171,7 @@ ActiveRecord::Schema.define(version: 20131104165427) do
     t.integer  "activated_by_id"
     t.integer  "deactivated_by_id"
     t.boolean  "admin",                  default: false
+    t.boolean  "can_create_events",      default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

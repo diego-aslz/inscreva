@@ -18,6 +18,8 @@ class Event < ActiveRecord::Base
   scope :future, -> { where('? < opens_at and closes_at', Time.zone.now) }
   scope :by_name, ->(name) { where("lower(events.name) like lower(?)", "%#{name}%") }
 
+  belongs_to :created_by, class_name: 'User'
+
   def ongoing?
     opens_at && closes_at && Time.zone.now.between?(opens_at, closes_at)
   end

@@ -15,5 +15,6 @@ class User < ActiveRecord::Base
     where('users.id in (select distinct user_id from delegations) or ' +
         'users.id not in (select distinct user_id from subscriptions)')
   }
-  scope :by_name, ->(name) { where("lower(users.name) like lower(?)", "%#{name}%") }
+  scope :by_name, ->(name) { where("lower(users.name) like lower(?)",
+    "%#{name}%") }
 end

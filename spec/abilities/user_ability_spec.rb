@@ -48,7 +48,7 @@ describe "User" do
         d.role = create(:role)
         d.role.permissions << Permission.find_or_create_by(action: 'read', subject_class: 'Event')
         d.role.permissions << Permission.find_or_create_by(action: 'read', subject_class: 'Subscription')
-        user.delegations << d
+        user.delegations   << d
       end
 
       it 'should be able to do what the permission says' do
@@ -62,6 +62,16 @@ describe "User" do
         ability.should      be_able_to(:read, subscription)
         ability.should_not  be_able_to(:read, another_subscription)
       end
+    end
+
+    context 'is the creator of an event' do
+      let(:user)  { create :user }
+      let(:event) { build(:event, created_by_id: user.id) }
+      let(:anothers_event) { build(:event) }
+
+      it { should     be_able_to(:show,   event) }
+      it { should     be_able_to(:update, event) }
+      it { should_not be_able_to(:manage, anothers_event) }
     end
   end
 end

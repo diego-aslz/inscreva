@@ -1,7 +1,8 @@
 require 'feature_spec_helper'
 
 describe "Event" do
-  let(:admin) { create(:admin, password: '123456789', password_confirmation: '123456789') }
+  let(:admin) { create(:admin, password: '123456789',
+    password_confirmation: '123456789') }
 
   before(:each) do
     sign_in admin, '123456789'
@@ -29,7 +30,8 @@ describe "Event" do
     find('#delegations').find('li.active').click
     select 'A Role', from: Delegation.human_attribute_name(:role)
     ## Check Result
-    click_on I18n.t(:'helpers.submit.create', model: Event.model_name.human)
+    expect{click_button 'Criar'}.to change(Event, :count).by(1)
+    Event.last.created_by_id.should == admin.id
     page.should have_content('Test Event')
     click_on Event.human_attribute_name(:fields)
     page.should have_content('Some Field')
