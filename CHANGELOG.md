@@ -1,9 +1,18 @@
 
 # CHANGELOG
 
+## v1.17
+
+1. Correção: Links do Devise saem de HTTPS para HTTP;
+2. Correção: Campo do tipo 'select' na listagem de inscritos;
+3. Ampliada cobertura de testes unitários;
+4. Novos formatos possíveis para arquivos;
+5. Funcionalidade: Usuários podem ter permissão de criar eventos. Um usuário
+pode atualizar e gerenciar seus próprios eventos.
+
 ## v1.16
 
-1. Correção: campos personalizados adicionados após criação de inscrições não
+1. Correção: Campos personalizados adicionados após criação de inscrições não
 sendo exibidos no formulário de alteração;
 2. Pequenas melhorias gerais.
 
