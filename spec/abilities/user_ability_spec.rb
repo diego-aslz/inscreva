@@ -46,8 +46,10 @@ describe "User" do
       before(:each) do
         d = create(:delegation, event_id: event.id, user_id: user.id)
         d.role = create(:role)
-        d.role.permissions << Permission.find_or_create_by(action: 'read', subject_class: 'Event')
-        d.role.permissions << Permission.find_or_create_by(action: 'read', subject_class: 'Subscription')
+        d.role.permissions << Permission.find_or_create_by(action: 'read',
+          subject_class: 'Event')
+        d.role.permissions << Permission.find_or_create_by(action: 'read',
+          subject_class: 'Subscription')
         user.delegations   << d
       end
 
@@ -66,12 +68,45 @@ describe "User" do
 
     context 'is the creator of an event' do
       let(:user)  { create :user }
-      let(:event) { build(:event, created_by_id: user.id) }
-      let(:anothers_event) { build(:event) }
+      let(:event) { create(:event, created_by_id: user.id) }
+      let(:his_events_subscription) { create(:subscription, event_id: event.id) }
+      let(:his_events_page)         { build(:page,          event_id: event.id) }
+      let(:his_events_notification) { build(:notification,  event_id: event.id) }
+      let(:his_events_fill)         { build(:field_fill,
+        subscription_id: his_events_subscription.id) }
 
-      it { should     be_able_to(:show,   event) }
-      it { should     be_able_to(:update, event) }
-      it { should_not be_able_to(:manage, anothers_event) }
+      let(:anothers_event) { create(:event) }
+      let(:anothers_events_subscription) { create(:subscription, event_id: anothers_event.id) }
+      let(:anothers_events_page)         { build(:page,          event_id: anothers_event.id) }
+      let(:anothers_events_notification) { build(:notification,  event_id: anothers_event.id) }
+      let(:anothers_events_fill)         { build(:field_fill,
+        subscription_id: anothers_events_subscription.id) }
+
+      it {
+        should be_able_to(:read,     event)
+        should be_able_to(:update,   event)
+        should be_able_to(:read,     his_events_page)
+        should be_able_to(:create,   his_events_page)
+        should be_able_to(:update,   his_events_page)
+        should be_able_to(:read,     his_events_subscription)
+        should be_able_to(:create,   his_events_subscription)
+        should be_able_to(:update,   his_events_subscription)
+        should be_able_to(:receipt,  his_events_subscription)
+        should be_able_to(:download, his_events_fill)
+        should be_able_to(:create,   his_events_notification)
+
+        should_not be_able_to(:read,     anothers_event)
+        should_not be_able_to(:update,   anothers_event)
+        should_not be_able_to(:read,     anothers_events_page)
+        should_not be_able_to(:create,   anothers_events_page)
+        should_not be_able_to(:update,   anothers_events_page)
+        should_not be_able_to(:read,     anothers_events_subscription)
+        should_not be_able_to(:create,   anothers_events_subscription)
+        should_not be_able_to(:update,   anothers_events_subscription)
+        should_not be_able_to(:receipt,  anothers_events_subscription)
+        should_not be_able_to(:download, anothers_events_fill)
+        should_not be_able_to(:create,   anothers_events_notification)
+      }
     end
   end
 end

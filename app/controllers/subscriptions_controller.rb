@@ -100,7 +100,8 @@ class SubscriptionsController < InheritedResources::Base
 
   def collection
     @event = Event.find(params[:event_id])
-    @subscriptions = @event.subscriptions.accessible_by(current_ability)
+    authorize! :read, @event.subscriptions.build
+    @subscriptions = @event.subscriptions
     @subscriptions = @subscriptions.search(params[:term]) unless params[:term].blank?
     @fields = []
     unless (fields = params[:field_ids]).blank?

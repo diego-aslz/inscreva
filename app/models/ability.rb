@@ -13,8 +13,16 @@ class Ability
       can :manage, :all
       cannot :mine, Subscription unless user.subscriptions.any?
     else
+      # Event created by user
       can :create, Event if user.can_create_events?
-      can [:update, :show], Event, created_by_id: user.id
+      can [:read, :update]         , Event, created_by_id: user.id
+      can [:read, :update, :create], Page , event: { created_by_id: user.id }
+      can [:read, :update, :create, :receipt], Subscription do |s|
+        s.event && s.event.created_by_id == user.id
+      end
+      can [:download], FieldFill, subscription: { event: { created_by_id: user.id } }
+      can [:create],   Notification, event: { created_by_id: user.id }
+
       # Subscribers
       if user.subscriptions.any?
         can [:show, :mine, :receipt], Subscription, user_id: user.id

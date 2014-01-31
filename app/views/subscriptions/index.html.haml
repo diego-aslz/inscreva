@@ -73,21 +73,20 @@
   %strong
     = t :total, count: @count
 
-
 .row
   .col-sm-1
-    = link_to icon_tag('icon-download-alt') + " CSV",
+    = link_to glyph('download-alt') + " CSV",
         event_subscriptions_path(@event, format: 'csv', params: params.slice(:fields,
         :field_ids, :term, :selects)), class: 'btn btn-default', title: t(:'export.csv')
   .col-sm-1
-    = link_to icon_tag('icon-download-alt') + " XLS",
+    = link_to glyph('download-alt') + " XLS",
         event_subscriptions_path(@event, format: 'xls', params: params.slice(:fields,
         :field_ids, :term, :selects)), class: 'btn btn-success', title: t(:'export.xls')
   .col-sm-1
-    = link_to icon_tag('icon-download-alt') + " ZIP", '#download_fields',
-        class: 'btn btn-info', :'data-toggle' => "modal", title: t(:'export.zip') if @subscriptions.first and can?(:download, @subscriptions.first.field_fills.build)
+    = link_to glyph('download-alt') + " ZIP", '#download_fields',
+        class: 'btn btn-info', :'data-toggle' => "modal", title: t(:'export.zip') if @subscriptions.any? && can?(:download, @subscriptions.first.field_fills.build)
   .col-sm-1
-    = link_to icon_tag('icon-envelope') + " E-mail",
+    = link_to glyph('envelope') + " E-mail",
         new_event_notification_path(@event, filters: params[:fields]),
         class: 'btn btn-danger', :'data-toggle' => "modal", title: t(:'send_email') if can? :create, @event.notifications.build
 
