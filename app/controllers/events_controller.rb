@@ -34,7 +34,7 @@ class EventsController < InheritedResources::Base
   protected
 
   def collection
-    @events = @events.order('opens_at desc, closes_at desc').page(params[:page])
+    @events = @events.order('id desc').page(params[:page])
   end
 
   def resource_params
