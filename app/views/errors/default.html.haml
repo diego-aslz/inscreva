@@ -1,0 +1,16 @@
+%h1.text-muted
+  = "Erro: #{@status}"
+%hr
+
+%p
+  Desculpe-nos, alguma falha inesperada ocorreu.
+  = link_to "Voltar para página inicial.", root_path
+
+- if @exception
+  %br
+  %br
+  %br
+  %h3.text-muted
+    Detalhes Técnicos
+  %p.text-muted
+    = @exception.try :message
