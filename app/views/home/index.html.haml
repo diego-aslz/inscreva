@@ -1,7 +1,7 @@
 - model_class = Event
 - if @events && @events.any?
   - 0.upto @events.count/3 do |i|
-    .row-fluid.home
+    .row.home
       - 0.upto 2 do |j|
         - event = @events[i*3 + j]
         - if event
