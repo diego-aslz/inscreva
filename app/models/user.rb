@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :delegations, dependent: :destroy
 
   scope :search, ->(term) {
-    where('concat(COALESCE(name,\'\'),email) like ?', "%#{term}%")
+    where('COALESCE(name,\'\') like :term or COALESCE(email) like :term', term: "%#{term}%")
   }
   scope :not_subscribers, -> {
     where('users.id in (select distinct user_id from delegations) or ' +

@@ -10,10 +10,10 @@ class UsersController < InheritedResources::Base
 
   def ahead
     authorize! :update, Event
-    @users = User.by_name(params[:term]).select([:id, :name]).order(:name)
+    @users = User.search(params[:term]).select([:id, :name, :email]).order(:name)
     ar = []
     for e in @users.limit(20) do
-      ar << {id: e.id, name: e.name}
+      ar << {id: e.id, name: "#{e.name} (#{e.email})"}
     end
     render json: ar
   end
