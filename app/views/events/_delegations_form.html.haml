@@ -9,7 +9,9 @@
       .col-sm-11
         = form.input_field :user_name, :'ng-model' => 'delegation.user',
           typeahead: "user as user.name for user in ahead($viewValue, '#{ahead_users_path}')",
-          autocomplete: "off", id: 'event_delegations_attributes_{{$index}}_user_name'
+          autocomplete: "off", id: 'event_delegations_attributes_{{$index}}_user_name',
+          :'typeahead-min-length' => 2, :'typeahead-editable' => false,
+          :'typeahead-wait-ms' => 200
       .col-sm-1.text-right
         = link_to icon_tag('icon-trash'), 'javascript:void(0)',
             'ng-click' => 'removeDelegation($index)',

@@ -1,4 +1,4 @@
-require 'feature_spec_helper'
+require 'spec_helper'
 
 describe "Event" do
   let(:admin) { create(:admin, password: '123456789',
@@ -26,8 +26,7 @@ describe "Event" do
     ## Delegations
     click_on Event.human_attribute_name(:delegations)
     find('#add_delegation').click
-    fill_in Delegation.human_attribute_name(:user), with: "Some Good"
-    find('#delegations').find('li.active').click
+    fill_in_typeahead 'Usuário', 'Some Good', page.find('#delegations')
     select 'A Role', from: Delegation.human_attribute_name(:role)
     ## Check Result
     expect{click_button 'Criar'}.to change(Event, :count).by(1)

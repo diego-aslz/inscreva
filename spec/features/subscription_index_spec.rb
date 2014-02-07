@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'feature_spec_helper'
+require 'spec_helper'
 
 describe "Subscription" do
   let(:admin) { create(:admin, password: '123456789', password_confirmation: '123456789') }

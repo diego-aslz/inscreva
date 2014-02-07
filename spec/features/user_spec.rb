@@ -1,4 +1,4 @@
-require 'feature_spec_helper'
+require 'spec_helper'
 require "cancan/matchers"
 
 describe "User" do

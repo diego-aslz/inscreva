@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'feature_spec_helper'
+require 'spec_helper'
 
 describe "Print Receipt" do
   let(:subscription) { create(:subscription, name: 'My Test', user_id: create(:user,
