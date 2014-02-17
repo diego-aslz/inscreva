@@ -16,7 +16,6 @@ group :test do
   gem 'zeus'
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'guard-rspec'
-  gem 'selenium-webdriver'
   gem 'poltergeist'
   gem 'capybara-screenshot'
 end

@@ -39,8 +39,8 @@ class EventsController < InheritedResources::Base
 
   def resource_params
     return [] if request.get?
-    [params.require(:event).permit(:closes_at, :email, :name, :opens_at, :rules_url,
-      :technical_email, :identifier, :published, :description,
+    [params.require(:event).permit(:closes_at, :email, :name, :opens_at,
+      :technical_email, :identifier, :published, :description, :rules_url,
       fields_attributes: [
         :field_type, :name, :extra, :required, :show_receipt,
         :group_name, :priority, :searchable, :is_numeric, :hint,
