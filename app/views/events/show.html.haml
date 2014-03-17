@@ -36,7 +36,7 @@
             - for d in @event.delegations.includes(:role, :user).order('roles.name, users.name')
               %tr
                 %td.left-col
-                  %strong.text-muted #{d.role.name}
+                  %strong.text-muted #{d.role.try :name}
                 %td
                   #{d.user.name || d.user.email}
 
