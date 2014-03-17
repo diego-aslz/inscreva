@@ -1,6 +1,12 @@
 
 # CHANGELOG
 
+## v1.18
+
+1. Correção de erro crítico: usuário não autenticado com permissão para ler e alterar eventos;
+2. Testes com Poltergeist;
+3. Pequenas correções e melhorias de layout.
+
 ## v1.17
 
 1. Correção: Links do Devise saem de HTTPS para HTTP;
