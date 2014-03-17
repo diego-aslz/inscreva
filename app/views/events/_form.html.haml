@@ -1,6 +1,18 @@
-%div{'ng-controller' => 'EventCtrl', 'ng-init' => "event = #{@event.to_ng}; extras = #{Field::TYPES_WITH_EXTRA.to_json}"}
+%div{'ng-controller' => 'EventCtrl', 'ng-init' => "event = #{to_ng(@event)}; extras = #{Field::TYPES_WITH_EXTRA.to_json}"}
   = simple_form_for @event, :html => { class: 'form-horizontal', multipart: true },
     wrapper: :horizontal do |f|
+
+    - if @event.errors[:delegations].any?
+      .alert.alert-danger
+        %button.close(type="button" data-dismiss="alert" aria-hidden="true")
+          &times;
+        %ul
+          %li= Delegation.model_name.human.pluralize
+          %ul
+            - @event.delegations.each do |delegation|
+              %li
+                #{ delegation.user.try(:name) }: #{ delegation.errors.collect{|k,v| Delegation.human_attribute_name(k) + ' ' + v }.join(', ') }
+
     .form-inputs
       %ul.nav.nav-tabs
         %li.active
@@ -27,10 +39,12 @@
           .event-field{:'ng-repeat' => 'field in event.fields',
               :'ng-show' => '!field._destroy' }
             = render 'fields_form', f: f
+          %hr(style="margin-top: -1px")
           .row
             .col-sm-9.col-sm-offset-3
-              = link_to icon_tag('icon-plus'), 'javascript:void(0)', 'ng-click' => 'addField()',
-                  class: 'btn btn-success', title: t(:add_field), id: 'add_field'
+              = link_to icon_tag('icon-plus'), 'javascript:void(0)',
+                'ng-click' => 'addField()', class: 'btn btn-success',
+                title: t(:add_field), id: 'add_field'
           %hr
         .tab-pane#delegations
           .delegation-field{:'ng-repeat' => 'delegation in event.delegations',

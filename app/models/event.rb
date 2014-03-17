@@ -8,6 +8,8 @@ class Event < ActiveRecord::Base
   validates_presence_of :name, :identifier
   validates_uniqueness_of :identifier
 
+  validates_associated :delegations
+
   accepts_nested_attributes_for :fields, allow_destroy: true, :reject_if =>
       lambda { |f| f[:name].blank? }
   accepts_nested_attributes_for :delegations, allow_destroy: true, :reject_if =>
@@ -45,20 +47,5 @@ class Event < ActiveRecord::Base
           :searchable, :is_numeric, :hint, :allowed_file_extensions, :max_file_size).
           merge(priority: (p += 1)))
     end
-  end
-
-  def to_ng
-    to_json(
-      include: {
-        fields: {},
-        delegations: {
-          include: {
-            user: {
-              only: [:id, :name]
-            }
-          }
-        }
-      }
-    )
   end
 end

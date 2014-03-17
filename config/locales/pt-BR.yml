@@ -111,6 +111,7 @@ pt-BR:
       delegation:
         user: Usuário
         role: Papel
+        role_id: Papel
       field:
         extra: Configuração
         field_type: Tipo
