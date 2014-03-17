@@ -73,14 +73,14 @@ pt-BR:
       create: 'Enviar'
 
   types:
-    boolean: Lógico
+    boolean: Lógico (Sim/Não)
     string: Texto
     text: Texto Multilinha
     country: País
     date: Data
     file: Arquivo
-    select: Única Escolha
-    check_boxes: Múltipla Escolha
+    select: Múltipla Escolha (permitir selecionar apenas um)
+    check_boxes: Múltipla Escolha (permitir selecionar vários)
 
   subscriptions:
     new:
