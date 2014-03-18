@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @events = Event.where(published: true).order('opens_at, closes_at')
+    @events = Event.for_main_page.order('opens_at, closes_at')
   end
 end

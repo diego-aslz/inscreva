@@ -22,6 +22,8 @@ class Event < ActiveRecord::Base
 
   belongs_to :created_by, class_name: 'User'
 
+  scope :for_main_page, -> { where('closes_at > ?', Time.zone.now).where(published: true) }
+
   def ongoing?
     opens_at && closes_at && Time.zone.now.between?(opens_at, closes_at)
   end

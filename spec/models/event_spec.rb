@@ -86,4 +86,27 @@ describe Event do
     e2.save.should be_true
     e2.fields[4].should_not be_new_record
   end
+
+  describe "for_main_page" do
+    let(:past_event)          { create(:past_event,    published: true) }
+    let(:ongoing_event)       { create(:ongoing_event, published: true) }
+    let(:not_published_event) { create(:ongoing_event, published: false) }
+    let(:future_event)        { create(:future_event,  published: true) }
+
+    subject { Event.for_main_page }
+
+    before(:each) do
+      past_event
+      ongoing_event
+      not_published_event
+      future_event
+    end
+
+    it {
+      should     include(ongoing_event)
+      should     include(future_event)
+      should_not include(past_event)
+      should_not include(not_published_event)
+    }
+  end
 end
