@@ -17,50 +17,51 @@
   %body
     .wrapper
       .navbar.navbar-default
-        .container-fluid
-          .navbar-header
-            %button.navbar-toggle(type="button" data-toggle="collapse" data-target="#mainmenu")
-              %span.sr-only Toggle navigation
-              %span.icon-bar
-              %span.icon-bar
-              %span.icon-bar
-            %a.navbar-brand(href="/") Inscreva
-          #mainmenu.navbar-collapse.collapse
-            %ul.nav.navbar-nav
-              - if can? :mine, Subscription
-                %li= link_to t(:'subscriptions.mine.title'), mine_subscriptions_path
-              - if can? :index, Event
-                %li= link_to Event.model_name.human.pluralize, events_path
-              - if can? :index, User
-                %li= link_to User.model_name.human.pluralize, users_path
-              - if can? :index, Role
-                %li= link_to Role.model_name.human.pluralize, roles_path
-            %ul.nav.navbar-nav.navbar-right
-              %li
-                - if user_signed_in?
+        .container
+          .container-fluid
+            .navbar-header
+              %button.navbar-toggle(type="button" data-toggle="collapse" data-target="#mainmenu")
+                %span.sr-only Toggle navigation
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+              %a.navbar-brand(href="/") Inscreva
+            #mainmenu.navbar-collapse.collapse
+              %ul.nav.navbar-nav
+                - if can? :mine, Subscription
+                  %li= link_to t(:'subscriptions.mine.title'), mine_subscriptions_path
+                - if can? :index, Event
+                  %li= link_to Event.model_name.human.pluralize, events_path
+                - if can? :index, User
+                  %li= link_to User.model_name.human.pluralize, users_path
+                - if can? :index, Role
+                  %li= link_to Role.model_name.human.pluralize, roles_path
+              %ul.nav.navbar-nav.navbar-right
+                %li
+                  - if user_signed_in?
+                    %a.dropdown-toggle(data-toggle="dropdown" href="#")
+                      = current_user.name || current_user.email
+                      %span.caret
+                    %ul.dropdown-menu
+                      %li
+                        %a{href: edit_registration_path}
+                          = t :'devise.links.edit'
+                      %li.divider
+                      %li
+                        %a{href: destroy_user_session_path, :'data-method' => "delete"}
+                          = t :'devise.links.sign_out'
+                  - else
+                    = link_to t('devise.links.sign_in'), new_user_session_path,
+                      class: 'navbar-link'
+                %li
                   %a.dropdown-toggle(data-toggle="dropdown" href="#")
-                    = current_user.name || current_user.email
+                    = image_tag "#{locale}.png", alt: locale, width: "16", height: "16"
                     %span.caret
                   %ul.dropdown-menu
-                    %li
-                      %a{href: edit_registration_path}
-                        = t :'devise.links.edit'
-                    %li.divider
-                    %li
-                      %a{href: destroy_user_session_path, :'data-method' => "delete"}
-                        = t :'devise.links.sign_out'
-                - else
-                  = link_to t('devise.links.sign_in'), new_user_session_path,
-                    class: 'navbar-link'
-              %li
-                %a.dropdown-toggle(data-toggle="dropdown" href="#")
-                  = image_tag "#{locale}.png", alt: locale, width: "16", height: "16"
-                  %span.caret
-                %ul.dropdown-menu
-                  - (I18n.available_locales - [locale]).each do |loc|
-                    %li
-                      %a{href: locale_path(loc)}
-                        = locale_flag loc
+                    - (I18n.available_locales - [locale]).each do |loc|
+                      %li
+                        %a{href: locale_path(loc)}
+                          = locale_flag loc
       .container
         .row
           .col-lg-12
