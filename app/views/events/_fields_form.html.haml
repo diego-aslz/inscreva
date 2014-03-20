@@ -1,18 +1,18 @@
-= f.simple_fields_for :fields, Field.new, child_index: '{{ $index }}' do |form|
+= f.simple_fields_for :fields, Field.new, child_index: '{{ fieldIdx }}' do |form|
   %h3{'ng-show' => 'field.group_name'}
     {{ field.group_name }}
   = form.input :group_name, input_html: { 'ng-model' => 'field.group_name',
-      id: 'event_fields_attributes_{{$index}}_group_name' },
+      id: 'event_fields_attributes_{{fieldIdx}}_group_name' },
       wrapper_html: { 'ng-show' => 'field.editing' }
   = form.input_field :id, as: :hidden, value: '{{field.id}}'
   = form.input_field :_destroy, as: :hidden, value: '{{field._destroy}}'
-  = form.input :name, label_html: { for: 'event_fields_attributes_{{$index}}_name',
+  = form.input :name, label_html: { for: 'event_fields_attributes_{{fieldIdx}}_name',
     class: 'col-sm-3' } do
     .row
       .col-sm-8
         = form.input_field :name, 'ng-model' => 'field.name',
             placeholder: t(:'simple_form.placeholders.field.name'),
-            id: 'event_fields_attributes_{{$index}}_name'
+            id: 'event_fields_attributes_{{fieldIdx}}_name'
       .col-sm-1
         = link_to icon_tag('icon-pencil'), 'javascript:void(0)',
             'ng-click' => 'editField(field)',
@@ -22,64 +22,64 @@
             'ng-show' => 'field.editing', class: 'btn btn-success btn-sm'
       .col-sm-1
         = link_to icon_tag('icon-trash'), 'javascript:void(0)',
-            'ng-click' => 'removeField($index)', id: 'event_fields_attributes_{{$index}}_destroy_link',
+            'ng-click' => 'removeField(fieldIdx)', id: 'event_fields_attributes_{{fieldIdx}}_destroy_link',
             class: 'btn btn-danger btn-sm', title: t(:remove_field)
       .col-sm-1
         = link_to icon_tag('icon-arrow-down'), 'javascript:void(0)',
             class: 'btn btn-default btn-sm', title: t(:move),
-            :'ng-show' => 'fieldsLength() > 1 && $index < fieldsLength() - 1',
-            :'ng-click' => 'fieldDown($index)'
+            :'ng-show' => 'fieldsLength() > 1 && fieldIdx < fieldsLength() - 1',
+            :'ng-click' => 'fieldDown(fieldIdx)'
       .col-sm-1
         = link_to icon_tag('icon-arrow-up'), 'javascript:void(0)',
             class: 'btn btn-default btn-sm', title: t(:move),
-            :'ng-show' => 'fieldsLength() > 1 && $index > 0',
-            :'ng-click' => 'fieldUp($index)'
+            :'ng-show' => 'fieldsLength() > 1 && fieldIdx > 0',
+            :'ng-click' => 'fieldUp(fieldIdx)'
   = form.input :field_type, as: :select, collection: Field.valid_types_to_collection,
       include_blank: false, input_html: { 'ng-model' => 'field.field_type',
-      disabled: !form.object.new_record?, id: 'event_fields_attributes_{{$index}}_field_type' },
+      disabled: !form.object.new_record?, id: 'event_fields_attributes_{{fieldIdx}}_field_type' },
       wrapper_html: { 'ng-show' => 'field.editing' }
   = form.input_field :max_file_size, value: '{{ field.max_size * 1024 * 1024 }}', as: :hidden
   = form.input :max_file_size, input_html: { :'ng-model' => 'field.max_file_size',
-      id: 'event_fields_attributes_{{$index}}_max_size' },
+      id: 'event_fields_attributes_{{fieldIdx}}_max_size' },
       wrapper_html: { :'ng-show' => "field.editing && field.field_type == 'file'" } do
     .row
       .col-sm-6
         .input-group
-          = text_field_tag nil, '', id: 'event_fields_attributes_{{$index}}_max_size',
+          = text_field_tag nil, '', id: 'event_fields_attributes_{{fieldIdx}}_max_size',
               :'ng-init' => 'field.max_size = field.max_file_size / 1024 / 1024',
               :'ng-model' => 'field.max_size', class: :'input-xs', class: 'form-control'
           %span.input-group-addon MB
   = form.input :allowed_file_extensions,
       as: :check_boxes, wrapper_html: { 'ng-show' => "field.editing && field.field_type == 'file'",
-      :'ng-init' => "idx = $index; types = ['jpg', 'jpeg', 'gif', 'png', 'pdf',
+      :'ng-init' => "types = ['jpg', 'jpeg', 'gif', 'png', 'pdf',
       'doc', 'xls', 'odt', 'ods', 'zip', 'avi', 'mpeg', 'mp4', 'flv']; labels = ['Imagem JPG', 'Imagem JPEG', 'Imagem GIF',
       'Imagem PNG', 'Documento PDF', 'Word (DOC)', 'Excel (XLS)', 'OpenOffice Texto (ODT)',
       'OpenOffice Calc (ODS)', 'Arquivo Compactado (ZIP)', 'Vídeo (AVI)',
       'Vídeo (MPEG)', 'Vídeo (MP4)', 'Vídeo (FLV)']" } do
     %label.checkbox{:'ng-repeat' => "type in types"}
-      %input.check_boxes.optional{ id: 'event_fields_attributes_{{idx}}_allowed_file_extensions', |
-        name: "event[fields_attributes][{{idx}}][allowed_file_extensions][]",    |
+      %input.check_boxes.optional{ id: 'event_fields_attributes_{{fieldIdx}}_allowed_file_extensions', |
+        name: "event[fields_attributes][{{fieldIdx}}][allowed_file_extensions][]",    |
         :'ng-checked' => 'field.allowed_file_extensions.indexOf(type) > -1',     |
-        type: "checkbox", value: '{{type}}'} {{labels[$index]}}                            |
-    %input{name: "event[fields_attributes][{{idx}}][allowed_file_extensions][]",
+        type: "checkbox", value: '{{type}}'} {{labels[$index]}}                  |
+    %input{name: "event[fields_attributes][{{fieldIdx}}][allowed_file_extensions][]",
         type: "hidden", value: ""}
   = form.input :extra, wrapper_html: { 'ng-show' => 'field.editing && showExtra(field)' },
       input_html: { 'ng-model' => 'field.extra',
-      id: 'event_fields_attributes_{{$index}}_extra' },
+      id: 'event_fields_attributes_{{fieldIdx}}_extra' },
       placeholder: t(:'simple_form.placeholders.field.extra')
   = form.input :hint, input_html: { 'ng-model' => 'field.hint',
-      id: 'event_fields_attributes_{{$index}}_hint' },
+      id: 'event_fields_attributes_{{fieldIdx}}_hint' },
       wrapper_html: { 'ng-show' => 'field.editing' }
   = form.input :required, input_html: { 'ng-model' => 'field.required',
-      id: 'event_fields_attributes_{{$index}}_required' },
+      id: 'event_fields_attributes_{{fieldIdx}}_required' },
       wrapper_html: { 'ng-show' => 'field.editing' }
   = form.input :show_receipt, input_html: { 'ng-model' => 'field.show_receipt',
-      id: 'event_fields_attributes_{{$index}}_show_receipt' },
+      id: 'event_fields_attributes_{{fieldIdx}}_show_receipt' },
       wrapper_html: { 'ng-show' => 'field.editing' }
   = form.input :searchable, input_html: { 'ng-model' => 'field.searchable',
-      id: 'event_fields_attributes_{{$index}}_searchable' },
+      id: 'event_fields_attributes_{{fieldIdx}}_searchable' },
       wrapper_html: { 'ng-show' => 'field.editing && field.field_type != "file"' }
   = form.input :is_numeric, input_html: { 'ng-model' => 'field.is_numeric',
-      id: 'event_fields_attributes_{{$index}}_is_numeric' },
+      id: 'event_fields_attributes_{{fieldIdx}}_is_numeric' },
       wrapper_html: { 'ng-show' => 'field.editing && field.field_type == "string"' }
   = form.input_field :priority, as: :hidden, value: '{{field.priority}}'

@@ -36,7 +36,7 @@
           = f.input :closes_at, include_blank: true
           = f.input :technical_email, input_html: { :'ng-model' => 'event.technical_email'}
         .tab-pane#fields
-          .event-field{:'ng-repeat' => 'field in event.fields',
+          .event-field{:'ng-repeat' => '(fieldIdx, field) in event.fields',
               :'ng-show' => '!field._destroy' }
             = render 'fields_form', f: f
           %hr(style="margin-top: -1px")

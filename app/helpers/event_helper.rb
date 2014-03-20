@@ -5,7 +5,8 @@ module EventHelper
 
       json.fields event.fields do |field|
         json.extract! field, :id, :group_name, :name, :field_type, :extra,
-          :hint, :required, :show_receipt, :searchable
+          :hint, :required, :show_receipt, :searchable, :max_file_size,
+          :allowed_file_extensions, :priority
         json.editing field.new_record?
       end if event.fields
 
