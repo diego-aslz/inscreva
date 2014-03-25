@@ -79,6 +79,14 @@ describe Subscription do
 
       Subscription.by_field(f1.id, 'B', 'string').should include(subscription)
       Subscription.by_field(f2.id, 'B', 'string').should_not include(subscription)
+    end
+
+    it 'searches by a text field' do
+      f1 = create :field, field_type: 'text'
+      f2 = create :field, field_type: 'text'
+      create(:field_fill, field_id: f1.id, value_text: 'ABC', subscription_id: subscription.id)
+      create(:field_fill, field_id: f2.id, value_text: 'DEF', subscription_id: subscription.id)
+
       Subscription.by_field(f1.id, 'B', 'text').should include(subscription)
       Subscription.by_field(f2.id, 'B', 'text').should_not include(subscription)
     end

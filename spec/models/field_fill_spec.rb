@@ -86,7 +86,7 @@ describe FieldFill do
   end
 
   context "validating" do
-    it "requires a value when Field is required and not a file" do
+    it "requires a value when Field is required" do
       fill.field.required = true
       fill.field.field_type = 'string'
       fill.should require_presence_of(:value)
@@ -94,62 +94,78 @@ describe FieldFill do
       fill.should_not require_presence_of(:value)
     end
 
-    it "does not require a value when Field is a file" do
-      fill.field.required = true
-      fill.field.field_type = 'file'
-      fill.should_not require_presence_of(:value)
-    end
-
-    it "requires a file when Field is required and is a file" do
-      fill.field.required = true
-      fill.field.field_type = 'file'
-      fill.should require_presence_of(:file)
-      fill.field.required = false
-      fill.should_not require_presence_of(:file)
-    end
-
-    it "requires a file with valid extension according to Field" do
-      fill.field.required = true
-      fill.field.field_type = 'file'
-      fill.field.allowed_file_extensions = %w(png doc)
-
-      fill.file = File.open '/tmp/test.png', 'w'
-      fill.should be_valid
-
-      fill.file = File.open '/tmp/test.doc', 'w'
-      fill.should be_valid
-
-      fill.file = File.open '/tmp/test.pdf', 'w'
-      fill.should have(1).errors_on :file
-    end
-
-    it 'requires the file to not be greater than the size defined in the Field' do
-      fill.field.max_file_size = 1.kilobyte
-      fill.file = File.open "#{Rails.root}/spec/support/files/blank.pdf", 'r'
-      fill.should have(1).errors_on :file
-
-      fill.field.max_file_size = 2.kilobytes
-      fill.should have(0).errors_on :file
-      fill.field.max_file_size = 0
-      fill.should have(0).errors_on :file
-      fill.field.max_file_size = -1
-      fill.should have(0).errors_on :file
-    end
-
-    it "does not require a file when Field is not a file" do
+    it "does not require a file" do
       fill.field.required = true
       fill.field.field_type = 'string'
       fill.should_not require_presence_of(:file)
     end
 
-    it "requires numericality of value when it is numeric" do
-      fill.field.update_attributes is_numeric: true, required: false, field_type: 'string'
-      fill.value = 'abc'
-      fill.should have(1).errors_on(:value)
-      fill.value = '123456'
-      fill.should have(0).errors_on(:value)
-      fill.value = ''
-      fill.should have(0).errors_on(:value)
+    context 'is a File' do
+      it "does not require a value" do
+        fill.field.required = true
+        fill.field.field_type = 'file'
+        fill.should_not require_presence_of(:value)
+      end
+
+      it "requires a file when required is true" do
+        fill.field.required = true
+        fill.field.field_type = 'file'
+        fill.should require_presence_of(:file)
+        fill.field.required = false
+        fill.should_not require_presence_of(:file)
+      end
+
+      it "requires a file with valid extension according to Field" do
+        fill.field.required = true
+        fill.field.field_type = 'file'
+        fill.field.allowed_file_extensions = %w(png doc)
+
+        fill.file = File.open '/tmp/test.png', 'w'
+        fill.should be_valid
+
+        fill.file = File.open '/tmp/test.doc', 'w'
+        fill.should be_valid
+
+        fill.file = File.open '/tmp/test.pdf', 'w'
+        fill.should have(1).errors_on :file
+      end
+
+      it 'requires the file to not be greater than the size defined in the Field' do
+        fill.field.max_file_size = 1.kilobyte
+        fill.file = File.open "#{Rails.root}/spec/support/files/blank.pdf", 'r'
+        fill.should have(1).errors_on :file
+
+        fill.field.max_file_size = 2.kilobytes
+        fill.should have(0).errors_on :file
+        fill.field.max_file_size = 0
+        fill.should have(0).errors_on :file
+        fill.field.max_file_size = -1
+        fill.should have(0).errors_on :file
+      end
+    end
+
+    context 'field is numeric' do
+      it "requires numericality of value" do
+        fill.field.update_attributes is_numeric: true, required: false, field_type: 'string'
+        fill.value = 'abc'
+        fill.should have(1).errors_on(:value)
+        fill.value = '123456'
+        fill.should have(0).errors_on(:value)
+        fill.value = ''
+        fill.should have(0).errors_on(:value)
+      end
+    end
+
+    context 'field is text' do
+      it "requires value_text instead of value" do
+        fill.field.update_attributes required: true, field_type: 'text'
+        fill.value = nil
+        fill.value_text = nil
+        fill.should have(0).errors_on(:value)
+        fill.should have(1).errors_on(:value_text)
+        fill.value_text = '123456'
+        fill.should have(0).errors_on(:value_text)
+      end
     end
   end
 end

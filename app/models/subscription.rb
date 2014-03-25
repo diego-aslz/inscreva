@@ -34,8 +34,10 @@ class Subscription < ActiveRecord::Base
       i.where(clauses.join(' and '), *pars)
     elsif %w(select country).include? type
       i.where("#{table}.value in (?)", value)
-    elsif %w(string text).include?(type)
+    elsif 'string' == type
       i.where("#{table}.value like ?", "%#{value}%")
+    elsif 'text' == type
+      i.where("#{table}.value_text like ?", "%#{value}%")
     elsif type == "check_boxes"
       clauses = []
       pars = []

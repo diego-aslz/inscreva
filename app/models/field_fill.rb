@@ -5,6 +5,7 @@ class FieldFill < ActiveRecord::Base
   include Concerns::CountryFieldFill
   include Concerns::BooleanFieldFill
   include Concerns::SelectFieldFill
+  include Concerns::TextFieldFill
 
   belongs_to :field
   belongs_to :subscription
@@ -26,6 +27,6 @@ class FieldFill < ActiveRecord::Base
   private
 
   def require_value?
-    field.required && !field.file?
+    field.required && !field.file? && !field.text?
   end
 end

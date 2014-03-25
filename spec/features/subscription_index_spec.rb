@@ -38,8 +38,8 @@ describe "Subscription" do
     f = create(:field, field_type: 'text', name: 'Big Text Example', searchable: true)
     s1 = create :subscription, event_id: f.event_id
     s2 = create :subscription, event_id: f.event_id
-    s1.field_fills << create(:field_fill, field_id: f.id, value: 'ABC')
-    s2.field_fills << create(:field_fill, field_id: f.id, value: 'DEF')
+    s1.field_fills << create(:field_fill, field_id: f.id, value_text: 'ABC')
+    s2.field_fills << create(:field_fill, field_id: f.id, value_text: 'DEF')
 
     visit event_subscriptions_path(f.event)
     page.should have_content('Big Text Example', count: 2)

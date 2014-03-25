@@ -14,7 +14,7 @@ describe "Subscription" do
       f = create(:field, field_type: 'text', name: 'Address')
       visit new_event_subscription_path(f.event)
       page.should have_content('Address')
-      page.should have_selector("textarea#subscription_field_fills_attributes_0_value")
+      page.should have_selector("textarea#subscription_field_fills_attributes_0_value_text")
     end
 
     it "displays a Boolean field" do
@@ -124,7 +124,7 @@ describe "Subscription" do
     fill_in Subscription.human_attribute_name(:email),                 with: 'some@mail.com'
     fill_in Subscription.human_attribute_name(:email_confirmation),    with: 'some@mail.com'
     fill_in "Street", with: 'Some St.'
-    fill_in "About Yourself", with: "I don't like to talk about me."
+    fill_in "About Yourself", with: "1234567890" * 30
     choose I18n.t('yes')
     select(I18n.t('countries.SWE'), :from => 'Birth Country')
     fill_in "Birth Date", with: '31/12/1990'
@@ -132,19 +132,19 @@ describe "Subscription" do
     select 'Black', :from => 'Chocolate'
     check 'TV'
     check 'Refrigerator'
-    click_on I18n.t(:subscribe)
+    expect{ click_on I18n.t(:subscribe) }.not_to change(Subscription, :count)
 
     page.should have_content(I18n.t(:'helpers.errors.subscription.confirm'))
     fill_in Subscription.human_attribute_name(:password),              with: '123456789'
     fill_in Subscription.human_attribute_name(:password_confirmation), with: '123456789'
-    click_on I18n.t(:subscribe)
+    expect{ click_on I18n.t(:subscribe) }.to change(Subscription, :count).by(1)
 
     page.should have_content(I18n.t(:'helpers.messages.subscription.successfully_created'))
     page.should have_content('123321123')
     page.should have_content('some@mail.com')
     page.should have_content('Some Great Event')
     page.should have_content('Some St.')
-    page.should have_content('I don\'t like to talk about me.')
+    page.should have_content("1234567890" * 30)
     page.should have_content(I18n.t('yes'))
     page.should have_content(I18n.t('countries.SWE'))
     page.should have_content(I18n.l(Date.new(1990,12,31), format: :long))

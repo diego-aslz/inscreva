@@ -23,12 +23,10 @@ class Field < ActiveRecord::Base
     select_options.select{ |opt| opt[1] == key }[0][0]
   end
 
-  def file?
-    field_type == 'file'
-  end
-
-  def date?
-    field_type == 'date'
+  %w(file date text).each do |type|
+    define_method "#{type}?" do
+      field_type == type
+    end
   end
 
   def default_values

@@ -1,4 +1,7 @@
 - url = (@application.new_record? ? event_subscriptions_path(@event) : subscription_path(@application.subscription))
+
+= @application.field_fills.collect &:errors #.full_messages
+
 = simple_form_for @application, url: url, :html => { class: 'form-horizontal', multipart: true },
   wrapper: :horizontal do |f|
   - alert = f.error :base

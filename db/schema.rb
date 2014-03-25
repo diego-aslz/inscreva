@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130132403) do
+ActiveRecord::Schema.define(version: 20140325112516) do
 
   create_table "delegations", force: true do |t|
     t.integer  "user_id"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20140130132403) do
     t.string   "file"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.text     "value_text"
   end
 
   add_index "field_fills", ["field_id"], name: "index_field_fills_on_event_field_id", using: :btree
