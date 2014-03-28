@@ -58,6 +58,15 @@ describe FieldFill do
     end
   end
 
+  context "being text" do
+    let(:fill) { build :field_fill, field: build(:field, field_type: 'text') }
+
+    it "uses the value_text field" do
+      fill.value_text = 'long text'
+      fill.value_to_s.should == 'long text'
+    end
+  end
+
   context "being boolean" do
     let(:fill) { build :field_fill, field: build(:field, field_type: 'boolean') }
 
