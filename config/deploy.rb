@@ -12,8 +12,7 @@ set :deploy_to, "/var/www/#{application}"
 set :use_sudo, false
 set :normalize_asset_timestamps, false
 
-## DEPLOY WHEN SERVER HAS RBENV ###
-set :bundle_flags, "--deployment --quiet --binstubs"
+set :bundle_flags, "--deployment --quiet"
 set :default_environment, {
   'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
 }
