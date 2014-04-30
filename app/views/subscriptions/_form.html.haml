@@ -11,7 +11,6 @@
 
   .form-inputs
     = f.input_field :confirmed, as: :hidden
-    = f.input :event_name, input_html: { disabled: true }
     = f.input :name
     - if @application.new_record?
       = f.input :email
