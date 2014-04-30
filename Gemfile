@@ -28,6 +28,7 @@ group :development do
   gem 'thin'
   gem 'debugger'
   gem 'capistrano', '~> 2.15.5'
+  gem 'quiet_assets'
 end
 
 gem 'sass-rails',   '~> 4.0.0'

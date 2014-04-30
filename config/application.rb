@@ -26,6 +26,8 @@ module Inscreva
     config.action_dispatch.rescue_responses["PagesController::NotFound"] = :not_found
 
     config.exceptions_app = self.routes
+
+    config.filter_parameters += [:current_password]
   end
 end
 
