@@ -17,7 +17,7 @@ pt-BR:
         edit:
           current_password: para confirmar se é você mesmo
       subscription:
-        id_card: Número do Documento
+        id_card: Número do Documento (RG/RNE)
     placeholders:
       user:
         edit:
