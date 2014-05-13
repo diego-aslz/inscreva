@@ -2,8 +2,10 @@
 require 'spec_helper'
 
 describe "Print Receipt" do
+  let(:receipt_signature) { false }
   let(:receipt_title) { nil }
-  let(:event)         { create :event, receipt_title: receipt_title }
+  let(:event)         { create :event, receipt_title: receipt_title,
+    receipt_signature: receipt_signature }
   let(:subscription)  { create(:subscription, name: 'My Test', event: event,
     user: create(:user, password: '123456789', password_confirmation: '123456789')) }
 
@@ -41,5 +43,15 @@ describe "Print Receipt" do
     end
     it { should_not have_content('Comprovante de Inscrição') }
     it { should     have_content('Another Title') }
+  end
+
+  context 'receipt_signature is true' do
+    let(:receipt_signature) { true }
+    subject { page }
+    before(:each) do
+      visit subscription_path(subscription)
+      click_on I18n.t(:print_receipt)
+    end
+    it { should have_content('____________') }
   end
 end

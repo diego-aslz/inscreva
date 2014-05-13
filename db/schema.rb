@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140513111815) do
+ActiveRecord::Schema.define(version: 20140513120144) do
 
   create_table "delegations", force: true do |t|
     t.integer  "user_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140513111815) do
     t.text     "description"
     t.integer  "created_by_id"
     t.string   "receipt_title"
+    t.boolean  "receipt_signature",   default: false
   end
 
   add_index "events", ["created_by_id"], name: "index_events_on_created_by_id", using: :btree

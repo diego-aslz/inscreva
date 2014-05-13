@@ -139,6 +139,7 @@ pt-BR:
         published: Publicar na página inicial
         description: Descrição
         receipt_title: Título no Comprovante
+        receipt_signature: Campo para Assinatura
       subscription:
         created_at: Inscrito
         email: E-mail

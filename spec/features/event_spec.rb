@@ -21,6 +21,7 @@ describe "Event" do
     ## Subscriptions
     click_on 'Inscrições'
     fill_in 'Título no Comprovante', with: "Some Title"
+    check 'Assinatura'
     ## Fields
     click_on Event.human_attribute_name(:fields)
     fill_in Field.human_attribute_name(:name), with: 'Some Field'
@@ -36,6 +37,7 @@ describe "Event" do
     Event.last.created_by_id.should == admin.id
     page.should have_content('Test Event')
     page.should have_content "Some Title"
+    page.should have_content "Assinatura Sim"
     click_on Event.human_attribute_name(:fields)
     page.should have_content('Some Field')
     click_on Event.human_attribute_name(:delegations)
