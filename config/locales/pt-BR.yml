@@ -138,6 +138,7 @@ pt-BR:
         delegations: Membros
         published: Publicar na página inicial
         description: Descrição
+        receipt_title: Título no Comprovante
       subscription:
         created_at: Inscrito
         email: E-mail

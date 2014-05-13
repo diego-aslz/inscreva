@@ -2,8 +2,10 @@
 require 'spec_helper'
 
 describe "Print Receipt" do
-  let(:subscription) { create(:subscription, name: 'My Test', user_id: create(:user,
-      password: '123456789', password_confirmation: '123456789').id) }
+  let(:receipt_title) { nil }
+  let(:event)         { create :event, receipt_title: receipt_title }
+  let(:subscription)  { create(:subscription, name: 'My Test', event: event,
+    user: create(:user, password: '123456789', password_confirmation: '123456789')) }
 
   before(:each) do
     sign_in subscription.user, '123456789'
@@ -13,6 +15,7 @@ describe "Print Receipt" do
     visit subscription_path(subscription)
     page.should have_content 'My Test'
     click_on I18n.t(:print_receipt)
+    page.should have_content 'Comprovante de Inscrição'
     current_path.should == receipt_subscription_path(subscription)
     page.should have_content 'My Test'
   end
@@ -27,5 +30,16 @@ describe "Print Receipt" do
     f.update_attribute :show_receipt, true
     visit receipt_subscription_path(subscription)
     page.should have_content 'My Street'
+  end
+
+  context 'there is a custom receipt_title' do
+    let(:receipt_title) { 'Another Title' }
+    subject { page }
+    before(:each) do
+      visit subscription_path(subscription)
+      click_on I18n.t(:print_receipt)
+    end
+    it { should_not have_content('Comprovante de Inscrição') }
+    it { should     have_content('Another Title') }
   end
 end

@@ -18,6 +18,8 @@ pt-BR:
           current_password: para confirmar se é você mesmo
       subscription:
         id_card: Número do Documento (RG/RNE)
+      event:
+        receipt_title: 'Se não informado, será "Comprovante de Inscrição"'
     placeholders:
       user:
         edit:

@@ -41,7 +41,7 @@ class EventsController < InheritedResources::Base
     return [] if request.get?
     [params.require(:event).permit(:closes_at, :email, :name, :opens_at,
       :technical_email, :identifier, :published, :description, :rules_url,
-      fields_attributes: [
+      :receipt_title, fields_attributes: [
         :field_type, :name, :extra, :required, :show_receipt,
         :group_name, :priority, :searchable, :is_numeric, :hint,
         :max_file_size, :id, :_destroy, allowed_file_extensions: []

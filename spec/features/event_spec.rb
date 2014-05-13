@@ -18,6 +18,9 @@ describe "Event" do
     click_on I18n.t(:'helpers.links.new')
     fill_in Event.human_attribute_name(:name), with: 'Test Event'
     fill_in Event.human_attribute_name(:identifier), with: 'test'
+    ## Subscriptions
+    click_on 'Inscrições'
+    fill_in 'Título no Comprovante', with: "Some Title"
     ## Fields
     click_on Event.human_attribute_name(:fields)
     fill_in Field.human_attribute_name(:name), with: 'Some Field'
@@ -32,6 +35,7 @@ describe "Event" do
     expect{click_button 'Criar'}.to change(Event, :count).by(1)
     Event.last.created_by_id.should == admin.id
     page.should have_content('Test Event')
+    page.should have_content "Some Title"
     click_on Event.human_attribute_name(:fields)
     page.should have_content('Some Field')
     click_on Event.human_attribute_name(:delegations)

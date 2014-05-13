@@ -1,5 +1,5 @@
 - content_for :title do
-  - t('.title')
+  - @subscription.event.receipt_title.blank? ? t('.title') : @subscription.event.receipt_title
 
 = show_for @subscription, class: 'dl-horizontal' do |show|
   = show.association :event
