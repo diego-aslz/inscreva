@@ -23,7 +23,7 @@
       </Row>
     <% @subscriptions.each do |subscription| %>
       <Row>
-        <Cell><Data ss:Type="String"><%= subscription.created_at.strftime('%Y-%m-%d %H:%M:%S') %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= subscription.created_at.strftime('%Y-%m-%d %H:%M:%S') if subscription.created_at %></Data></Cell>
         <Cell><Data ss:Type="String"><%= subscription.number %></Data></Cell>
         <Cell><Data ss:Type="String"><%= subscription.name %></Data></Cell>
       <% for select in permitted_selects %>
