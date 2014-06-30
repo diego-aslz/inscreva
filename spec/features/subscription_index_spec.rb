@@ -2,10 +2,10 @@
 require 'spec_helper'
 
 describe "Subscription" do
-  let(:admin) { create(:admin, password: '123456789', password_confirmation: '123456789') }
+  let(:user) { create(:admin, password: '123456789', password_confirmation: '123456789') }
 
   before(:each) do
-    sign_in admin, '123456789'
+    sign_in user, '123456789'
   end
 
   it "does not show a filter that is not searchable" do
@@ -276,5 +276,31 @@ describe "Subscription" do
     click_on "Buscar"
     page.find('table').should have_content("ABC")
     page.find('table').should have_content("DEF")
+  end
+
+  context 'all subscriptions' do
+    let(:sub1) { create :subscription }
+    let(:sub2) { create :subscription }
+
+    before(:each) do
+      sub1
+      sub2
+      visit subscriptions_path
+    end
+
+    it "lists all the subscriptions" do
+      page.should have_content(sub1.number)
+      page.should have_content(sub2.number)
+    end
+
+    context 'user is not admin' do
+      let(:user) { create(:user, can_create_events: true, password: '123456789', password_confirmation: '123456789') }
+      let(:sub1) { create :subscription, event: create(:event, created_by_id: user.id) }
+
+      it "filters according to user's permissions" do
+        page.should     have_content(sub1.number)
+        page.should_not have_content(sub2.number)
+      end
+    end
   end
 end

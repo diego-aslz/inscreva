@@ -100,24 +100,30 @@ class SubscriptionsController < InheritedResources::Base
   end
 
   def collection
-    @event = Event.find(params[:event_id])
-    authorize! :read, @event.subscriptions.build
-    @subscriptions = @event.subscriptions
-    @subscriptions = @subscriptions.search(params[:term]) unless params[:term].blank?
-    @fields = []
-    unless (fields = params[:field_ids]).blank?
-      @fields = @event.fields.where("id in (?) and field_type != 'file'",
-          fields).select(:id, :name, :field_type, :is_numeric, :extra)
-      @subscriptions = @subscriptions.includes(:field_fills).references(:field_fills).
-          where('field_fills.field_id in (?)', fields.map(&:to_i))
+    if params[:event_id]
+      @event = Event.find(params[:event_id])
+      @subscriptions = @event.subscriptions
+    else
+      @subscriptions = Subscription.all
     end
-    if params[:fields]
-      types = Field.where('id in (?)', params[:fields].keys).pluck :field_type
-      i=-1
-      params[:fields].each_pair { |k,v| v[:type] = types[i += 1] }
-      params[:fields].reject!{ |k,v| !Subscription.valid_filter?(k, v[:value], v[:type]) }
-      params[:fields].each do |k,v|
-        @subscriptions = @subscriptions.by_field k, v[:value], v[:type]
+    @subscriptions = @subscriptions.accessible_by(current_ability)
+    @subscriptions = @subscriptions.search(params[:term]) unless params[:term].blank?
+    if params[:event_id]
+      @fields = []
+      unless (fields = params[:field_ids]).blank?
+        @fields = @event.fields.where("id in (?) and field_type != 'file'",
+            fields).select(:id, :name, :field_type, :is_numeric, :extra)
+        @subscriptions = @subscriptions.includes(:field_fills).references(:field_fills).
+            where('field_fills.field_id in (?)', fields.map(&:to_i))
+      end
+      if params[:fields]
+        types = Field.where('id in (?)', params[:fields].keys).pluck :field_type
+        i=-1
+        params[:fields].each_pair { |k,v| v[:type] = types[i += 1] }
+        params[:fields].reject!{ |k,v| !Subscription.valid_filter?(k, v[:value], v[:type]) }
+        params[:fields].each do |k,v|
+          @subscriptions = @subscriptions.by_field k, v[:value], v[:type]
+        end
       end
     end
   end

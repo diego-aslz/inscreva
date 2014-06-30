@@ -57,7 +57,12 @@
         = modal_cancel caption: t(:'helpers.links.cancel')
         = f.button :submit, t(:'copy_fields'), class: 'btn-success'
 
-= paginate @events
+.row
+  .col-sm-6
+    = paginate @events
+  .col-sm-6.text-right
+    = link_to 'Todos os inscritos', subscriptions_path if can? :read, Subscription
+
 
 %br
 

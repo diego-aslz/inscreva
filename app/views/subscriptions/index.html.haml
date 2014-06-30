@@ -1,15 +1,20 @@
 - model_class = Subscription
-= page_header "#{t('.title', default: model_class.model_name.human.pluralize)} - #{@event.name}"
+- if @event
+  = page_header "#{t('.title', default: model_class.model_name.human.pluralize)} - #{@event.name}"
+- else
+  = page_header "#{t('.title', default: model_class.model_name.human.pluralize)}"
 
-= form_tag event_subscriptions_path(@event), method: :get,
+- search_path = @event && event_subscriptions_path(@event) || subscriptions_path
+= form_tag search_path, method: :get,
   class: 'form-search form-horizontal' do
   - values = params[:fields] || {}
-  - @event.fields.where(searchable: true).each do |field|
-    = render "subscriptions/inputs/#{field.field_type}_input",
-        field: field,
-        value: begin values[field.id.to_s][:value] rescue nil end,
-        values: values,
-        id: dom_id(field) rescue nil
+  - if @event
+    - @event.fields.where(searchable: true).each do |field|
+      = render "subscriptions/inputs/#{field.field_type}_input",
+          field: field,
+          value: begin values[field.id.to_s][:value] rescue nil end,
+          values: values,
+          id: dom_id(field) rescue nil
 
   .form-group
     = label_tag 'name', t(:search), class: :'control-label col-sm-3'
@@ -25,19 +30,20 @@
             id: "select_#{att}"
           = Subscription.human_attribute_name(att)
 
-  .form-group
-    = label_tag 'field_ids[]', t(:include_fields), class: :'control-label col-sm-3'
-    .col-sm-9
-      = select_tag 'field_ids[]', options_from_collection_for_select(@event.         |
-          fields.where("field_type != 'file'"), :id, :name, params['field_ids']),    |
-          multiple: '', class: 'chosen', :'data-placeholder' => t(:select).titleize  |
+  - if @event
+    .form-group
+      = label_tag 'field_ids[]', t(:include_fields), class: :'control-label col-sm-3'
+      .col-sm-9
+        = select_tag 'field_ids[]', options_from_collection_for_select(@event.         |
+            fields.where("field_type != 'file'"), :id, :name, params['field_ids']),    |
+            multiple: '', class: 'chosen', :'data-placeholder' => t(:select).titleize  |
 
   .form-group
     .col-sm-9.col-sm-offset-3
       = button_tag type: "submit", class: :'btn btn-primary' do
         #{icon_tag("icon-search")}
         #{t(:search)}
-      = link_to icon_tag("icon-remove"), event_subscriptions_path(@event),
+      = link_to icon_tag("icon-remove"), search_path,
           title: t(:clear_fields), class: 'btn btn-warning'
 
 %table.table.table-striped
@@ -46,10 +52,11 @@
       %th= model_class.human_attribute_name :created_at
       %th= model_class.human_attribute_name :number
       %th= model_class.human_attribute_name :name
-      - for select in permitted_selects
-        %th= model_class.human_attribute_name select
-      - for field in @fields
-        %th= field.name
+      - if @event
+        - for select in permitted_selects
+          %th= model_class.human_attribute_name select
+        - for field in @fields
+          %th= field.name
       %th
   %tbody
     - @subscriptions.each do |subscription|
@@ -57,12 +64,13 @@
         %td= l subscription.created_at, format: :short
         %td= link_to subscription.number, subscription_path(subscription)
         %td= abbr(subscription.name, size: 60)
-        - for select in permitted_selects
-          %td= subscription.attributes[select]
-        - for field in @fields
-          - fill = subscription.fills.where(field_id: field.id).first
-          - fill.field = field
-          %td= fill.value_to_s if fill
+        - if @event
+          - for select in permitted_selects
+            %td= subscription.attributes[select]
+          - for field in @fields
+            - fill = subscription.fills.where(field_id: field.id).first
+            - fill.field = field
+            %td= fill.value_to_s if fill
         %td.text-right
           = minilink_to_edit subscription, edit_subscription_path(subscription)
           = minilink_to_receipt(subscription)
@@ -73,22 +81,23 @@
   %strong
     = t :total, count: @count
 
-.row
-  .col-sm-1
-    = link_to glyph('download-alt') + " CSV",
-        event_subscriptions_path(@event, format: 'csv', params: params.slice(:fields,
-        :field_ids, :term, :selects)), class: 'btn btn-default', title: t(:'export.csv')
-  .col-sm-1
-    = link_to glyph('download-alt') + " XLS",
-        event_subscriptions_path(@event, format: 'xls', params: params.slice(:fields,
-        :field_ids, :term, :selects)), class: 'btn btn-success', title: t(:'export.xls')
-  .col-sm-1
-    = link_to glyph('download-alt') + " ZIP", '#download_fields',
-        class: 'btn btn-info', :'data-toggle' => "modal", title: t(:'export.zip') if @subscriptions.any? && can?(:download, @subscriptions.first.field_fills.build)
-  .col-sm-1
-    = link_to glyph('envelope') + " E-mail",
-        new_event_notification_path(@event, filters: params[:fields]),
-        class: 'btn btn-danger', :'data-toggle' => "modal", title: t(:'send_email') if can? :create, @event.notifications.build
+- if @event
+  .row
+    .col-sm-1
+      = link_to glyph('download-alt') + " CSV",
+          event_subscriptions_path(@event, format: 'csv', params: params.slice(:fields,
+          :field_ids, :term, :selects)), class: 'btn btn-default', title: t(:'export.csv')
+    .col-sm-1
+      = link_to glyph('download-alt') + " XLS",
+          event_subscriptions_path(@event, format: 'xls', params: params.slice(:fields,
+          :field_ids, :term, :selects)), class: 'btn btn-success', title: t(:'export.xls')
+    .col-sm-1
+      = link_to glyph('download-alt') + " ZIP", '#download_fields',
+          class: 'btn btn-info', :'data-toggle' => "modal", title: t(:'export.zip') if @subscriptions.any? && can?(:download, @subscriptions.first.field_fills.build)
+    .col-sm-1
+      = link_to glyph('envelope') + " E-mail",
+          new_event_notification_path(@event, filters: params[:fields]),
+          class: 'btn btn-danger', :'data-toggle' => "modal", title: t(:'send_email') if can? :create, @event.notifications.build
 
-- if @subscriptions.first and can?(:download, @subscriptions.first.field_fills.build)
-  = render 'download_dialog', params: params, event: @event
+  - if @subscriptions.first and can?(:download, @subscriptions.first.field_fills.build)
+    = render 'download_dialog', params: params, event: @event

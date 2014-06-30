@@ -19,9 +19,7 @@ class Ability
         can :create, Event
         can [:read, :update]         , Event, created_by_id: user.id
         can [:read, :update, :create], Page , event: { created_by_id: user.id }
-        can [:read, :update, :create, :receipt], Subscription do |s|
-          s.event && s.event.created_by_id == user.id
-        end
+        can [:read, :update, :create, :receipt], Subscription, event: { created_by_id: user.id }
         can [:download], FieldFill, subscription: { event: { created_by_id: user.id } }
         can [:create],   Notification, event: { created_by_id: user.id }
       end
