@@ -5,11 +5,11 @@
   = page_header "#{t('.title', default: model_class.model_name.human.pluralize)}"
 
 - search_path = @event && event_subscriptions_path(@event) || subscriptions_path
-= form_tag search_path, method: :get,
-  class: 'form-search form-horizontal' do
+= form_tag search_path, method: :get, class: 'form-search form-horizontal' do
   - values = params[:fields] || {}
   - if @event
     - @event.fields.where(searchable: true).each do |field|
+      = hidden_field_tag dom_id(field, :field_type), field.field_type, name: "fields[#{field.id}][type]"
       = render "subscriptions/inputs/#{field.field_type}_input",
           field: field,
           value: begin values[field.id.to_s][:value] rescue nil end,

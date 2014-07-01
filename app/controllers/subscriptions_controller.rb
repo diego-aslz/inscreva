@@ -117,9 +117,6 @@ class SubscriptionsController < InheritedResources::Base
             where('field_fills.field_id in (?)', fields.map(&:to_i))
       end
       if params[:fields]
-        types = Field.where('id in (?)', params[:fields].keys).pluck :field_type
-        i=-1
-        params[:fields].each_pair { |k,v| v[:type] = types[i += 1] }
         params[:fields].reject!{ |k,v| !Subscription.valid_filter?(k, v[:value], v[:type]) }
         params[:fields].each do |k,v|
           @subscriptions = @subscriptions.by_field k, v[:value], v[:type]
