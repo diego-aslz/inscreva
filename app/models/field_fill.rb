@@ -18,7 +18,6 @@ class FieldFill < ActiveRecord::Base
   end
 
   def value_to_s
-    return '' if value.blank?
     method = "#{field.field_type}_value_to_s"
     return send(method) if respond_to? method
     value
