@@ -27,7 +27,7 @@ module Inscreva
 
     config.exceptions_app = self.routes
 
-    config.filter_parameters += [:current_password]
+    config.filter_parameters += [:password, :password_confirmation, :current_password]
   end
 end
 
