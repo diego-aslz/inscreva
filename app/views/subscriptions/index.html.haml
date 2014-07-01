@@ -57,8 +57,11 @@
           %th= model_class.human_attribute_name select
         - for field in @fields
           %th= field.name
+      - else
+        %th= model_class.human_attribute_name :event
       %th
   %tbody
+    - @subscriptions = @subscriptions.includes(:event) unless @event
     - @subscriptions.each do |subscription|
       %tr
         %td= l subscription.created_at, format: :short
@@ -71,6 +74,8 @@
             - fill = subscription.fills.where(field_id: field.id).first
             - fill.field = field
             %td= fill.value_to_s if fill
+        - else
+          %td= link_to subscription.event.name, event_subscriptions_path(subscription.event, term: params[:term])
         %td.text-right
           = minilink_to_edit subscription, edit_subscription_path(subscription)
           = minilink_to_receipt(subscription)
