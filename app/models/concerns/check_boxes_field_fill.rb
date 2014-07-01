@@ -2,7 +2,7 @@
 module Concerns
   module CheckBoxesFieldFill
     def value_cb
-      value.split ',' if value
+      value && value.split(',') || []
     end
 
     def value_cb=(value_cb)
