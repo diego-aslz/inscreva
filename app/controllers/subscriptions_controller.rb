@@ -1,6 +1,6 @@
 class SubscriptionsController < InheritedResources::Base
   actions :all, except: [ :destroy, :create ]
-  load_and_authorize_resource except: [:new, :create]
+  load_and_authorize_resource except: [:new, :create, :index]
   respond_to :html
   respond_to :json, only: :index
   include SubscriptionsHelper
@@ -106,7 +106,7 @@ class SubscriptionsController < InheritedResources::Base
     else
       @subscriptions = Subscription.all
     end
-    @subscriptions = @subscriptions.accessible_by(current_ability)
+    @subscriptions = @subscriptions.accessible_by(current_ability).references(:event)
     @subscriptions = @subscriptions.search(params[:term]) unless params[:term].blank?
     if params[:event_id]
       @fields = []

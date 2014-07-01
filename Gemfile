@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.5'
 
 gem 'mysql2'
 
@@ -43,7 +43,7 @@ gem 'maskedinput-rails'
 
 gem 'devise', github: 'plataformatec/devise', branch: 'v3.1.0.rc2'
 gem 'show_for', github: 'plataformatec/show_for'
-gem 'cancan'
+gem 'cancancan'
 gem 'simple_form', '~> 3.0.1'
 gem 'kaminari'
 gem 'nested_form'
