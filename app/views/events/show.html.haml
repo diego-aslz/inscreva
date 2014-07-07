@@ -34,7 +34,7 @@
       .tab-pane#delegations
         %table
           %tbody
-            - for d in @event.delegations.includes(:role, :user).order('roles.name, users.name')
+            - for d in @event.delegations.includes(:role).includes(:user)
               %tr
                 %td.left-col
                   %strong.text-muted #{d.role.try :name}

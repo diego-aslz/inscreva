@@ -10,7 +10,7 @@ module EventHelper
         json.editing field.new_record?
       end if event.fields
 
-      json.delegations event.delegations do |delegation|
+      json.delegations event.delegations.includes(:user) do |delegation|
         json.(delegation, :id, :role_id, :user_id)
         json.role_id(delegation.role_id || '')
         json.user do
