@@ -110,6 +110,7 @@ class ApplicationForm
   end
 
   def valid_user?
+    return true unless confirmed?
     valid = self.user || (self.user = User.find_by_email(email)).nil? || self.user.
         valid_password?(password)
     unless valid
