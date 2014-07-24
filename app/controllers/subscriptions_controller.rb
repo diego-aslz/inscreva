@@ -71,7 +71,7 @@ class SubscriptionsController < InheritedResources::Base
       format.zip {
         authorize! :download, @subscriptions.first.field_fills.build
         fds = FileDownloaderService.new(@subscriptions)
-        send_file fds.zip_file(params[:download][:field_ids])
+        redirect_to fds.zip_file(params[:download][:field_ids])
       }
     end
   end

@@ -46,6 +46,7 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/config/initializers/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
     run "ln -nfs #{shared_path}/uploads #{release_path}/uploads"
     run "ln -nfs #{shared_path}/public/files #{release_path}/public/files"
+    run "ln -nfs #{shared_path}/public/downloads #{release_path}/public/downloads"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 

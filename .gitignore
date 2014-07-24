@@ -20,4 +20,5 @@
 
 uploads
 public/files
+public/downloads
 .vagrant
