@@ -1,17 +1,11 @@
 require "bundler/capistrano"
 
-set :whenever_environment, defer { stage }
-set :whenever_identifier, defer { "#{application}_#{stage}" }
-ENV['INSCREVA_SHARED'] ||= shared_path
-require "whenever/capistrano"
+set :application, "inscreva"
 
 production = (ENV['STAGE'] == 'production')
 
-set :application, "inscreva"
-set :repository,  "https://github.com/nerde/inscreva.git"
-
 set :scm, :git
-# set :git_enable_submodules, 1
+set :repository,  "https://github.com/nerde/inscreva.git"
 
 set :deploy_to, "/var/www/#{application}"
 set :use_sudo, false
@@ -21,6 +15,9 @@ set :bundle_flags, "--deployment --quiet"
 set :default_environment, {
   'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
 }
+
+ENV['INSCREVA_SHARED'] ||= shared_path
+require "whenever/capistrano"
 
 if production
   role :web,       "realserver"
@@ -34,7 +31,6 @@ else
   set :user,       'vagrant'
 end
 
-# if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
 after "deploy:restart", "deploy:restart_service"
 
