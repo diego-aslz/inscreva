@@ -27,6 +27,7 @@ class FileDownloaderService
         end
       end
     end
+    FileUtils.chmod 0644, zip_name
 
     "/downloads/#{filename}"
   end
