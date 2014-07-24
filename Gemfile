@@ -60,4 +60,5 @@ gem 'unicorn'
 gem 'markitup-rails'
 gem 'rubyzip', '< 1.0.0'
 gem 'letter_opener', group: :development
+gem 'whenever', group: :development
 gem 'jbuilder'

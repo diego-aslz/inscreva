@@ -1,5 +1,10 @@
 require "bundler/capistrano"
 
+set :whenever_environment, defer { stage }
+set :whenever_identifier, defer { "#{application}_#{stage}" }
+ENV['INSCREVA_SHARED'] ||= shared_path
+require "whenever/capistrano"
+
 production = (ENV['STAGE'] == 'production')
 
 set :application, "inscreva"
@@ -35,7 +40,8 @@ after "deploy:restart", "deploy:restart_service"
 
 namespace :deploy do
   task :setup_config, roles: :app do
-    run "mkdir -p #{shared_path}/config/initializers #{shared_path}/uploads #{shared_path}/public/files"
+    run "mkdir -p #{shared_path}/config/initializers #{shared_path}/uploads "\
+      "#{shared_path}/public/files  #{shared_path}/public/downloads"
     put File.read("config/database.yml.example"),
         "#{shared_path}/config/database.yml"
   end
