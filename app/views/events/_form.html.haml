@@ -18,24 +18,19 @@
         %li.active
           %a(href="#details" data-toggle="tab")= t :details
         %li
-          %a(href="#subscriptions" data-toggle="tab")= Subscription.model_name.human.pluralize
-        %li
           %a(href="#fields" data-toggle="tab")= Event.human_attribute_name :fields
         %li
           %a(href="#delegations" data-toggle="tab")= Event.human_attribute_name :delegations
+        %li
+          %a(href="#more_config" data-toggle="tab")= t(:more_config)
       .tab-content
         .tab-pane.active#details
           = f.input :name, input_html: { :'ng-model' => 'event.name' }
           = f.input :description
           = f.input :identifier, input_html: { :'ng-model' => 'event.identifier'}
-          = f.input :rules_url, input_html: { :'ng-model' => 'event.rules_url'}
-          = f.input :email, input_html: { :'ng-model' => 'event.email'}
           = f.input :published
-        .tab-pane#subscriptions
           = f.input :opens_at, include_blank: true
           = f.input :closes_at, include_blank: true
-          = f.input :receipt_title
-          = f.input :receipt_signature
         .tab-pane#fields
           .event-field{:'ng-repeat' => '(fieldIdx, field) in event.fields',
               :'ng-show' => '!field._destroy' }
@@ -57,6 +52,9 @@
                 'ng-click' => 'addDelegation()', id: 'add_delegation',
                 class: 'btn btn-success', title: t(:add_delegation)
           %hr
+        .tab-pane#more_config
+          = f.input :receipt_title
+          = f.input :receipt_signature
 
     .form-actions.row
       %div.col-sm-9.col-sm-offset-3

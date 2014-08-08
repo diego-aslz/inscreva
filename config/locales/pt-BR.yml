@@ -36,6 +36,7 @@ pt-BR:
   to: para
   total: 'Total: %{count}'
   send_email: Enviar E-mail
+  more_config: Mais Configurações
 
   export:
     csv: Exportar para CSV
