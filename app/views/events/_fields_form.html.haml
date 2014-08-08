@@ -75,7 +75,7 @@
       wrapper_html: { 'ng-show' => 'field.editing' }
   = form.input :show_receipt, input_html: { 'ng-model' => 'field.show_receipt',
       id: 'event_fields_attributes_{{fieldIdx}}_show_receipt' },
-      wrapper_html: { 'ng-show' => 'field.editing' }
+      wrapper_html: { 'ng-show' => 'field.editing && field.field_type != "file"' }
   = form.input :searchable, input_html: { 'ng-model' => 'field.searchable',
       id: 'event_fields_attributes_{{fieldIdx}}_searchable' },
       wrapper_html: { 'ng-show' => 'field.editing && field.field_type != "file"' }
