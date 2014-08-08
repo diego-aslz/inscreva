@@ -141,6 +141,7 @@ pt-BR:
         description: Descrição
         receipt_title: Título no Comprovante
         receipt_signature: Campo para Assinatura
+        created_by: Criado por
       subscription:
         created_at: Inscrito
         email: E-mail

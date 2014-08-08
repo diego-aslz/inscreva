@@ -35,6 +35,7 @@ en:
   from: from
   to: to
   total: 'Total: %{count}'
+  more_config: More Configuration
 
   export:
     csv: Export to CSV
@@ -136,6 +137,7 @@ en:
         delegations: Members
         published: Publish in the front page
         description: Description
+        created_by: Created by
       subscription:
         created_at: Subscribed at
         email: E-mail

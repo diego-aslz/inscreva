@@ -13,6 +13,7 @@
     .tab-content
       .tab-pane#details.active
         = show.attribute :name
+        = show.association :created_by
         = show.attribute :opens_at
         = show.attribute :closes_at
         = show.attribute :rules_url

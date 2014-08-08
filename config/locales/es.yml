@@ -35,6 +35,7 @@ es:
   from: de
   to: para
   total: 'Total: %{count}'
+  more_config: Más Ajustes
 
   export:
     csv: Exportar CSV
@@ -133,6 +134,7 @@ es:
         delegations: Miembros
         published: Publicar en la página de inicio
         description: Descripción
+        created_by: Creado por
       subscription:
         created_at: Registrado
         email: Correo electrónico
