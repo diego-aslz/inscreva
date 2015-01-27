@@ -26,7 +26,6 @@ group :development do
   # gem 'rack-mini-profiler'
   gem 'binding_of_caller'
   gem 'thin'
-  gem 'debugger'
   gem 'capistrano', '~> 2.15.5'
   gem 'quiet_assets'
 end
