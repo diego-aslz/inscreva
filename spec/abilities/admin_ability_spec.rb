@@ -8,6 +8,6 @@ describe "User" do
     subject { ability }
     let(:ability){ Ability.new(user) }
 
-    it{ should be_able_to(:manage, :all) }
+    it{ is_expected.to be_able_to(:manage, :all) }
   end
 end

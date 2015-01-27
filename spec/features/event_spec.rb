@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Event" do
+describe "Event", type: :feature do
   let(:admin) { create(:admin, password: '123456789',
     password_confirmation: '123456789') }
 
@@ -34,15 +34,15 @@ describe "Event" do
     check 'Assinatura'
     ## Check Result
     expect{click_button 'Criar'}.to change(Event, :count).by(1)
-    Event.last.created_by_id.should == admin.id
-    page.should have_content('Test Event')
-    page.should have_content "Some Title"
-    page.should have_content "Assinatura Sim"
+    expect(Event.last.created_by_id).to eq(admin.id)
+    expect(page).to have_content('Test Event')
+    expect(page).to have_content "Some Title"
+    expect(page).to have_content "Assinatura Sim"
     click_on Event.human_attribute_name(:fields)
-    page.should have_content('Some Field')
+    expect(page).to have_content('Some Field')
     click_on Event.human_attribute_name(:delegations)
-    page.should have_content('Some Good User')
-    page.should have_content('A Role')
+    expect(page).to have_content('Some Good User')
+    expect(page).to have_content('A Role')
 
     # Updating
     click_on I18n.t(:'helpers.links.edit')
@@ -55,13 +55,13 @@ describe "Event" do
     find('#event_delegations_attributes_0_destroy_link').click
     ## Check Result
     click_on I18n.t(:'helpers.submit.update', model: Event.model_name.human)
-    page.should have_content('Test Event')
+    expect(page).to have_content('Test Event')
     click_on Event.human_attribute_name(:fields)
-    page.should_not have_content('Some Field')
-    page.should_not have_content('Another one')
-    page.should have_content('Changed it')
+    expect(page).not_to have_content('Some Field')
+    expect(page).not_to have_content('Another one')
+    expect(page).to have_content('Changed it')
     click_on Event.human_attribute_name(:delegations)
-    page.should_not have_content('Some Good User')
+    expect(page).not_to have_content('Some Good User')
   end
 
   context "notifying subscribers" do
@@ -82,9 +82,9 @@ describe "Event" do
       visit events_path
 
       click_on "#event_#{event.id}_notify_link"
-      page.should have_field(Notification.human_attribute_name(:recipients_text),
+      expect(page).to have_field(Notification.human_attribute_name(:recipients_text),
         with: 'abc@def.com, ghi@jkl.com, xyz@jkl.com')
-      page.should have_field(Notification.human_attribute_name(:respond),
+      expect(page).to have_field(Notification.human_attribute_name(:respond),
         with: admin.email)
     end
 
@@ -95,12 +95,12 @@ describe "Event" do
       fill_in Notification.human_attribute_name(:message), with: 'Some message'
 
       result = Object.new
-      result.should_receive(:deliver)
-      NotificationMailer.should_receive(:notify) do |notification|
-        notification.subject.should == 'Some subject'
-        notification.respond.should == admin.email
-        notification.recipients.should == ['abc@def.com', 'ghi@jkl.com', 'xyz@jkl.com']
-        notification.message.should == 'Some message'
+      expect(result).to receive(:deliver)
+      expect(NotificationMailer).to receive(:notify) do |notification|
+        expect(notification.subject).to eq('Some subject')
+        expect(notification.respond).to eq(admin.email)
+        expect(notification.recipients).to eq(['abc@def.com', 'ghi@jkl.com', 'xyz@jkl.com'])
+        expect(notification.message).to eq('Some message')
         result
       end
       expect {

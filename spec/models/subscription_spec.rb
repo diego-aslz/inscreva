@@ -6,14 +6,14 @@ describe Subscription do
 
   context 'generating a subscription number' do
     it "should generate a new one on create" do
-      subscription.number.should be_nil
+      expect(subscription.number).to be_nil
       subscription.save!
-      subscription.number.should_not be_nil
+      expect(subscription.number).not_to be_nil
     end
 
     it "should not change on update" do
       subscription.save!
-      subscription.number.should_not be_nil
+      expect(subscription.number).not_to be_nil
       expect {
         subscription.update_attribute :name, subscription.name + subscription.name
       }.not_to change(subscription, :number)
@@ -29,40 +29,40 @@ describe Subscription do
           fill.subscription_id)
 
       subscription = fill.subscription
-      subscription.receipt_fills.include?(fill).should be_false
-      subscription.receipt_fills.include?(show_fill).should be_true
+      expect(subscription.receipt_fills.include?(fill)).to be_falsey
+      expect(subscription.receipt_fills.include?(show_fill)).to be_truthy
     end
   end
 
   it 'searches by a text' do
     s = create(:subscription, name: 'nametosearchby')
-    Subscription.search('ametosearchb').include?(s).should be_true
+    expect(Subscription.search('ametosearchb').include?(s)).to be_truthy
     s.update_attribute :name, 'A'
     s.update_attribute :email, 'nametosearchby@domain.com'
-    Subscription.search('ametosearchb').include?(s).should be_true
+    expect(Subscription.search('ametosearchb').include?(s)).to be_truthy
     s.update_attribute :name, 'A'
     s.update_attribute :email, 'abc@domain.com'
     s.update_attribute :number, '123456789'
-    Subscription.search('23456789').include?(s).should be_true
-    Subscription.search('anythingelse').include?(s).should be_false
+    expect(Subscription.search('23456789').include?(s)).to be_truthy
+    expect(Subscription.search('anythingelse').include?(s)).to be_falsey
   end
 
   context "checking if a filter is valid" do
     it "is valid when it's a date and there is a begining date or an ending date" do
-      Subscription.valid_filter?(1, {b: '', e: ''}, 'date').should be_false
-      Subscription.valid_filter?(1, {b: 'a', e: ''}, 'date').should be_true
-      Subscription.valid_filter?(1, {b: '', e: 'a'}, 'date').should be_true
-      Subscription.valid_filter?(1, {b: 'a', e: 'a'}, 'date').should be_true
+      expect(Subscription.valid_filter?(1, {b: '', e: ''}, 'date')).to be_falsey
+      expect(Subscription.valid_filter?(1, {b: 'a', e: ''}, 'date')).to be_truthy
+      expect(Subscription.valid_filter?(1, {b: '', e: 'a'}, 'date')).to be_truthy
+      expect(Subscription.valid_filter?(1, {b: 'a', e: 'a'}, 'date')).to be_truthy
     end
 
     it "is valid when it's not a date and there is some value" do
-      Subscription.valid_filter?(1, '', 'string').should be_false
-      Subscription.valid_filter?(1, 'a', 'string').should be_true
+      expect(Subscription.valid_filter?(1, '', 'string')).to be_falsey
+      expect(Subscription.valid_filter?(1, 'a', 'string')).to be_truthy
     end
 
     it 'is valid when it\'s about check_boxes and there is some value' do
-      Subscription.valid_filter?(1, [], 'check_boxes').should be_false
-      Subscription.valid_filter?(1, ['a'], 'check_boxes').should be_true
+      expect(Subscription.valid_filter?(1, [], 'check_boxes')).to be_falsey
+      expect(Subscription.valid_filter?(1, ['a'], 'check_boxes')).to be_truthy
     end
   end
 
@@ -77,8 +77,8 @@ describe Subscription do
       create(:field_fill, field_id: f1.id, value: 'ABC', subscription_id: subscription.id)
       create(:field_fill, field_id: f2.id, value: 'DEF', subscription_id: subscription.id)
 
-      Subscription.by_field(f1.id, 'B', 'string').should include(subscription)
-      Subscription.by_field(f2.id, 'B', 'string').should_not include(subscription)
+      expect(Subscription.by_field(f1.id, 'B', 'string')).to include(subscription)
+      expect(Subscription.by_field(f2.id, 'B', 'string')).not_to include(subscription)
     end
 
     it 'searches by a text field' do
@@ -87,8 +87,8 @@ describe Subscription do
       create(:field_fill, field_id: f1.id, value_text: 'ABC', subscription_id: subscription.id)
       create(:field_fill, field_id: f2.id, value_text: 'DEF', subscription_id: subscription.id)
 
-      Subscription.by_field(f1.id, 'B', 'text').should include(subscription)
-      Subscription.by_field(f2.id, 'B', 'text').should_not include(subscription)
+      expect(Subscription.by_field(f1.id, 'B', 'text')).to include(subscription)
+      expect(Subscription.by_field(f2.id, 'B', 'text')).not_to include(subscription)
     end
 
     it 'searches by a date field' do
@@ -97,10 +97,10 @@ describe Subscription do
       create(:field_fill, field_id: f1.id, value: '2013-01-31', subscription_id: subscription.id)
       create(:field_fill, field_id: f2.id, value: '2013-02-01', subscription_id: subscription.id)
 
-      Subscription.by_field(f1.id, {b: '31/01/2013'}, 'date').should include(subscription)
-      Subscription.by_field(f1.id, {e: '31/01/2013'}, 'date').should include(subscription)
-      Subscription.by_field(f1.id, {b: '31/01/2013', e: '31/01/2013'}, 'date').should include(subscription)
-      Subscription.by_field(f2.id, {b: '31/01/2013', e: '31/01/2013'}, 'date').should_not include(subscription)
+      expect(Subscription.by_field(f1.id, {b: '31/01/2013'}, 'date')).to include(subscription)
+      expect(Subscription.by_field(f1.id, {e: '31/01/2013'}, 'date')).to include(subscription)
+      expect(Subscription.by_field(f1.id, {b: '31/01/2013', e: '31/01/2013'}, 'date')).to include(subscription)
+      expect(Subscription.by_field(f2.id, {b: '31/01/2013', e: '31/01/2013'}, 'date')).not_to include(subscription)
     end
 
     it 'searches by a check_boxes field' do
@@ -109,10 +109,10 @@ describe Subscription do
       create(:field_fill, field_id: f1.id, value: '1,2', subscription_id: subscription.id)
       create(:field_fill, field_id: f2.id, value: '3', subscription_id: subscription.id)
 
-      Subscription.by_field(f1.id, ['2'], 'check_boxes').should include(subscription)
-      Subscription.by_field(f1.id, ['1', '2'], 'check_boxes').should include(subscription)
-      Subscription.by_field(f2.id, ['1', '3'], 'check_boxes').should include(subscription)
-      Subscription.by_field(f2.id, ['1'], 'check_boxes').should_not include(subscription)
+      expect(Subscription.by_field(f1.id, ['2'], 'check_boxes')).to include(subscription)
+      expect(Subscription.by_field(f1.id, ['1', '2'], 'check_boxes')).to include(subscription)
+      expect(Subscription.by_field(f2.id, ['1', '3'], 'check_boxes')).to include(subscription)
+      expect(Subscription.by_field(f2.id, ['1'], 'check_boxes')).not_to include(subscription)
     end
 
     it 'searches by a boolean field' do
@@ -121,8 +121,8 @@ describe Subscription do
       create(:field_fill, field_id: f1.id, value: 'true', subscription_id: subscription.id)
       create(:field_fill, field_id: f2.id, value: 'false', subscription_id: subscription.id)
 
-      Subscription.by_field(f1.id, 'true', 'boolean').should include(subscription)
-      Subscription.by_field(f1.id, 'false', 'boolean').should_not include(subscription)
+      expect(Subscription.by_field(f1.id, 'true', 'boolean')).to include(subscription)
+      expect(Subscription.by_field(f1.id, 'false', 'boolean')).not_to include(subscription)
     end
 
     it 'searches by a select field' do
@@ -131,9 +131,9 @@ describe Subscription do
       create(:field_fill, field_id: f1.id, value: '1', subscription_id: subscription.id)
       create(:field_fill, field_id: f2.id, value: '2', subscription_id: subscription.id)
 
-      Subscription.by_field(f1.id, ['1'     ], 'select').should     include(subscription)
-      Subscription.by_field(f1.id, ['1', '2'], 'select').should     include(subscription)
-      Subscription.by_field(f2.id, ['1'     ], 'select').should_not include(subscription)
+      expect(Subscription.by_field(f1.id, ['1'     ], 'select')).to     include(subscription)
+      expect(Subscription.by_field(f1.id, ['1', '2'], 'select')).to     include(subscription)
+      expect(Subscription.by_field(f2.id, ['1'     ], 'select')).not_to include(subscription)
     end
 
     it 'searches by a country field' do
@@ -142,9 +142,9 @@ describe Subscription do
       create(:field_fill, field_id: f1.id, value: 'BRA', subscription_id: subscription.id)
       create(:field_fill, field_id: f2.id, value: 'PRY', subscription_id: subscription.id)
 
-      Subscription.by_field(f1.id, ['BRA'       ], 'country').should     include(subscription)
-      Subscription.by_field(f1.id, ['BRA', 'PRY'], 'country').should     include(subscription)
-      Subscription.by_field(f2.id, ['BRA'       ], 'country').should_not include(subscription)
+      expect(Subscription.by_field(f1.id, ['BRA'       ], 'country')).to     include(subscription)
+      expect(Subscription.by_field(f1.id, ['BRA', 'PRY'], 'country')).to     include(subscription)
+      expect(Subscription.by_field(f2.id, ['BRA'       ], 'country')).not_to include(subscription)
     end
   end
 end

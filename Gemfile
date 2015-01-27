@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.13'
+gem 'rails', '4.1.9'
 
 gem 'mysql2'
+gem 'spring', group: :development
 
 group :test, :development do
   gem 'rspec-rails'
@@ -40,10 +41,10 @@ gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails', branc
 gem 'bootstrap-datepicker-rails'
 gem 'maskedinput-rails'
 
-gem 'devise', github: 'plataformatec/devise', branch: 'v3.1.0.rc2'
-gem 'show_for', github: 'plataformatec/show_for'
+gem 'devise'
+gem 'show_for'
 gem 'cancancan'
-gem 'simple_form', '~> 3.0.1'
+gem 'simple_form'
 gem 'kaminari'
 gem 'nested_form'
 gem 'responders'

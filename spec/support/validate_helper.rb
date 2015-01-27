@@ -7,7 +7,7 @@ RSpec::Matchers.define :require_presence_of do |attrib, options = {}|
     @errors == @expected_errors
   end
 
-  failure_message_for_should do |model|
+  failure_message do |model|
     attrib,options = expected
     message = "expected #{model} to have #{@expected_errors}" +
         " errors for #{attrib}, but it has #{@errors}."
@@ -29,7 +29,7 @@ RSpec::Matchers.define :require_confirmation_of do |attrib, options = {}|
     @errors == @expected_errors
   end
 
-  failure_message_for_should do |model|
+  failure_message do |model|
     attrib,options = expected
     message = "expected #{model} to have #{@expected_errors}" +
         " errors for #{@attrib_conf}, but it has #{@errors}."
@@ -55,7 +55,7 @@ RSpec::Matchers.define :require_valid do |attrib, options = {}|
     @errors == @expected_errors
   end
 
-  failure_message_for_should do |model|
+  failure_message do |model|
     attrib,options = expected
     message = "expected #{model} to have #{@expected_errors}" +
         " errors for #{attrib}, but it has #{@errors}."
@@ -81,7 +81,7 @@ RSpec::Matchers.define :require_uniqueness_of do |attrib, options = {}|
     @errors == @expected_errors
   end
 
-  failure_message_for_should do |model|
+  failure_message do |model|
     attrib,options = expected
     message = "expected #{model} to have #{@expected_errors}" +
         " errors for #{attrib}, but it has #{@errors}."

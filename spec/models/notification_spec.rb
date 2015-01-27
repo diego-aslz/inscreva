@@ -17,8 +17,8 @@ describe Notification do
       3 => {
         type: 'string'}
       }
-    notification.save.should be_true
-    notification.filters.should == { 4 => { type: 'string', value: 'A'} }
+    expect(notification.save).to be_truthy
+    expect(notification.filters).to eq({ 4 => { type: 'string', value: 'A'} })
   end
 
   context "loading recipients" do
@@ -37,7 +37,7 @@ describe Notification do
     end
 
     it "does not repeat recipients" do
-      notification.recipients.should == ['abc@def.com', 'ghi@jkl.com', 'xyz@jkl.com']
+      expect(notification.recipients).to eq(['abc@def.com', 'ghi@jkl.com', 'xyz@jkl.com'])
     end
 
     it "filters the subscribers" do
@@ -45,16 +45,16 @@ describe Notification do
       create(:field_fill, value: 'ABC', subscription_id: sub3.id, field_id: f.id)
       notification.filters = { f.id => { type: 'select', value: 'ABC' } }
       notification.load_recipients
-      notification.recipients.should == ['ghi@jkl.com']
+      expect(notification.recipients).to eq(['ghi@jkl.com'])
     end
 
     it "converts recipients to text" do
-      notification.recipients_text.should == 'abc@def.com, ghi@jkl.com, xyz@jkl.com'
+      expect(notification.recipients_text).to eq('abc@def.com, ghi@jkl.com, xyz@jkl.com')
     end
 
     it "converts recipients from text" do
       notification.recipients_text= "abc@def.com,,,,   \n ghi@jkl.com,,another@test.com,"
-      notification.recipients.should == ['abc@def.com', 'ghi@jkl.com', 'another@test.com']
+      expect(notification.recipients).to eq(['abc@def.com', 'ghi@jkl.com', 'another@test.com'])
     end
   end
 end

@@ -22,8 +22,8 @@ describe "User" do
 
     expect{ click_button 'Criar' }.to change(User, :count).by(1)
 
-    Ability.new(created_user).should_not be_able_to(:create, Event)
-    created_user.should_not be_admin
+    expect(Ability.new(created_user)).not_to be_able_to(:create, Event)
+    expect(created_user).not_to be_admin
   end
 
   it "creates admin" do
@@ -31,7 +31,7 @@ describe "User" do
 
     expect{ click_button 'Criar' }.to change(User, :count).by(1)
 
-    created_user.should be_admin
+    expect(created_user).to be_admin
   end
 
   it "can be allowed to create Event" do
@@ -40,6 +40,6 @@ describe "User" do
 
     expect{ click_button 'Criar' }.to change(User, :count).by(1)
 
-    Ability.new(created_user).should be_able_to(:create, Event)
+    expect(Ability.new(created_user)).to be_able_to(:create, Event)
   end
 end

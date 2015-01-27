@@ -14,8 +14,6 @@
     text-indent: 50px;
   }
   table {
-    @extend .table;
-    @extend .table-striped;
     th,td[align=center] {
       text-align: center;
     }

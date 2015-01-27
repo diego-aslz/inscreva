@@ -23,8 +23,8 @@ class ApplicationForm
   delegate :field_fills=, :field_fills_attributes=, :email=, :id_card=, :event_id=,
       :event=, :name=, :user_id=, :user=, :persisted?, :new_record?, to: :subscription
 
-  def self.reflect_on_association(*args)
-    Subscription.reflect_on_association args
+  def self._reflect_on_association(*args)
+    Subscription._reflect_on_association *args
   end
 
   def load_from(params, user = nil)

@@ -5,33 +5,33 @@ describe Event do
     let(:event) { build :event, opens_at: Time.now }
     subject { event }
 
-    it { should require_presence_of(:name) }
-    it { should require_presence_of(:identifier) }
-    it { should require_uniqueness_of(:identifier, used_value: create(:event).identifier) }
-    it { should require_valid(:closes_at, invalid: event.opens_at - 1.day,
+    it { is_expected.to require_presence_of(:name) }
+    it { is_expected.to require_presence_of(:identifier) }
+    it { is_expected.to require_uniqueness_of(:identifier, used_value: create(:event).identifier) }
+    it { is_expected.to require_valid(:closes_at, invalid: event.opens_at - 1.day,
         valid: event.opens_at + 1.day) }
   end
 
   it "is ongoing when now is between opens_at and closes_at" do
-    build(:ongoing_event).ongoing?.should be_true
+    expect(build(:ongoing_event).ongoing?).to be_truthy
   end
 
   it "is not ongoing by default" do
-    Event.new.ongoing?.should be_false
+    expect(Event.new.ongoing?).to be_falsey
   end
 
   it "is not ongoing when closes_at is in the past" do
-    build(:past_event).ongoing?.should be_false
+    expect(build(:past_event).ongoing?).to be_falsey
   end
 
   it "is not ongoing when opens_at is in the future" do
-    build(:future_event).ongoing?.should be_false
+    expect(build(:future_event).ongoing?).to be_falsey
   end
 
   it "is not ongoing when opens_at or closes_at are null" do
-    build(:ongoing_event, opens_at: nil).ongoing?.should be_false
-    build(:ongoing_event, closes_at: nil).ongoing?.should be_false
-    build(:ongoing_event, opens_at: nil, closes_at: nil).ongoing?.should be_false
+    expect(build(:ongoing_event, opens_at: nil).ongoing?).to be_falsey
+    expect(build(:ongoing_event, closes_at: nil).ongoing?).to be_falsey
+    expect(build(:ongoing_event, opens_at: nil, closes_at: nil).ongoing?).to be_falsey
   end
 
   it "scopes ongoing events" do
@@ -39,9 +39,9 @@ describe Event do
     past = create(:past_event)
     future = create(:future_event)
     events = Event.ongoing
-    events.include?(curr).should be_true
-    events.include?(past).should be_false
-    events.include?(future).should be_false
+    expect(events.include?(curr)).to be_truthy
+    expect(events.include?(past)).to be_falsey
+    expect(events.include?(future)).to be_falsey
   end
 
   it "scopes future events" do
@@ -49,9 +49,9 @@ describe Event do
     past = create(:past_event)
     future = create(:future_event)
     events = Event.future
-    events.include?(curr).should be_false
-    events.include?(past).should be_false
-    events.include?(future).should be_true
+    expect(events.include?(curr)).to be_falsey
+    expect(events.include?(past)).to be_falsey
+    expect(events.include?(future)).to be_truthy
   end
 
   it 'copies fields from another event' do
@@ -63,28 +63,28 @@ describe Event do
 
     e2 = create(:event)
     e2.copy_fields_from e1
-    e2.fields.size.should == 2
-    e2.fields[0].name.should == f1.name
-    e2.fields[1].name.should == f2.name
-    e2.fields[1].extra.should == f2.extra
-    e2.fields[1].group_name.should == f2.group_name
-    e2.fields[1].allowed_file_extensions.should == f2.allowed_file_extensions
-    e2.fields[1].max_file_size.should == f2.max_file_size
-    e2.fields[1].hint.should == f2.hint
+    expect(e2.fields.size).to eq(2)
+    expect(e2.fields[0].name).to eq(f1.name)
+    expect(e2.fields[1].name).to eq(f2.name)
+    expect(e2.fields[1].extra).to eq(f2.extra)
+    expect(e2.fields[1].group_name).to eq(f2.group_name)
+    expect(e2.fields[1].allowed_file_extensions).to eq(f2.allowed_file_extensions)
+    expect(e2.fields[1].max_file_size).to eq(f2.max_file_size)
+    expect(e2.fields[1].hint).to eq(f2.hint)
 
-    e2.fields[0].priority.should == 1
-    e2.fields[1].priority.should == 2
+    expect(e2.fields[0].priority).to eq(1)
+    expect(e2.fields[1].priority).to eq(2)
 
     e2.fields << Field.new(name: "Another One", priority: 3)
     e2.copy_fields_from e1
-    e2.fields.size.should == 5
-    e2.fields[3].name.should == f1.name
-    e2.fields[4].name.should == f2.name
-    e2.fields[3].priority.should == 4
-    e2.fields[4].priority.should == 5
+    expect(e2.fields.size).to eq(5)
+    expect(e2.fields[3].name).to eq(f1.name)
+    expect(e2.fields[4].name).to eq(f2.name)
+    expect(e2.fields[3].priority).to eq(4)
+    expect(e2.fields[4].priority).to eq(5)
 
-    e2.save.should be_true
-    e2.fields[4].should_not be_new_record
+    expect(e2.save).to be_truthy
+    expect(e2.fields[4]).not_to be_new_record
   end
 
   describe "for_main_page" do
@@ -103,10 +103,10 @@ describe Event do
     end
 
     it {
-      should     include(ongoing_event)
-      should     include(future_event)
-      should_not include(past_event)
-      should_not include(not_published_event)
+      is_expected.to     include(ongoing_event)
+      is_expected.to     include(future_event)
+      is_expected.not_to include(past_event)
+      is_expected.not_to include(not_published_event)
     }
   end
 end

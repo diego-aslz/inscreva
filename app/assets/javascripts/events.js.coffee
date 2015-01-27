@@ -1,6 +1,6 @@
 app = angular.module('Inscreva', ['ui.bootstrap']);
 
-@EventCtrl = ["$scope", "$http", ($scope, $http) ->
+app.controller 'EventCtrl', ["$scope", "$http", ($scope, $http) ->
   $scope.event = {}
   $scope.showExtra = (field)->
     $scope.extras.indexOf(field.field_type) > -1
@@ -50,7 +50,7 @@ app = angular.module('Inscreva', ['ui.bootstrap']);
       response.data
 ]
 
-@EventIndexCtrl = ["$scope", "$http", ($scope, $http) ->
+app.controller 'EventIndexCtrl', ["$scope", "$http", ($scope, $http) ->
   $scope.copyFrom = (ev) ->
     $scope.fromEvent = ev
   $scope.ahead = (term, url) ->

@@ -6,23 +6,26 @@ describe Page do
     let(:page) { build(:page) }
     subject { page }
 
-    it { should require_presence_of :name }
-    it { should require_presence_of :event }
-    it { should require_presence_of :title }
+    it { is_expected.to require_presence_of :name }
+    it { is_expected.to require_presence_of :event }
+    it { is_expected.to require_presence_of :title }
 
     it "should validate uniqueness of name within the event" do
-      should have(0).errors_on(:name)
+      expect(subject).to be_valid
+      expect(subject.errors[:name].size).to eq 0
       page2 = create(:page, name: page.name)
-      should have(0).errors_on(:name)
+      expect(subject).to be_valid
+      expect(subject.errors[:name].size).to eq 0
       page2.update_attributes event_id: page.event_id
-      should have(1).errors_on(:name)
+      expect(subject).to_not be_valid
+      expect(subject.errors[:name].size).to eq 1
     end
   end
 
   it 'should correct it\'s name to be a valid URL' do
     w = build(:page, name: 'Á_çabc?$% #@-')
     w.save
-    w.name.should == '_abc--'
+    expect(w.name).to eq('_abc--')
   end
 
   it "should reset the main page when a new main page is set to the event" do
@@ -30,27 +33,27 @@ describe Page do
     w2 = create(:page, main: true, event_id: w1.event_id)
     w1.reload
     w2.reload
-    w1.main.should be_false
-    w2.main.should be_true
+    expect(w1.main).to be_falsey
+    expect(w2.main).to be_truthy
 
     w1.update_attribute :main, true
     w1.reload
     w2.reload
-    w1.main.should be_true
-    w2.main.should be_false
+    expect(w1.main).to be_truthy
+    expect(w2.main).to be_falsey
 
     create(:page, main: true)
     w1.reload
-    w1.main.should be_true
+    expect(w1.main).to be_truthy
   end
 
   it 'searches by a text' do
     s = create(:page, name: 'nametosearchby')
-    Page.search('ametosearchb').include?(s).should be_true
+    expect(Page.search('ametosearchb').include?(s)).to be_truthy
     s.update_attribute :name, 'A'
     s.update_attribute :title, 'nametosearchby'
-    Page.search('ametosearchb').include?(s).should be_true
-    Page.search('anythingelse').include?(s).should be_false
+    expect(Page.search('ametosearchb').include?(s)).to be_truthy
+    expect(Page.search('anythingelse').include?(s)).to be_falsey
   end
 
   it "scopes by the language, including the ones without it" do
@@ -58,8 +61,8 @@ describe Page do
     p2 = create(:page, language: 'es')
     p3 = create(:page, language: nil)
     pages = Page.by_language('es')
-    pages.include?(p1).should be_false
-    pages.include?(p2).should be_true
-    pages.include?(p3).should be_true
+    expect(pages.include?(p1)).to be_falsey
+    expect(pages.include?(p2)).to be_truthy
+    expect(pages.include?(p3)).to be_truthy
   end
 end

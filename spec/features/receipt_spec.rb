@@ -15,11 +15,11 @@ describe "Print Receipt" do
 
   it "shows the subscription's details" do
     visit subscription_path(subscription)
-    page.should have_content 'My Test'
+    expect(page).to have_content 'My Test'
     click_on I18n.t(:print_receipt)
-    page.should have_content 'Comprovante de Inscrição'
-    current_path.should == receipt_subscription_path(subscription)
-    page.should have_content 'My Test'
+    expect(page).to have_content 'Comprovante de Inscrição'
+    expect(current_path).to eq(receipt_subscription_path(subscription))
+    expect(page).to have_content 'My Test'
   end
 
   it "shows the fields marked to be shown" do
@@ -27,11 +27,11 @@ describe "Print Receipt" do
         name: 'Street', show_receipt: false)
     f.field_fills.create(subscription_id: subscription.id, value: 'My Street')
     visit receipt_subscription_path(subscription)
-    page.should_not have_content 'Street'
+    expect(page).not_to have_content 'Street'
 
     f.update_attribute :show_receipt, true
     visit receipt_subscription_path(subscription)
-    page.should have_content 'My Street'
+    expect(page).to have_content 'My Street'
   end
 
   context 'there is a custom receipt_title' do
@@ -41,8 +41,8 @@ describe "Print Receipt" do
       visit subscription_path(subscription)
       click_on I18n.t(:print_receipt)
     end
-    it { should_not have_content('Comprovante de Inscrição') }
-    it { should     have_content('Another Title') }
+    it { is_expected.not_to have_content('Comprovante de Inscrição') }
+    it { is_expected.to     have_content('Another Title') }
   end
 
   context 'receipt_signature is true' do
@@ -52,6 +52,6 @@ describe "Print Receipt" do
       visit subscription_path(subscription)
       click_on I18n.t(:print_receipt)
     end
-    it { should have_content('____________') }
+    it { is_expected.to have_content('____________') }
   end
 end

@@ -15,8 +15,8 @@ describe NotificationMailer do
 
   it "notifies the subscribers about the Notification" do
     NotificationMailer.notify(notification).deliver
-    ActionMailer::Base.deliveries.last.bcc.should == ['abc@def.com', 'ghi@jkl.com']
-    ActionMailer::Base.deliveries.last.subject.should == 'Testing'
+    expect(ActionMailer::Base.deliveries.last.bcc).to eq(['abc@def.com', 'ghi@jkl.com'])
+    expect(ActionMailer::Base.deliveries.last.subject).to eq('Testing')
   end
 
   it "filters the subscribers" do
@@ -25,6 +25,6 @@ describe NotificationMailer do
     notification.filters = { f.id => { type: 'select', value: 'ABC' } }
     notification.load_recipients
     NotificationMailer.notify(notification).deliver
-    ActionMailer::Base.deliveries.last.bcc.should == ['ghi@jkl.com']
+    expect(ActionMailer::Base.deliveries.last.bcc).to eq(['ghi@jkl.com'])
   end
 end

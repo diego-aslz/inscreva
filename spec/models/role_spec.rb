@@ -5,6 +5,6 @@ describe Role do
     let(:role) { build :role }
     subject { role }
 
-    it { should require_presence_of(:name) }
+    it { is_expected.to require_presence_of(:name) }
   end
 end
