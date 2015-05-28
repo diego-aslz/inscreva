@@ -94,7 +94,7 @@ describe 'ApplicationForm' do
 
     context 'user creation' do
       it "validates the password when user exists" do
-        subscription.email = user.email,
+        subscription.email = user.email
         subscription.email_confirmation = user.email
         subscription.password = user.password + 'a'
         subscription.password_confirmation = user.password + 'a'

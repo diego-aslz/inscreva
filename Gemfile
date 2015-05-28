@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.9'
+gem 'rails', '4.2.1'
 
 gem 'mysql2'
 gem 'spring', group: :development
@@ -31,9 +31,9 @@ group :development do
   gem 'quiet_assets'
 end
 
-gem 'sass-rails',   '~> 4.0.0'
+gem 'sass-rails',   '~> 5.0'
 gem "less-rails"
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails', "2.3.0"
 gem 'therubyracer', :platforms => :ruby
 gem 'uglifier', '>= 1.3.0'

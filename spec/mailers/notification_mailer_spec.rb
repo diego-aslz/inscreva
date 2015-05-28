@@ -14,7 +14,7 @@ describe NotificationMailer do
   end
 
   it "notifies the subscribers about the Notification" do
-    NotificationMailer.notify(notification).deliver
+    NotificationMailer.notify(notification).deliver_now
     expect(ActionMailer::Base.deliveries.last.bcc).to eq(['abc@def.com', 'ghi@jkl.com'])
     expect(ActionMailer::Base.deliveries.last.subject).to eq('Testing')
   end
@@ -24,7 +24,7 @@ describe NotificationMailer do
     create(:field_fill, value: 'ABC', subscription_id: @s3.id, field_id: f.id)
     notification.filters = { f.id => { type: 'select', value: 'ABC' } }
     notification.load_recipients
-    NotificationMailer.notify(notification).deliver
+    NotificationMailer.notify(notification).deliver_now
     expect(ActionMailer::Base.deliveries.last.bcc).to eq(['ghi@jkl.com'])
   end
 end
