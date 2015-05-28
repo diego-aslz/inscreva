@@ -17,8 +17,8 @@ class Event < ActiveRecord::Base
 
   validate :valid_period?
   scope :ongoing, -> { where('? between opens_at and closes_at', Time.zone.now) }
-  scope :future, -> { where('? < opens_at and closes_at', Time.zone.now) }
-  scope :by_name, ->(name) { where("lower(events.name) like lower(?)", "%#{name}%") }
+  scope :future, -> { where('? < opens_at', Time.zone.now) }
+  scope :by_name, ->(name) { where(arel_table[:name].matches("%#{name}%")) }
 
   belongs_to :created_by, class_name: 'User'
 
@@ -43,7 +43,7 @@ class Event < ActiveRecord::Base
 
   def copy_fields_from(event)
     p = fields.last.try(:priority) || 0
-    event.fields.each do |field|
+    event.fields.sort_by(&:id).each do |field|
       self.fields.build(field.attributes.with_indifferent_access.slice(
           :field_type, :name, :extra, :required, :show_receipt, :group_name,
           :searchable, :is_numeric, :hint, :allowed_file_extensions, :max_file_size).

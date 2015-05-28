@@ -203,7 +203,6 @@ GEM
     mini_portile (0.6.2)
     minitest (5.7.0)
     multi_json (1.11.0)
-    mysql2 (0.3.18)
     nenv (0.2.0)
     nested_form (0.3.2)
     net-scp (1.2.1)
@@ -219,6 +218,7 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
+    pg (0.18.1)
     poltergeist (1.6.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -378,8 +378,8 @@ DEPENDENCIES
   letter_opener
   markitup-rails
   maskedinput-rails
-  mysql2
   nested_form
+  pg
   poltergeist
   quiet_assets
   rails (= 4.2.1)

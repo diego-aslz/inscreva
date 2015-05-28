@@ -12,12 +12,15 @@ class Page < ActiveRecord::Base
 
   before_save :correct_name, :clear_mains
 
-  scope :search, ->(term) {
-    where('upper(concat(pages.name,pages.title)) like upper(?)', "%#{term}%")
-  }
-  scope :by_language, ->(lang) {
-    where("pages.`language` is null or pages.`language` = '' or pages.`language` = ?", lang)
-  }
+  def self.search(term)
+    term = "%#{term}%"
+    where(arel_table[:name].matches(term).or(arel_table[:title].matches(term)))
+  end
+
+  def self.by_language(lang)
+    language = arel_table[:language]
+    where(language.eq(nil).or(language.eq('')).or(language.eq(lang)))
+  end
 
   def event_name=(e) end
 
@@ -35,8 +38,8 @@ class Page < ActiveRecord::Base
   def clear_mains
     if self.main
       ws = self.event.pages.where(main: true)
-      ws = ws.by_language(self.language) unless self.language.nil? or self.language.empty?
-      ws = ws.where('id <> ?', self.id) if self.id
+      ws = ws.by_language(self.language) unless self.language.nil? || self.language.empty?
+      ws = ws.where.not(id: self.id) if self.id
       ws.update_all(main: false)
     end
   end

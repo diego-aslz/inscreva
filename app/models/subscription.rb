@@ -42,7 +42,7 @@ class Subscription < ActiveRecord::Base
       clauses = []
       pars = []
       for val in value
-        clauses << "FIND_IN_SET(?, #{table}.value) > 0"
+        clauses << "STRPOS(','||#{table}.value||',', ?) > 0"
         pars << val
       end
       i.where("(#{clauses.join ' or '})", *pars)
