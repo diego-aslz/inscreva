@@ -27,7 +27,9 @@ group :development do
   # gem 'rack-mini-profiler'
   gem 'binding_of_caller'
   gem 'thin'
-  gem 'capistrano', '~> 2.15.5'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
   gem 'quiet_assets'
 end
 
