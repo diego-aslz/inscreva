@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def icon_tag(icon)
-    content_tag(:i, '', class: icon)
+    content_tag(:span, '', class: "glyphicon glyph#{icon}")
   end
 
   def link_to_add(klass, path, options = {})
