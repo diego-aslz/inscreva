@@ -11,8 +11,8 @@ module EventHelper
       end if event.fields
 
       json.delegations event.delegations.includes(:user) do |delegation|
-        json.(delegation, :id, :role_id, :user_id)
-        json.role_id(delegation.role_id || '')
+        json.(delegation, :id, :user_id)
+        json.role_id delegation.role_id.to_s
         json.user do
           json.extract! delegation.user, :id, :name if delegation.user
         end

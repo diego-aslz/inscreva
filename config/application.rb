@@ -28,5 +28,11 @@ module Inscreva
     config.filter_parameters += [:password, :password_confirmation, :current_password]
 
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Precompile additional assets.
+    # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
+    config.assets.precompile += %w( printing_page.css printing_page.js chosen-sprite.png markitup/skins/simple/*.png markitup/sets/markdown/*.png )
   end
 end
+
+Rack::Utils.multipart_part_limit = 0
