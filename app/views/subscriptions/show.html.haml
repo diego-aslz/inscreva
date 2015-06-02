@@ -9,7 +9,7 @@
   = show.attribute :email
   = show.association :event
   - last_group = ''
-  - @subscription.field_fills.each do |fill|
+  - @subscription.field_fills.eager_load(:field).merge(Field.order(:priority)).each do |fill|
     - group = fill.field.group_name
     - if !group.blank? && group != last_group
       %h2= group
