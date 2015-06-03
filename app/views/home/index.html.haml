@@ -1,29 +1,26 @@
-- model_class = Event
-- if @events && @events.any?
-  - 0.upto @events.count/3 do |i|
-    .row.home
-      - 0.upto 2 do |j|
-        - event = @events[i*3 + j]
-        - if event
-          .col-md-4.text-center
-            - if event.pages.any?
-              %h2= link_to event.name, present_event_main_page_path(event.identifier)
-            - else
-              %h2= event.name
-            %p= event.description
-            - if event.opens_at && event.closes_at
-              %table
-                %tr
-                  %th.text-center(colspan="2")= Subscription.model_name.human.pluralize
-                %tr
-                  %th.text-left
-                    = t(:begin).titleize
-                  %td.text-right
-                    #{l event.opens_at}
-                %tr
-                  %th.text-left
-                    = t(:end).titleize
-                  %td.text-right
-                    #{l event.closes_at}
-            - if can? :create, event.subscriptions.build
-              %p= link_to_subscribe(event)
+- @events.preload(:pages).each_slice(3) do |events|
+  .row.home
+    - events.each do |event|
+      - if event
+        .col-md-4.text-center
+          - if event.pages.any?
+            %h2= link_to event.name, present_event_main_page_path(event.identifier)
+          - else
+            %h2= event.name
+          %p= event.description
+          - if event.opens_at && event.closes_at
+            %table
+              %tr
+                %th.text-center(colspan="2")= Subscription.model_name.human.pluralize
+              %tr
+                %th.text-left
+                  = t(:begin).titleize
+                %td.text-right
+                  #{l event.opens_at}
+              %tr
+                %th.text-left
+                  = t(:end).titleize
+                %td.text-right
+                  #{l event.closes_at}
+          - if can? :create, event.subscriptions.build
+            %p= link_to_subscribe(event)
