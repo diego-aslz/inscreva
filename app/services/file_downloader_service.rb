@@ -17,13 +17,12 @@ class FileDownloaderService
     field_ids = field_ids.map(&:to_i)
 
     Zip::ZipFile.open(zip_name, Zip::ZipFile::CREATE) do |zipfile|
-      @subscriptions.eager_load(field_fills: :field).where('field_fills.field_id in (?)',
-        field_ids).each do |sub|
+      @subscriptions.preload(field_fills: :field).each do |sub|
         field_ids.each do |field_id|
-          fill = sub.field_fills.detect{ |fill| fill.field_id == field_id}
-          zipfile.add "#{fill.field.name.parameterize}/#{sub.name.parameterize}-" +
-              "#{sub.number}#{File.extname(fill.file_url)}",
-              fill.file_url if fill && !fill.file_url.blank?
+          fill = sub.field_fills.detect { |fill| fill.field_id == field_id}
+          next unless fill && !fill.file_url.blank?
+          zipfile.add "#{fill.field.name.parameterize}/#{sub.name.parameterize}-"\
+            "#{sub.number}#{File.extname(fill.file_url)}", fill.file_url
         end
       end
     end
